@@ -103,17 +103,17 @@
             />
           </view>
         </view>
-        <view class="section_4 flex-row justify-between">
-          <view class="section_5 flex-col">
-            <view class="section_6 flex-col" v-for="(item,index) in message" :key="index"></view>
-          </view>
-		  <view class="paragraph_text flex-col">
-		  	<text class="paragraph_1" v-for="(item,index) in message" :key="index">
-		  				  {{item.text}}
-		  	  <br />
-		  	</text>
-		  </view>
-        </view>
+		<view class="section_7">
+			<view class="section_4 flex-col justify-between">
+			  <view class="section_5 flex-row justify-between align-center"  v-for="(item,index) in message" :key="index">
+			    <view class="section_6"></view>
+				<text class="paragraph_1">
+							  {{item.text}}
+				  <br />
+				</text>
+			  </view>
+			</view>
+		</view>
       </view>
       <view class="group_7 flex-col">
         <view class="text-wrapper_2 flex-row justify-between">
@@ -296,7 +296,7 @@ export default {
 		  	text:"美的大风管机",
 	      },
 		  {
-			  text:"求购一台格力壁挂式空调，要求最起码八成新",
+			  text:"求购一台格力壁挂式空调，要求最起码八成新求购一台格力壁挂式空调，要求最起码八成新",
 			  
 		  },
 		  {
@@ -305,6 +305,17 @@ export default {
 		  },
 		  {
 			  text:"回收10台二手格力柜式机回",
+		  },
+		  {
+		  			  text:"求购一台格力壁挂式空调，要求最起码八成新求购一台格力壁挂式空调，要求最起码八成新",
+		  			  
+		  },
+		  {
+		  			  text: "回收废旧空调压缩机 回收5台1.5匹空调",
+		  			  
+		  },
+		  {
+		  			  text:"回收10台二手格力柜式机回",
 		  }
 	  ],
       constants: {},
@@ -669,12 +680,12 @@ export default {
 	      }
 	    }
 	    .group_6 {
+		  width: 962rpx;
+		  height: 393rpx;
+		  margin: 20rpx 31rpx 19rpx 37rpx;
 	      background-color: rgba(255, 255, 255, 1);
 	      border-radius: 10px;
-	      height: 197rpx;
-	      border: 2px solid rgba(255, 254, 255, 1);
-	      width: 346rpx;
-	      margin: 20rpx 31rpx 19rpx 37rpx;
+	      // border: 2px solid rgba(255, 254, 255, 1);
 	      .section_3 {
 	        width: 653rpx;
 	        height: 33rpx;
@@ -714,36 +725,37 @@ export default {
 	          }
 	        }
 	      }
-	      .section_4 {
-	        width: 692rpx;
-	        height: 393rpx;
-	        .section_5 {
-	          width: 7rpx;
-	          height: 249rpx;
-	          .section_6 {
-	            background-color: rgba(230, 60, 49, 1);
-	            border-radius: 50%;
-	            width: 7rpx;
-	            height: 7rpx;
-				margin-top: 41rpx;
-	          }
-	        }
-			.paragraph_text {
-				width: 479rpx;
-				height: 263rpx;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow:ellipsis;
-				text-align: left;
-				.paragraph_1 { 
-				  color: rgba(51, 51, 51, 1);
-				  font-size: 24rpx;
-				  font-family: PingFang-SC-Regular;
-				  font-weight: NaN;
-				  line-height: 48rpx;
+		  .section_7 {
+			  height: 360rpx;
+			  overflow: hidden;
+			  .section_4 {
+			    width: 653rpx;
+				.section_5 {
+					margin: 25rpx 0 0 20rpx; 
+					.section_6 {
+					  background-color: rgba(230, 60, 49, 1);
+					  border-radius: 50%;
+					  width: 7rpx;
+					  height: 7rpx;
+					}
+					.paragraph_1 {
+						width: 600rpx;
+						height: 30rpx;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow:ellipsis;
+						text-align: left;
+					  color: rgba(51, 51, 51, 1);
+					  font-size: 24rpx;
+					  font-family: PingFang-SC-Regular;
+					  font-weight: NaN;
+					  // line-height: 48rpx;
+					}
 				}
-			}
-	      }
+			    }	
+		  }
+	      			
+				
 	    }
 	    .group_7 {
 	      background-color: rgba(255, 255, 255, 1);
