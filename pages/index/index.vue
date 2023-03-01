@@ -2,36 +2,13 @@
   <view class="page flex-col">
     <view class="group_1 flex-col">
       <view class="group_2 flex-col">
-        <!-- <image
-          class="image_1"
-          referrerpolicy="no-referrer"
-          src="https://lanhu.oss-cn-beijing.aliyuncs.com/psuvtbw3djlyb6iwwp7xlw0hb8toxzkn22u051cdfaa-5a07-4636-af90-a31c6fac2a4d"
-        /> -->
-        <!-- <view class="block_1 flex-row">
-          <image
-            class="label_1"
-            referrerpolicy="no-referrer"
-            src="https://lanhu.oss-cn-beijing.aliyuncs.com/ps9g949redfj5pcip8qy9l4ebew5xxm8lqc25c5c847-6331-4fa5-b63a-6f0838aa14c7"
-          />
-          <text class="text_1">中央空调网</text>
-          <view class="group_3 flex-row justify-between">
-            <image
-              class="image_2"
-              referrerpolicy="no-referrer"
-              src="https://lanhu-dds-backend.oss-cn-beijing.aliyuncs.com/merge_image/imgs/4325300cbc47460fbdd310d24066bf37_mergeImage.png"
-            />
-            <view class="group_4 flex-col">
-              <view class="box_1 flex-col"></view>
-            </view>
-          </view>
-        </view> -->
         <view class="block_2 flex-row justify-between">
           <view class="image-text_1 flex-row justify-between">
             <text class="text-group_1">郑州</text>
             <image
               class="thumbnail_1"
               referrerpolicy="no-referrer"
-              src="https://lanhu.oss-cn-beijing.aliyuncs.com/psn0jpa0rv4jokgnpjgiyspa6d5ap30qwvka8534697-34f3-4d04-ad86-53aa6ed0ac52"
+              src="/static/bg/psn0jpa0rv4jokgnpjgiyspa6d5ap30qwvka8534697-34f3-4d04-ad86-53aa6ed0ac52.png"
             />
           </view>
           <view class="text-wrapper_1 flex-col">
@@ -122,32 +99,20 @@
             <image
               class="thumbnail_2"
               referrerpolicy="no-referrer"
-              src="https://lanhu.oss-cn-beijing.aliyuncs.com/ps9eqtt3izc6df1bfdwxikkb9lerbbb0sf89be13a8-4627-4296-a69e-c90609ca556f"
+              src="/static/bg/ps9eqtt3izc6df1bfdwxikkb9lerbbb0sf89be13a8-4627-4296-a69e-c90609ca556f.png"
             />
           </view>
         </view>
         <view class="section_4 flex-row justify-between">
           <view class="section_5 flex-col">
-            <view class="section_6 flex-col"></view>
-            <view class="section_7 flex-col"></view>
-            <view class="section_8 flex-col"></view>
-            <view class="section_9 flex-col"></view>
-            <view class="section_10 flex-col"></view>
-            <view class="section_11 flex-col"></view>
+            <view class="section_6 flex-col" v-for="(item,index) in message" :key="index"></view>
           </view>
-          <text class="paragraph_1">
-            美的大风管机
-            <br />
-            求购一台格力壁挂式空调，要求最起码八成新
-            <br />
-            回收废旧空调压缩机
-            <br />
-            回收5台1.5匹空调
-            <br />
-            回收10台二手格力柜式机
-            <br />
-            回收一台2级能效的格力空调
-          </text>
+		  <view class="paragraph_text flex-col">
+		  	<text class="paragraph_1" v-for="(item,index) in message" :key="index">
+		  				  {{item.text}}
+		  	  <br />
+		  	</text>
+		  </view>
         </view>
       </view>
       <view class="group_7 flex-col">
@@ -275,10 +240,6 @@
 </template>
 <script>
 export default {
-	
-	onLoad() {
-		
-	},
   data() {
     return {
       loopData0: [
@@ -330,10 +291,31 @@ export default {
 		    lanhufontColor0: 'rgba(51,51,51,1)',
 		  },
 	  ],
+	  message: [
+		  {
+		  	text:"美的大风管机",
+	      },
+		  {
+			  text:"求购一台格力壁挂式空调，要求最起码八成新",
+			  
+		  },
+		  {
+			  text: "回收废旧空调压缩机 回收5台1.5匹空调",
+			  
+		  },
+		  {
+			  text:"回收10台二手格力柜式机回",
+		  }
+	  ],
       constants: {},
     };
   },
-  methods: {},
+  methods: {
+	
+  },
+  onLoad() {
+  	console.log(this.message)
+  },
 };
 </script>
 <style>
@@ -343,7 +325,6 @@ export default {
 
 <style lang="less" scoped>
 	.page {
-	  background-color: rgba(255, 255, 255, 1);
 	  position: relative;
 	  width: 750rpx;
 	  height: 2760rpx;
@@ -351,9 +332,6 @@ export default {
 	  .group_1 {
 	    width: 750rpx;
 	    height: 2745rpx;
-	    background: url(/static/bg/psmo695p76bfssrj9pl5w9qj0uyomqbywxac8cb1c426-ce63-48d0-8e43-58db29b4a380.png)
-	      0rpx 0rpx no-repeat;
-	    background-size: 750rpx 2848rpx;
 	    margin-top: 15rpx;
 	    .group_2 {
 	      width: 750rpx;
@@ -693,10 +671,10 @@ export default {
 	    .group_6 {
 	      background-color: rgba(255, 255, 255, 1);
 	      border-radius: 10px;
-	      height: 393rpx;
+	      height: 197rpx;
 	      border: 2px solid rgba(255, 254, 255, 1);
-	      width: 692rpx;
-	      margin: -1rpx 0 0 27rpx;
+	      width: 346rpx;
+	      margin: 20rpx 31rpx 19rpx 37rpx;
 	      .section_3 {
 	        width: 653rpx;
 	        height: 33rpx;
@@ -716,10 +694,10 @@ export default {
 	        }
 	        .image-text_10 {
 	          width: 105rpx;
-	          height: 21rpx;
+	          height: 31rpx;
 	          .text-group_10 {
 	            width: 87rpx;
-	            height: 21rpx;
+	            height: 31rpx;
 	            overflow-wrap: break-word;
 	            color: rgba(153, 153, 153, 1);
 	            font-size: 22rpx;
@@ -727,76 +705,44 @@ export default {
 	            font-weight: NaN;
 	            text-align: left;
 	            white-space: nowrap;
-	            line-height: 48rpx;
+	            line-height: 31rpx;
 	          }
 	          .thumbnail_2 {
 	            width: 10rpx;
 	            height: 16rpx;
-	            margin-top: 2rpx;
+	            margin-top: 8rpx;
 	          }
 	        }
 	      }
 	      .section_4 {
-	        width: 497rpx;
-	        height: 263rpx;
-	        margin: 38rpx 0 37rpx 34rpx;
+	        width: 692rpx;
+	        height: 393rpx;
 	        .section_5 {
 	          width: 7rpx;
 	          height: 249rpx;
-	          margin-top: 7rpx;
 	          .section_6 {
 	            background-color: rgba(230, 60, 49, 1);
 	            border-radius: 50%;
 	            width: 7rpx;
 	            height: 7rpx;
-	          }
-	          .section_7 {
-	            background-color: rgba(230, 60, 49, 1);
-	            border-radius: 50%;
-	            width: 7rpx;
-	            height: 7rpx;
-	            margin-top: 41rpx;
-	          }
-	          .section_8 {
-	            background-color: rgba(230, 60, 49, 1);
-	            border-radius: 50%;
-	            width: 7rpx;
-	            height: 7rpx;
-	            margin-top: 43rpx;
-	          }
-	          .section_9 {
-	            background-color: rgba(230, 60, 49, 1);
-	            border-radius: 50%;
-	            width: 7rpx;
-	            height: 7rpx;
-	            margin-top: 43rpx;
-	          }
-	          .section_10 {
-	            background-color: rgba(230, 60, 49, 1);
-	            border-radius: 50%;
-	            width: 7rpx;
-	            height: 7rpx;
-	            margin-top: 36rpx;
-	          }
-	          .section_11 {
-	            background-color: rgba(230, 60, 49, 1);
-	            border-radius: 50%;
-	            width: 7rpx;
-	            height: 7rpx;
-	            margin-top: 44rpx;
+				margin-top: 41rpx;
 	          }
 	        }
-	        .paragraph_1 {
-	          width: 479rpx;
-	          height: 263rpx;
-	          overflow-wrap: break-word;
-	          color: rgba(51, 51, 51, 1);
-	          font-size: 24rpx;
-	          font-family: PingFang-SC-Regular;
-	          font-weight: NaN;
-	          text-align: left;
-	          line-height: 48rpx;
-	        }
+			.paragraph_text {
+				width: 479rpx;
+				height: 263rpx;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow:ellipsis;
+				text-align: left;
+				.paragraph_1 { 
+				  color: rgba(51, 51, 51, 1);
+				  font-size: 24rpx;
+				  font-family: PingFang-SC-Regular;
+				  font-weight: NaN;
+				  line-height: 48rpx;
+				}
+			}
 	      }
 	    }
 	    .group_7 {

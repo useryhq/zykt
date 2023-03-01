@@ -11,9 +11,9 @@
 	],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",
-		"navigationBarTitleText": "中央空调网",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		// "navigationBarTitleText": "中央空调网",
+		// "navigationBarBackgroundColor": "#F8F8F8",
+		// "backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {}
 }

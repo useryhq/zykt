@@ -383,43 +383,7 @@ exports.default = void 0;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
-  onLoad: function onLoad() {},
   data: function data() {
     return {
       loopData0: [{
@@ -460,10 +424,22 @@ var _default = {
         lanhutext0: '奥克斯',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }],
+      message: [{
+        text: "美的大风管机"
+      }, {
+        text: "求购一台格力壁挂式空调，要求最起码八成新"
+      }, {
+        text: "回收废旧空调压缩机 回收5台1.5匹空调"
+      }, {
+        text: "回收10台二手格力柜式机回"
+      }],
       constants: {}
     };
   },
-  methods: {}
+  methods: {},
+  onLoad: function onLoad() {
+    console.log(this.message);
+  }
 };
 exports.default = _default;
 

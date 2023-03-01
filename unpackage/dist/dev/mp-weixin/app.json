@@ -3,11 +3,7 @@
     "pages/index/index"
   ],
   "subPackages": [],
-  "window": {
-    "navigationBarTitleText": "中央空调网",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  },
+  "window": {},
   "permission": {
     "scope.userLocation": {
       "desc": "获取用户位置，提供附近商家商品，更好的为客户服务"
