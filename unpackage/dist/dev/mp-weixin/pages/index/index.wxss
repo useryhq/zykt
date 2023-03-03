@@ -614,7 +614,7 @@ button:active {
   background-color: #e63c31;
   border-radius: 2px;
   position: absolute;
-  left: 30rpx;
+  left: 36rpx;
   top: 68rpx;
   width: 64rpx;
   height: 4rpx;
@@ -623,7 +623,7 @@ button:active {
   background-color: #e63c31;
   border-radius: 2px;
   position: absolute;
-  left: 138rpx;
+  left: 140rpx;
   top: 68rpx;
   width: 64rpx;
   height: 4rpx;

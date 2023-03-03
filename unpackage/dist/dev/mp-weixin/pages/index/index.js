@@ -289,40 +289,40 @@ var _default = {
   data: function data() {
     return {
       loopData0: [{
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '大金',
         lanhufontColor0: 'rgba(102,102,102,1)'
       }, {
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '格力',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }, {
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '美的',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }, {
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '奥克斯',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }, {
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '海尔',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }],
       loopData1: [{
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '大金',
         lanhufontColor0: 'rgba(102,102,102,1)'
       }, {
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '格力',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }, {
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '美的',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }, {
-        lanhuimage0: '../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
+        lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
         lanhutext0: '奥克斯',
         lanhufontColor0: 'rgba(51,51,51,1)'
       }],
