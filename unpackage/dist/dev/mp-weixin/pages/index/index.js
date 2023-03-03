@@ -385,7 +385,7 @@ var _default = {
     }
   },
   onLoad: function onLoad() {
-    console.log(this.message);
+    // console.log(this.message)
   }
 };
 exports.default = _default;
