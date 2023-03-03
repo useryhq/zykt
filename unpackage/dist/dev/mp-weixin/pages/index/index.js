@@ -285,6 +285,19 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -341,7 +354,7 @@ var _default = {
       }, {
         text: "回收10台二手格力柜式机回"
       }],
-      ktlist: [{
+      ktlist1: [{
         imgSrc: "/static/bg/0301162340.png",
         title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
         price: "8000.00",
@@ -372,7 +385,39 @@ var _default = {
         price: "8000.00",
         address: "郑州"
       }],
+      ktlist2: [{
+        imgSrc: "/static/bg/0301162340.png",
+        title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+        price: "10000.00",
+        address: "郑州"
+      }, {
+        imgSrc: "/static/bg/0301162340.png",
+        title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+        price: "10000.00",
+        address: "郑州"
+      }, {
+        imgSrc: "/static/bg/0301162340.png",
+        title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+        price: "10000.00",
+        address: "郑州"
+      }, {
+        imgSrc: "/static/bg/0301162340.png",
+        title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+        price: "10000.00",
+        address: "郑州"
+      }, {
+        imgSrc: "/static/bg/0301162340.png",
+        title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+        price: "10000.00",
+        address: "郑州"
+      }, {
+        imgSrc: "/static/bg/0301162340.png",
+        title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+        price: "10000.00",
+        address: "郑州"
+      }],
       add: 1,
+      selectTab: 1,
       constants: {}
     };
   },
@@ -382,6 +427,10 @@ var _default = {
     },
     choose_status2: function choose_status2() {
       this.add = 2;
+    },
+    slecetTab: function slecetTab(e) {
+      console.log(e);
+      this.selectTab = e;
     }
   },
   onLoad: function onLoad() {

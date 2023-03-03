@@ -94,8 +94,22 @@
 					<text :class="[add == 1 ? 'text_8 click_text' : 'text_8']" @click="choose_status1">商家</text>
 					<text :class="[add == 2 ? 'text_9 click_text' : 'text_9']" @click="choose_status2">个人</text>
 				</view>
-				<view class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,index) in ktlist" :key="index">
+				<view v-if="add == 1" class="group_8 flex-row justify-between">
+					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index">
+						<image class="kt_img" :src="item.imgSrc"></image>
+						<view class="text-wrapper_3 flex-row justify-between">
+							<text class="paragraph_2">
+								{{item.title}}
+							</text>
+						</view>
+						<view class="text-wrapper_4 flex-row">
+							<text class="text_10">￥{{item.price}}</text>
+							<text class="text_11">{{item.address}}</text>
+						</view>
+					</view>
+				</view>
+				<view  v-if="add == 2" class="group_8 flex-row justify-between">
+					<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index">
 						<image class="kt_img" :src="item.imgSrc"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
@@ -111,29 +125,28 @@
 				<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 			</view>
 			<view class="group_12 flex-row">
-				<view class="image-text_11 flex-col justify-between">
-					<image class="label_6" referrerpolicy="no-referrer"
-						src="https://lanhu.oss-cn-beijing.aliyuncs.com/psm5n3m7gxrsiehjmcxt9hsa75u9y8quwie36b3d6ec-62fb-488b-99f9-9da3d6b6bc41" />
+				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']" @click=slecetTab(1)>
+					<text class="iconfont label_6">&#xe674;</text>
 					<text class="text-group_11">首页</text>
 				</view>
-				<view class="image-text_12 flex-col justify-between">
-					<image class="label_7" referrerpolicy="no-referrer"
-						src="https://lanhu.oss-cn-beijing.aliyuncs.com/ps9rn1vp332wahn260403twrppv4ggj4ob7a91e101-bc6e-40a6-b6f9-2a1f0c576275" />
+				<view :class="[selectTab == 2 ? 'image-text_12 flex-col color' : 'image-text_12 flex-col']"
+					@click=slecetTab(2)>
+					<text class="iconfont label_7">&#xe60e;</text>
 					<text class="text-group_12">家用空调</text>
 				</view>
-				<view class="image-text_13 flex-col justify-between">
-					<image class="label_8" referrerpolicy="no-referrer"
-						src="https://lanhu.oss-cn-beijing.aliyuncs.com/psl7gos2feoz9d75ysxq24vpudv61lh0coa7dbe15d-cda9-4ca4-b720-6c8b9769077c" />
+				<view :class="[selectTab == 3 ? 'image-text_13 flex-col color' : 'image-text_13 flex-col']"
+					@click=slecetTab(3)>
+					<text class="iconfont label_8">&#xe610;</text>
 					<text class="text-group_13">商用空调</text>
 				</view>
-				<view class="image-text_14 flex-col justify-between">
-					<image class="label_9" referrerpolicy="no-referrer"
-						src="https://lanhu.oss-cn-beijing.aliyuncs.com/psvofjfn3epq360am3umvxhw5zwwzx82xk9feb5edf-2935-4493-ba00-5d2d7c6c8ba4" />
+				<view :class="[selectTab == 4 ? 'image-text_14 flex-col color' : 'image-text_14 flex-col']"
+					@click=slecetTab(4)>
+					<text class="iconfont label_9">&#xe676;</text>
 					<text class="text-group_14">二手门店</text>
 				</view>
-				<view class="image-text_15 flex-col justify-between">
-					<image class="label_10" referrerpolicy="no-referrer"
-						src="https://lanhu.oss-cn-beijing.aliyuncs.com/psuf6qv9ncvq0hh5r4yx8iwgx1j90uio8b9e38e19e3-f255-46b2-95ad-7e2ada113b10" />
+				<view :class="[selectTab == 5 ? 'image-text_15 flex-col color' : 'image-text_15 flex-col']"
+					@click=slecetTab(5)>
+					<text class="iconfont label_10">&#xe682;</text>
 					<text class="text-group_15">我的</text>
 				</view>
 			</view>
@@ -217,8 +230,7 @@
 						text: "回收10台二手格力柜式机回",
 					},
 				],
-				ktlist: [
-					{
+				ktlist1: [{
 						imgSrc: "/static/bg/0301162340.png",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
 						price: "8000.00",
@@ -255,17 +267,59 @@
 						address: "郑州",
 					}
 				],
+				ktlist2: [{
+						imgSrc: "/static/bg/0301162340.png",
+						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+						price: "10000.00",
+						address: "郑州",
+					},
+					{
+						imgSrc: "/static/bg/0301162340.png",
+						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+						price: "10000.00",
+						address: "郑州",
+					},
+					{
+						imgSrc: "/static/bg/0301162340.png",
+						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+						price: "10000.00",
+						address: "郑州",
+					},
+					{
+						imgSrc: "/static/bg/0301162340.png",
+						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+						price: "10000.00",
+						address: "郑州",
+					},
+					{
+						imgSrc: "/static/bg/0301162340.png",
+						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+						price: "10000.00",
+						address: "郑州",
+					},
+					{
+						imgSrc: "/static/bg/0301162340.png",
+						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
+						price: "10000.00",
+						address: "郑州",
+					}
+				],
 				add: 1,
+				selectTab: 1,
 				constants: {},
 			};
 		},
 		methods: {
-		choose_status1(){
-			this.add=1
-		},
-		choose_status2(){
-			this.add=2
-		},
+			choose_status1() {
+				this.add = 1
+			},
+			choose_status2() {
+				this.add = 2
+			},
+			slecetTab(e) {
+				console.log(e)
+				this.selectTab = e
+			}
 		},
 		onLoad() {
 			// console.log(this.message)
@@ -283,12 +337,10 @@
 	.page {
 		position: relative;
 		width: 750rpx;
-		height: 2760rpx;
-		overflow: hidden;
+		// overflow: hidden;
 
 		.group_1 {
 			width: 750rpx;
-			height: 2745rpx;
 			margin-top: 15rpx;
 
 			.group_2 {
@@ -664,11 +716,12 @@
 			}
 
 			.group_6 {
-				width: 962rpx;
+				width: 692rpx;
 				height: 393rpx;
 				margin: 20rpx 31rpx 19rpx 37rpx;
 				background-color: rgba(255, 255, 255, 1);
 				border-radius: 10px;
+
 				.section_3 {
 					width: 653rpx;
 					height: 33rpx;
@@ -687,16 +740,18 @@
 						line-height: 32rpx;
 						margin-top: 2rpx;
 					}
+
 					.image-text_10 {
 						width: 105rpx;
 						height: 31rpx;
+
 						.text-group_10 {
 							width: 87rpx;
 							height: 31rpx;
 							overflow-wrap: break-word;
 							color: rgba(153, 153, 153, 1);
 							font-size: 22rpx;
-							font-family: PingFang-SC-Regular;							
+							font-family: PingFang-SC-Regular;
 							text-align: left;
 							white-space: nowrap;
 							line-height: 31rpx;
@@ -709,19 +764,24 @@
 						}
 					}
 				}
+
 				.section_7 {
 					height: 360rpx;
 					overflow: hidden;
+
 					.section_4 {
 						width: 653rpx;
+
 						.section_5 {
 							margin: 25rpx 0 0 20rpx;
+
 							.section_6 {
 								background-color: rgba(230, 60, 49, 1);
 								border-radius: 50%;
 								width: 7rpx;
 								height: 7rpx;
 							}
+
 							.paragraph_1 {
 								width: 600rpx;
 								height: 30rpx;
@@ -756,6 +816,7 @@
 					margin: 27rpx 0 0 14rpx;
 					padding-bottom: 15rpx;
 					border-bottom: 2rpx solid #A0A0A0;
+
 					.text_8 {
 						margin: 0 51rpx 0 22rpx;
 						font-size: 28rpx;
@@ -770,17 +831,22 @@
 						font-family: PingFang-SC-Regular;
 						line-height: 28rpx;
 					}
-					.click_text{
+
+					.click_text {
 						font-size: 32rpx;
 						font-weight: 500;
 						line-height: 32rpx;
 						color: rgba(51, 51, 51, 1);
 					}
 				}
+
 				.group_8 {
 					width: 659rpx;
 					margin: 28rpx 0 0 16rpx;
+					padding-bottom: 128rpx;
 					flex-wrap: wrap;
+					border-radius: 4px;
+
 					.kt_img {
 						width: 320rpx;
 						height: 320rpx;
@@ -788,14 +854,15 @@
 
 					.box_3 {
 						background-color: rgba(255, 255, 255, 1);
-						border-radius: 4px;
 						width: 320rpx;
 						height: 460rpx;
 						margin-top: 38rpx;
+
 						.text-wrapper_3 {
 							width: 300rpx;
 							height: 60rpx;
 							margin: 26rpx 0 0 9rpx;
+
 							.paragraph_2 {
 								width: 286rpx;
 								height: 60rpx;
@@ -804,14 +871,14 @@
 								font-family: PingFang-SC-Regular;
 								text-align: left;
 								line-height: 30rpx;
-								overflow:hidden;
+								overflow: hidden;
 								text-overflow: ellipsis;
-								-webkit-line-clamp:2;
-								word-break:break-all;
-								display:-webkit-box;
-							    -webkit-box-orient:vertical;
+								-webkit-line-clamp: 2;
+								word-break: break-all;
+								display: -webkit-box;
+								-webkit-box-orient: vertical;
 							}
-						
+
 							.paragraph_3 {
 								width: 286rpx;
 								height: 60rpx;
@@ -823,10 +890,12 @@
 								line-height: 36rpx;
 							}
 						}
+
 						.text-wrapper_4 {
 							width: 300rpx;
 							height: 24rpx;
 							margin: 21rpx 0 0 13rpx;
+
 							.text_10 {
 								width: 139rpx;
 								height: 30rpx;
@@ -839,7 +908,7 @@
 								white-space: nowrap;
 								line-height: 30rpx;
 							}
-						
+
 							.text_11 {
 								width: 42rpx;
 								height: 21rpx;
@@ -853,11 +922,12 @@
 								line-height: 36rpx;
 								margin: 3rpx 0 0 100rpx;
 							}
-						
+
 						}
 					}
 
 				}
+
 				.group_10 {
 					width: 659rpx;
 					height: 320rpx;
@@ -877,6 +947,7 @@
 						height: 320rpx;
 					}
 				}
+
 				.group_left {
 					background-color: rgba(230, 60, 49, 1);
 					border-radius: 2px;
@@ -886,7 +957,8 @@
 					width: 64rpx;
 					height: 4rpx;
 				}
-				.group_right{
+
+				.group_right {
 					background-color: rgba(230, 60, 49, 1);
 					border-radius: 2px;
 					position: absolute;
@@ -901,24 +973,31 @@
 				background-color: rgba(255, 255, 255, 1);
 				width: 750rpx;
 				height: 98rpx;
-				margin: 25rpx 0 5rpx 0;
+				padding-bottom: 6rpx;
+				// margin: 25rpx 0 5rpx 0;
+				position: fixed;
+				left: 0;
+				bottom: 0rpx;
+				z-index: 1000;
+
 
 				.image-text_11 {
 					width: 46rpx;
 					height: 72rpx;
-					margin: 19rpx 0 0 36rpx;
-
+					margin: 19rpx 0 0 37rpx;
+					color: rgba(51, 51, 51, 1);
 					.label_6 {
 						width: 42rpx;
 						height: 40rpx;
+						font-size: 42rpx;
 						margin-left: 1rpx;
 					}
+
 
 					.text-group_11 {
 						width: 46rpx;
 						height: 23rpx;
 						overflow-wrap: break-word;
-						color: rgba(230, 60, 49, 1);
 						font-size: 24rpx;
 						font-family: PingFang-SC-Regular;
 						font-weight: NaN;
@@ -933,18 +1012,18 @@
 					width: 93rpx;
 					height: 68rpx;
 					margin: 23rpx 0 0 85rpx;
-
+					color: rgba(51, 51, 51, 1);
 					.label_7 {
 						width: 48rpx;
 						height: 38rpx;
-						margin-left: 19rpx;
+						font-size: 44rpx;
+						margin-left: 26rpx;
 					}
 
 					.text-group_12 {
 						width: 93rpx;
 						height: 23rpx;
 						overflow-wrap: break-word;
-						color: rgba(51, 51, 51, 1);
 						font-size: 24rpx;
 						font-family: PingFang-SC-Regular;
 						font-weight: NaN;
@@ -959,18 +1038,18 @@
 					width: 93rpx;
 					height: 75rpx;
 					margin: 16rpx 0 0 63rpx;
-
+					color: rgba(51, 51, 51, 1);
 					.label_8 {
 						width: 42rpx;
 						height: 42rpx;
-						margin-left: 23rpx;
+						font-size: 42rpx;
+						margin-left: 26rpx;
 					}
 
 					.text-group_13 {
 						width: 93rpx;
 						height: 23rpx;
 						overflow-wrap: break-word;
-						color: rgba(51, 51, 51, 1);
 						font-size: 24rpx;
 						font-family: PingFang-SC-Regular;
 						font-weight: NaN;
@@ -985,10 +1064,11 @@
 					width: 94rpx;
 					height: 75rpx;
 					margin: 16rpx 0 0 62rpx;
-
+					color: rgba(51, 51, 51, 1);
 					.label_9 {
 						width: 42rpx;
 						height: 40rpx;
+						font-size: 44rpx;
 						margin-left: 29rpx;
 					}
 
@@ -996,7 +1076,6 @@
 						width: 94rpx;
 						height: 23rpx;
 						overflow-wrap: break-word;
-						color: rgba(51, 51, 51, 1);
 						font-size: 24rpx;
 						font-family: PingFang-SC-Regular;
 						font-weight: NaN;
@@ -1011,18 +1090,18 @@
 					width: 45rpx;
 					height: 73rpx;
 					margin: 18rpx 47rpx 0 86rpx;
-
+					color: rgba(51, 51, 51, 1);
 					.label_10 {
 						width: 36rpx;
 						height: 40rpx;
-						margin-left: 6rpx;
+						font-size: 44rpx;
+						margin-left: 2rpx;
 					}
 
 					.text-group_15 {
 						width: 45rpx;
 						height: 23rpx;
 						overflow-wrap: break-word;
-						color: rgba(51, 51, 51, 1);
 						font-size: 24rpx;
 						font-family: PingFang-SC-Regular;
 						font-weight: NaN;
@@ -1031,6 +1110,9 @@
 						line-height: 36rpx;
 						margin-top: 10rpx;
 					}
+				}
+				.color {
+					color: #E63C31;
 				}
 			}
 		}
