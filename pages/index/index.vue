@@ -806,10 +806,9 @@
 				border-radius: 10px;
 				position: relative;
 				width: 694rpx;
-				height: 1564rpx;
 				border: 2px solid rgba(255, 254, 255, 1);
 				margin: 19rpx 0 0 27rpx;
-
+				padding-bottom: 128rpx;
 				.text-wrapper_2 {
 					width: 665rpx;
 					height: 32rpx;
@@ -843,7 +842,6 @@
 				.group_8 {
 					width: 659rpx;
 					margin: 28rpx 0 0 16rpx;
-					padding-bottom: 128rpx;
 					flex-wrap: wrap;
 					border-radius: 4px;
 
