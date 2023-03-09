@@ -8,7 +8,18 @@
 				"navigationBarBackgroundColor": "#ff6842"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "搜索",
+                "enablePullDownRefresh": false,
+				"navigationBarTextStyle":"black",
+				"navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",
 		// "navigationBarTitleText": "中央空调网",

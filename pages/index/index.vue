@@ -8,7 +8,7 @@
 						<image class="thumbnail_1" referrerpolicy="no-referrer"
 							src="/static/bg/psn0jpa0rv4jokgnpjgiyspa6d5ap30qwvka8534697-34f3-4d04-ad86-53aa6ed0ac52.png" />
 					</view>
-					<view class="text-wrapper_1 flex-col">
+					<view class="text-wrapper_1 flex-col" @click="ToSearch">
 						<text class="text_2">搜索想要的空调产品</text>
 					</view>
 					<view class="image-wrapper_1 flex-col">
@@ -319,6 +319,11 @@
 			slecetTab(e) {
 				console.log(e)
 				this.selectTab = e
+			},
+			ToSearch() {
+				uni.navigateTo({
+					url: '../search/search'
+				})
 			}
 		},
 		onLoad() {
