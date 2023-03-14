@@ -4,7 +4,7 @@
       <view class="section_1 flex-row">
         <view class="group_3">     
 		  <text class="search_icon iconfont">&#xe65c;</text>
-            <input class="text-group_1" placeholder-style="font-size:22rpx;color:#999999" focus placeholder="搜索想要的空调产品" />
+            <input class="text-group_1" type="text" placeholder-style="font-size:22rpx;color:#999999" focus placeholder="搜索想要的空调产品" />
         </view>
         <text class="text_2">搜索</text>
       </view>

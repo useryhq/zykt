@@ -125,27 +125,27 @@
 				<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 			</view>
 			<view class="group_12 flex-row">
-				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']" @click=slecetTab(1)>
+				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']" @click="slecetTab(1)">
 					<text class="iconfont label_6">&#xe674;</text>
 					<text class="text-group_11">首页</text>
 				</view>
 				<view :class="[selectTab == 2 ? 'image-text_12 flex-col color' : 'image-text_12 flex-col']"
-					@click=slecetTab(2)>
+					@click="ToHotProduct('jia')">
 					<text class="iconfont label_7">&#xe60e;</text>
 					<text class="text-group_12">家用空调</text>
 				</view>
 				<view :class="[selectTab == 3 ? 'image-text_13 flex-col color' : 'image-text_13 flex-col']"
-					@click=slecetTab(3)>
+					@click="ToHotProduct('shang')">
 					<text class="iconfont label_8">&#xe610;</text>
 					<text class="text-group_13">商用空调</text>
 				</view>
 				<view :class="[selectTab == 4 ? 'image-text_14 flex-col color' : 'image-text_14 flex-col']"
-					@click=slecetTab(4)>
+					@click="slecetTab(4)">
 					<text class="iconfont label_9">&#xe676;</text>
 					<text class="text-group_14">二手门店</text>
 				</view>
 				<view :class="[selectTab == 5 ? 'image-text_15 flex-col color' : 'image-text_15 flex-col']"
-					@click=slecetTab(5)>
+					@click="slecetTab(5)">
 					<text class="iconfont label_10">&#xe682;</text>
 					<text class="text-group_15">我的</text>
 				</view>
@@ -324,6 +324,21 @@
 				uni.navigateTo({
 					url: '../search/search'
 				})
+			},
+			ToHotProduct(e) {
+				if (e == 'jia') {
+					this.selectTab = 2,
+					uni.navigateTo({
+						url: '/pages/hotProduct/hotProduct?item=' + e
+					})
+				} 
+				if (e == 'shang') {
+					this.selectTab = 3,
+					uni.navigateTo({
+						url: '/pages/hotProduct/hotProduct?item='+ e
+					})
+				}
+				
 			}
 		},
 		onLoad() {
@@ -846,7 +861,7 @@
 
 				.group_8 {
 					width: 659rpx;
-					margin: 28rpx 0 0 16rpx;
+					margin-left: 16rpx;
 					flex-wrap: wrap;
 					border-radius: 4px;
 
@@ -929,26 +944,6 @@
 						}
 					}
 
-				}
-
-				.group_10 {
-					width: 659rpx;
-					height: 320rpx;
-					margin: 30rpx 0 0 16rpx;
-
-					.box_7 {
-						background-color: rgba(255, 255, 255, 1);
-						border-radius: 4px;
-						width: 320rpx;
-						height: 320rpx;
-					}
-
-					.box_8 {
-						background-color: rgba(255, 255, 255, 1);
-						border-radius: 4px;
-						width: 320rpx;
-						height: 320rpx;
-					}
 				}
 
 				.group_left {
