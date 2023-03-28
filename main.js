@@ -1,9 +1,10 @@
 import App from './App'
-
+import iphonex from 'static/js/iphoneX.js'
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
+Vue.prototype.$iphonex = iphonex;
 const app = new Vue({
     ...App
 })

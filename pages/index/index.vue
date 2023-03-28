@@ -89,13 +89,13 @@
 					</view>
 				</view>
 			</view>
-			<view class="group_7 flex-col">
+			<view class="group_7 flex-col" :style="{'padding-bottom': iphonex ? '196rpx' : '128rpx'}">
 				<view class="text-wrapper_2 flex-row justify-start">
 					<text :class="[add == 1 ? 'text_8 click_text' : 'text_8']" @click="choose_status1">商家</text>
 					<text :class="[add == 2 ? 'text_9 click_text' : 'text_9']" @click="choose_status2">个人</text>
 				</view>
 				<view v-if="add == 1" class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index">
+					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index" @click="toProductDetail(item.price)">
 						<image class="kt_img" :src="item.imgSrc"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
@@ -109,7 +109,7 @@
 					</view>
 				</view>
 				<view  v-if="add == 2" class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index">
+					<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index" @click="toProductDetailH(item.price)">
 						<image class="kt_img" :src="item.imgSrc"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
@@ -124,7 +124,7 @@
 				</view>
 				<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 			</view>
-			<view class="group_12 flex-row">
+			<view class="group_12 flex-row" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
 				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']" @click="slecetTab(1)">
 					<text class="iconfont label_6">&#xe674;</text>
 					<text class="text-group_11">首页</text>
@@ -306,6 +306,7 @@
 				],
 				add: 1,
 				selectTab: 1,
+				iphonex: this.$iphonex.iphonex,
 				constants: {},
 			};
 		},
@@ -339,6 +340,16 @@
 					})
 				}
 				
+			},
+			toProductDetail(e) {
+				uni.navigateTo({
+					url: '/pages/productDetail/productDetail?price=' + e
+				})
+			},
+			toProductDetailH(e) {
+				uni.navigateTo({
+					url: '/pages/productDetailH/productDetailH?price=' + e
+				})
 			}
 		},
 		onLoad() {

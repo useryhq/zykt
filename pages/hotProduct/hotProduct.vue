@@ -2,7 +2,7 @@
 	<view class="page flex-col">
 		<view class="section_2 flex-col">
 			<view class="group_2 flex-row justify-between">
-				<view class="image-text_1 flex-row justify-between">
+				<view class="image-text_1 flex-row justify-between" @click="toHotProduct()">
 					<text class="iconfont menu">&#xe677;</text>
 					<text class="text-group_1">分类</text>
 				</view>
@@ -13,7 +13,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="section_3 flex-col">
+		<view class="section_3 flex-col" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
 			<view class="text-wrapper_1 flex-row align-center justify-start">
 				<text :class="[add == 1 ? 'text_2 click_text' : 'text_2']" @click="choose_status1">商家</text>
 				<text :class="[add == 2 ? 'text_3 click_text' : 'text_3']" @click="choose_status2">个人</text>
@@ -64,42 +64,43 @@
 					<text :class="[parameter == 4 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
 				</view>
 			</view>
-			
+
 			<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
-<view v-if="add == 1" class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index">
-						<image class="kt_img" :src="item.imgSrc"></image>
-						<view class="text-wrapper_3 flex-row justify-between">
-							<text class="paragraph_2">
-								{{item.title}}
-							</text>
-						</view>
-						<view class="text-wrapper_4 flex-row">
-							<text v-if="item.price == ''" class="text_10">询价</text>
-							<text v-else class="text_10">￥{{item.price}}</text>
-							<text class="iconfont pk_text" @click="pkText(item)" v-if="item.pk">&#xe661;对比</text>
-							<text class="iconfont pk_text choose_color" v-else="!item.pk">&#xe661;已选</text>
-						</view>
-						<view class="text-wrapper_4 flex-row">
-							<text class="iconfont agent_icon">&#xe67d; 代理商</text>
-							<text class="text_11">{{item.address}}</text>
-						</view>
+			<view v-if="add == 1" class="group_8 flex-row justify-between">
+				<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index"
+					@click="toProductDetail(item.price)">
+					<image class="kt_img" :src="item.imgSrc"></image>
+					<view class="text-wrapper_3 flex-row justify-between">
+						<text class="paragraph_2">
+							{{item.title}}
+						</text>
+					</view>
+					<view class="text-wrapper_4 flex-row" @tap.stop.prevent>
+						<text class="text_10"><text v-if="item.price != '询价'">￥</text>{{item.price}}</text>
+						<text class="iconfont pk_text" @click="pkText(item)" v-if="item.pk">&#xe661;对比</text>
+						<text class="iconfont pk_text choose_color" v-else="!item.pk">&#xe661;已选</text>
+					</view>
+					<view class="text-wrapper_4 flex-row">
+						<text class="iconfont agent_icon">&#xe67d; 代理商</text>
+						<text class="text_11">{{item.address}}</text>
 					</view>
 				</view>
-				<view  v-if="add == 2" class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index">
-						<image class="kt_img" :src="item.imgSrc"></image>
-						<view class="text-wrapper_3 flex-row justify-between">
-							<text class="paragraph_2">
-								{{item.title}}
-							</text>
-						</view>
-						<view class="text-wrapper_4 flex-row">
-							<text class="text_10">￥{{item.price}}</text>
-							<text class="text_11">{{item.address}}</text>
-						</view>
+			</view>
+			<view v-if="add == 2" class="group_8 flex-row justify-between">
+				<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index"
+					@click="toProductDetailH(item.price)">
+					<image class="kt_img" :src="item.imgSrc"></image>
+					<view class="text-wrapper_3 flex-row justify-between">
+						<text class="paragraph_2">
+							{{item.title}}
+						</text>
+					</view>
+					<view class="text-wrapper_4 flex-row">
+						<text class="text_10">￥{{item.price}}</text>
+						<text class="text_11">{{item.address}}</text>
 					</view>
 				</view>
+			</view>
 
 		</view>
 	</view>
@@ -118,7 +119,7 @@
 					{
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "",
+						price: "询价",
 						address: "郑州",
 						pk: true,
 					},
@@ -132,7 +133,7 @@
 					{
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "",
+						price: "询价",
 						address: "郑州",
 						pk: true,
 					},
@@ -190,6 +191,7 @@
 				],
 				add: 1,
 				parameter: 0,
+				iphonex: this.$iphonex.iphonex,
 				constants: {}
 			};
 		},
@@ -207,29 +209,44 @@
 				e.pk = false
 			},
 			optionIndex(e) {
-				if(e == 'jia') {
-					for(let i = 0; i < this.ktlist1.length; i++) {
+				if (e == 'jia') {
+					for (let i = 0; i < this.ktlist1.length; i++) {
 						this.ktlist1[i].imgSrc = '/static/bg/200711.png'
 					}
-					for(let i = 0; i < this.ktlist2.length; i++) {
+					for (let i = 0; i < this.ktlist2.length; i++) {
 						this.ktlist2[i].imgSrc = '/static/bg/200711.png'
 					}
 				}
-				if(e == 'shang') {
-					for(let i = 0; i < this.ktlist1.length; i++) {
+				if (e == 'shang') {
+					for (let i = 0; i < this.ktlist1.length; i++) {
 						this.ktlist1[i].imgSrc = '/static/bg/0301162340.png'
 					}
-					for(let i = 0; i < this.ktlist2.length; i++) {
+					for (let i = 0; i < this.ktlist2.length; i++) {
 						this.ktlist2[i].imgSrc = '/static/bg/0301162340.png'
 					}
 				}
+			},
+			toProductDetail(e) {
+				uni.navigateTo({
+					url: '/pages/productDetail/productDetail?price=' + e
+				})
+			},
+			toProductDetailH(e) {
+				uni.navigateTo({
+					url: '/pages/productDetailH/productDetailH?price=' + e
+				})
+			},
+			toHotProduct() {
+				uni.navigateTo({
+					url: '/pages/classifyList/classifyList'
+				})
 			}
 		},
 		onLoad(option) {
-			console.log(option.item)
-					this.optionIndex(option.item)
-					
-				},
+			// console.log(option.item)
+			this.optionIndex(option.item)
+
+		},
 	};
 </script>
 <style lang='less'>
@@ -315,6 +332,7 @@
 			position: relative;
 			width: 694rpx;
 			margin-left: 33rpx;
+
 			.text-wrapper_1 {
 				width: 665rpx;
 				height: 32rpx;
@@ -405,27 +423,28 @@
 				height: 4rpx;
 			}
 		}
+
 		.group_8 {
 			width: 659rpx;
 			flex-wrap: wrap;
 			border-radius: 4px;
-		
+
 			.kt_img {
 				width: 320rpx;
 				height: 320rpx;
 			}
-		
+
 			.box_3 {
 				background-color: rgba(255, 255, 255, 1);
 				width: 320rpx;
 				height: 460rpx;
 				margin-top: 38rpx;
-		
+
 				.text-wrapper_3 {
 					width: 300rpx;
 					height: 60rpx;
 					margin: 26rpx 0 0 9rpx;
-		
+
 					.paragraph_2 {
 						width: 286rpx;
 						height: 60rpx;
@@ -441,7 +460,7 @@
 						display: -webkit-box;
 						-webkit-box-orient: vertical;
 					}
-		
+
 					.paragraph_3 {
 						width: 286rpx;
 						height: 60rpx;
@@ -453,13 +472,13 @@
 						line-height: 36rpx;
 					}
 				}
-		
+
 				.text-wrapper_4 {
 					width: 300rpx;
 					height: 24rpx;
 					margin: 21rpx 0 0 13rpx;
 					justify-content: space-between;
-		
+
 					.text_10 {
 						width: 139rpx;
 						height: 30rpx;
@@ -472,7 +491,7 @@
 						white-space: nowrap;
 						line-height: 30rpx;
 					}
-		
+
 					.text_11 {
 						width: 42rpx;
 						height: 21rpx;
@@ -486,6 +505,7 @@
 						line-height: 36rpx;
 						margin-right: 20rpx;
 					}
+
 					.pk_text {
 						width: 79rpx;
 						height: 32rpx;
@@ -496,20 +516,22 @@
 						border: 1rpx solid #E63C31;
 						border-radius: 16rpx;
 					}
+
 					.choose_color {
 						color: #666666;
 						border: 1rpx solid #666666;
 					}
+
 					.agent_icon {
 						font-size: 22rpx;
 						color: #999999;
 					}
-		
+
 				}
 			}
-		
+
 		}
-		
+
 
 	}
 </style>
