@@ -409,7 +409,7 @@ export default {
 	  },
 	  openTel() {
 		  uni.makePhoneCall({
-		  	phoneNumber: '18838356798'
+		  	phoneNumber: '18838000000'
 		  });
 	  }
   },

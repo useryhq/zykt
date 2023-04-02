@@ -184,7 +184,7 @@
 						  this.shoppingCart = e
 					  } else {
 						  uni.makePhoneCall({
-						  	phoneNumber: '18838356798'
+						  	phoneNumber: '18838000000'
 						  });
 					  }
 			},

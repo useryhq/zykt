@@ -59,7 +59,7 @@
 									:style="{ color: item.lanhufontColor0 }">{{item.lanhutext0}}</text>
 							</view>
 						</view>
-						<view class="image-text_9 flex-row justify-between">
+						<view class="image-text_9 flex-row justify-between" @click="toBrand()">
 							<image class="label_5" referrerpolicy="no-referrer"
 								src="../../static/bg/ps8w062b4dww78ren5gnd20n7t1lgq9wifk1489dc63-ba6a-4b28-81df-764d45f40f3c.png" />
 							<text class="text-group_9">更多</text>
@@ -70,7 +70,7 @@
 			<view class="group_6 flex-col">
 				<view class="section_3 flex-row justify-between">
 					<text class="text_7">最新求购</text>
-					<view class="image-text_10 flex-row justify-between">
+					<view class="image-text_10 flex-row justify-between" @click="TowantToBuy()">
 						<text class="text-group_10">查看更多</text>
 						<image class="thumbnail_2" referrerpolicy="no-referrer"
 							src="/static/bg/ps9eqtt3izc6df1bfdwxikkb9lerbbb0sf89be13a8-4627-4296-a69e-c90609ca556f.png" />
@@ -318,8 +318,12 @@
 				this.add = 2
 			},
 			slecetTab(e) {
-				console.log(e)
+				// console.log(e)
 				this.selectTab = e
+				if(e == 4) {
+					uni.navigateTo({
+						url: '/pages/twoHand/twoHand'
+					})				}
 			},
 			ToSearch() {
 				uni.navigateTo({
@@ -349,6 +353,16 @@
 			toProductDetailH(e) {
 				uni.navigateTo({
 					url: '/pages/productDetailH/productDetailH?price=' + e
+				})
+			},
+			TowantToBuy() {
+				uni.navigateTo({
+					url: '/pages/wantToBuy/wantToBuy'
+				})
+			},
+			toBrand() {
+				uni.navigateTo({
+					url:'/pages/brand/brand'
 				})
 			}
 		},
