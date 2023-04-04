@@ -8,7 +8,7 @@
 	  <view class="block_4">
 	  	<view class="list_1 flex-row">
 	  		<view class="image-text_4 flex-col justify-between" v-for="(item, index) in loopData0"
-	  			:key="index">
+	  			:key="index" @click="toBrandTwo(item.lanhutext0)">
 	  			<image class="image_3" referrerpolicy="no-referrer" :src="item.lanhuimage0" />
 	  			<text class="text-group_4"
 	  				:style="{ color: item.lanhufontColor0 }">{{item.lanhutext0}}</text>
@@ -289,8 +289,15 @@ export default {
 		  }).exec()
   },
   bindClick(e) {
-  				console.log('点击item，返回数据' + JSON.stringify(e))
-  			}
+	  uni.navigateTo({
+	  	url: '/pages/brandTwo/brandTwo?title=' + e.item.itemobj.name
+	  })
+  			},
+			toBrandTwo(T) {
+				uni.navigateTo({
+					url: '/pages/brandTwo/brandTwo?title=' + T
+				})
+			}
   },
   onLoad() {
 	 this.setHeight()

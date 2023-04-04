@@ -107,6 +107,28 @@
             }
             
         }
+        ,{
+            "path" : "pages/brandTwo/brandTwo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle":"black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/brandWantBuy/brandWantBuy",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle":"black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",

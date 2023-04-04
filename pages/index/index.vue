@@ -44,7 +44,7 @@
 				<view class="block_4 flex-col">
 					<view class="list_1 flex-row">
 						<view class="image-text_4 flex-col justify-between" v-for="(item, index) in loopData0"
-							:key="index">
+							:key="index" @click="toBrandTwo(item.lanhutext0)">
 							<image class="image_3" referrerpolicy="no-referrer" :src="item.lanhuimage0" />
 							<text class="text-group_4"
 								:style="{ color: item.lanhufontColor0 }">{{item.lanhutext0}}</text>
@@ -53,7 +53,7 @@
 					<view class="box_2 flex-row">
 						<view class="list_2 flex-row justify-between">
 							<view class="image-text_5 flex-col justify-between" v-for="(item, index) in loopData1"
-								:key="index">
+								:key="index" @click="toBrandTwo(item.lanhutext0)">
 								<image class="image_4" referrerpolicy="no-referrer" :src="item.lanhuimage0" />
 								<text class="text-group_5"
 									:style="{ color: item.lanhufontColor0 }">{{item.lanhutext0}}</text>
@@ -364,10 +364,32 @@
 				uni.navigateTo({
 					url:'/pages/brand/brand'
 				})
+			},
+			toBrandTwo(T) {
+				uni.navigateTo({
+					url: '/pages/brandTwo/brandTwo?title=' + T
+				})
+			},
+			getGps() {
+				// console.log('gps')
+				uni.authorize({
+				    scope: 'scope.userLocation',
+				    success() {
+				        uni.getLocation({
+				        	type: 'wgs84',
+				        	success: function (res) {
+				        		console.log('当前位置的经度：' + res.longitude);
+				        		console.log('当前位置的纬度：' + res.latitude);
+				        		console.log('当前位置：' + res.address);
+				        	}
+				        });
+				    }
+				})
+				
 			}
 		},
 		onLoad() {
-			// console.log(this.message)
+			this.getGps()
 		},
 	};
 
