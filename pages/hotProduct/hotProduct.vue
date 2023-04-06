@@ -101,8 +101,28 @@
 					</view>
 				</view>
 			</view>
-
 		</view>
+		<view v-if="pkBlock" class="pk_block">
+			<view class="mask"></view>
+			<view class="mode">
+				<view class="pk_title">
+					<text>同类产品对比（2/3）</text>
+					<text class="close_pk" @click="closePk">×</text>
+				</view>
+				<view class="product_message flex-row justify-between" v-for="(item,index) in pkMessage" :key="index">
+					<text>{{item.title}}</text>
+					<text class="iconfont dele" @click="deleProduct(index)">&#xe665;</text>
+				</view>
+				<view class="add_product">
+					<view class="add_icon" @click="closePk">＋</view>
+					<text>点击商品列表中对比按钮继续添加</text>
+				</view>
+				<view class="pk_btn">开始对比</view>
+			</view>
+		</view>
+		<uni-popup ref="popup" type="message">
+			<uni-popup-message type="warn" message="最多选择3个商品" :duration="5000"></uni-popup-message>
+		</uni-popup>
 	</view>
 </template>
 <script>
@@ -110,6 +130,7 @@
 		data() {
 			return {
 				ktlist1: [{
+					    id:1,
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
 						price: "8000.00",
@@ -117,6 +138,7 @@
 						pk: true,
 					},
 					{
+						id:2,
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
 						price: "询价",
@@ -124,6 +146,7 @@
 						pk: true,
 					},
 					{
+						id:3,
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
 						price: "8000.00",
@@ -131,6 +154,7 @@
 						pk: true,
 					},
 					{
+						id:4,
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
 						price: "询价",
@@ -138,6 +162,7 @@
 						pk: true,
 					},
 					{
+						id:5,
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
 						price: "8000.00",
@@ -145,6 +170,7 @@
 						pk: true,
 					},
 					{
+						id:6,
 						imgSrc: "",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
 						price: "8000.00",
@@ -192,6 +218,9 @@
 				add: 1,
 				parameter: 0,
 				iphonex: this.$iphonex.iphonex,
+				pkBlock:false,
+				pkBlockadd: 0,
+				pkMessage:[],
 				constants: {}
 			};
 		},
@@ -202,12 +231,45 @@
 			choose_status2() {
 				this.add = 2
 			},
+			// 价格、销量、品牌、成色筛选
 			chooseParameter(e) {
 				this.parameter = e
 			},
+			// 对比弹窗
 			pkText(e) {
-				e.pk = false
+				this.pkBlockadd ++
+				// console.log(this.pkBlockadd)
+				if(this.pkBlockadd > 3) {
+					console.log('=====')
+					this.$refs.popup.open()
+					this.pkBlock = true
+					return
+				} else {
+					this.pkMessage.push({'title':e.title,'id':e.id})
+					console.log(this.pkMessage)
+					e.pk = false,
+					this.pkBlock = true
+				}
+				
 			},
+			closePk() {
+				this.pkBlock = false
+			},
+			deleProduct(e) {
+				console.log(e)
+				if(this.pkBlockadd > 0) {
+					this.pkBlockadd --
+					for(let i = 0; i < this.ktlist1.length; i++) {
+						console.log("===",this.ktlist1[i].id)
+						if(this.ktlist1[i].id == this.pkMessage[e].id) {
+							this.ktlist1[i].pk = true
+						}
+					}
+					this.pkMessage.splice(e,1)
+				}
+			},
+			// 对比弹窗结束
+			// 家用、商用空调不同参数
 			optionIndex(e) {
 				if (e == 'jia') {
 					for (let i = 0; i < this.ktlist1.length; i++) {
@@ -226,6 +288,7 @@
 					}
 				}
 			},
+			// 路由跳转
 			toProductDetail(e) {
 				uni.navigateTo({
 					url: '/pages/productDetail/productDetail?price=' + e
@@ -531,7 +594,99 @@
 			}
 
 		}
-
-
+.pk_block {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	.mask {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+	.mode {
+		width: 686rpx;
+		height: 600rpx;
+		background-color: #fff;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		border-radius: 10rpx;
+		margin: 0 auto;
+		.pk_title {
+			width: 100%;
+			height: 60rpx;
+			background-color: #FF0000;
+			color: #fff;
+			font-size: 30rpx;
+			font-weight: 500;
+			line-height: 60rpx;
+			text-align: center;
+			.close_pk {
+				width: 38rpx;
+				height: 38rpx;
+				margin: 11rpx 26rpx 0 0;
+				font-size: 30rpx;
+				line-height: 38rpx;
+				text-align: center;
+				color: #fff;
+				border: 2rpx solid #fff;
+				border-radius: 50%;
+				float: right;
+			}
+		}
+		.product_message {
+			width: 646rpx;
+			height: 30rpx;
+			margin: 0 auto;
+			padding: 20rpx 10rpx;
+			font-size: 24rpx;
+			color: #333;
+			line-height: 30rpx;
+			text-align: left;
+			border-bottom: 1rpx solid #BFBFBF;
+			.dele {
+				font-size: 24rpx;
+				color: #5C5C5C;
+			}
+		}
+		.add_product {
+			width: 646rpx;
+			height: 88rpx;
+			margin: 0 auto;
+			padding: 16rpx 0;
+			font-size: 20rpx;
+			color: #999;
+			text-align: center;
+			border-bottom: 1rpx solid #BFBFBF;
+			.add_icon {
+				width: 58rpx;
+				height: 58rpx;
+				margin: 0 auto;
+				border-radius: 50%;
+				border: 1rpx solid #B5B5B5;
+				font-size: 44rpx;
+				font-weight: 500;
+				line-height: 58rpx;
+			}
+		}
+		.pk_btn {
+			width: 484rpx;
+			height: 60rpx;
+			margin: 100rpx auto auto auto;
+			background-color: #E63C31;
+			border-radius: 30rpx;
+			font-size: 30rpx;
+			color: #fff;
+			line-height: 60rpx;
+			text-align: center;
+		}
+}
+}
 	}
 </style>
