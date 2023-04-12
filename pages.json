@@ -129,6 +129,17 @@
             }
             
         }
+        ,{
+            "path" : "pages/contrastDetail/contrastDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "对比详情",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle":"black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",

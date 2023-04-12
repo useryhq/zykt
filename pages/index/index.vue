@@ -3,10 +3,14 @@
 		<view class="group_1 flex-col">
 			<view class="group_2 flex-col">
 				<view class="block_2 flex-row justify-between">
-					<view class="image-text_1 flex-row justify-between">
-						<text class="text-group_1">郑州</text>
+					<view class="image-text_1 flex-row" @click="addressShow">
+						<text class="text-group_1">{{address}}</text>
 						<image class="thumbnail_1" referrerpolicy="no-referrer"
 							src="/static/bg/psn0jpa0rv4jokgnpjgiyspa6d5ap30qwvka8534697-34f3-4d04-ad86-53aa6ed0ac52.png" />
+					</view>
+					<view  class="choose_address">
+						<uni-data-picker ref="picker" :localdata="localData" @change="onchange" @nodeclick="onnodeclick">
+						</uni-data-picker>
 					</view>
 					<view class="text-wrapper_1 flex-col" @click="ToSearch">
 						<text class="text_2">搜索想要的空调产品</text>
@@ -154,6 +158,13 @@
 	</view>
 </template>
 <script>
+	import get_city_tree from '../../static/js/cityData.js'
+	
+	// export default {
+	// 	components: {
+	// 		get_city_tree
+	// 	},
+	// }
 	export default {
 		data() {
 			return {
@@ -304,6 +315,8 @@
 						address: "郑州",
 					}
 				],
+				localData: [],
+				address: '郑州',
 				add: 1,
 				selectTab: 1,
 				iphonex: this.$iphonex.iphonex,
@@ -370,6 +383,7 @@
 					url: '/pages/brandTwo/brandTwo?title=' + T
 				})
 			},
+			// 获取地址
 			getGps() {
 				// console.log('gps')
 				uni.authorize({
@@ -384,19 +398,32 @@
 				        	}
 				        });
 				    }
-				})
-				
-			}
+				})			
+			},
+			addressShow() {
+				this.$refs.picker.show()
+			},
+			// 节点变化后 （并非已经选择完毕）
+						onnodeclick(node) {
+							// console.log(JSON.stringify(node))
+						},
+						
+						// 整体选择完成以后
+						onchange(e) {
+							const value = e.detail.value
+							this.address = value.slice(-1)[0].text
+						},
 		},
 		onLoad() {
 			this.getGps()
+			this.localData = get_city_tree()
+			// console.log(this.localData)
 		},
 	};
 
 </script>
 <style>
 	@import '../../static/css/common.css';
-	/* @import './index.rpx.css';y */
 
 </style>
 
@@ -486,12 +513,11 @@
 					margin: 0 0 39rpx 28rpx;
 
 					.image-text_1 {
-						width: 70rpx;
+						width: 100rpx;
 						height: 23rpx;
 						margin-top: 18rpx;
 
 						.text-group_1 {
-							width: 45rpx;
 							height: 23rpx;
 							overflow-wrap: break-word;
 							color: rgba(255, 255, 255, 1);
@@ -506,8 +532,13 @@
 						.thumbnail_1 {
 							width: 18rpx;
 							height: 10rpx;
-							margin-top: 10rpx;
+							margin: 10rpx 0 0 8rpx;
 						}
+					}
+					
+					.choose_address {
+						width: 2rpx;
+						height: 2rpx;
 					}
 
 					.text-wrapper_1 {

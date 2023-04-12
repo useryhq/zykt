@@ -117,7 +117,7 @@
 					<view class="add_icon" @click="closePk">＋</view>
 					<text>点击商品列表中对比按钮继续添加</text>
 				</view>
-				<view class="pk_btn">开始对比</view>
+				<view class="pk_btn" @click="toContrastDetail()">开始对比</view>
 			</view>
 		</view>
 		<uni-popup ref="popup" type="message">
@@ -302,6 +302,11 @@
 			toHotProduct() {
 				uni.navigateTo({
 					url: '/pages/classifyList/classifyList'
+				})
+			},
+			toContrastDetail() {
+				uni.navigateTo({
+					url: '/pages/contrastDetail/contrastDetail'
 				})
 			}
 		},
