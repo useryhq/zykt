@@ -7,7 +7,7 @@
           <view v-else-if="loading && !isOpened" class="selected-area">
             <uni-load-more class="load-more" :contentText="loadMore" status="loading"></uni-load-more>
           </view>
-          <scroll-view v-else-if="inputSelected.length" class="selected-area" scroll-x="true">
+          <scroll-view enable-flex="true" v-else-if="inputSelected.length" class="selected-area" scroll-x="true">
             <view class="selected-list">
               <view class="selected-item" v-for="(item,index) in inputSelected" :key="index">
                 <text class="text-color">{{item.text}}</text><text v-if="index<inputSelected.length-1"

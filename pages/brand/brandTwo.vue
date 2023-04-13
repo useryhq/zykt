@@ -77,7 +77,7 @@ export default {
 	  },
 	  toBrandWantBuy() {
 		  uni.navigateTo({
-		  	url: '/pages/brandWantBuy/brandWantBuy?title=' + this.title
+		  	url: '/pages/brand/brandWantBuy?title=' + this.title
 		  })
 	  }
   },

@@ -290,12 +290,12 @@ export default {
   },
   bindClick(e) {
 	  uni.navigateTo({
-	  	url: '/pages/brandTwo/brandTwo?title=' + e.item.itemobj.name
+	  	url: '/pages/brand/brandTwo?title=' + e.item.itemobj.name
 	  })
   			},
 			toBrandTwo(T) {
 				uni.navigateTo({
-					url: '/pages/brandTwo/brandTwo?title=' + T
+					url: '/pages/brand/brandTwo?title=' + T
 				})
 			}
   },

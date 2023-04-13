@@ -64,8 +64,9 @@
 							</view>
 						</view>
 						<view class="image-text_9 flex-row justify-between" @click="toBrand()">
-							<image class="label_5" referrerpolicy="no-referrer"
-								src="../../static/bg/ps8w062b4dww78ren5gnd20n7t1lgq9wifk1489dc63-ba6a-4b28-81df-764d45f40f3c.png" />
+							<text class="iconfont label_5">&#xe6b3;</text>
+							<!-- <image class="label_5" referrerpolicy="no-referrer"
+								src="../../static/bg/ps8w062b4dww78ren5gnd20n7t1lgq9wifk1489dc63-ba6a-4b28-81df-764d45f40f3c.png" /> -->
 							<text class="text-group_9">更多</text>
 						</view>
 					</view>
@@ -113,7 +114,7 @@
 					</view>
 				</view>
 				<view  v-if="add == 2" class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index" @click="toProductDetailH(item.price)">
+					<view class="box_3 flex-col" v-for="(item,i) in ktlist2" :key="i" @click="toProductDetailH(item.price)">
 						<image class="kt_img" :src="item.imgSrc"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
@@ -159,12 +160,6 @@
 </template>
 <script>
 	import get_city_tree from '../../static/js/cityData.js'
-	
-	// export default {
-	// 	components: {
-	// 		get_city_tree
-	// 	},
-	// }
 	export default {
 		data() {
 			return {
@@ -336,7 +331,12 @@
 				if(e == 4) {
 					uni.navigateTo({
 						url: '/pages/twoHand/twoHand'
-					})				}
+					})
+					}else if(e == 5) {
+						uni.navigateTo({
+							url: '/pages/my/my'
+						})
+					}
 			},
 			ToSearch() {
 				uni.navigateTo({
@@ -417,7 +417,6 @@
 		onLoad() {
 			this.getGps()
 			this.localData = get_city_tree()
-			// console.log(this.localData)
 		},
 	};
 
@@ -435,14 +434,12 @@
 
 		.group_1 {
 			width: 750rpx;
-			margin-top: 15rpx;
-
+			
 			.group_2 {
 				width: 750rpx;
 				height: 110rpx;
-				background: url(/static/bg/ps59drfwoeaop2rwmujyrphvuaeqgb0axqfdf6667e-c63f-4b00-961c-724335a2ad65.png) 0rpx -15rpx no-repeat;
+				background: url(/static/bg/ps59drfwoeaop2rwmujyrphvuaeqgb0axqfdf6667e-c63f-4b00-961c-724335a2ad65.png) 0rpx 0rpx no-repeat;
 				background-size: 750rpx 100rpx;
-				margin-top: -15rpx;
 
 				.image_1 {
 					width: 727rpx;
@@ -537,8 +534,9 @@
 					}
 					
 					.choose_address {
-						width: 2rpx;
-						height: 2rpx;
+						width: 1rpx;
+						height: 1rpx;
+						// background-color: #ff6842;
 					}
 
 					.text-wrapper_1 {
@@ -604,9 +602,9 @@
 
 							.image-wrapper_2 {
 								height: 80rpx;
-								background: url(/static/bg/ps7h7jzhhtm8jb4llh1yegvcjvxbrswrx85d5751f1-88c2-4c20-bf8f-6ff75a5375a7.png) 100% no-repeat;
-								background-size: 100% 100%;
+								background-color: #E43930;
 								width: 80rpx;
+								border-radius: 50%;
 
 								.label_3 {
 									font-size: 45rpx;
@@ -664,9 +662,9 @@
 
 							.image-wrapper_3 {
 								height: 80rpx;
-								background: url(../../static/bg/pstzh93nwbnl5cb7gwrw4bmlegwk475rbb98159a4-30ef-482c-9b50-b8c05d79ac62.png) 100% no-repeat;
-								background-size: 100% 100%;
+								background-color: #F09B0F ;
 								width: 80rpx;
+								border-radius: 50%;
 
 								.label_4 {
 									font-size: 48rpx;
@@ -793,6 +791,8 @@
 							.label_5 {
 								width: 30rpx;
 								height: 30rpx;
+								font-size: 30rpx;
+								color: #000;
 							}
 
 							.text-group_9 {

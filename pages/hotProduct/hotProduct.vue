@@ -67,7 +67,7 @@
 
 			<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 			<view v-if="add == 1" class="group_8 flex-row justify-between">
-				<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index"
+				<view class="box_3 flex-col" v-for="(item,i) in ktlist1" :key="i"
 					@click="toProductDetail(item.price)">
 					<image class="kt_img" :src="item.imgSrc"></image>
 					<view class="text-wrapper_3 flex-row justify-between">

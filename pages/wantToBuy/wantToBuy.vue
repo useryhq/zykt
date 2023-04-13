@@ -79,7 +79,7 @@
 		methods: {
 			toWantBUyDetail() {
 				uni.navigateTo({
-					url:'/pages/wantBuyDetail/wantBuyDetail'
+					url:'/pages/wantToBuy/wantBuyDetail'
 				})
 			}
 		}

@@ -75,7 +75,7 @@
             
         }
         ,{
-            "path" : "pages/wantBuyDetail/wantBuyDetail",
+            "path" : "pages/wantToBuy/wantBuyDetail",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "求购详情",
@@ -108,7 +108,7 @@
             
         }
         ,{
-            "path" : "pages/brandTwo/brandTwo",
+            "path" : "pages/brand/brandTwo",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -119,7 +119,7 @@
             
         }
         ,{
-            "path" : "pages/brandWantBuy/brandWantBuy",
+            "path" : "pages/brand/brandWantBuy",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -137,6 +137,17 @@
                 "enablePullDownRefresh": false,
                 "navigationBarTextStyle":"black",
                 "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/my",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle":"white",
+                "navigationBarBackgroundColor": "#80ACFF"
             }
             
         }

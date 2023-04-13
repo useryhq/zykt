@@ -62,8 +62,7 @@
             "scope.userLocation" : {
                 "desc" : "获取用户位置，提供附近商家商品，更好的为客户服务"
             }
-        },
-		"lazyCodeLoading": "requiredComponents"
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true
