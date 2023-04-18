@@ -246,7 +246,7 @@
 					return
 				} else {
 					this.pkMessage.push({'title':e.title,'id':e.id})
-					console.log(this.pkMessage)
+					// console.log(this.pkMessage)
 					e.pk = false,
 					this.pkBlock = true
 				}
@@ -437,12 +437,6 @@
 				}
 			}
 
-			.image_3 {
-				width: 665rpx;
-				height: 1rpx;
-				margin: 12rpx 0 0 14rpx;
-			}
-
 			.box_3 {
 				width: 586rpx;
 				height: 23rpx;
@@ -527,17 +521,6 @@
 						word-break: break-all;
 						display: -webkit-box;
 						-webkit-box-orient: vertical;
-					}
-
-					.paragraph_3 {
-						width: 286rpx;
-						height: 60rpx;
-						overflow-wrap: break-word;
-						color: rgba(51, 51, 51, 1);
-						font-size: 24rpx;
-						font-family: PingFang-SC-Regular;
-						text-align: left;
-						line-height: 36rpx;
 					}
 				}
 

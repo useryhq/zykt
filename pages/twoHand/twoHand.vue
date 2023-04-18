@@ -29,7 +29,7 @@
         </view>
       </view>
     </view>
-  </view>
+	</view>
 </template>
 <script>
 export default {
@@ -88,14 +88,11 @@ export default {
 	.page {
 	  position: relative;
 	  width: 750rpx;
-	  height: 1334rpx;
 	  overflow: hidden;
 	  .group_4 {
 	    position: relative;
 	    width: 749rpx;
 	    height: 1210rpx;
-	   
-	    margin-left: 1rpx;
 	    .image-text_1 {
 	      width: 65rpx;
 	      height: 22rpx;
@@ -184,79 +181,7 @@ export default {
 	        }
 	      }
 	    }
-	    .group_5 {
-	      background-color: rgba(246, 246, 246, 1);
-	      height: 238rpx;
-	      width: 750rpx;
-	      position: absolute;
-	      left: -1rpx;
-	      top: 972rpx;
-	      .label_4 {
-	        width: 32rpx;
-	        height: 32rpx;
-	        margin: 95rpx 0 0 347rpx;
-	      }
-	      .group_6 {
-	        background-color: rgba(255, 255, 255, 1);
-	        border-radius: 4px;
-	        position: absolute;
-	        left: 30rpx;
-	        top: -126rpx;
-	        width: 690rpx;
-	        height: 167rpx;
-	        .image-text_3 {
-	          width: 589rpx;
-	          height: 110rpx;
-	          margin: 27rpx 0 0 11rpx;
-	          .image_4 {
-	            width: 124rpx;
-	            height: 110rpx;
-	          }
-	          .text-group_3 {
-	            width: 444rpx;
-	            height: 99rpx;
-	            margin-top: 6rpx;
-	            .text_4 {
-	              width: 332rpx;
-	              height: 27rpx;
-	              overflow-wrap: break-word;
-	              color: rgba(51, 51, 51, 1);
-	              font-size: 28rpx;
-	              font-family: PingFang-SC-Medium;
-	              font-weight: 500;
-	              text-align: left;
-	              white-space: nowrap;
-	              line-height: 27rpx;
-	            }
-	            .paragraph_1 {
-	              width: 443rpx;
-	              height: 50rpx;
-	              overflow-wrap: break-word;
-	              color: rgba(51, 51, 51, 1);
-	              font-size: 20rpx;
-	              font-family: PingFang-SC-Regular;
-	              font-weight: NaN;
-	              text-align: left;
-	              line-height: 30rpx;
-	              margin: 22rpx 0 0 1rpx;
-	            }
-	          }
-	        }
-	        .image-wrapper_2 {
-	          background-color: rgba(255, 239, 239, 1);
-	          border-radius: 50%;
-	          height: 54rpx;
-	          width: 54rpx;
-	          margin: 17rpx 16rpx 0 20rpx;
-	          .label_5 {
-	            width: 26rpx;
-	            height: 26rpx;
-	            margin: 16rpx 0 0 14rpx;
-	          }
-	        }
-	      }
 	    }
 	  }
-	}
 
 </style>

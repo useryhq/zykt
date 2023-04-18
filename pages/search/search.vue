@@ -56,12 +56,12 @@ export default {
   background-color: rgba(255, 255, 255, 1);
   position: relative;
   width: 750rpx;
-  height: 1334rpx;
+  // height: 1334rpx;
   overflow: hidden;
   .box_3 {
     width: 750rpx;
-    height: 1211rpx;
-    margin-bottom: 1rpx;
+    // height: 1211rpx;
+    // margin-bottom: 1rpx;
     .section_1 {
       margin: 25rpx 0 0 29rpx;
       .group_3 {

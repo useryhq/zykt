@@ -177,7 +177,7 @@
       </view>
       <view class="image-text_10 flex-col justify-around" @click="tabClick(3)">
         <text class="iconfont label_11" :class="{'tab_color' : shoppingCart == 3}">&#xe607;</text>
-        <text class="text-group_12">购物车</text>
+        <text class="text-group_12" @click="toShoppingCart">购物车</text>
       </view>
       <view class="text-wrapper_9" @click="tabClick(4)">
         <text class="text_31">加入购物车</text>
@@ -343,6 +343,7 @@ export default {
     };
   },
   methods: {
+	  //顶部nav切换，定位到相应栏目
 	  navChange(index) {
 	  	this.navIndex = index
 		let height = 0
@@ -375,9 +376,11 @@ export default {
 			
 	  }
 	  },
+	  //展开规格
 	  open() {
 		  this.openHeight = this.ktParameter.length * 48
 	  },
+	  //底部tab切换
 	  tabClick(e) {
 		  if(e == 1) {
 			  this.store = e
@@ -387,19 +390,25 @@ export default {
 			  this.shoppingCart = e
 		  } else if(e == 4) {
 			  this.join = e
+			  uni.navigateTo({
+			  	url: '/pages/my/shoppingCart'
+			  })
 		  } else if(e == 5){
 			  this.buyBlock = true
 		  } else {
 			  this.buyBlock2 = true
 		  }
 	  },
+	  //购买数量改变
 	  change(value) {
 	  				this.numberValue = value
 	  			},
+	//选择购买规格	
 	  clickSpecifications(e,f) {
 		  this.choose = e
 		  this.specificationsIndex = f
 	  },
+	  //关闭购买弹窗
 	  buyClose(e) {
 		  if(e == 1) {
 			  this.buyBlock = false
@@ -407,10 +416,17 @@ export default {
 			  this.buyBlock2 = false
 		  }		  
 	  },
+	  //拨打电话
 	  openTel() {
 		  uni.makePhoneCall({
 		  	phoneNumber: '18838000000'
 		  });
+	  },
+	  //跳转购物车
+	  toShoppingCart() {
+		  uni.navigateTo({
+		  	url: '/pages/my/shoppingCart'
+		  })
 	  }
   },
   onLoad(option) {
@@ -490,10 +506,6 @@ export default {
 	    .image-text_1 {
 	      width: 77rpx;
 	      height: 24rpx;
-	      .label_3 {
-	        width: 24rpx;
-	        height: 22rpx;
-	      }
 	      .text-group_1 {
 	        width: 45rpx;
 	        height: 23rpx;
@@ -524,11 +536,6 @@ export default {
 		background-color: #fff;
 		overflow: hidden;
 		text-overflow: ellipsis;
-	  }
-	  .image_3 {
-	    width: 750rpx;
-	    height: 1rpx;
-	    margin-top: 18rpx;
 	  }
 	  .box_3 {
 	    width: 692rpx;
@@ -642,16 +649,6 @@ export default {
 	      line-height: 36rpx;
 	      margin-left: 23rpx;
 	    }
-	    .image_4 {
-	      width: 36rpx;
-	      height: 6rpx;
-	      margin: 10rpx 0 0 363rpx;
-	    }
-	  }
-	  .image_5 {
-	    width: 750rpx;
-	    height: 1rpx;
-	    margin-top: 23rpx;
 	  }
 	  .group_10 {
 	    width: 687rpx;
@@ -681,11 +678,6 @@ export default {
 	      white-space: nowrap;
 	      line-height: 36rpx;
 	      margin: 1rpx 0 0 22rpx;
-	    }
-	    .image_6 {
-	      width: 36rpx;
-	      height: 6rpx;
-	      margin: 7rpx 0 0 290rpx;
 	    }
 	  }
 }
@@ -806,30 +798,6 @@ export default {
             color: #999;
             font-size: 22rpx;
             font-family: PingFang-SC-Regular;
-            font-weight: NaN;
-            text-align: left;
-            white-space: nowrap;
-            line-height: 30rpx;
-          }
-          .text_22 {
-            width: 218rpx;
-            height: 22rpx;
-            overflow-wrap: break-word;
-            color: rgba(153, 153, 153, 1);
-            font-size: 18rpx;
-            font-family: PingFang-SC-Regular;
-            font-weight: NaN;
-            text-align: left;
-            white-space: nowrap;
-            line-height: 30rpx;
-          }
-          .text_23 {
-            width: 218rpx;
-            height: 22rpx;
-            overflow-wrap: break-word;
-            color: rgba(153, 153, 153, 1);
-            font-size: 18rpx;
-            font-family: MicrosoftYaHei;
             font-weight: NaN;
             text-align: left;
             white-space: nowrap;

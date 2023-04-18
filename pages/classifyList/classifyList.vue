@@ -317,16 +317,16 @@
 				console.log(this.comList)
 			},
 			// 跳转产品列表页
-			togoodList(id) {
-				uni.navigateTo({
-					url: "./goodsList?c_id=" + id
-				})
-			},
-			async GetGoodsClassifyList() {
-				let res = await goodsClassifyList()
-				this.list = res.list
-				// console.log(res)
-			}
+			// togoodList(id) {
+			// 	uni.navigateTo({
+			// 		url: "./goodsList?c_id=" + id
+			// 	})
+			// },
+			// async GetGoodsClassifyList() {
+			// 	let res = await goodsClassifyList()
+			// 	this.list = res.list
+			// 	// console.log(res)
+			// }
 		}
 	}
 </script>
@@ -362,7 +362,8 @@
 			width: 580rpx;
 			height: 100%;
 			overflow: auto;
-
+			-webkit-overflow-scrolling: touch;
+			
 			.right-content {
 				.right-block {
 					width: 580rpx;

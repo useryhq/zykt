@@ -380,7 +380,7 @@
 			},
 			toBrandTwo(T) {
 				uni.navigateTo({
-					url: '/pages/brandTwo/brandTwo?title=' + T
+					url: '/pages/brand/brandTwo?title=' + T
 				})
 			},
 			// 获取地址
@@ -441,69 +441,6 @@
 				background: url(/static/bg/ps59drfwoeaop2rwmujyrphvuaeqgb0axqfdf6667e-c63f-4b00-961c-724335a2ad65.png) 0rpx 0rpx no-repeat;
 				background-size: 750rpx 100rpx;
 
-				.image_1 {
-					width: 727rpx;
-					height: 20rpx;
-					margin: 15rpx 0 0 12rpx;
-				}
-
-				.block_1 {
-					width: 706rpx;
-					height: 64rpx;
-					margin: 23rpx 0 0 31rpx;
-
-					.label_1 {
-						width: 42rpx;
-						height: 42rpx;
-						margin-top: 7rpx;
-					}
-
-					.text_1 {
-						width: 146rpx;
-						height: 29rpx;
-						overflow-wrap: break-word;
-						color: rgba(255, 255, 255, 1);
-						font-size: 30rpx;
-						font-family: PingFang-SC-Bold;
-						font-weight: 700;
-						text-align: left;
-						white-space: nowrap;
-						line-height: 30rpx;
-						margin: 15rpx 0 0 12rpx;
-					}
-
-					.group_3 {
-						background-color: rgba(0, 0, 0, 0.18);
-						border-radius: 32px;
-						width: 174rpx;
-						height: 64rpx;
-						border: 1px solid rgba(210, 210, 210, 0.18);
-						margin-left: 332rpx;
-
-						.image_2 {
-							width: 68rpx;
-							height: 42rpx;
-							margin: 11rpx 0 0 28rpx;
-						}
-
-						.group_4 {
-							border-radius: 50%;
-							height: 32rpx;
-							border: 3px solid rgba(255, 254, 255, 1);
-							width: 32rpx;
-							margin: 17rpx 28rpx 0 0;
-
-							.box_1 {
-								background-color: rgba(255, 254, 255, 1);
-								border-radius: 50%;
-								width: 14rpx;
-								height: 14rpx;
-								margin: 9rpx 0 0 9rpx;
-							}
-						}
-					}
-				}
-
 				.block_2 {
 					width: 693rpx;
 					height: 56rpx;
@@ -534,7 +471,7 @@
 					}
 					
 					.choose_address {
-						width: 1rpx;
+						width: 0rpx;
 						height: 1rpx;
 						// background-color: #ff6842;
 					}
@@ -973,17 +910,6 @@
 								word-break: break-all;
 								display: -webkit-box;
 								-webkit-box-orient: vertical;
-							}
-
-							.paragraph_3 {
-								width: 286rpx;
-								height: 60rpx;
-								overflow-wrap: break-word;
-								color: rgba(51, 51, 51, 1);
-								font-size: 24rpx;
-								font-family: PingFang-SC-Regular;
-								text-align: left;
-								line-height: 36rpx;
 							}
 						}
 

@@ -13,25 +13,25 @@
         <view class="box_3 flex-row align-center">
           <text class="text_4">开通店铺</text>
           <text class="text_5">享受专属权益</text>
-          <button class="button_1 flex-col" @click="onClick_1">
+          <view class="button_1 flex-col" @click="onClick_1">
             <text class="text_6">查看详情</text>
-          </button>
+          </view>
         </view>
       </view>
       <view class="box_4 flex-col">
         <view class="group_4 flex-row justify-between">
-          <button class="button_2 flex-col" @click="onClick_2">
+          <view class="button_2 flex-col" @click="onClick_2">
             <view class="icon_3 flex-col">
 				<text class="iconfont label_2">&#xe6af;</text>
             </view>
             <text class="text_7">我的求购</text>
-          </button>
-          <button class="button_3 flex-col" @click="onClick_3">
+          </view>
+          <view class="button_3 flex-col" @click="onClick_3">
             <view class="icon_4 flex-col">
 				<text class="iconfont label_3">&#xe649;</text>
             </view>
             <text class="text_8">我的发布</text>
-          </button>
+          </view>
         </view>
         <view class="text-wrapper_1 flex-row justify-between">
           <text class="text_9">我的订单</text>
@@ -97,13 +97,15 @@ export default {
   },
   methods: {
     onClick_1() {
-      alert(1);
+      
     },
     onClick_2() {
-      alert(1);
+      uni.navigateTo({
+      	url: '/pages/my/myWantBuy'
+      })
     },
     onClick_3() {
-      alert(1);
+      
     }
   }
 };
