@@ -16,6 +16,242 @@
 			<text class="nav" :class="{'nav_active' : nav == 3}" @click="chooseNav(3)">待收货</text>
 			<text class="nav" :class="{'nav_active' : nav == 4}" @click="chooseNav(4)">待评价</text>
 		</view>
+		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		  <view class="block_2 flex-row justify-between align-center" >
+		    <view class="image-text_1 flex-row align-center">
+				<text class="iconfont icon_2">&#xe676;</text>
+		      <text class="text-group_1">格力二手空调专卖</text>
+		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    </view>
+			<view class="image-text_3" v-if="index == 0 || index == 1">
+				等待付款
+			</view>
+			<view class="image-text_3" v-if="index == 2">
+				待发货
+			</view>
+			<view class="image-text_3" v-if="index == 3">
+				待收货
+			</view>
+			<view class="image-text_4 flex-row align-center justify-between" v-if="index === 4 || index == 5">
+				<text>完成</text>|
+				<text class="iconfont delet">&#xe665;</text>
+			</view>
+		  </view>
+		    <view class="image-text_2 flex-row">
+		      <view class="group_5">
+				  <image src="../../static/bg/0301162340.png" mode="aspectFit"></image>
+			  </view>
+		      <view class="text-group_2 flex-col">
+				  <view class="text-group_3 flex-row justify-between">
+				  	<text class="paragraph_1">
+				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	</text>
+					<text class="num_text">
+						×1
+					</text>
+				  </view>
+		        
+				<view class="flex-row justify-end">
+					<text class="text_8" v-if="index == 0 || index == 1">应付：4899元</text>
+				</view>
+		      </view>
+		  </view>
+		  <view class="block_3 flex-row align-center justify-end">
+			  <view class="flex-row" v-if="index == 0 || index == 1">
+			  	<view class="time">
+			  		<text class="iconfont icon_4">&#xe680;</text>
+			  		支付剩余24小时36分
+			  	</view>
+			  	<view class="button_1">
+			  		去支付
+			  	</view>
+			  </view>
+			  <view class="flex-row" v-if="index == 2">
+			  	<view class="button_2">
+			  		取消订单
+			  	</view>
+				<view class="button_1">
+					提醒发货
+				</view>
+			  </view>
+			<view class="flex-row" v-if="index == 3">
+				<view class="button_2">
+					申请退款
+				</view>
+				<view class="button_2">
+					查看物流
+				</view>
+				<view class="button_1">
+					确认收货
+				</view>
+			</view>
+			<view class="flex-row" v-if="index === 4 || index == 5">
+				<view class="button_2">
+					评价晒单
+				</view>
+				<view class="button_1">
+					再次购买
+				</view>
+			</view>
+		  </view>
+		</view>
+		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		  <view class="block_2 flex-row justify-between align-center" >
+		    <view class="image-text_1 flex-row align-center">
+				<text class="iconfont icon_2">&#xe676;</text>
+		      <text class="text-group_1">格力二手空调专卖</text>
+		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    </view>
+			<view class="image-text_3">
+				等待付款
+			</view>
+		  </view>
+		    <view class="image-text_2 flex-row">
+		      <view class="group_5">
+				  <image src="../../static/bg/0301162340.png" mode="aspectFit"></image>
+			  </view>
+		      <view class="text-group_2 flex-col">
+				  <view class="text-group_3 flex-row justify-between">
+				  	<text class="paragraph_1">
+				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	</text>
+					<text class="num_text">
+						×1
+					</text>
+				  </view>
+		        
+				<view class="flex-row justify-end">
+					<text class="text_8">应付：4899元</text>
+				</view>
+		      </view>
+		  </view>
+		  <view class="block_3 flex-row align-center justify-end">
+			  <view class="flex-row">
+			  	<view class="time">
+			  		<text class="iconfont icon_4">&#xe680;</text>
+			  		支付剩余24小时36分
+			  	</view>
+			  	<view class="button_1">
+			  		去支付
+			  	</view>
+			  </view>
+		  </view>
+		</view>
+		<view v-if="nav == 2" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		  <view class="block_2 flex-row justify-between align-center" >
+		    <view class="image-text_1 flex-row align-center">
+				<text class="iconfont icon_2">&#xe676;</text>
+		      <text class="text-group_1">格力二手空调专卖</text>
+		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    </view>
+			<view class="image-text_3">
+				待发货
+			</view>
+		  </view>
+		    <view class="image-text_2 flex-row">
+		      <view class="group_5">
+				  <image src="../../static/bg/0301162340.png" mode="aspectFit"></image>
+			  </view>
+		      <view class="text-group_2 flex-col">
+				  <view class="text-group_3 flex-row justify-between">
+				  	<text class="paragraph_1">
+				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	</text>
+					<text class="num_text">
+						×1
+					</text>
+				  </view>
+		      </view>
+		  </view>
+		  <view class="block_3 flex-row align-center justify-end">
+			  <view class="flex-row">
+			  	<view class="button_2">
+			  		取消订单
+			  	</view>
+				<view class="button_1">
+					提醒发货
+				</view>
+			  </view>
+		  </view>
+		</view>
+		<view v-if="nav == 3" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		  <view class="block_2 flex-row justify-between align-center" >
+		    <view class="image-text_1 flex-row align-center">
+				<text class="iconfont icon_2">&#xe676;</text>
+		      <text class="text-group_1">格力二手空调专卖</text>
+		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    </view>
+			<view class="image-text_3">
+				待收货
+			</view>
+		  </view>
+		    <view class="image-text_2 flex-row">
+		      <view class="group_5">
+				  <image src="../../static/bg/0301162340.png" mode="aspectFit"></image>
+			  </view>
+		      <view class="text-group_2 flex-col">
+				  <view class="text-group_3 flex-row justify-between">
+				  	<text class="paragraph_1">
+				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	</text>
+					<text class="num_text">
+						×1
+					</text>
+				  </view>
+		      </view>
+		  </view>
+		  <view class="block_3 flex-row align-center justify-end">
+			<view class="flex-row">
+				<view class="button_2">
+					申请退款
+				</view>
+				<view class="button_2">
+					查看物流
+				</view>
+				<view class="button_1">
+					确认收货
+				</view>
+			</view>
+		  </view>
+		</view>
+		<view v-if="nav == 4" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		  <view class="block_2 flex-row justify-between align-center" >
+		    <view class="image-text_1 flex-row align-center">
+				<text class="iconfont icon_2">&#xe676;</text>
+		      <text class="text-group_1">格力二手空调专卖</text>
+		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    </view>
+			<view class="image-text_4 flex-row align-center justify-between">
+				<text>完成</text>|
+				<text class="iconfont delet">&#xe665;</text>
+			</view>
+		  </view>
+		    <view class="image-text_2 flex-row">
+		      <view class="group_5">
+				  <image src="../../static/bg/0301162340.png" mode="aspectFit"></image>
+			  </view>
+		      <view class="text-group_2 flex-col">
+				  <view class="text-group_3 flex-row justify-between">
+				  	<text class="paragraph_1">
+				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	</text>
+					<text class="num_text">
+						×1
+					</text>
+				  </view>
+		      </view>
+		  </view>
+		  <view class="block_3 flex-row align-center justify-end">
+			<view class="flex-row">
+				<view class="button_2">
+					评价晒单
+				</view>
+				<view class="button_1">
+					再次购买
+				</view>
+			</view>
+		  </view>
+		</view>
 	</view>
 </template>
 
@@ -30,6 +266,9 @@
 			chooseNav(e) {
 				this.nav = e
 			}
+		},
+		onLoad(option) {
+			this.nav = option.nav
 		}
 	}
 </script>
@@ -98,6 +337,148 @@
 			// padding-bottom: 18rpx;
 			border-bottom: 4rpx solid #E63C31;
 		}
+	}
+	.section_3 {
+	  background-color: rgba(255, 255, 255, 1);
+	  border-radius: 10px;
+	  height: 340rpx;
+	  width: 690rpx;
+	  margin: 22rpx 0 0 32rpx;
+	  .block_2 {
+	    width: 650rpx;
+	    height: 31rpx;
+	    margin: 28rpx 0 0 19rpx;
+		border-bottom: 1rpx solid #EEEEEE;
+		padding-bottom: 18rpx;
+	    .image-text_1 {
+	      width: 430rpx;
+	      height: 29rpx;				
+				.icon_2 {
+				  font-size: 34rpx;
+				  color: #666;
+				}
+	      .text-group_1 {
+				  width: 250rpx;
+	        height: 30rpx;
+	        overflow-wrap: break-word;
+	        color: rgba(51, 51, 51, 1);
+	        font-size: 30rpx;
+	        font-family: PingFang-SC-Regular;
+	        font-weight: NaN;
+	        text-align: left;
+	        white-space: nowrap;
+	        line-height: 30rpx;
+				  text-overflow: ellipsis;
+				  overflow: hidden;
+				  margin-left: 10rpx;
+	      }
+	      .icon_3 {
+	        font-size: 24rpx;
+				  color: #333;
+				  margin-left: 14rpx;
+	      }
+	    }
+		.image-text_3 {
+			font-size: 24rpx;
+			color: #E63C31;
+		}
+		.image-text_4 {
+			width: 120rpx;
+			font-size: 24rpx;
+			color: #999;
+			.delet {
+				width: 40rpx;
+				height: 40rpx;
+				font-size: 28rpx;
+				line-height: 40rpx;
+				text-align: center;
+			}
+		}
+	  }
+	    .image-text_2 {
+	      width: 640rpx;
+	      height: 110rpx;
+	      margin: 30rpx 0 0 17rpx;
+		  padding-bottom: 20rpx;
+		  border-bottom: 1rpx solid #EEEEEE;
+	      .group_5 {
+	        width: 110rpx;
+	        height: 110rpx;
+				  image {
+					  width: 110rpx;
+					  height: 110rpx;
+				  }
+	      }
+	      .text-group_2 {
+	        width: 500rpx;
+	        height: 120rpx;
+	        margin: 6rpx 0 0 14rpx;
+	        .paragraph_1 {
+	          width: 382rpx;
+	          height: 56rpx;
+	          overflow-wrap: break-word;
+	          color: rgba(51, 51, 51, 1);
+	          font-size: 24rpx;
+	          font-family: PingFang-SC-Regular;
+	          font-weight: NaN;
+	          text-align: left;
+	          line-height: 28rpx;
+					// text-overflow: ellipsis;
+					display: -webkit-box; 
+					-webkit-box-orient: vertical; 
+					-webkit-line-clamp: 2; 
+					overflow: hidden;
+	        }
+				  .text_8 {
+				    overflow-wrap: break-word;
+				    color: #333;
+				    font-size: 24rpx;
+				    font-family: PingFang-SC-Bold;
+				    font-weight: 600;
+				    text-align: left;
+				    white-space: nowrap;
+				    line-height: 24rpx;
+					margin-top: 10rpx;
+				  }
+				  .num_text {
+					  font-size: 24rpx;
+					  color: #333;
+				  }
+	      }
+	  }
+	  .block_3 {
+		  height: 80rpx;
+		  .time {
+			  font-size: 22rpx;
+			  color: #333;
+			  .icon_4 {
+				  font-size: 28rpx;
+				  margin-right: 12rpx;
+			  }
+		  }
+		  .button_1 {
+			  width: 124rpx;
+			  height: 40rpx;
+			  margin-left: 16rpx;
+			  font-size: 22rpx;
+			  color: #fff;
+			  line-height: 40rpx;
+			  text-align: center;
+			  background-color: #E63C31;
+			  border-radius: 20rpx;
+		  }
+		  .button_2 {
+			  width: 124rpx;
+			  height: 40rpx;
+			   margin-left: 16rpx;
+			  font-size: 22rpx;
+			  color: #999;
+			  line-height: 40rpx;
+			  text-align: center;
+			  border-radius: 20rpx;
+			  border: 1rpx solid #BFBFBF;
+		  }
+	  }
 	}
 }
 </style>

@@ -35,26 +35,26 @@
         </view>
         <view class="text-wrapper_1 flex-row justify-between">
           <text class="text_9">我的订单</text>
-          <text class="text_10">全部（10）</text>
+          <text class="text_10" @click="toOrderList(0)">全部（10）</text>
         </view>
         <view class="group_5 flex-col">
           <view class="box_5 flex-row justify-between">
-            <view class="image-text_1 flex-col align-center">
+            <view class="image-text_1 flex-col align-center" @click="toOrderList(1)">
 				<text class="iconfont icon_5">&#xe675;</text>
                 <text class="text_11">待付款</text>
                 <text class="text_12">0</text>
             </view>
-            <view class="image-text_1 flex-col align-center">
+            <view class="image-text_1 flex-col align-center" @click="toOrderList(2)">
 			<text class="iconfont icon_5">&#xe67a;</text>
               <text class="text_11">待发货</text>
 			  <text class="text_12">0</text>
             </view>
-			<view class="image-text_1 flex-col align-center">
+			<view class="image-text_1 flex-col align-center" @click="toOrderList(3)">
 			<text class="iconfont icon_5">&#xe672;</text>
 			  <text class="text_11">待收货</text>
 			  <text class="text_12">0</text>
 			</view>
-           <view class="image-text_1 flex-col align-center">
+           <view class="image-text_1 flex-col align-center" @click="toOrderList(4)">
            <text class="iconfont icon_5">&#xe673;</text>
              <text class="text_11">待评价</text>
              <text class="text_12">0</text>           
@@ -99,6 +99,7 @@ export default {
     onClick_1() {
       
     },
+	//跳转我的求购
     onClick_2() {
       uni.navigateTo({
       	url: '/pages/my/myWantBuy'
@@ -106,7 +107,13 @@ export default {
     },
     onClick_3() {
       
-    }
+    },
+	//跳转订单列表
+	toOrderList(e) {
+			uni.navigateTo({
+				url: '/pages/order/orderList?nav=' + e
+			})
+	}
   }
 };
 </script>
