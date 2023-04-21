@@ -167,6 +167,28 @@
             }
             
         }
+        ,{
+            "path" : "pages/order/afterSales",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "申请售后",
+               "enablePullDownRefresh": false,
+               "navigationBarTextStyle": "black",
+               "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/afterSalesList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "售后订单",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            
+        }
+		}
     ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",

@@ -11,30 +11,27 @@
 		</view>
 		<view class="box_nav flex-row justify-between">
 			<text class="nav nav_1" :class="{'nav_active' : nav == 0}" @click="chooseNav(0)">全部</text>
-			<text class="nav" :class="{'nav_active' : nav == 1}" @click="chooseNav(1)">待付款</text>
-			<text class="nav" :class="{'nav_active' : nav == 2}" @click="chooseNav(2)">待发货</text>
-			<text class="nav" :class="{'nav_active' : nav == 3}" @click="chooseNav(3)">待收货</text>
-			<text class="nav" :class="{'nav_active' : nav == 4}" @click="chooseNav(4)">待评价</text>
+			<text class="nav" :class="{'nav_active' : nav == 1}" @click="chooseNav(1)">仅退款</text>
+			<text class="nav nav_2" :class="{'nav_active' : nav == 2}" @click="chooseNav(2)">退货退款</text>
+			<text class="nav nav_1" :class="{'nav_active' : nav == 3}" @click="chooseNav(3)">换货</text>
+			<text class="nav" :class="{'nav_active' : nav == 4}" @click="chooseNav(4)">已完成</text>
 		</view>
 		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
 		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    <view class="image-text_1">
+				<text>订单号：2023042689563</text>
 		    </view>
 			<view class="image-text_3" v-if="index == 0 || index == 1">
-				等待付款
+				仅退款
 			</view>
 			<view class="image-text_3" v-if="index == 2">
-				待发货
+				退货退款
 			</view>
 			<view class="image-text_3" v-if="index == 3">
-				待收货
+				换货
 			</view>
-			<view class="image-text_4 flex-row align-center justify-between" v-if="index === 4 || index == 5">
-				<text>完成</text>|
-				<text class="iconfont delet">&#xe665;</text>
+			<view class="image-text_4" v-if="index === 4 || index == 5">
+				<text>已完成</text>
 			</view>
 		  </view>
 		    <view class="image-text_2 flex-row">
@@ -52,58 +49,23 @@
 				  </view>
 		        
 				<view class="flex-row justify-end">
-					<text class="text_8" v-if="index == 0 || index == 1">应付：4899元</text>
+					<text class="text_8">实付：4899元</text>
 				</view>
 		      </view>
 		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			  <view class="flex-row" v-if="index == 0 || index == 1">
-			  	<view class="time">
-			  		<text class="iconfont icon_4">&#xe680;</text>
-			  		支付剩余24小时36分
-			  	</view>
-			  	<view class="button_1">
-			  		去支付
-			  	</view>
-			  </view>
-			  <view class="flex-row" v-if="index == 2">
-			  	<view class="button_2">
-			  		取消订单
-			  	</view>
-				<view class="button_1">
-					提醒发货
-				</view>
-			  </view>
-			<view class="flex-row" v-if="index == 3">
-				<view class="button_2" @click="toAfterSales">
-					退换/售后
-				</view>
+		  <view class="block_3 align-center justify-end">
 				<view class="button_2">
-					查看物流
+					查看详情
 				</view>
-				<view class="button_1">
-					确认收货
-				</view>
-			</view>
-			<view class="flex-row" v-if="index === 4 || index == 5">
-				<view class="button_2">
-					评价晒单
-				</view>
-				<view class="button_1">
-					再次购买
-				</view>
-			</view>
 		  </view>
 		</view>
 		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
 		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    <view class="image-text_1">
+				<text>订单号：2023042689563</text>
 		    </view>
 			<view class="image-text_3">
-				等待付款
+				仅退款
 			</view>
 		  </view>
 		    <view class="image-text_2 flex-row">
@@ -121,31 +83,23 @@
 				  </view>
 		        
 				<view class="flex-row justify-end">
-					<text class="text_8">应付：4899元</text>
+					<text class="text_8">实付：4899元</text>
 				</view>
 		      </view>
 		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			  <view class="flex-row">
-			  	<view class="time">
-			  		<text class="iconfont icon_4">&#xe680;</text>
-			  		支付剩余24小时36分
-			  	</view>
-			  	<view class="button_1">
-			  		去支付
-			  	</view>
-			  </view>
+		  <view class="block_3 align-center justify-end">
+				<view class="button_2">
+					查看详情
+				</view>
 		  </view>
 		</view>
 		<view v-if="nav == 2" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
 		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    <view class="image-text_1">
+				<text>订单号：2023042689563</text>
 		    </view>
 			<view class="image-text_3">
-				待发货
+				退货退款
 			</view>
 		  </view>
 		    <view class="image-text_2 flex-row">
@@ -161,28 +115,25 @@
 						×1
 					</text>
 				  </view>
+		        
+				<view class="flex-row justify-end">
+					<text class="text_8">实付：4899元</text>
+				</view>
 		      </view>
 		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			  <view class="flex-row">
-			  	<view class="button_2">
-			  		取消订单
-			  	</view>
-				<view class="button_1">
-					提醒发货
+		  <view class="block_3 align-center justify-end">
+				<view class="button_2">
+					查看详情
 				</view>
-			  </view>
 		  </view>
 		</view>
 		<view v-if="nav == 3" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
 		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    <view class="image-text_1">
+				<text>订单号：2023042689563</text>
 		    </view>
 			<view class="image-text_3">
-				待收货
+				换货
 			</view>
 		  </view>
 		    <view class="image-text_2 flex-row">
@@ -198,32 +149,25 @@
 						×1
 					</text>
 				  </view>
+		        
+				<view class="flex-row justify-end">
+					<text class="text_8">实付：4899元</text>
+				</view>
 		      </view>
 		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			<view class="flex-row">
-				<view class="button_2" @click="toAfterSales">
-					退换/售后
-				</view>
+		  <view class="block_3 align-center justify-end">
 				<view class="button_2">
-					查看物流
+					查看详情
 				</view>
-				<view class="button_1">
-					确认收货
-				</view>
-			</view>
 		  </view>
 		</view>
 		<view v-if="nav == 4" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
 		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
+		    <view class="image-text_1">
+				<text>订单号：2023042689563</text>
 		    </view>
-			<view class="image-text_4 flex-row align-center justify-between">
-				<text>完成</text>|
-				<text class="iconfont delet">&#xe665;</text>
+			<view class="image-text_4">
+				<text>已完成</text>
 			</view>
 		  </view>
 		    <view class="image-text_2 flex-row">
@@ -239,17 +183,16 @@
 						×1
 					</text>
 				  </view>
+		        
+				<view class="flex-row justify-end">
+					<text class="text_8">实付：4899元</text>
+				</view>
 		      </view>
 		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			<view class="flex-row">
+		  <view class="block_3 align-center justify-end">
 				<view class="button_2">
-					评价晒单
+					查看详情
 				</view>
-				<view class="button_1">
-					再次购买
-				</view>
-			</view>
 		  </view>
 		</view>
 	</view>
@@ -267,16 +210,6 @@
 			chooseNav(e) {
 				this.nav = e
 			},
-			//跳转售后页面
-			toAfterSales() {
-				uni.navigateTo({
-					url: '/pages/order/afterSales'
-				})
-			}
-		},
-		onLoad(option) {
-			//获取进入的nav导航状态
-			this.nav = option.nav
 		}
 	}
 </script>
@@ -340,6 +273,9 @@
 		.nav_1 {
 			width: 60rpx;
 		}
+		.nav_2 {
+			width: 110rpx;
+		}
 		.nav_active {
 			color: #E63C31;
 			// padding-bottom: 18rpx;
@@ -361,46 +297,16 @@
 	    .image-text_1 {
 	      width: 430rpx;
 	      height: 29rpx;				
-				.icon_2 {
-				  font-size: 34rpx;
-				  color: #666;
-				}
-	      .text-group_1 {
-				  width: 250rpx;
-	        height: 30rpx;
-	        overflow-wrap: break-word;
-	        color: rgba(51, 51, 51, 1);
-	        font-size: 30rpx;
-	        font-family: PingFang-SC-Regular;
-	        font-weight: NaN;
-	        text-align: left;
-	        white-space: nowrap;
-	        line-height: 30rpx;
-				  text-overflow: ellipsis;
-				  overflow: hidden;
-				  margin-left: 10rpx;
-	      }
-	      .icon_3 {
-	        font-size: 24rpx;
-				  color: #333;
-				  margin-left: 14rpx;
-	      }
+		  font-size: 24rpx;
+		  color: #333;
 	    }
 		.image-text_3 {
 			font-size: 24rpx;
 			color: #E63C31;
 		}
 		.image-text_4 {
-			width: 120rpx;
 			font-size: 24rpx;
 			color: #999;
-			.delet {
-				width: 40rpx;
-				height: 40rpx;
-				font-size: 28rpx;
-				line-height: 40rpx;
-				text-align: center;
-			}
 		}
 	  }
 	    .image-text_2 {
@@ -467,7 +373,7 @@
 		  .button_1 {
 			  width: 124rpx;
 			  height: 40rpx;
-			  margin: 0 16rpx;			  
+			  margin-left: 16rpx;
 			  font-size: 22rpx;
 			  color: #fff;
 			  line-height: 40rpx;
@@ -478,7 +384,7 @@
 		  .button_2 {
 			  width: 124rpx;
 			  height: 40rpx;
-			  margin-left: 16rpx;
+			  margin-right: 16rpx;
 			  font-size: 22rpx;
 			  color: #999;
 			  line-height: 40rpx;
@@ -487,6 +393,6 @@
 			  border: 1rpx solid #BFBFBF;
 		  }
 	  }
-	}
+}
 }
 </style>

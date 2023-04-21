@@ -42,27 +42,27 @@
             <view class="image-text_1 flex-col align-center" @click="toOrderList(1)">
 				<text class="iconfont icon_5">&#xe675;</text>
                 <text class="text_11">待付款</text>
-                <text class="text_12">0</text>
+                <text class="text_12">6</text>
             </view>
             <view class="image-text_1 flex-col align-center" @click="toOrderList(2)">
 			<text class="iconfont icon_5">&#xe67a;</text>
               <text class="text_11">待发货</text>
-			  <text class="text_12">0</text>
+			  <text class="text_12">6</text>
             </view>
 			<view class="image-text_1 flex-col align-center" @click="toOrderList(3)">
 			<text class="iconfont icon_5">&#xe672;</text>
 			  <text class="text_11">待收货</text>
-			  <text class="text_12">0</text>
+			  <text class="text_12">6</text>
 			</view>
            <view class="image-text_1 flex-col align-center" @click="toOrderList(4)">
            <text class="iconfont icon_5">&#xe673;</text>
              <text class="text_11">待评价</text>
-             <text class="text_12">0</text>           
+             <text class="text_12">6</text>           
            </view>
-		   <view class="image-text_1 flex-col align-center">
+		   <view class="image-text_1 flex-col align-center" @click="toAfterSalesList">
 		   <text class="iconfont icon_5">&#xe6ac;</text>
 		     <text class="text_11">退款/售后</text>
-		     <text class="text_12">0</text>
+		     <text class="text_12">6</text>
 		   </view>
           </view>
         </view>
@@ -113,6 +113,12 @@ export default {
 			uni.navigateTo({
 				url: '/pages/order/orderList?nav=' + e
 			})
+	},
+	//跳转售后列表
+	toAfterSalesList() {
+		uni.navigateTo({
+			url: '/pages/order/afterSalesList'
+		})
 	}
   }
 };
