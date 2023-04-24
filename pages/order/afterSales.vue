@@ -41,7 +41,7 @@
 				<text class="iconfont icon2">&#xe6a3;</text>
 			</view>
 			<view class="box flex-row justify-around">
-				<text class="iconfont icon1">&#xe6ac;</text>
+				<text class="iconfont icon1">&#xe62c;</text>
 				<view class="text_box flex-col justify-between">
 					<text class="text_1">退货退款</text>
 					<text class="text_2">已收到货，需退还收到的货物</text>
@@ -49,7 +49,7 @@
 				<text class="iconfont icon2">&#xe6a3;</text>
 			</view>
 			<view class="box flex-row justify-around">
-				<text class="iconfont icon1">&#xe6ac;</text>
+				<text class="iconfont icon1">&#xe63f;</text>
 				<view class="text_box flex-col justify-between">
 					<text class="text_1">换货</text>
 					<text class="text_2">已收到货，需更换收到的货物</text>

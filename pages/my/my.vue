@@ -67,7 +67,7 @@
           </view>
         </view>
         <view class="group_6 flex-col">
-          <view class="image-text_6 flex-row">
+          <view class="image-text_6 flex-row" @click="toShoppingCart">
 			  <text class="iconfont icon_10">&#xe6af;</text>
             <text class="text-group_7">购物车</text>
           </view>
@@ -119,6 +119,12 @@ export default {
 		uni.navigateTo({
 			url: '/pages/order/afterSalesList'
 		})
+	},
+	//跳转购物车
+	toShoppingCart() {
+			  uni.navigateTo({
+			  	url: '/pages/my/shoppingCart'
+			  })
 	}
   }
 };
