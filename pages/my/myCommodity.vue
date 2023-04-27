@@ -13,7 +13,7 @@
 			</view>
 			<view class="avtive_line" :class="{'avtive_line-active_left' : nav == 0, 'avtive_line-active_right' : nav== 1}"></view>
 		</view>
-		<view class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
 				  <image src="../../static/bg/0301162340.png" mode="aspectFit"></image>
@@ -38,6 +38,38 @@
 			 <view class="button_text">
 			 	<text class="iconfont icon">&#xe739;</text>
 				<text class="text">下架</text>
+			 </view>		
+		 	 <view class="button_text">
+			 	<text class="iconfont icon"> &#xe665;</text>
+				<text class="text">删除</text>
+			 </view>
+		  </view>
+		</view>
+		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		    <view class="image-text_2 flex-row">
+		      <view class="group_5">
+				  <image src="../../static/bg/0301162340.png" mode="aspectFit"></image>
+			  </view>
+		      <view class="text-group_2 flex-col">
+				  <view class="text-group_3 flex-row">
+				  	<text class="paragraph_1">
+				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	</text>
+				  </view>
+		        
+				<view class="flex-row">
+					<text class="text_8">￥4899</text>
+				</view>
+		      </view>
+		  </view>
+		  <view class="block_3 flex-row align-center justify-around">
+			 <view class="button_text">
+			 	<text class="iconfont icon">&#xe66e;</text>
+				<text class="text">编辑</text>
+			 </view>
+			 <view class="button_text">
+			 	<text class="iconfont icon">&#xe739;</text>
+				<text class="text">上架</text>
 			 </view>		
 		 	 <view class="button_text">
 			 	<text class="iconfont icon"> &#xe665;</text>

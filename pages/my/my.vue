@@ -105,8 +105,11 @@ export default {
       	url: '/pages/my/myWantBuy'
       })
     },
+	//跳转我的发布
     onClick_3() {
-      
+      uni.navigateTo({
+      	url: '/pages/my/myCommodity'
+      })
     },
 	//跳转订单列表
 	toOrderList(e) {
