@@ -79,7 +79,7 @@
           			  <text class="iconfont icon_10">&#xe64c;</text>
             <text class="text-group_7">我的收藏</text>
           </view>
-          <view class="image-text_6 flex-row">
+          <view class="image-text_6 flex-row" @click="toManageAddress">
             <text class="iconfont icon_10">&#xe651;</text>
             <text class="text-group_7">收货地址</text>
           </view>
@@ -128,6 +128,12 @@ export default {
 			  uni.navigateTo({
 			  	url: '/pages/my/shoppingCart'
 			  })
+	},
+	//跳转地址管理
+	toManageAddress() {
+		uni.navigateTo({
+			url: '/pages/my/manageAddress'
+		})
 	}
   }
 };

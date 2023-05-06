@@ -68,8 +68,11 @@ export default {
     };
   },
   methods: {
+	  //跳转发布求购
     onClick_1() {
-      alert(1);
+      uni.navigateTo({
+      	url: '/pages/my/releaseWantBuy'
+      })
     },
     onClick_2() {
       alert(1);
