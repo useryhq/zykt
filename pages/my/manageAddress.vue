@@ -29,7 +29,7 @@
               </view>
             </view>
           </view>
-        <view class="button_1 flex-col" @click="onClick_1">
+        <view class="button_1" @click="onClick_1">
           <text class="text_6">新增地址</text>
         </view>
       </view>
@@ -77,8 +77,11 @@ export default {
 			  }
 		  })
 	  },
+	  //跳转填写地址
     onClick_1() {
-      alert(1);
+      uni.navigateTo({
+      	url: '/pages/my/addAddress'
+      })
     }
   }
 };

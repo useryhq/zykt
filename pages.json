@@ -222,6 +222,17 @@
             }
             
         }
+        ,{
+            "path" : "pages/my/addAddress",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "填写地址",
+               "enablePullDownRefresh": false,
+               "navigationBarTextStyle": "black",
+               "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",

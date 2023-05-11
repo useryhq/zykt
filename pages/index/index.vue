@@ -401,6 +401,7 @@
 				})			
 			},
 			addressShow() {
+				this.localData = get_city_tree()
 				this.$refs.picker.show()
 			},
 			// 节点变化后 （并非已经选择完毕）
@@ -416,7 +417,6 @@
 		},
 		onLoad() {
 			this.getGps()
-			this.localData = get_city_tree()
 		},
 	};
 
