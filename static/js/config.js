@@ -1,5 +1,5 @@
 const config = {
-    api_base_url: 'http://api.zykt.com',
+    api_base_url: 'https://api.zykt.com',
  }
  
  export {

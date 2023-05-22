@@ -8,19 +8,21 @@
 		    </view>
 			<view class="text-wrapper_1 flex-row align-center justify-between">
 			  <text class="text_2">商品分类：</text>
-			  <view class="text_5">
+			  <view v-if="listText" class="text_5">
 			  	{{listText}}/{{sListText}}/{{tListText}}
 			  </view>
 			  <view class="botton_1" @click="chooseBlock">
 			  	选择分类
 			  </view>
 			</view>
-			<view class="text-wrapper_1 flex-row align-center justify-between">
+			<view class="text-wrapper_1 flex-row align-center justify-between" @click="openBrand">
 			  <text class="text_2">品牌：</text>
+			  <text class="text_5">{{brandText}}</text>
 			  <text class="iconfont icon_1">&#xe686;</text>
 			</view>
-			<view class="text-wrapper_1 flex-row align-center justify-between">
+			<view class="text-wrapper_1 flex-row align-center justify-between" @click="openFineness">
 			  <text class="text_2">成色：</text>
+			  <text class="text_5">{{finenessText}}</text>
 			  <text class="iconfont icon_1">&#xe686;</text>
 			</view>
 			<view class="text-wrapper_1 flex-row align-center">
@@ -78,6 +80,32 @@
 						</view>
 					</view>
 					<!-- <view class="pk_btn" @click="choose()">确定</view> -->
+				</view>
+			</view>
+			<view v-if="fineness" class="fineness-block">
+				<view class="mask"></view>
+				<view class="mode">
+					<view class="pk_title">
+						<text>选择产品成色</text>
+						<text class="close_pk" @click="closeFineness">×</text>
+					</view>
+					<view class="finess-text flex-row">
+						<text v-for="(i,n) in finenessList" :key='n' class="text-block" @click="chooseFineness(i)">{{i}}</text>
+					</view>
+				</view>
+			</view>
+			<view v-if="brand" class="brand-block">
+				<view class="mask"></view>
+				<view class="mode">
+					<view class="brand-title flex-row justify-between align-center">
+						<text>品牌</text>
+						<view class="up" @click="closeBrand">
+							<text class="iconfont">&#xe686;</text>
+						</view>
+					</view>
+					<view class="brand-text flex-row">
+						<text v-for="(i,n) in brandList" :key='n' class="text-block" @click="chooseBrand(i)">{{i}}</text>
+					</view>
 				</view>
 			</view>
             <uni-popup ref="popup" type="message">
@@ -307,6 +335,7 @@
 							}],
 						}]
 						}],
+						//选择分类弹窗
 						choose: false,
 						//一级分类索引
 						listIndex: '',
@@ -322,6 +351,54 @@
 						tListIndex: '',
 						//三级分类内容
 						tListText: '',
+						//成色弹窗
+						fineness: false,
+						finenessList: [
+							 '全新',
+							 '九成新',
+							 '八成新',
+							 '七成新',
+							 '六成新',
+							 '五成新',
+						],
+						finenessText: '',
+						//品牌弹窗
+						brand: false,
+						brandList: [
+							 '奥克斯',
+							 '艾尔斯派',
+							 '奥普',
+							 '班工防护',
+							 '安林空调',
+							 '百维',
+							 '奥克斯',
+							 '艾尔斯派',
+							 '长泽',
+							 '长虹',
+							 '安林空调',
+							 '百维',
+							 '奥克斯',
+							 '艾尔斯派',
+							 '奥普',
+							 '班工防护',
+							 '安林空调',
+							 '百维',
+							 '奥克斯',
+							 '艾尔斯派',
+							 '长泽',
+							 '长虹',
+							 '安林空调',
+							 '百维',
+							 '安林空调',
+							 '百维',
+							 '奥克斯',
+							 '艾尔斯派',
+							 '长泽',
+							 '长虹',
+							 '安林空调',
+							 '百维',
+						],
+						brandText: '',
 			};
 		},
 		computed: {
@@ -334,7 +411,7 @@
 					sList.push(this.textList[i])
 					}
 				}
-				console.log("===",sList)
+				// console.log("===",sList)
 				if(sList.length !== 0) {
 					this.sListC = sList[0].sub
 				}
@@ -399,6 +476,32 @@
 			 closeChoose() {
 				 this.choose = false
 			 },
+			 //打开成色弹窗
+			 openFineness() {
+				 this.fineness = true
+			 },
+			 //关闭成色弹窗
+			 closeFineness() {
+				 this.fineness = false
+			 },
+			 //选择成色
+			 chooseFineness(text) {
+				 this.finenessText = text
+				 this.fineness = false
+			 },
+			 //打开品牌弹窗
+			 openBrand() {
+				 this.brand = true
+			 },
+			 //关闭品牌弹窗
+			 closeBrand() {
+				this.brand = false 
+			 },
+			 //选择品牌
+			 chooseBrand(text) {
+				this.brandText = text 
+				this.brand = false
+			 },
 			 //输入价格
 			 inPrice(e) {
 				 this.price = e.detail.value
@@ -462,24 +565,30 @@
 							} else {
 								this.tel = e.detail.value
 							}
-							console.log(this.tel)
+							// console.log(this.tel)
 						},
 						//提交数据
 						submit() {
 							if(this.cname == '') {
 								this.prompt = '请输入商品名字'
 								this.$refs.popup.open('top')
+							} else if(this.listText == '') {
+								this.prompt = '请选择产品分类'
+								this.$refs.popup.open('top')
+							} else if(this.brandText == '') {
+								this.prompt = '请选择品牌'
+								this.$refs.popup.open('top')
+							} else if(this.finenessText == '') {
+								this.prompt = '请选择成色'
+								this.$refs.popup.open('top')
+							} else if(this.price == '') {
+								this.prompt = '请输入商品价格'
+								this.$refs.popup.open('top')
 							} else if(this.tel == '') {
 								this.prompt = '请输入电话号码'
 								this.$refs.popup.open('top')
-							} else if(this.num == '') {
-								this.prompt = '请输入采购数量'
-								this.$refs.popup.open('top')
-							} else if(this.date == '请选择截止日期') {
-								this.prompt = '请选择截止日期'
-								this.$refs.popup.open('top')
-							} 
-							console.log(this.cname,this.name,this.tel,this.num,this.date,this.text)
+							}
+							console.log(this.cname,this.listText,this.brandText,this.finenessText,this.price,this.tel)
 						}
 		},
 		onLoad() {
@@ -673,6 +782,121 @@
 					text-align: center;
 				}
 		}
+		}
+		.fineness-block {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			.mask {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: rgba(0, 0, 0, 0.6);
+			}
+			.mode {
+				width: 400rpx;
+				height: 200rpx;
+				background-color: #fff;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				border-radius: 10rpx;
+				margin: auto;
+				.pk_title {
+					width: 100%;
+					height: 60rpx;
+					background-color: #eee;
+					color: #333;
+					font-size: 30rpx;
+					font-weight: 500;
+					line-height: 60rpx;
+					text-align: center;
+					.close_pk {
+						width: 38rpx;
+						height: 38rpx;
+						margin: 11rpx 26rpx 0 0;
+						background-color: #666;
+						font-size: 30rpx;
+						line-height: 38rpx;
+						text-align: center;
+						color: #fff;
+						border-radius: 50%;
+						float: right;
+					}
+				}
+				.finess-text {
+					flex-wrap: wrap;
+					.text-block {
+						width: 110rpx;
+						height: 40rpx;
+						margin: 16rpx 0 0 16rpx;
+						border: 1rpx solid #eee;
+						font-size: 22rpx;
+						color: #333;
+						line-height: 40rpx;
+						text-align: center;
+					}
+				}
+				}
+		}
+		.brand-block {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			.mask {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: rgba(0, 0, 0, 0.6);
+			}
+			.mode {
+				width: 600rpx;
+				height: 100%;
+				background-color: #fff;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				border-radius: 10rpx;
+				.brand-title {
+					padding: 20rpx 30rpx;
+					font-size: 30rpx;
+					color: #000;
+					.up {
+						width: 50rpx;
+						height: 50rpx;
+						transform: rotate(180deg);
+						text-align: center;
+						line-height: 50rpx;
+						color: #222;
+						font-size: 30rpx;
+					}
+				}
+				.brand-text {
+					flex-wrap: wrap;
+					.text-block {
+						width: 200rpx;
+						height: 40rpx;
+						margin-top: 50rpx;
+						font-size: 26rpx;
+						color: #333;
+						line-height: 40rpx;
+						text-align: center;
+					}
+				}
+				}
 		}
 		}
 }
