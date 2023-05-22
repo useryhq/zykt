@@ -75,7 +75,7 @@
 			  <text class="iconfont icon_10">&#xe66b;</text>
             <text class="text-group_7">我的消息</text>
           </view>
-          <view class="image-text_6 flex-row">
+          <view class="image-text_6 flex-row" @click="toMyCollect">
           			  <text class="iconfont icon_10">&#xe64c;</text>
             <text class="text-group_7">我的收藏</text>
           </view>
@@ -133,6 +133,12 @@ export default {
 	toManageAddress() {
 		uni.navigateTo({
 			url: '/pages/my/manageAddress'
+		})
+	},
+	//跳转我的收藏
+	toMyCollect() {
+		uni.navigateTo({
+			url: '/pages/my/myCollect'
 		})
 	}
   }

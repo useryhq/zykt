@@ -73,10 +73,11 @@ export default {
 	  //输入电话
 	  inTel(e) {
 		  let reg = /^1[3456789]\d{9}$/
-		  this.tel = e.detail.value
-		  if(!reg.test(this.tel)) {
-			  this.prompt = '请输入正确的电话号码'
-			  this.$refs.popup.open('top')
+		  if(!reg.test(e.detail.value)) {
+		  			  this.prompt = '请输入正确的电话号码'
+		  			  this.$refs.popup.open('top')
+		  } else {
+		  	this.tel = e.detail.value
 		  }
 	  },
 	  //输入求购数量
