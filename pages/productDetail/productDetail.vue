@@ -108,7 +108,7 @@
                <text class="iconfont label_7">&#xe64c;</text>
               <text class="text-group_5">收藏店铺</text>
           </view>
-          <view class="box_6 flex-row justify-center align-center">
+          <view class="box_6 flex-row justify-center align-center" @click="toShop">
               <text class="iconfont label_8">&#xe676;</text>
               <text class="text-group_6">进入店铺</text>
           </view>
@@ -384,6 +384,9 @@ export default {
 	  tabClick(e) {
 		  if(e == 1) {
 			  this.store = e
+			  uni.navigateTo({
+			  	url: '/pages/shop/shop'
+			  })
 		  } else if (e == 2) {
 			  this.collect = e
 		  } else if(e == 3) {
@@ -426,6 +429,12 @@ export default {
 	  toShoppingCart() {
 		  uni.navigateTo({
 		  	url: '/pages/my/shoppingCart'
+		  })
+	  },
+	  //跳转店铺
+	  toShop() {
+		  uni.navigateTo({
+		  	url: '/pages/shop/shop'
 		  })
 	  }
   },

@@ -487,7 +487,7 @@
 		}
 
 		.group_8 {
-			width: 659rpx;
+			width: 690rpx;
 			flex-wrap: wrap;
 			border-radius: 4px;
 

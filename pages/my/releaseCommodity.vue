@@ -45,7 +45,7 @@
 			  	图片尺寸比例为3：2，支持jpg,jpeg,gif,bmp格式。
 			  </view>
 			</view>
-			<view class="text-wrapper_1 flex-row align-center justify-between">
+			<view class="text-wrapper_1 flex-row align-center justify-between" @click="toReleaseCommodityDetail">
 			  <text class="text_2">商品图文详情：</text>
 			  <text class="iconfont icon_1">&#xe686;</text>
 			</view>
@@ -397,6 +397,14 @@
 							 '长虹',
 							 '安林空调',
 							 '百维',
+							 '百维',
+							 '安林空调',
+							 '百维',
+							 '奥克斯',
+							 '艾尔斯派',
+							 '长泽',
+							 '长虹',
+							 '安林空调',
 						],
 						brandText: '',
 			};
@@ -556,6 +564,12 @@
 						//上传
 						// submitImg() {
 						// },
+						//跳转图文详情
+						toReleaseCommodityDetail() {
+							uni.navigateTo({
+								url: '/pages/my/releaseCommodityDetail'
+							})
+						},
 						//输入电话
 						inTel(e) {
 							let reg = /^1[3456789]\d{9}$/
@@ -886,13 +900,15 @@
 				}
 				.brand-text {
 					flex-wrap: wrap;
+					overflow: scroll;
+					height: 90%;
 					.text-block {
 						width: 200rpx;
-						height: 40rpx;
+						height: 80rpx;
 						margin-top: 50rpx;
 						font-size: 26rpx;
 						color: #333;
-						line-height: 40rpx;
+						line-height: 80rpx;
 						text-align: center;
 					}
 				}

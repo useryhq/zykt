@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<view class="button_1 flex-row justify-center" @click="onClick_1">
+		<view class="button_1 flex-row justify-center" @click="toReleaseCommodity">
 		    <text class="iconfont icon_2">&#xe649;</text>
 		    <text class="text-group_1">发布商品</text>
 		</view>
@@ -90,6 +90,12 @@
 		methods: {
 			changeNav(e) {
 				this.nav = e
+			},
+			//跳转发布商品
+			toReleaseCommodity() {
+				uni.navigateTo({
+					url: '/pages/my/releaseCommodity'
+				})
 			}
 		}
 	}
