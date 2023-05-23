@@ -132,7 +132,7 @@
 				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#80ACFF"
+				"navigationBarBackgroundColor": "#4182FE"
 			}
 
 		}, {
@@ -274,6 +274,38 @@
                 "enablePullDownRefresh": false,
                 "navigationBarTextStyle": "black",
                 "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/business/business",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商家中心",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "white",
+                "navigationBarBackgroundColor": "#4182FE"
+            }
+            
+        },{
+            "path" : "pages/business/manageAddress",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "地址管理",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/business/addAddress",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "填写地址",
+               "enablePullDownRefresh": false,
+               "navigationBarTextStyle": "black",
+               "navigationBarBackgroundColor": "#ffffff"
             }
             
         }

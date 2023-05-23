@@ -8,33 +8,29 @@
             <text class="text_2">lightdrawlightdraw</text>
             <text class="text_3">136****1482</text>
           </view>
-		  <text class="iconfont icon_2">&#xe67e;</text>
+		  <text class="icon_2">返回个人中心</text>
         </view>
-        <view class="box_3 flex-row align-center">
-          <text class="text_4">开通店铺</text>
-          <text class="text_5">享受专属权益</text>
-          <view class="button_1 flex-col" @click="onClick_1">
-            <text class="text_6">查看详情</text>
+        <view class="box_3 flex-row align-center justify-between">
+          <view class="text-block flex-col align-center">
+          	<text class="text_4">订单数</text>
+			<text class="text_5">10</text>
+			<text class="text_4">昨日30</text>
           </view>
+		  <view class="text-block flex-col align-center">
+		  	<text class="text_4">成交额（￥）</text>
+		  	<text class="text_5">10000.00</text>
+		  	<text class="text_4">昨日5000</text>
+		  </view>
+		  <view class="text-block flex-col align-center">
+		  	<text class="text_4">总资产（￥）</text>
+		  	<text class="text_5">10000.00</text>
+		  	<text class="button_1">查看</text>
+		  </view>
         </view>
       </view>
       <view class="box_4 flex-col">
-        <view class="group_4 flex-row justify-between">
-          <view class="button_2 flex-col" @click="onClick_2">
-            <view class="icon_3 flex-col">
-				<text class="iconfont label_2">&#xe6af;</text>
-            </view>
-            <text class="text_7">我的求购</text>
-          </view>
-          <view class="button_3 flex-col" @click="onClick_3">
-            <view class="icon_4 flex-col">
-				<text class="iconfont label_3">&#xe649;</text>
-            </view>
-            <text class="text_8">我的发布</text>
-          </view>
-        </view>
         <view class="text-wrapper_1 flex-row justify-between">
-          <text class="text_9">我的订单</text>
+          <text class="text_9">销售订单</text>
           <text class="text_10" @click="toOrderList(0)">全部（10）</text>
         </view>
         <view class="group_5 flex-col">
@@ -66,22 +62,52 @@
 		   </view>
           </view>
         </view>
+		<view class="box_6">
+			常用工具
+		</view>
+		<view class="group_5 flex-col">
+		  <view class="box_5 flex-row justify-between">
+		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(1)">
+				<text class="iconfont icon_5">&#xe649;</text>
+		        <text class="text_11">发布商品</text>
+		    </view>
+		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(2)">
+			<text class="iconfont icon_5">&#xe699;</text>
+		      <text class="text_11">商品管理</text>
+		    </view>
+			<view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(3)">
+			<text class="iconfont icon_5">&#xe649;</text>
+			  <text class="text_11">发布求购</text>
+			</view>
+		   <view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(4)">
+		   <text class="iconfont icon_5">&#xe699;</text>
+		     <text class="text_11">求购管理</text>           
+		   </view>
+		   <view class="image-text_1 image-text_2 flex-col align-center" @click="toAfterSalesList">
+		   <text class="iconfont icon_5">&#xe676;</text>
+		     <text class="text_11">店铺装修</text>
+		   </view>
+		  </view>
+		</view>
         <view class="group_6 flex-col">
-          <view class="image-text_6 flex-row" @click="toShoppingCart">
-			  <text class="iconfont icon_10">&#xe6af;</text>
-            <text class="text-group_7">购物车</text>
+          <view class="image-text_6 flex-row">
+			  <text class="iconfont icon_10">&#xe6a8;</text>
+            <text class="text-group_7">入驻资料</text>
+          </view>
+          <view class="image-text_6 flex-row justify-between align-center">
+			  <view>
+				  <text class="iconfont icon_10">&#xe66b;</text>
+				  <text class="text-group_7">订单消息</text>
+			  </view>
+			<view class="round-dot"></view>
           </view>
           <view class="image-text_6 flex-row">
-			  <text class="iconfont icon_10">&#xe66b;</text>
-            <text class="text-group_7">我的消息</text>
-          </view>
-          <view class="image-text_6 flex-row" @click="toMyCollect">
-          			  <text class="iconfont icon_10">&#xe64c;</text>
-            <text class="text-group_7">我的收藏</text>
+          	<text class="iconfont icon_10">&#xe612;</text>
+            <text class="text-group_7">开通城市分站</text>
           </view>
           <view class="image-text_6 flex-row" @click="toManageAddress">
             <text class="iconfont icon_10">&#xe651;</text>
-            <text class="text-group_7">收货地址</text>
+            <text class="text-group_7">地址管理</text>
           </view>
         </view>
       </view>
@@ -99,18 +125,6 @@ export default {
     onClick_1() {
       
     },
-	//跳转我的求购
-    onClick_2() {
-      uni.navigateTo({
-      	url: '/pages/my/myWantBuy'
-      })
-    },
-	//跳转我的发布
-    onClick_3() {
-      uni.navigateTo({
-      	url: '/pages/my/myCommodity'
-      })
-    },
 	//跳转订单列表
 	toOrderList(e) {
 			uni.navigateTo({
@@ -123,16 +137,10 @@ export default {
 			url: '/pages/order/afterSalesList'
 		})
 	},
-	//跳转购物车
-	toShoppingCart() {
-			  uni.navigateTo({
-			  	url: '/pages/my/shoppingCart'
-			  })
-	},
 	//跳转地址管理
 	toManageAddress() {
 		uni.navigateTo({
-			url: '/pages/my/manageAddress'
+			url: '/pages/business/manageAddress'
 		})
 	},
 	//跳转我的收藏
@@ -158,7 +166,7 @@ export default {
     width: 750rpx;
     .box_1 {
       width: 749rpx;
-      height: 232rpx;
+      height: 290rpx;
       background-color: #4182FE;
       .box_2 {
         width: 675rpx;
@@ -200,136 +208,46 @@ export default {
           }
         }
         .icon_2 {
-          width: 48rpx;
-          height: 48rpx;
-		  margin-left: 350rpx;
-          font-size: 48rpx;
+          width: 170rpx;
+          height: 40rpx;
+		  margin-left: 250rpx;
+		  background-color: #E63C31;
+		  border-radius: 20rpx;
+          font-size: 22rpx;
 		  color: #fff;
+		  line-height: 40rpx;
+		  text-align: center;
         }
       }
       .box_3 {
-        width: 630rpx;
-        height: 35rpx;
-        margin: 20rpx 0 0 40rpx;
-		padding: 20rpx 30rpx;
-		background-color: #FFE6C2;
-		border-radius: 20rpx 20rpx 0 0;
+        width: 675rpx;
+        height: 130rpx;
+        margin: 30rpx;
         .text_4 {
-          width: 110rpx;
-          height: 28rpx;
-          overflow-wrap: break-word;
-          color: rgba(230, 60, 49, 1);
-          font-size: 28rpx;
+          color: #fff;
+          font-size: 24rpx;
           font-family: PingFang-SC-Bold;
-          font-weight: 700;
-          text-align: left;
-          white-space: nowrap;
-          line-height: 28rpx;
         }
         .text_5 {
-          width: 130rpx;
-          height: 22rpx;
-          overflow-wrap: break-word;
-          color: rgba(230, 60, 49, 1);
-          font-size: 22rpx;
+          color: #fff;
+          font-size: 36rpx;
           font-family: PingFang-SC-Regular;
-          font-weight: NaN;
-          text-align: left;
-          white-space: nowrap;
-          line-height: 22rpx;
-          margin-left:  15rpx;
         }
-        .button_1 {
-          background-color: rgba(230, 60, 49, 1);
-          border-radius: 20px;
-          height: 40rpx;
-          margin-left: 259rpx;
-          width: 124rpx;
-		  text-align: center;
-          .text_6 {
-            overflow-wrap: break-word;
-            color: rgba(255, 255, 255, 1);
-            font-size: 22rpx;
-            font-family: PingFang-SC-Regular;
-            font-weight: NaN;
-            white-space: nowrap;
-            line-height: 40rpx;
-          }
-        }
+		.button_1 {
+			width: 90rpx;
+			height: 30rpx;
+			background-color: #E63C31;
+			border-radius: 15rpx;
+			color: #fff;
+			font-size: 22rpx;
+			line-height: 30rpx;
+			text-align: center;
+		}
       }
     }
     .box_4 {
       width: 750rpx;
       height: 872rpx;
-      .group_4 {
-        width: 686rpx;
-        height: 77rpx;
-        margin: 28rpx 0 0 32rpx;
-        .button_2 {
-          background-color: rgba(238, 238, 238, 1);
-          border-radius: 10px;
-          height: 77rpx;
-          width: 330rpx;
-          .icon_3 {
-            background-color: rgba(255, 255, 255, 1);
-            border-radius: 50%;
-            height: 57rpx;
-            width: 57rpx;
-            margin: 12rpx 0 0 68rpx;
-			text-align: center;
-            .label_2 {
-              font-size: 40rpx;
-			  color: #000;
-			  line-height: 57rpx;
-            }
-          }
-          .text_7 {
-            width: 117rpx;
-            height: 28rpx;
-            overflow-wrap: break-word;
-            color: rgba(51, 51, 51, 1);
-            font-size: 30rpx;
-            font-family: PingFang-SC-Medium;
-            font-weight: 500;
-            text-align: left;
-            white-space: nowrap;
-            line-height: 30rpx;
-            margin: -42rpx 0 22rpx 147rpx;
-          }
-        }
-        .button_3 {
-          background-color: rgba(238, 238, 238, 1);
-          border-radius: 10px;
-          height: 77rpx;
-          width: 330rpx;
-          .icon_4 {
-            background-color: rgba(255, 255, 255, 1);
-            border-radius: 50%;
-            height: 57rpx;
-            width: 57rpx;
-            margin: 12rpx 0 0 63rpx;
-			text-align: center;
-            .label_3 {
-              font-size: 40rpx;
-              color: #000;
-              line-height: 57rpx;
-            }
-          }
-          .text_8 {
-            width: 118rpx;
-            height: 28rpx;
-            overflow-wrap: break-word;
-            color: rgba(51, 51, 51, 1);
-            font-size: 30rpx;
-            font-family: PingFang-SC-Medium;
-            font-weight: 500;
-            text-align: left;
-            white-space: nowrap;
-            line-height: 30rpx;
-            margin: -42rpx 0 22rpx 142rpx;
-          }
-        }
-      }
       .text-wrapper_1 {
         width: 678rpx;
         height: 28rpx;
@@ -397,10 +315,19 @@ export default {
                 line-height: 24rpx;
               }
 			  .color {
-			  	color: #E63C31
+				  color: #E63C31
 			  }
           }
+		  .image-text_2 {
+			  height: 80rpx;
+		  }
       }
+	  }
+	  .box_6 {
+		  margin: 38rpx 0 16rpx 38rpx;
+		  font-size: 30rpx;
+		  color: #333;
+		  font-weight: 500;
 	  }
       .group_6 {
         background-color: rgba(255, 255, 255, 1);
@@ -433,6 +360,13 @@ export default {
             line-height: 24rpx;
             margin-top: 3rpx;
           }
+		  .round-dot {
+			  width: 14rpx;
+			  height: 14rpx;
+			  margin-right: 20rpx;
+			  background-color: #E63C31;
+			  border-radius: 50%;
+		  }
         }
       }
     }
