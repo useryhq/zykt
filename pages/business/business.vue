@@ -8,7 +8,7 @@
             <text class="text_2">lightdrawlightdraw</text>
             <text class="text_3">136****1482</text>
           </view>
-		  <text class="icon_2">返回个人中心</text>
+		  <text class="icon_2" @click="toMy">返回个人中心</text>
         </view>
         <view class="box_3 flex-row align-center justify-between">
           <view class="text-block flex-col align-center">
@@ -67,23 +67,23 @@
 		</view>
 		<view class="group_5 flex-col">
 		  <view class="box_5 flex-row justify-between">
-		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(1)">
+		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toReleaseCommodity">
 				<text class="iconfont icon_5">&#xe649;</text>
 		        <text class="text_11">发布商品</text>
 		    </view>
-		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(2)">
+		    <view class="image-text_1 image-text_2 flex-col align-center">
 			<text class="iconfont icon_5">&#xe699;</text>
 		      <text class="text_11">商品管理</text>
 		    </view>
-			<view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(3)">
+			<view class="image-text_1 image-text_2 flex-col align-center">
 			<text class="iconfont icon_5">&#xe649;</text>
 			  <text class="text_11">发布求购</text>
 			</view>
-		   <view class="image-text_1 image-text_2 flex-col align-center" @click="toOrderList(4)">
+		   <view class="image-text_1 image-text_2 flex-col align-center">
 		   <text class="iconfont icon_5">&#xe699;</text>
 		     <text class="text_11">求购管理</text>           
 		   </view>
-		   <view class="image-text_1 image-text_2 flex-col align-center" @click="toAfterSalesList">
+		   <view class="image-text_1 image-text_2 flex-col align-center">
 		   <text class="iconfont icon_5">&#xe676;</text>
 		     <text class="text_11">店铺装修</text>
 		   </view>
@@ -128,13 +128,19 @@ export default {
 	//跳转订单列表
 	toOrderList(e) {
 			uni.navigateTo({
-				url: '/pages/order/orderList?nav=' + e
+				url: '/pages/businessOrder/orderList?nav=' + e
 			})
 	},
 	//跳转售后列表
 	toAfterSalesList() {
 		uni.navigateTo({
-			url: '/pages/order/afterSalesList'
+			url: '/pages/businessOrder/afterSalesList'
+		})
+	},
+	//跳转发布商品
+	toReleaseCommodity() {
+		uni.navigateTo({
+			url: '/pages/business/releaseCommodity'
 		})
 	},
 	//跳转地址管理
@@ -148,6 +154,10 @@ export default {
 		uni.navigateTo({
 			url: '/pages/my/myCollect'
 		})
+	},
+	//返回个人中心
+	toMy() {
+		uni.navigateBack()
 	}
   }
 };

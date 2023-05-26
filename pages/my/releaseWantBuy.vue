@@ -104,6 +104,7 @@ export default {
 		console.log('confirm 返回:', e)
 		this.date = e.fulldate
 		},
+		//提交数据
 		submit() {
 			if(this.cname == '') {
 				this.prompt = '请输入商品名字'

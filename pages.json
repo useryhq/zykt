@@ -189,6 +189,28 @@
             
         }
 		}
+		,{
+		    "path" : "pages/businessOrder/orderList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "订单列表",
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#ffffff"
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/businessOrder/afterSalesList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "售后订单",
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#ffffff"
+		    
+		}
+		}
         ,{
             "path" : "pages/my/myCommodity",
             "style" :                                                                                    
@@ -306,6 +328,26 @@
                "enablePullDownRefresh": false,
                "navigationBarTextStyle": "black",
                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
+            "path" : "pages/business/releaseCommodity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布商品",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
+            "path" : "pages/business/releaseCommodityDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "图文详情",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
             }
             
         }
