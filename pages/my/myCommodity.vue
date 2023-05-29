@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心我的发布 -->
 	<view class="page">
 		<view class="button_1 flex-row justify-center" @click="toReleaseCommodity">
 		    <text class="iconfont icon_2">&#xe649;</text>

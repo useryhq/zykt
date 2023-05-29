@@ -1,4 +1,5 @@
 <template>
+	<!-- 品牌详情 -->
   <view class="page flex-col justify-between">
     <view class="image-wrapper_1 flex-col">
       <image src="../../static/bg/200711.png" mode=""></image>

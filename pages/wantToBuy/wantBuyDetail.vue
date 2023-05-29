@@ -1,4 +1,5 @@
 <<template>
+	<!-- 求购详情 -->
 	<view class="page flex-col justify-between">
 		<view class="group_2 flex-col">
 			<view class="text-wrapper_1 flex-col">

@@ -1,4 +1,5 @@
 <template>
+	<!-- 热门产品 -->
 	<view class="page flex-col">
 		<view class="section_2 flex-col">
 			<view class="group_2 flex-row justify-between">

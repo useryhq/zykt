@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心发布商品图文详情 -->
 	<view class="page">
 		<view class="block_1">
 			<view class="detail-block">

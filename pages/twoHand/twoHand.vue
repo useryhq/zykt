@@ -1,4 +1,5 @@
 <template>
+	<!-- 二手门店 -->
   <view class="page flex-col justify-between">
     <view class="group_4 flex-col">
       <!-- <view class="image-text_1 flex-row justify-between align-center">

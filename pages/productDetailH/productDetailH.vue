@@ -1,4 +1,5 @@
 <template>
+	<!-- 产品详情个人 -->
 	<view class="page">
 		<view class="goods-block">
 			<!-- 商品轮播 -->

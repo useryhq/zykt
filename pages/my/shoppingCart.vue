@@ -1,4 +1,5 @@
 <template>
+	<!-- 购物车 -->
   <view class="page flex-col">
     <view class="block_1 flex-col justify-end">
       <view class="group_4 flex-col">

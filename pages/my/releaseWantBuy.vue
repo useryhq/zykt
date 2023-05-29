@@ -1,4 +1,5 @@
 <<template>
+	<!-- 个人中心发布求购 -->
   <view class="page flex-col">
     <view class="block_1 flex-col">
       <view class="group_2 flex-col">

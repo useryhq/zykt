@@ -1,4 +1,5 @@
 <template>
+	<!-- 商家中心地址列表 -->
   <view class="page flex-col">
     <view class="group_1 flex-col">
         <view class="list_1 flex-col">

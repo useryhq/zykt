@@ -1,4 +1,5 @@
 <template>
+	<!-- 商家中心发布商品 -->
 	<view class="page">
 		<view class="block_1 flex-col">
 			<view class="commodity-title">

@@ -1,4 +1,5 @@
 <template>
+	<!-- 搜索 -->
   <view class="page flex-col">
     <view class="box_3 flex-col">
       <view class="section_1 flex-row">

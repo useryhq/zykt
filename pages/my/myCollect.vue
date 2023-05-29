@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心我的收藏 -->
 	<view class="page">
 		<view class="nav_box flex-row justify-around">
 			<view class="nav_text" :class="{'nav_text-avtive' : nav == 0}" @click="changeNav(0)">

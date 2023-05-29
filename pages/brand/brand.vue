@@ -1,4 +1,5 @@
 <<template>
+	<!-- 品牌列表 -->
   <view class="page flex-col justify-between">
     <view class="box_2 flex-col justify-end">
       <view class="group_3 flex-row">

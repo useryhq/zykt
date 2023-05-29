@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心 -->
   <view class="page flex-col">
     <view class="group_1 flex-col">
       <view class="box_1 flex-col">

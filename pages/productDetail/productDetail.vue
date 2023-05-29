@@ -1,4 +1,5 @@
 <template>
+	<!-- 产品详情（商家） -->
   <view class="page flex-col">
     <view class="goods-detail-nav">
     	<view v-if="price != '询价'" class="w">

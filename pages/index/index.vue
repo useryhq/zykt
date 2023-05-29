@@ -1,4 +1,5 @@
 <template>
+	<!-- 首页 -->
 	<view class="page flex-col">
 		<view class="group_1 flex-col">
 			<view class="group_2 flex-col">

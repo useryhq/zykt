@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心我的求购 -->
   <view class="page flex-col">
     <view class="section_1 flex-col">
       <view class="section_3 flex-col">

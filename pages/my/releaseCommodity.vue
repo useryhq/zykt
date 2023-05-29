@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心发布商品 -->
 	<view class="page">
 		<view class="block_1 flex-col">
 		  <view class="group_2 flex-col">

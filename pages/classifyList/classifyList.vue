@@ -1,4 +1,5 @@
 <template>
+	<!-- 产品分类 -->
 	<view class="classify-list">
 		<view class="list-left">
 			<view class="left-block" :class="{'left-block-active': activeKey == item.id}" v-for="(item,index) in list" :key="index"

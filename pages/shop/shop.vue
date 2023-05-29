@@ -1,4 +1,5 @@
 <template>
+	<!-- 店铺主页 -->
 	<view class="page">
 		<view class="shop-message flex-row justify-between">
 			<view class="img-text flex-row align-center">

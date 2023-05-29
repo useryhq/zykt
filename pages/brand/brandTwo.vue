@@ -1,4 +1,5 @@
 <template>
+	<!-- 选择品牌 -->
   <view class="page flex-col justify-between">
     <view class="box_3 flex-col" v-for="(items,index) in list" :key="index">
       <text class="text_2">{{items.text}}</text>

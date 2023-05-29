@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心添加地址 -->
   <view class="page flex-col">
     <view class="box_1 flex-col">
       <view class="box_5 flex-col">

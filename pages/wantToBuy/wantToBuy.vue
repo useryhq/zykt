@@ -1,4 +1,5 @@
 <template>
+	<!-- 求购列表 -->
 	<view class="page">
 		<view class="list_1 flex-col">
 			<view class="list-items_1 flex-col" v-for="(item, index) in loopData0" :key="index" @click="toWantBUyDetail()">
