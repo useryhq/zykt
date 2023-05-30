@@ -115,7 +115,7 @@
 			<view class="group_2">
 				<view class="text-wrapper_1 text-wrapper_3 flex-row align-center justify-between" @click="">
 				  <text class="text_2">售卖区域：</text>
-				  <view class="button_3">
+				  <view class="button_3" @click="openCity">
 				  	开通新城市
 				  </view>
 				  <view class="button_5 button_3">
@@ -208,12 +208,12 @@
 				</view>
 			</view>
 			<!-- 开通城市分站弹窗 -->
-			<view class="city-block">
+			<view v-if="city" class="city-block">
 				<view class="mask"></view>
 				<view class="mode">
 					<view class="pk_title">
 						<text>开通城市分站</text>
-						<text class="close_pk" @click="closeModel">×</text>
+						<text class="close_pk" @click="closeCity">×</text>
 					</view>
 					<view class="city-prompt">开通城市分站收费标准（您的商品将会在您开通的城市展示）</view>
 					<view class="city-table">
@@ -246,7 +246,9 @@
 								</view>
 								<view class="city-shi flex-row align-center">
 									<view class="shi-list flex-row align-center">
-										<view class="round"></view>
+										<view class="round">
+											<view class="drop"></view>
+										</view>
 										<text class="list-text">北京</text>
 									</view>
 								</view>
@@ -627,7 +629,8 @@
 							'KFR-35GW/BpR3QYQ1+1',
 						],
 						date: '',
-						help: false
+						help: false,
+						city: false
 			};
 		},
 		computed: {
@@ -827,6 +830,14 @@
 								//关闭销售方式帮助
 								closeHlep() {
 									this.help = false
+								},
+								//打开城市分站弹窗
+								openCity() {
+									this.city = true
+								},
+								//关闭城市分站弹窗
+								closeCity() {
+									this.city = false
 								},
 						//提交数据
 						submit() {
@@ -1414,6 +1425,13 @@
 					height: 22rpx;
 					border: 1rpx solid #A0A0A0;
 					border-radius: 50%;
+					.drop {
+						width: 14rpx;
+						height: 14rpx;
+						margin: 4rpx;
+						background-color: #DD1215;
+						border-radius: 50%;
+					}
 				}
 				.area-list {
 					height: 55%;
