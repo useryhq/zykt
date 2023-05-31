@@ -72,7 +72,7 @@
 			  <text class="iconfont icon_10">&#xe6af;</text>
             <text class="text-group_7">购物车</text>
           </view>
-          <view class="image-text_6 flex-row">
+          <view class="image-text_6 flex-row" @click="toMyMessage">
 			  <text class="iconfont icon_10">&#xe66b;</text>
             <text class="text-group_7">我的消息</text>
           </view>
@@ -98,7 +98,9 @@ export default {
   },
   methods: {
     onClick_1() {
-      
+      uni.navigateTo({
+      	url: '/pages/business/business'
+      })
     },
 	//跳转我的求购
     onClick_2() {
@@ -140,6 +142,11 @@ export default {
 	toMyCollect() {
 		uni.navigateTo({
 			url: '/pages/my/myCollect'
+		})
+	},
+	toMyMessage() {
+		uni.navigateTo({
+			url: '/pages/my/myMessage'
 		})
 	}
   }

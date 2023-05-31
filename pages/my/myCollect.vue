@@ -75,7 +75,7 @@
 	.nav_box {
 		width: 680rpx;
 		padding: 20rpx 35rpx 10rpx 35rpx;
-		border-bottom: 1rpx solid #A0A0A0;
+		// border-bottom: 1rpx solid #A0A0A0;
 		position: relative;
 		background-color: #fff;
 			.nav_text {

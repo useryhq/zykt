@@ -32,7 +32,7 @@
 			</view>
 			<view class="text-wrapper_1 text-wrapper_2 flex-col">
 			  <text class="text_2 text_4">商品主图：</text>
-			  <uni-file-picker ref="file" auto-upload="false" v-model="imageValue" :image-styles="imageStyles" limit="1" :del-icon="false" file-mediatype="image" @success="success" @select="select" >
+			  <uni-file-picker ref="file" auto-upload="false" v-model="imageValue" :image-styles="imageStyles" limit="1" :del-icon="false" file-mediatype="image" @select="select" >
 				  <view class="button_2 flex-col align-center">
 					  <text class="iconfont icon_2">&#xe67b;</text>
 					  点击上传

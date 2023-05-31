@@ -241,7 +241,7 @@
 							</view>
 							<view class="city-list flex-row align-start">
 								<view class="city-sheng flex-row align-center">
-									<view class="round"></view>
+									<!-- <view class="round"></view> -->
 									<text class="list-text">北京</text>
 								</view>
 								<view class="city-shi flex-row align-center">
@@ -255,7 +255,7 @@
 							</view>
 							<view class="city-list flex-row align-start">
 								<view class="city-sheng flex-row align-center">
-									<view class="round"></view>
+									<!-- <view class="round"></view> -->
 									<text class="list-text">天津</text>
 								</view>
 								<view class="city-shi flex-row align-center">
@@ -267,7 +267,7 @@
 							</view>
 							<view class="city-list flex-row align-start">
 								<view class="city-sheng flex-row align-center">
-									<view class="round"></view>
+									<!-- <view class="round"></view> -->
 									<text class="list-text">河北省</text>
 								</view>
 								<view class="city-shi flex-row align-center">

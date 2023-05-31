@@ -72,19 +72,19 @@
 				<text class="iconfont icon_5">&#xe649;</text>
 		        <text class="text_11">发布商品</text>
 		    </view>
-		    <view class="image-text_1 image-text_2 flex-col align-center">
+		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toManageAddress">
 			<text class="iconfont icon_5">&#xe699;</text>
 		      <text class="text_11">商品管理</text>
 		    </view>
-			<view class="image-text_1 image-text_2 flex-col align-center">
+			<view class="image-text_1 image-text_2 flex-col align-center" @click="toReleaseWantBuy">
 			<text class="iconfont icon_5">&#xe649;</text>
 			  <text class="text_11">发布求购</text>
 			</view>
-		   <view class="image-text_1 image-text_2 flex-col align-center">
+		   <view class="image-text_1 image-text_2 flex-col align-center" @click="toManageWantBuy">
 		   <text class="iconfont icon_5">&#xe699;</text>
 		     <text class="text_11">求购管理</text>           
 		   </view>
-		   <view class="image-text_1 image-text_2 flex-col align-center">
+		   <view class="image-text_1 image-text_2 flex-col align-center" @click="toShopDecoration">
 		   <text class="iconfont icon_5">&#xe676;</text>
 		     <text class="text_11">店铺装修</text>
 		   </view>
@@ -102,7 +102,7 @@
 			  </view>
 			<view class="round-dot"></view>
           </view>
-          <view class="image-text_6 flex-row">
+          <view class="image-text_6 flex-row" @click="toOpenCity">
           	<text class="iconfont icon_10">&#xe612;</text>
             <text class="text-group_7">开通城市分站</text>
           </view>
@@ -159,6 +159,35 @@ export default {
 	//返回个人中心
 	toMy() {
 		uni.navigateBack()
+	},
+	// 跳转店铺装修
+	toShopDecoration() {
+		uni.navigateTo({
+			url: '/pages/shop/shopDecoration'
+		})
+	},
+	// 跳转店铺装修
+	toManageAddress() {
+		uni.navigateTo({
+			url: '/pages/business/manageCommodity'
+		})
+	},
+	// 跳转发布求购
+	toReleaseWantBuy() {
+		uni.navigateTo({
+			url: '/pages/business/releaseWantBuy'
+		})
+	},
+	//跳转求购管理
+	toManageWantBuy() {
+		uni.navigateTo({
+			url: '/pages/business/manageWantBuy'
+		})
+	},
+	toOpenCity() {
+		uni.navigateTo({
+			url: '/pages/business/openCity'
+		})
 	}
   }
 };

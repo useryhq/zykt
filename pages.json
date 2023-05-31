@@ -351,6 +351,71 @@
             }
             
         }
+        ,{
+            "path" : "pages/shop/shopDecoration",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "店铺装修",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/myMessage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "消息中心",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/business/manageCommodity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品管理",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
+            "path" : "pages/business/releaseWantBuy",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "发布求购",
+               "enablePullDownRefresh": false,
+               "navigationBarTextStyle": "black",
+               "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/business/manageWantBuy",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "求购管理",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/business/openCity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "开通城市分站",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",
