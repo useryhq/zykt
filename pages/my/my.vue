@@ -97,9 +97,10 @@ export default {
     };
   },
   methods: {
+	  // 跳转商家入驻
     onClick_1() {
       uni.navigateTo({
-      	url: '/pages/business/business'
+      	url: '/pages/business/joinBusiness'
       })
     },
 	//跳转我的求购
@@ -144,6 +145,7 @@ export default {
 			url: '/pages/my/myCollect'
 		})
 	},
+	//跳转我的消息
 	toMyMessage() {
 		uni.navigateTo({
 			url: '/pages/my/myMessage'

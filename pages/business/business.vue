@@ -72,7 +72,7 @@
 				<text class="iconfont icon_5">&#xe649;</text>
 		        <text class="text_11">发布商品</text>
 		    </view>
-		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toManageAddress">
+		    <view class="image-text_1 image-text_2 flex-col align-center" @click="toManageCommodity">
 			<text class="iconfont icon_5">&#xe699;</text>
 		      <text class="text_11">商品管理</text>
 		    </view>
@@ -158,7 +158,9 @@ export default {
 	},
 	//返回个人中心
 	toMy() {
-		uni.navigateBack()
+		uni.navigateBack({
+			delta: 2
+		})
 	},
 	// 跳转店铺装修
 	toShopDecoration() {
@@ -166,8 +168,8 @@ export default {
 			url: '/pages/shop/shopDecoration'
 		})
 	},
-	// 跳转店铺装修
-	toManageAddress() {
+	// 跳转商品管理
+	toManageCommodity() {
 		uni.navigateTo({
 			url: '/pages/business/manageCommodity'
 		})

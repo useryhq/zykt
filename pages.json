@@ -416,6 +416,17 @@
             }
             
         }
+        ,{
+            "path" : "pages/business/joinBusiness",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商家入驻",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",

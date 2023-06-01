@@ -9,7 +9,7 @@
 						<image class="thumbnail_1" referrerpolicy="no-referrer"
 							src="/static/bg/psn0jpa0rv4jokgnpjgiyspa6d5ap30qwvka8534697-34f3-4d04-ad86-53aa6ed0ac52.png" />
 					</view>
-					<view  class="choose_address">
+					<view class="choose_address">
 						<uni-data-picker ref="picker" :localdata="localData" @change="onchange" @nodeclick="onnodeclick">
 						</uni-data-picker>
 					</view>
@@ -439,7 +439,7 @@
 			.group_2 {
 				width: 750rpx;
 				height: 110rpx;
-				background: url(/static/bg/ps59drfwoeaop2rwmujyrphvuaeqgb0axqfdf6667e-c63f-4b00-961c-724335a2ad65.png) 0rpx 0rpx no-repeat;
+				background: url(/static/bg/ps59drfwoeaop2rwmujyrphvuaeqgb0axqfdf6667e-c63f-4b00-961c-724335a2ad65.png) 0rpx -1rpx no-repeat;
 				background-size: 750rpx 100rpx;
 
 				.block_2 {
