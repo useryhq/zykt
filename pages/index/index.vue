@@ -49,19 +49,17 @@
 				<view class="block_4 flex-col">
 					<view class="list_1 flex-row">
 						<view class="image-text_4 flex-col justify-between" v-for="(item, index) in loopData0"
-							:key="index" @click="toBrandTwo(item.lanhutext0)">
-							<image class="image_3" referrerpolicy="no-referrer" :src="item.lanhuimage0" />
-							<text class="text-group_4"
-								:style="{ color: item.lanhufontColor0 }">{{item.lanhutext0}}</text>
+							:key="index" @click="toBrandTwo(item.name)">
+							<image class="image_3" referrerpolicy="no-referrer" :src='imgUrl + item.logo' />
+							<text class="text-group_4">{{item.name}}</text>
 						</view>
 					</view>
 					<view class="box_2 flex-row">
 						<view class="list_2 flex-row justify-between">
 							<view class="image-text_5 flex-col justify-between" v-for="(item, index) in loopData1"
-								:key="index" @click="toBrandTwo(item.lanhutext0)">
-								<image class="image_4" referrerpolicy="no-referrer" :src="item.lanhuimage0" />
-								<text class="text-group_5"
-									:style="{ color: item.lanhufontColor0 }">{{item.lanhutext0}}</text>
+								:key="index" @click="toBrandTwo(item.name)">
+								<image class="image_4" referrerpolicy="no-referrer" :src='imgUrl + item.logo' />
+								<text class="text-group_5">{{item.name}}</text>
 							</view>
 						</view>
 						<view class="image-text_9 flex-row justify-between" @click="toBrand()">
@@ -161,82 +159,13 @@
 </template>
 <script>
 	import get_city_tree from '../../static/js/cityData.js'
+	import {brandHot,wantBuy} from '../../static/js/api.js'
 	export default {
 		data() {
 			return {
-				loopData0: [{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '大金',
-						lanhufontColor0: 'rgba(102,102,102,1)',
-					},
-					{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '格力',
-						lanhufontColor0: 'rgba(51,51,51,1)',
-					},
-					{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '美的',
-						lanhufontColor0: 'rgba(51,51,51,1)',
-					},
-					{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '奥克斯',
-						lanhufontColor0: 'rgba(51,51,51,1)',
-					},
-					{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '海尔',
-						lanhufontColor0: 'rgba(51,51,51,1)',
-					},
-				],
-				loopData1: [{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '大金',
-						lanhufontColor0: 'rgba(102,102,102,1)',
-					},
-					{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '格力',
-						lanhufontColor0: 'rgba(51,51,51,1)',
-					},
-					{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '美的',
-						lanhufontColor0: 'rgba(51,51,51,1)',
-					},
-					{
-						lanhuimage0: '/static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-						lanhutext0: '奥克斯',
-						lanhufontColor0: 'rgba(51,51,51,1)',
-					},
-				],
-				message: [{
-						text: "美的大风管机",
-					},
-					{
-						text: "求购一台格力壁挂式空调，要求最起码八成新求购一台格力壁挂式空调，要求最起码八成新",
-
-					},
-					{
-						text: "回收废旧空调压缩机 回收5台1.5匹空调",
-
-					},
-					{
-						text: "回收10台二手格力柜式机回",
-					},
-					{
-						text: "求购一台格力壁挂式空调，要求最起码八成新求购一台格力壁挂式空调，要求最起码八成新",
-
-					},
-					{
-						text: "回收废旧空调压缩机 回收5台1.5匹空调",
-
-					},
-					{
-						text: "回收10台二手格力柜式机回",
-					},
-				],
+				loopData0: [],
+				loopData1: [],
+				message: [],
 				ktlist1: [{
 						imgSrc: "/static/bg/0301162340.png",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
@@ -316,41 +245,61 @@
 				add: 1,
 				selectTab: 1,
 				iphonex: this.$iphonex.iphonex,
+				imgUrl: this.$imgUrl.img_base_url,
 				constants: {},
 			};
 		},
 		methods: {
+			// 获取热门品牌数据
+			async getBrandHot() {
+				let data = await brandHot()
+				// console.log(data)
+				this.loopData0 = data.hot1
+				this.loopData1 = data.hot2
+			},
+			//获取最新求购
+			async getWantBuy() {
+				let data = await wantBuy()
+				console.log(data)
+			},
+			//切换商家个人
 			choose_status1() {
 				this.add = 1
 			},
 			choose_status2() {
 				this.add = 2
 			},
+			//tab栏跳转
 			slecetTab(e) {
 				// console.log(e)
 				this.selectTab = e
 				if(e == 4) {
+					//跳转二手门店
 					uni.navigateTo({
 						url: '/pages/twoHand/twoHand'
 					})
 					}else if(e == 5) {
+						//跳转我的
 						uni.navigateTo({
 							url: '/pages/my/my'
 						})
 					}
 			},
+			//跳转搜索
 			ToSearch() {
 				uni.navigateTo({
 					url: '../search/search'
 				})
 			},
 			ToHotProduct(e) {
+				//跳转家用空调
 				if (e == 'jia') {
 					this.selectTab = 2,
 					uni.navigateTo({
 						url: '/pages/hotProduct/hotProduct?item=' + e
 					})
 				} 
+				//跳转商用空调
 				if (e == 'shang') {
 					this.selectTab = 3,
 					uni.navigateTo({
@@ -359,26 +308,31 @@
 				}
 				
 			},
+			//跳转商家详情
 			toProductDetail(e) {
 				uni.navigateTo({
 					url: '/pages/productDetail/productDetail?price=' + e
 				})
 			},
+			//跳转个人详情
 			toProductDetailH(e) {
 				uni.navigateTo({
 					url: '/pages/productDetailH/productDetailH?price=' + e
 				})
 			},
+			// 跳转求购列表
 			TowantToBuy() {
 				uni.navigateTo({
 					url: '/pages/wantToBuy/wantToBuy'
 				})
 			},
+			// 跳转品牌
 			toBrand() {
 				uni.navigateTo({
 					url:'/pages/brand/brand'
 				})
 			},
+			// 跳转品牌二级列表
 			toBrandTwo(T) {
 				uni.navigateTo({
 					url: '/pages/brand/brandTwo?title=' + T
@@ -401,6 +355,7 @@
 				    }
 				})			
 			},
+			// 地址选择三级联动
 			addressShow() {
 				this.localData = get_city_tree()
 				this.$refs.picker.show()
@@ -418,6 +373,9 @@
 		},
 		onLoad() {
 			this.getGps()
+			this.getBrandHot()
+			this.getWantBuy()
+			// console.log(this.imgUrl)
 		},
 	};
 
@@ -679,6 +637,7 @@
 								font-size: 24rpx;
 								font-family: PingFang-SC-Regular;
 								font-weight: NaN;
+								color: #333;
 								text-align: left;
 								white-space: nowrap;
 								line-height: 24rpx;

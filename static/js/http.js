@@ -32,22 +32,23 @@ export function request(url, method, data, opt) {
           }
           if (res.data.code == 200) {
             uni.hideLoading();
-            resolve(res)
+            resolve(res.data)
           } else {
             if (res.data.code == 0) {
               uni.hideLoading();
               reject({
                 'message': '连接服务器失败'
               })
-              // if (res.statusCode == 401) {
-              //   uni.navigateTo({
-              //     url: '../pages/login/load.wpy'
-              //   });
-              // }
+              if (res.statusCode == 405) {
+				  // 跳转登录
+                // uni.navigateTo({
+                //   url: ''
+                // });
+              }
             }
   
             uni.hideLoading();
-            reject(res.data.error)
+            reject(res.data.msg)
           }
         },
         fail: () => {
