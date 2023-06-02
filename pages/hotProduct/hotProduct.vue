@@ -9,8 +9,7 @@
 				</view>
 				<view class="group_3 flex-row">
 					<text class="search_icon iconfont">&#xe65c;</text>
-					<input class="text-group_2" type="text" placeholder-style="font-size:22rpx;color:#999999" focus
-						placeholder="搜索想要的空调产品" />
+					<input class="text-group_2" type="text" placeholder-style="font-size:22rpx;color:#999999" placeholder="搜索想要的空调产品" />
 				</view>
 			</view>
 		</view>
@@ -18,6 +17,7 @@
 			<view class="text-wrapper_1 flex-row align-center justify-start">
 				<text :class="[add == 1 ? 'text_2 click_text' : 'text_2']" @click="choose_status1">商家</text>
 				<text :class="[add == 2 ? 'text_3 click_text' : 'text_3']" @click="choose_status2">个人</text>
+				<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 			</view>
 			<view v-if="add == 1" class="box_3 flex-row justify-between">
 				<view
@@ -65,8 +65,6 @@
 					<text :class="[parameter == 4 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
 				</view>
 			</view>
-
-			<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 			<view v-if="add == 1" class="group_8 flex-row justify-between">
 				<view class="box_3 flex-col" v-for="(item,i) in ktlist1" :key="i"
 					@click="toProductDetail(item.price)">
@@ -408,7 +406,7 @@
 				margin: 27rpx 0 0 14rpx;
 				padding-bottom: 15rpx;
 				border-bottom: 2rpx solid #A0A0A0;
-
+				position: relative;
 				.text_2 {
 					margin: 0 51rpx 0 26rpx;
 					color: rgba(102, 102, 102, 1);
@@ -435,6 +433,25 @@
 					font-weight: 500;
 					line-height: 32rpx;
 					color: rgba(230, 60, 49, 1);
+				}
+				.group_left {
+					background-color: rgba(230, 60, 49, 1);
+					border-radius: 2px;
+					position: absolute;
+					left: 24rpx;
+					bottom: 0;
+					width: 64rpx;
+					height: 4rpx;
+				}
+				
+				.group_right {
+					background-color: rgba(230, 60, 49, 1);
+					border-radius: 2px;
+					position: absolute;
+					left: 124rpx;
+					bottom: 0;
+					width: 64rpx;
+					height: 4rpx;
 				}
 			}
 
@@ -464,26 +481,6 @@
 				.delta_transform {
 					transform: rotate(180deg);
 				}
-			}
-
-			.group_left {
-				background-color: rgba(230, 60, 49, 1);
-				border-radius: 2px;
-				position: absolute;
-				left: 36rpx;
-				top: 68rpx;
-				width: 64rpx;
-				height: 4rpx;
-			}
-
-			.group_right {
-				background-color: rgba(230, 60, 49, 1);
-				border-radius: 2px;
-				position: absolute;
-				left: 134rpx;
-				top: 68rpx;
-				width: 64rpx;
-				height: 4rpx;
 			}
 		}
 

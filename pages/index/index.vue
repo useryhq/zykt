@@ -99,6 +99,7 @@
 				<view class="text-wrapper_2 flex-row justify-start">
 					<text :class="[add == 1 ? 'text_8 click_text' : 'text_8']" @click="choose_status1">商家</text>
 					<text :class="[add == 2 ? 'text_9 click_text' : 'text_9']" @click="choose_status2">个人</text>
+					<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 				</view>
 				<view v-if="add == 1" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index" @click="toProductDetail(item.price)">
@@ -128,7 +129,6 @@
 						</view>
 					</view>
 				</view>
-				<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
 			</view>
 			<view class="group_12 flex-row" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
 				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']" @click="slecetTab(1)">
@@ -851,7 +851,7 @@
 					margin: 27rpx 0 0 14rpx;
 					padding-bottom: 15rpx;
 					border-bottom: 2rpx solid #A0A0A0;
-
+					position: relative;
 					.text_8 {
 						margin: 0 51rpx 0 22rpx;
 						font-size: 28rpx;
@@ -872,6 +872,25 @@
 						font-weight: 500;
 						line-height: 32rpx;
 						color: rgba(51, 51, 51, 1);
+					}
+					.group_left {
+						background-color: rgba(230, 60, 49, 1);
+						border-radius: 2px;
+						position: absolute;
+						left: 20rpx;
+						bottom: 0;
+						width: 64rpx;
+						height: 4rpx;
+					}
+					
+					.group_right {
+						background-color: rgba(230, 60, 49, 1);
+						border-radius: 2px;
+						position: absolute;
+						left: 128rpx;
+						bottom: 0;
+						width: 64rpx;
+						height: 4rpx;
 					}
 				}
 
@@ -949,26 +968,6 @@
 						}
 					}
 
-				}
-
-				.group_left {
-					background-color: rgba(230, 60, 49, 1);
-					border-radius: 2px;
-					position: absolute;
-					left: 36rpx;
-					top: 68rpx;
-					width: 64rpx;
-					height: 4rpx;
-				}
-
-				.group_right {
-					background-color: rgba(230, 60, 49, 1);
-					border-radius: 2px;
-					position: absolute;
-					left: 140rpx;
-					top: 68rpx;
-					width: 64rpx;
-					height: 4rpx;
 				}
 			}
 
