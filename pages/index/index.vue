@@ -50,7 +50,7 @@
 					<view class="list_1 flex-row">
 						<view class="image-text_4 flex-col justify-between" v-for="(item, index) in loopData0"
 							:key="index" @click="toBrandTwo(item.name)">
-							<image class="image_3" referrerpolicy="no-referrer" :src='imgUrl + item.logo' />
+							<image class="image_3" referrerpolicy="no-referrer" :src="imgUrl + 'logo/' + item.logo" />
 							<text class="text-group_4">{{item.name}}</text>
 						</view>
 					</view>
@@ -58,7 +58,7 @@
 						<view class="list_2 flex-row justify-between">
 							<view class="image-text_5 flex-col justify-between" v-for="(item, index) in loopData1"
 								:key="index" @click="toBrandTwo(item.name)">
-								<image class="image_4" referrerpolicy="no-referrer" :src='imgUrl + item.logo' />
+								<image class="image_4" referrerpolicy="no-referrer" :src="imgUrl + 'logo/' + item.logo" />
 								<text class="text-group_5">{{item.name}}</text>
 							</view>
 						</view>
@@ -86,7 +86,7 @@
 							:key="index">
 							<view class="section_6"></view>
 							<text class="paragraph_1">
-								{{item.text}}
+								{{item.title}}
 								<br />
 							</text>
 						</view>
@@ -261,6 +261,7 @@
 			async getWantBuy() {
 				let data = await wantBuy()
 				console.log(data)
+				this.message =data.lists
 			},
 			//切换商家个人
 			choose_status1() {

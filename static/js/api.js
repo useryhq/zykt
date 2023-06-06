@@ -28,3 +28,22 @@ export function wantBuy() {
 		})
 	})
 }
+//首页商品
+export function goodsList() {
+	let url = '/goods/lists?type=1&priceDesc=1&key=空调'
+	return new Promise((resolve,reject) => {
+		request(url,'POST').then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//推荐搜索
+export function search(data) {
+	let url = '/search/search-goods'
+	console.log("====",data)
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}

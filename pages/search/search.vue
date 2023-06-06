@@ -5,9 +5,9 @@
       <view class="section_1 flex-row">
         <view class="group_3">     
 		  <text class="search_icon iconfont">&#xe65c;</text>
-            <input class="text-group_1" type="text" placeholder-style="font-size:22rpx;color:#999999" focus placeholder="搜索想要的空调产品" />
+            <input class="text-group_1" type="text" placeholder-style="font-size:22rpx;color:#999999" focus placeholder="搜索想要的空调产品" @blur="inSearch" />
         </view>
-        <text class="text_2">搜索</text>
+        <text class="text_2" @click="toSearch">搜索</text>
       </view>
       <text class="text_3">推荐搜索</text>
       <view class="section_2 flex-row">
@@ -16,12 +16,28 @@
         </view>
       </view>
     </view>
+	<view v-if="searchList" class="group_8 flex-row justify-between">
+		<view class="box_3 flex-col" v-for="(item,index) in searchList" :key="index" @click="toProductDetail(item.shop_id)">
+			<image class="kt_img" :src="img + item.thumb"></image>
+			<view class="text-wrapper_3 flex-row justify-between">
+				<text class="paragraph_2">
+					{{item.goods_name}}
+				</text>
+			</view>
+			<view class="text-wrapper_4 flex-row">
+				<text class="text_10">￥{{item.market_price}}</text>
+			</view>
+		</view>
+	</view>
   </view>
 </template>
 <script>
+	import {search} from '../../static/js/api.js'
 export default {
   data() {
     return {
+		searchKey: '',
+		img: this.$imgUrl. img_base_url,
 		searchData: [
 			{
 				text: '格力中央空调'
@@ -42,10 +58,35 @@ export default {
 				text: '风管机'
 			}
 		],
+		searchList: [],
       constants: {}
     };
   },
-  methods: {}
+  methods: {
+	  //搜索关键字赋值
+	  inSearch(e) {
+		  console.log(e)
+		  this.searchKey = e.detail.value
+	  },
+	  // 请求搜索接口
+	  async getSearch() {
+		  let data = {
+			  body:{
+			  key:this.searchKey,
+		    },
+		  }
+		  let res = await search(data)
+		  console.log(res)
+		  this.searchList = res.lists
+	  },
+	  //点击搜索
+	  toSearch() {
+		  this.getSearch()
+	  }
+  },
+  onLoad() {
+  	
+  }
 };
 </script>
 <style lang='less'>
@@ -135,6 +176,81 @@ export default {
       }
   }
 }
+		.group_8 {
+					width: 659rpx;
+					margin-left: 16rpx;
+					flex-wrap: wrap;
+					border-radius: 4px;
+
+					.kt_img {
+						width: 320rpx;
+						height: 320rpx;
+					}
+
+					.box_3 {
+						background-color: rgba(255, 255, 255, 1);
+						width: 320rpx;
+						height: 460rpx;
+						margin-top: 38rpx;
+
+						.text-wrapper_3 {
+							width: 300rpx;
+							height: 60rpx;
+							margin: 26rpx 0 0 9rpx;
+
+							.paragraph_2 {
+								width: 286rpx;
+								height: 60rpx;
+								color: rgba(51, 51, 51, 1);
+								font-size: 24rpx;
+								font-family: PingFang-SC-Regular;
+								text-align: left;
+								line-height: 30rpx;
+								overflow: hidden;
+								text-overflow: ellipsis;
+								-webkit-line-clamp: 2;
+								word-break: break-all;
+								display: -webkit-box;
+								-webkit-box-orient: vertical;
+							}
+						}
+
+						.text-wrapper_4 {
+							width: 300rpx;
+							height: 24rpx;
+							margin: 21rpx 0 0 13rpx;
+
+							.text_10 {
+								width: 139rpx;
+								height: 30rpx;
+								overflow-wrap: break-word;
+								color: rgba(230, 60, 49, 1);
+								font-size: 30rpx;
+								font-family: PingFang-SC-Medium;
+								font-weight: 500;
+								text-align: left;
+								white-space: nowrap;
+								line-height: 30rpx;
+							}
+
+							.text_11 {
+								width: 42rpx;
+								height: 21rpx;
+								overflow-wrap: break-word;
+								color: rgba(153, 153, 153, 1);
+								font-size: 22rpx;
+								font-family: PingFang-SC-Regular;
+								font-weight: NaN;
+								text-align: left;
+								white-space: nowrap;
+								line-height: 36rpx;
+								margin: 3rpx 0 0 100rpx;
+							}
+
+						}
+					}
+
+				}
 }
 
 </style>
