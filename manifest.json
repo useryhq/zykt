@@ -1,5 +1,5 @@
 {
-    "name" : "zykt-uni",
+    "name" : "空调优选平台",
     "appid" : "__UNI__8F8A0B6",
     "description" : "",
     "versionName" : "1.0.0",
@@ -63,7 +63,7 @@
                 "desc" : "获取用户位置，提供附近商家商品，更好的为客户服务"
             }
         },
-		"lazyCodeLoading": "requiredComponents"
+        "lazyCodeLoading" : "requiredComponents"
     },
     "mp-alipay" : {
         "usingComponents" : true

@@ -9,16 +9,6 @@
 			}
 		},
 		{
-			"path": "pages/search/search",
-			"style": {
-				"navigationBarTitleText": "搜索",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-
-		},
-		{
 			"path": "pages/hotProduct/hotProduct",
 			"style": {
 				"navigationBarTitleText": "热门产品",
@@ -47,15 +37,330 @@
 			}
 
 		}, {
-			"path": "pages/classifyList/classifyList",
+			"path": "pages/twoHand/twoHand",
 			"style": {
-				"navigationBarTitleText": "所有分类",
+				"navigationBarTitleText": "附近门店",
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
 
-		}, {
+		}
+	],
+	"subpackages": [{
+		// 个人中心
+		"root": "pageA",
+		"pages": [{
+				"path": "pages/my/my",
+				"style": {
+					"navigationBarTitleText": "我的",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "white",
+					"navigationBarBackgroundColor": "#4182FE"
+				}
+
+			}, {
+				"path": "pages/my/myWantBuy",
+				"style": {
+					"navigationBarTitleText": "我的求购",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/shoppingCart",
+				"style": {
+					"navigationBarTitleText": "购物车",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/myCommodity",
+				"style": {
+					"navigationBarTitleText": "商品管理",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/releaseWantBuy",
+				"style": {
+					"navigationBarTitleText": "发布求购",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/manageAddress",
+				"style": {
+					"navigationBarTitleText": "地址管理",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/addAddress",
+				"style": {
+					"navigationBarTitleText": "填写地址",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/myCollect",
+				"style": {
+					"navigationBarTitleText": "我的收藏",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/releaseCommodity",
+				"style": {
+					"navigationBarTitleText": "发布商品",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/releaseCommodityDetail",
+				"style": {
+					"navigationBarTitleText": "图文详情",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/my/myMessage",
+				"style": {
+					"navigationBarTitleText": "消息中心",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}
+			// 个人中心订单
+			, {
+				"path": "pages/order/orderList",
+				"style": {
+					"navigationBarTitleText": "订单列表",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/order/afterSales",
+				"style": {
+					"navigationBarTitleText": "申请售后",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/order/afterSalesList",
+				"style": {
+					"navigationBarTitleText": "售后订单",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+
+				}
+			}
+		]
+	}, {
+		// 商家中心
+		"root": "pageB",
+		"pages": [{
+				"path": "pages/business/business",
+				"style": {
+					"navigationBarTitleText": "商家中心",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "white",
+					"navigationBarBackgroundColor": "#4182FE"
+				}
+
+			}, {
+				"path": "pages/business/manageAddress",
+				"style": {
+					"navigationBarTitleText": "地址管理",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/addAddress",
+				"style": {
+					"navigationBarTitleText": "填写地址",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/releaseCommodity",
+				"style": {
+					"navigationBarTitleText": "发布商品",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/releaseCommodityDetail",
+				"style": {
+					"navigationBarTitleText": "图文详情",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/manageCommodity",
+				"style": {
+					"navigationBarTitleText": "商品管理",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/releaseWantBuy",
+				"style": {
+					"navigationBarTitleText": "发布求购",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/manageWantBuy",
+				"style": {
+					"navigationBarTitleText": "求购管理",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/openCity",
+				"style": {
+					"navigationBarTitleText": "开通城市分站",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/business/joinBusiness",
+				"style": {
+					"navigationBarTitleText": "商家入驻",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			},
+			// 商家中心订单
+			 {
+				"path": "pages/businessOrder/orderList",
+				"style": {
+					"navigationBarTitleText": "订单列表",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "pages/businessOrder/afterSalesList",
+				"style": {
+					"navigationBarTitleText": "售后订单",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+
+				}
+			}
+		]
+	},{
+		// 内部展示页
+		"root":"pageC",
+		"pages":[{
+				"path": "pages/brand/brand",
+				"style": {
+					"navigationBarTitleText": "品牌",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			
+			}, {
+				"path": "pages/brand/brandTwo",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			
+			}, {
+				"path": "pages/brand/brandWantBuy",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			
+			}, {
+				"path": "pages/contrastDetail/contrastDetail",
+				"style": {
+					"navigationBarTitleText": "对比详情",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			
+			}, {
+				"path": "pages/brand/brandThree",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			}, {
+				"path": "pages/shop/shop",
+				"style": {
+					"navigationBarTitleText": "店铺主页",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			
+			}, {
+				"path": "pages/shop/shopDecoration",
+				"style": {
+					"navigationBarTitleText": "店铺装修",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			
+			},{
 			"path": "pages/wantToBuy/wantToBuy",
 			"style": {
 				"navigationBarTitleText": "求购列表",
@@ -74,360 +379,24 @@
 			}
 
 		}, {
-			"path": "pages/twoHand/twoHand",
+			"path": "pages/search/search",
 			"style": {
-				"navigationBarTitleText": "附近门店",
+				"navigationBarTitleText": "搜索",
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
 
 		}, {
-			"path": "pages/brand/brand",
+			"path": "pages/classifyList/classifyList",
 			"style": {
-				"navigationBarTitleText": "品牌",
+				"navigationBarTitleText": "所有分类",
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
-
-		}, {
-			"path": "pages/brand/brandTwo",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-
-		}, {
-			"path": "pages/brand/brandWantBuy",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-
-		}, {
-			"path": "pages/contrastDetail/contrastDetail",
-			"style": {
-				"navigationBarTitleText": "对比详情",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-
-		}, {
-			"path": "pages/brand/brandThree",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		}, {
-			"path": "pages/my/my",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#4182FE"
-			}
-
-		}, {
-			"path": "pages/my/myWantBuy",
-			"style": {
-				"navigationBarTitleText": "我的求购",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-
-		}
-	    ,{
-            "path" : "pages/my/shoppingCart",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "购物车",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/orderList",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "订单列表",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/afterSales",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "申请售后",
-               "enablePullDownRefresh": false,
-               "navigationBarTextStyle": "black",
-               "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/afterSalesList",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "售后订单",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            
-        }
-		}
-		,{
-		    "path" : "pages/businessOrder/orderList",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "订单列表",
-		        "enablePullDownRefresh": false,
-		        "navigationBarTextStyle": "black",
-		        "navigationBarBackgroundColor": "#ffffff"
-		    }
-		    
-		}
-		,{
-		    "path" : "pages/businessOrder/afterSalesList",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "售后订单",
-		        "enablePullDownRefresh": false,
-		        "navigationBarTextStyle": "black",
-		        "navigationBarBackgroundColor": "#ffffff"
-		    
-		}
-		}
-        ,{
-            "path" : "pages/my/myCommodity",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "商品管理",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/releaseWantBuy",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "发布求购",
-               "enablePullDownRefresh": false,
-               "navigationBarTextStyle": "black",
-               "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/manageAddress",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "地址管理",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/addAddress",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "填写地址",
-               "enablePullDownRefresh": false,
-               "navigationBarTextStyle": "black",
-               "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/myCollect",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的收藏",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/releaseCommodity",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "发布商品",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/releaseCommodityDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "图文详情",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/shop/shop",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "店铺主页",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/business/business",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "商家中心",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "white",
-                "navigationBarBackgroundColor": "#4182FE"
-            }
-            
-        },{
-            "path" : "pages/business/manageAddress",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "地址管理",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/business/addAddress",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "填写地址",
-               "enablePullDownRefresh": false,
-               "navigationBarTextStyle": "black",
-               "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        },{
-            "path" : "pages/business/releaseCommodity",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "发布商品",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        },{
-            "path" : "pages/business/releaseCommodityDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "图文详情",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/shop/shopDecoration",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "店铺装修",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/myMessage",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "消息中心",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/business/manageCommodity",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "商品管理",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        },{
-            "path" : "pages/business/releaseWantBuy",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "发布求购",
-               "enablePullDownRefresh": false,
-               "navigationBarTextStyle": "black",
-               "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/business/manageWantBuy",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "求购管理",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/business/openCity",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "开通城市分站",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-        ,{
-            "path" : "pages/business/joinBusiness",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "商家入驻",
-                "enablePullDownRefresh": false,
-                "navigationBarTextStyle": "black",
-                "navigationBarBackgroundColor": "#ffffff"
-            }
-            
-        }
-    ],
+		}]
+	}],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",
 		// "navigationBarTitleText": "中央空调网",

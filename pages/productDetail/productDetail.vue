@@ -386,7 +386,7 @@ export default {
 		  if(e == 1) {
 			  this.store = e
 			  uni.navigateTo({
-			  	url: '/pages/shop/shop'
+			  	url: '/pageC/pages/shop/shop'
 			  })
 		  } else if (e == 2) {
 			  this.collect = e
@@ -395,7 +395,7 @@ export default {
 		  } else if(e == 4) {
 			  this.join = e
 			  uni.navigateTo({
-			  	url: '/pages/my/shoppingCart'
+			  	url: '/pageA/pages/my/shoppingCart'
 			  })
 		  } else if(e == 5){
 			  this.buyBlock = true
@@ -429,13 +429,13 @@ export default {
 	  //跳转购物车
 	  toShoppingCart() {
 		  uni.navigateTo({
-		  	url: '/pages/my/shoppingCart'
+		  	url: '/pageA/pages/my/shoppingCart'
 		  })
 	  },
 	  //跳转店铺
 	  toShop() {
 		  uni.navigateTo({
-		  	url: '/pages/shop/shop'
+		  	url: '/pageC/pages/shop/shop'
 		  })
 	  }
   },

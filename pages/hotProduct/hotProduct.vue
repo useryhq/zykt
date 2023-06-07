@@ -300,12 +300,12 @@
 			},
 			toHotProduct() {
 				uni.navigateTo({
-					url: '/pages/classifyList/classifyList'
+					url: '/pageC/pages/classifyList/classifyList'
 				})
 			},
 			toContrastDetail() {
 				uni.navigateTo({
-					url: '/pages/contrastDetail/contrastDetail'
+					url: '/pageC/pages/contrastDetail/contrastDetail'
 				})
 			}
 		},

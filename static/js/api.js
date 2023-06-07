@@ -7,6 +7,7 @@ export function qnToken() {
 	return new Promise((resolve, reject) => {
 	  request(url, 'GET').then(res => {
 	    resolve(res.data)
+		console.log("====",res)
 	  })
 	})
 }
@@ -40,7 +41,25 @@ export function goodsList() {
 //推荐搜索
 export function search(data) {
 	let url = '/search/search-goods'
-	console.log("====",data)
+	// console.log("====",data)
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//求购详情
+export function wantBuyDetail(data) {
+	let url = '/qiu-gou/info'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//求购列表
+export function wantToBuy(data) {
+	let url = '/qiu-gou/lists'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)

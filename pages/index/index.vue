@@ -85,7 +85,7 @@
 						<view class="section_5 flex-row justify-between align-center" v-for="(item,index) in message"
 							:key="index">
 							<view class="section_6"></view>
-							<text class="paragraph_1">
+							<text class="paragraph_1" @click="toWantBuyDetail(item.id)">
 								{{item.title}}
 								<br />
 							</text>
@@ -260,7 +260,7 @@
 			//获取最新求购
 			async getWantBuy() {
 				let data = await wantBuy()
-				console.log(data)
+				// console.log(data)
 				this.message =data.lists
 			},
 			//切换商家个人
@@ -282,14 +282,14 @@
 					}else if(e == 5) {
 						//跳转我的
 						uni.navigateTo({
-							url: '/pages/my/my'
+							url: '/pageA/pages/my/my'
 						})
 					}
 			},
 			//跳转搜索
 			ToSearch() {
 				uni.navigateTo({
-					url: '../search/search'
+					url: '/pageC/pages/search/search'
 				})
 			},
 			ToHotProduct(e) {
@@ -324,19 +324,25 @@
 			// 跳转求购列表
 			TowantToBuy() {
 				uni.navigateTo({
-					url: '/pages/wantToBuy/wantToBuy'
+					url: '/pageC/pages/wantToBuy/wantToBuy'
 				})
 			},
 			// 跳转品牌
 			toBrand() {
 				uni.navigateTo({
-					url:'/pages/brand/brand'
+					url:'/pageC/pages/brand/brand'
 				})
 			},
 			// 跳转品牌二级列表
 			toBrandTwo(T) {
 				uni.navigateTo({
-					url: '/pages/brand/brandTwo?title=' + T
+					url: '/pageC/pages/brand/brandTwo?title=' + T
+				})
+			},
+			//跳转求购详情
+			toWantBuyDetail(id) {
+				uni.navigateTo({
+					url: '/pageC/pages/wantToBuy/wantBuyDetail?id='+ id
 				})
 			},
 			// 获取地址
