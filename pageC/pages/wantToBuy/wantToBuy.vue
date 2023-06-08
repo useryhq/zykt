@@ -83,7 +83,7 @@
 			async getWantToBuy() {
 				let data = {
 					body: {
-						cupage: '1',
+						curpage: '1',
 						page: '10'
 					}
 				}

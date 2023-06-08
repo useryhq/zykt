@@ -54,6 +54,7 @@ export function wantBuyDetail(data) {
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)
+			console.log('data',data)
 		})
 	})
 }
