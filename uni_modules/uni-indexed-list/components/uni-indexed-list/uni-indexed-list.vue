@@ -149,7 +149,7 @@
 					let items = value.data.map(item => {
 						// console.log('item',item)
 						let obj = {}
-						obj['key'] = value.letter
+						obj['key'] = item.initial
 						obj['itemobj'] = item
 						obj['itemIndex'] = index
 						index++

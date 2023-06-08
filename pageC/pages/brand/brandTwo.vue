@@ -2,16 +2,16 @@
 	<!-- 选择品牌 -->
   <view class="page flex-col justify-between">
     <view class="box_3 flex-col" v-for="(items,index) in list" :key="index">
-      <text class="text_2">{{items.text}}</text>
+      <text class="text_2">{{items.name}}</text>
       <view class="section_2 flex-col">
-        <view class="block_1 flex-row justify-between"  v-for="(item,i) in items.ktList" :key="i">
-          <view class="image-text_1 flex-col justify-between align-center" @click="toBrandThree(items.text,item.text)">
+        <view class="block_1 flex-row justify-between"  v-for="(item,i) in items.son" :key="i">
+          <view class="image-text_1 flex-col justify-between align-center" @click="toBrandThree(item.id,item.cat_id)">
             <image
               class="image_3"
               referrerpolicy="no-referrer"
-              :src="item.img"
+              :src="imgUrl + item.files"
             />
-            <text class="text-group_1">{{item.text}}</text>
+            <text class="text-group_1">{{item.name}}</text>
           </view>
           <view class="text-wrapper_1 flex-col" @click="toBrandWantBuy">
             <text class="text_3">询价</text>
@@ -23,64 +23,41 @@
   </view>
 </template>
 <script>
+import { brandTwo } from '../../../static/js/api';
 export default {
   data() {
     return {
 		title: '',
-		list:{
-			kt1:{
-				text: '普通空调',
-				ktList: [{
-					img: '../../../static/bg/0301162340.png',
-					text: '壁挂式'
-					},
-					{
-						img: '../../../static/bg/0301162340.png',
-						text: '立柜式'
-					},
-					{
-						img: '../../../static/bg/0301162340.png',
-						text: '壁挂式'
-					},
-					{
-						img: '../../../static/bg/0301162340.png',
-						text: '立柜式'
-				}]
-			},
-			kt2:{
-				text: '家用空调',
-				ktList: [{
-					img: '../../../static/bg/0301162340.png',
-					text: '壁挂式',
-					},
-					{
-						img: '../../../static/bg/0301162340.png',
-						text: '立柜式',
-					},
-					{
-						img: '../../../static/bg/0301162340.png',
-						text: '壁挂式',
-					},
-					{
-						img: '../../../static/bg/0301162340.png',
-						text: '立柜式',
-				}]
-			},
-		},
+		list:[],
+		imgUrl: this.$imgUrl.img_base_url,
       constants: {}
     };
   },
   methods: {
+	  //获取品牌产品列表
+	  async getBrandTwo(i,c) {
+		  let data = {
+			  id: i,
+			  cat_id:c
+		  }
+		  let res = await brandTwo(data)
+		  this.setTitle(res.brand_name)
+		  this.list = res.categories
+		  console.log(res)
+	  },
+	  //设置页面title
 	  setTitle(T) {
 		  uni.setNavigationBarTitle({
 		  	title: T
 		  });
 	  },
+	  //跳转品牌三级页面
 	  toBrandThree(text0,text1) {
 		  uni.navigateTo({
 		  	url: '/pageC/pages/brand/brandThree?title=' + this.title + '&text0=' + text0 +'&text1=' + text1
 		  })
 	  },
+	  //跳转询价
 	  toBrandWantBuy() {
 		  uni.navigateTo({
 		  	url: '/pageC/pages/brand/brandWantBuy?title=' + this.title
@@ -88,8 +65,8 @@ export default {
 	  }
   },
   onLoad(option) {
-	  this.title = option.title
-	this.setTitle(option.title)
+	  console.log(option)
+	  this.getBrandTwo(option.id,option.c)
   }
 };
 </script>

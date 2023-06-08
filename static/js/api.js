@@ -53,14 +53,32 @@ export function wantBuyDetail(data) {
 	let url = '/qiu-gou/info'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
-			resolve(res.data)
-			console.log('data',data)
+			resolve(res)
+			// console.log('data',data)
 		})
 	})
 }
 //求购列表
 export function wantToBuy(data) {
 	let url = '/qiu-gou/lists'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//获取品牌列表
+export function brandList() {
+	let url = '/brands/all'
+	return new Promise((resolve,reject) => {
+		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//获取品牌二级列表
+export function brandTwo(data) {
+	let url = '/brands/select'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)

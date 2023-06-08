@@ -10,7 +10,7 @@
 						<view v-if="showSelect" style="margin-right: 20rpx;">
 							<uni-icons :type="item.checked ? 'checkbox-filled' : 'circle'" :color="item.checked ? '#007aff' : '#C0C0C0'" size="24" />
 						</view>
-						<image class="logo-img" :src="item.itemobj.logo" ></image>
+						<image class="logo-img" :src="imgUrl + 'logo/' + item.itemobj.logo" ></image>
 						<text class="uni-indexed-list__item-content">{{ item.itemobj.name }}</text>
 					</view>
 				</view>
@@ -21,6 +21,11 @@
 
 <script>
 	export default {
+		data() {
+			return {
+				imgUrl: 'https://img.zykt.com/'
+			}
+		},
 		name: 'UniIndexedList',
 		emits:['itemClick'],
 		props: {

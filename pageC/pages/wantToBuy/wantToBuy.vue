@@ -26,55 +26,9 @@
 	export default {
 		data() {
 			return {
-				loopData0: [{
-						lanhutext0: '2013-01-30',
-						lanhutext1: '河南省郑州市金水区',
-						specialSlot3: {
-							lanhutext0: '求购中央空调商用',
-							lanhutext1: '本人长期回收二手空调，价格详谈！'
-						},
-					},
-					{
-						lanhutext0: '2013-01-30',
-						lanhutext1: '河南省郑州市金水区',
-						specialSlot3: {
-							lanhutext0: '求购中央空调商用',
-							lanhutext1: '本人长期回收二手空调，价格详谈！'
-						},
-					},
-					{
-						lanhutext0: '2013-01-30',
-						lanhutext1: '河南省郑州市金水区',
-						specialSlot3: {
-							lanhutext0: '求购中央空调商用',
-							lanhutext1: '本人长期回收二手空调，价格详谈！'
-						},
-					},
-					{
-						lanhutext0: '2013-01-30',
-						lanhutext1: '河南省郑州市金水区',
-						specialSlot3: {
-							lanhutext0: '求购中央空调商用',
-							lanhutext1: '本人长期回收二手空调，价格详谈！'
-						},
-					},
-					{
-						lanhutext0: '2013-01-30',
-						lanhutext1: '河南省郑州市金水区',
-						specialSlot3: {
-							lanhutext0: '求购中央空调商用',
-							lanhutext1: '本人长期回收二手空调，价格详谈！'
-						},
-					},
-					{
-						lanhutext0: '2013-01-30',
-						lanhutext1: '河南省郑州市金水区',
-						specialSlot3: {
-							lanhutext0: '求购中央空调商用',
-							lanhutext1: '本人长期回收二手空调，价格详谈！'
-						},
-					}
-				],
+				loopData0: [],
+				loading: 0,
+				num: 1,
 				constants: {}
 			};
 		},
@@ -82,14 +36,42 @@
 			//获取求购列表
 			async getWantToBuy() {
 				let data = {
-					body: {
-						curpage: '1',
-						page: '10'
-					}
+						curpage: 1,
+						page: 10
 				}
 				let res = await wantToBuy(data)
 				console.log(res)
 				this.loopData0 = res.lists
+			},
+			//上拉加载更多
+			async loadingMore() {
+				if(this.loading !== 0)
+				return false
+				this.loading = 1
+				uni.showLoading({
+					title: 'Loading...', //提示的内容,
+					mask: true, //显示透明蒙层，防止触摸穿透,
+					success: res => {}
+				})
+				let data = {
+						curpage: this.num,
+						page: 10
+				}
+				console.log(data)
+				let res =  await wantToBuy(data)
+				console.log("res",res)
+				// this.loopData0 = res.lists
+				if(res.lists.length < 1) {
+					this.loading = 2
+					uni.hideLoading()
+					return
+				}
+				this.loopData0 = this.loopData0.concat(res.lists)
+				console.log(this.loopData0,"=======")
+				this.num++
+				this.loading = 0
+				uni.hideLoading()
+				
 			},
 			//跳转求购详情
 			toWantBUyDetail(id) {
@@ -100,6 +82,9 @@
 		},
 		onLoad() {
 			this.getWantToBuy()
+		},
+		onReachBottom() {
+			this.loadingMore()
 		}
 	};
 </script>
@@ -120,7 +105,7 @@
 				border-radius: 10px;
 				position: relative;
 				width: 690rpx;
-				height: 171rpx;
+				height: 180rpx;
 				border: 1px solid rgba(191, 191, 191, 1);
 				margin-bottom: 30rpx;
 
@@ -132,7 +117,7 @@
 
 					.text_2 {
 						width: 600rpx;
-						height: 29rpx;
+						height: 30rpx;
 						overflow-wrap: break-word;
 						color: rgba(51, 51, 51, 1);
 						font-size: 30rpx;
@@ -148,7 +133,7 @@
 
 					.text_3 {
 						width: 600rpx;
-						height: 24rpx;
+						height: 26rpx;
 						overflow-wrap: break-word;
 						color: rgba(102, 102, 102, 1);
 						font-size: 24rpx;
@@ -156,7 +141,7 @@
 						font-weight: NaN;
 						text-align: left;
 						white-space: nowrap;
-						line-height: 30rpx;
+						line-height: 24rpx;
 						margin-top: 18rpx;
 						overflow: hidden;
 						text-overflow: ellipsis;

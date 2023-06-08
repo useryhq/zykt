@@ -9,10 +9,9 @@
 	  <view class="block_4">
 	  	<view class="list_1 flex-row">
 	  		<view class="image-text_4 flex-col justify-between" v-for="(item, index) in loopData0"
-	  			:key="index" @click="toBrandTwo(item.lanhutext0)">
-	  			<image class="image_3" referrerpolicy="no-referrer" :src="item.lanhuimage0" />
-	  			<text class="text-group_4"
-	  				:style="{ color: item.lanhufontColor0 }">{{item.lanhutext0}}</text>
+	  			:key="index" @click="toBrandTwo(item.id,item.url)">
+	  			<image class="image_3" referrerpolicy="no-referrer" :src="imgUrl + 'logo/' + item.logo" />
+	  			<text class="text-group_4">{{item.name}}</text>
 	  		</view>
 	  	</view>
 	  </view>
@@ -23,257 +22,32 @@
     </view>
 </template>
 <script>
+import {brandHot,brandList} from '../../../static/js/api.js'
 export default {
   data() {
     return {
 		Height: 0,
-		loopData0: [{
-				lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-				lanhutext0: '大金',
-				lanhufontColor0: 'rgba(102,102,102,1)',
-			},
-			{
-				lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-				lanhutext0: '格力',
-				lanhufontColor0: 'rgba(51,51,51,1)',
-			},
-			{
-				lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-				lanhutext0: '美的',
-				lanhufontColor0: 'rgba(51,51,51,1)',
-			},
-			{
-				lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-				lanhutext0: '奥克斯',
-				lanhufontColor0: 'rgba(51,51,51,1)',
-			},
-			{
-				lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-				lanhutext0: '海尔',
-				lanhufontColor0: 'rgba(51,51,51,1)',
-			},
-			{
-					lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-					lanhutext0: '大金',
-					lanhufontColor0: 'rgba(102,102,102,1)',
-				},
-				{
-					lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-					lanhutext0: '格力',
-					lanhufontColor0: 'rgba(51,51,51,1)',
-				},
-				{
-					lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-					lanhutext0: '美的',
-					lanhufontColor0: 'rgba(51,51,51,1)',
-				},
-				{
-					lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-					lanhutext0: '奥克斯',
-					lanhufontColor0: 'rgba(51,51,51,1)',
-				},
-				{
-					lanhuimage0: '../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png',
-					lanhutext0: '海尔',
-					lanhufontColor0: 'rgba(51,51,51,1)',
-				},
-		],
-      list: [{
-              "letter":"A",
-			  'data':[
-                  {
-                      "id": "10",
-                      "name": "奥克斯",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "A"
-                  },
-                  {
-                      "id": "31",
-                      "name": "艾尔斯派",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "A"
-                  },
-                  {
-                      "id": "33",
-                      "name": "奥普",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "A"
-                  },
-                  {
-                      "id": "101",
-                      "name": "安林空调",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "/shop/show?id=163",
-                      "initial": "A"
-                  },
-                  {
-                      "id": "114",
-                      "name": "奥瑞环保设备有限公司",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "/shop/show?id=185",
-                      "initial": "A"
-                  }
-              ]},
-			  {
-              "letter":"B",
-			  'data':[
-                  {
-                      "id": "54",
-                      "name": "百维",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "B"
-                  },
-                  {
-                      "id": "58",
-                      "name": "保室瑞",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "B"
-                  },
-                  {
-                      "id": "88",
-                      "name": "布拉 ",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "B"
-                  },
-                  {
-                      "id": "91",
-                      "name": "班工防护",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "B"
-                  }
-              ]},
-			  {
-              "letter":"C",
-			  'data':[
-                  {
-                      "id": "11",
-                      "name": "长虹",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "/brands/brand-index?id=11&c=1",
-                      "initial": "C"
-                  },
-                  {
-                      "id": "41",
-                      "name": "成都恒荣鑫元亨",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "C"
-                  },
-                  {
-                      "id": "68",
-                      "name": "长泽",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "C"
-                  },
-                  {
-                      "id": "69",
-                      "name": "长泽恒泰",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "C"
-                  },
-                  {
-                      "id": "89",
-                      "name": "晨光",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "C"
-                  },
-                  {
-                      "id": "96",
-                      "name": "春兰",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "/brands/brand-index?id=96&c=1",
-                      "initial": "C"
-                  }
-              ]},
-			  {
-              "letter":"D",
-			  'data':[
-                  {
-                      "id": "2",
-                      "name": "大金",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "/brands/brand-index?id=2&c=1",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "27",
-                      "name": "东洋",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "50",
-                      "name": "德力西",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "56",
-                      "name": "鼎盛",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "79",
-                      "name": "邓禄普",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "90",
-                      "name": "代尔塔",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "104",
-                      "name": "东维",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "/shop/show?id=168",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "109",
-                      "name": "盾安",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "115",
-                      "name": "顿汉布什",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  },
-                  {
-                      "id": "120",
-                      "name": "东芝",
-                      "logo": "../../../../static/bg/ps95mtybpw0jn16vy7ne5aficxkyag434f645f595-76fe-41a1-a4d6-9a3b53212d86.png",
-                      "url": "",
-                      "initial": "D"
-                  }
-              ],
-      }],
+		loopData0: [],
+		imgUrl: this.$imgUrl.img_base_url,
+        list: [],
       constants: {}
     };
   },
   methods: {
+	  //获取品牌列表
+	  async getBrandList() {
+		  let res = await brandList()
+		  // console.log(res)
+		  this.list = res
+	  },
+	  // 获取热门品牌数据
+	  async getBrandHot() {
+	  	let data = await brandHot()
+	  	// console.log(data)
+	  	this.loopData0 = data.hot1
+	  	this.loopData0 = this.loopData0.concat(data.hot2)
+	  },
+	  //设置品牌列表高度
 	  setHeight() {
 		  let h = 0
 		  let that = this
@@ -290,18 +64,28 @@ export default {
 		  }).exec()
   },
   bindClick(e) {
+	  console.log(e)
+	  let id = e.item.itemobj.id
+	  let c = e.item.itemobj.url.split('c=')[1]
+	  // console.log(c)
 	  uni.navigateTo({
-	  	url: '/pageC/pages/brand/brandTwo?title=' + e.item.itemobj.name
+	  	url: '/pageC/pages/brand/brandTwo?id=' + id + '&c=' + c
 	  })
   			},
-			toBrandTwo(T) {
+			//跳转品牌二级页面
+			toBrandTwo(id,url) {
+				// console.log(url)
+				let c = url.split('c=')[1]
+				// console.log(c)
 				uni.navigateTo({
-					url: '/pageC/pages/brand/brandTwo?title=' + T
+					url: '/pageC/pages/brand/brandTwo?id=' + id + '&c=' + c
 				})
-			}
+			},
   },
   onLoad() {
 	 this.setHeight()
+	 this.getBrandHot()
+	 this.getBrandList()
   }
 };
 </script>
@@ -373,6 +157,7 @@ export default {
 					font-size: 24rpx;
 					font-family: PingFang-SC-Regular;
 					font-weight: NaN;
+					color: #333;
 					text-align: left;
 					white-space: nowrap;
 					line-height: 24rpx;

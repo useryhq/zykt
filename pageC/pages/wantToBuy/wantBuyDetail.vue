@@ -3,24 +3,23 @@
 	<view class="page flex-col justify-between">
 		<view class="group_2 flex-col">
 			<view class="text-wrapper_1 flex-col">
-				<text class="text_2">二手空调回收，杭州二手空调回收</text>
+				<text class="text_2">{{info.title}}</text>
 				<text class="paragraph_1">
-					本公司专业收售空调，大小空调，中央空调，风冷模块，冷库，制冷设备等。
-					1.酒店宾馆，茶楼，舞厅，KTV，浴场，学校，企业，公司，单位，空调，中央空调，音响，点歌器，服务器
-					2.另外承接酒店，宾馆，舞厅，KTV，茶楼，浴场装修前拆除工程。
+					{{info.content}}
 				</text>
 			</view>
 			<view class="section_2 flex-col">
 				<view class="section_3 flex-row">
 					<image class="image_3" src="../../../static/bg/7220921.png" mode=""></image>
-					<text class="text_3">华建二手空调</text>
-					<view class="text-wrapper_2 flex-col">
-						<text class="text_4">查看联系方式</text>
+					<text class="text_3">{{info.lianxiren}}</text>
+					<view class="text-wrapper_2 flex-col" @click="lookTel">
+						<text v-if="tel" class="text_4">{{info.shoujihao}}</text>
+						<text v-else class="text_4">查看联系方式</text>
 					</view>
 				</view>
 				<view class="text-wrapper_3 flex-row justify-between">
-					<text class="text_5">发布时间：2023年01月29日</text>
-					<text class="text_6">地址：河南省郑州市中原区</text>
+					<text class="text_5">发布时间：{{info.created_at}}</text>
+					<text class="text_6">地址：{{info.province}}{{info.city}}{{info.area}}</text>
 				</view>
 			</view>
 			<text class="text_7">同类求购推荐</text>
@@ -50,7 +49,10 @@
 		export default {
 			data() {
 				return {
+					info:[],
 					loopData0: [],
+					code: 0,
+					tel: false,
 					constants: {}
 				};
 			},
@@ -58,17 +60,29 @@
 				//获取求购详情数据
 				async getWantBuyDetail(option) {
 					let data = {
-						body: {
 							id:option,
-						}
 					}
 					let res = await wantBuyDetail(data)
 					console.log(res)
-					this.loopData0 = res.recommand
+					this.code = res.code
+					this.info = res.data.info
+					this.loopData0 = res.data.recommand
 				},
 				//点击推荐重新请求求购详情
 				reRequst(item) {
+					// this.$forceUpdate()
+					this.tel = false
 					this.getWantBuyDetail(item)
+				},
+				// 查看联系方式
+				lookTel() {
+					if(this.code == 405) {
+						uni.navigateTo({
+							url: ''
+						})
+					} else {
+						this.tel = true
+					}
 				}
 			},
 			onLoad(option) {
@@ -178,12 +192,12 @@
 					}
 
 					.text-wrapper_3 {
-						width: 531rpx;
+						width: 560rpx;
 						height: 20rpx;
 						margin: 19rpx 0 20rpx 18rpx;
 
 						.text_5 {
-							width: 253rpx;
+							width: 300rpx;
 							height: 20rpx;
 							overflow-wrap: break-word;
 							color: rgba(153, 153, 153, 1);

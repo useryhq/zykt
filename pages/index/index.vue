@@ -49,7 +49,7 @@
 				<view class="block_4 flex-col">
 					<view class="list_1 flex-row">
 						<view class="image-text_4 flex-col justify-between" v-for="(item, index) in loopData0"
-							:key="index" @click="toBrandTwo(item.name)">
+							:key="index" @click="toBrandTwo(item.id,item.url)">
 							<image class="image_3" referrerpolicy="no-referrer" :src="imgUrl + 'logo/' + item.logo" />
 							<text class="text-group_4">{{item.name}}</text>
 						</view>
@@ -57,7 +57,7 @@
 					<view class="box_2 flex-row">
 						<view class="list_2 flex-row justify-between">
 							<view class="image-text_5 flex-col justify-between" v-for="(item, index) in loopData1"
-								:key="index" @click="toBrandTwo(item.name)">
+								:key="index" @click="toBrandTwo(item.id,item.url)">
 								<image class="image_4" referrerpolicy="no-referrer" :src="imgUrl + 'logo/' + item.logo" />
 								<text class="text-group_5">{{item.name}}</text>
 							</view>
@@ -253,7 +253,7 @@
 			// 获取热门品牌数据
 			async getBrandHot() {
 				let data = await brandHot()
-				// console.log(data)
+				console.log(data)
 				this.loopData0 = data.hot1
 				this.loopData1 = data.hot2
 			},
@@ -334,9 +334,12 @@
 				})
 			},
 			// 跳转品牌二级列表
-			toBrandTwo(T) {
+			toBrandTwo(id,url) {
+				// console.log(url)
+				let c = url.split('c=')[1]
+				// console.log(c)
 				uni.navigateTo({
-					url: '/pageC/pages/brand/brandTwo?title=' + T
+					url: '/pageC/pages/brand/brandTwo?id=' + id + '&c=' + c
 				})
 			},
 			//跳转求购详情
