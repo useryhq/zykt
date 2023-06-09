@@ -53,7 +53,7 @@ export function wantBuyDetail(data) {
 	let url = '/qiu-gou/info'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
-			resolve(res)
+			resolve(res.data)
 			// console.log('data',data)
 		})
 	})

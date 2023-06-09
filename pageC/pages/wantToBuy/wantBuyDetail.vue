@@ -12,7 +12,7 @@
 				<view class="section_3 flex-row">
 					<image class="image_3" src="../../../static/bg/7220921.png" mode=""></image>
 					<text class="text_3">{{info.lianxiren}}</text>
-					<view class="text-wrapper_2 flex-col" @click="lookTel">
+					<view class="text-wrapper_2 flex-col" @click="lookTel(info.shoujihao)">
 						<text v-if="tel" class="text_4">{{info.shoujihao}}</text>
 						<text v-else class="text_4">查看联系方式</text>
 					</view>
@@ -51,7 +51,6 @@
 				return {
 					info:[],
 					loopData0: [],
-					code: 0,
 					tel: false,
 					constants: {}
 				};
@@ -63,10 +62,9 @@
 							id:option,
 					}
 					let res = await wantBuyDetail(data)
-					console.log(res)
-					this.code = res.code
-					this.info = res.data.info
-					this.loopData0 = res.data.recommand
+					// console.log(res)
+					this.info = res.info
+					this.loopData0 = res.recommand
 				},
 				//点击推荐重新请求求购详情
 				reRequst(item) {
@@ -75,13 +73,11 @@
 					this.getWantBuyDetail(item)
 				},
 				// 查看联系方式
-				lookTel() {
-					if(this.code == 405) {
-						uni.navigateTo({
-							url: ''
-						})
-					} else {
+				lookTel(e) {
+					if(e) {
 						this.tel = true
+					} else {
+						this.tel = false
 					}
 				}
 			},
