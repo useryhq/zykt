@@ -10,7 +10,8 @@
 							src="/static/bg/psn0jpa0rv4jokgnpjgiyspa6d5ap30qwvka8534697-34f3-4d04-ad86-53aa6ed0ac52.png" />
 					</view>
 					<view class="choose_address">
-						<uni-data-picker ref="picker" :localdata="localData" @change="onchange" @nodeclick="onnodeclick">
+						<uni-data-picker ref="picker" :localdata="localData" @change="onchange"
+							@nodeclick="onnodeclick">
 						</uni-data-picker>
 					</view>
 					<view class="text-wrapper_1 flex-col" @click="ToSearch">
@@ -58,7 +59,8 @@
 						<view class="list_2 flex-row justify-between">
 							<view class="image-text_5 flex-col justify-between" v-for="(item, index) in loopData1"
 								:key="index" @click="toBrandTwo(item.id,item.url)">
-								<image class="image_4" referrerpolicy="no-referrer" :src="imgUrl + 'logo/' + item.logo" />
+								<image class="image_4" referrerpolicy="no-referrer"
+									:src="imgUrl + 'logo/' + item.logo" />
 								<text class="text-group_5">{{item.name}}</text>
 							</view>
 						</view>
@@ -95,41 +97,43 @@
 			</view>
 			<view class="group_7 flex-col" :style="{'padding-bottom': iphonex ? '196rpx' : '128rpx'}">
 				<view class="text-wrapper_2 flex-row justify-start">
-					<text :class="[add == 1 ? 'text_8 click_text' : 'text_8']" @click="choose_status1">商家</text>
-					<text :class="[add == 2 ? 'text_9 click_text' : 'text_9']" @click="choose_status2">个人</text>
-					<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
+					<text :class="[add == 2 ? 'text_8 click_text' : 'text_8']" @click="choose_status(2)">商家</text>
+					<text :class="[add == 1 ? 'text_9 click_text' : 'text_9']" @click="choose_status(1)">个人</text>
+					<view :class="[add == 2 ? 'group_left' : 'group_right']"></view>
 				</view>
-				<view v-if="add == 1" class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index" @click="toProductDetail(item.price)">
-						<image class="kt_img" :src="item.imgSrc"></image>
+				<view v-if="add == 2" class="group_8 flex-row justify-between">
+					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index"
+						@click="toProductDetail(item.id)">
+						<image class="kt_img" :src="imgUrl + item.thumb"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
-								{{item.title}}
+								{{item.goods_name}}
 							</text>
 						</view>
 						<view class="text-wrapper_4 flex-row">
-							<text class="text_10">￥{{item.price}}</text>
-							<text class="text_11">{{item.address}}</text>
+							<text class="text_10">￥{{item.market_price}}</text>
+							<text class="text_11">{{item.region_id}}</text>
 						</view>
 					</view>
 				</view>
-				<view  v-if="add == 2" class="group_8 flex-row justify-between">
-					<view class="box_3 flex-col" v-for="(item,i) in ktlist2" :key="i" @click="toProductDetailH(item.price)">
-						<image class="kt_img" :src="item.imgSrc"></image>
+				<view v-if="add == 1" class="group_8 flex-row justify-between">
+					<view class="box_3 flex-col" v-for="(item,i) in ktlist2" :key="i"
+						@click="toProductDetailH(item.id)">
+						<image class="kt_img" :src="imgUrl + item.thumb"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
-								{{item.title}}
+								{{item.goods_name}}
 							</text>
 						</view>
 						<view class="text-wrapper_4 flex-row">
-							<text class="text_10">￥{{item.price}}</text>
-							<text class="text_11">{{item.address}}</text>
+							<text class="text_10">￥{{item.market_price}}</text>
 						</view>
 					</view>
 				</view>
 			</view>
 			<view class="group_12 flex-row" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
-				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']" @click="slecetTab(1)">
+				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']"
+					@click="slecetTab(1)">
 					<text class="iconfont label_6">&#xe674;</text>
 					<text class="text-group_11">首页</text>
 				</view>
@@ -159,90 +163,23 @@
 </template>
 <script>
 	import get_city_tree from '../../static/js/cityData.js'
-	import {brandHot,wantBuy} from '../../static/js/api.js'
+	import {
+		indexGoodsList,
+		brandHot,
+		wantBuy,
+		getCity
+	} from '../../static/js/api.js'
 	export default {
 		data() {
 			return {
 				loopData0: [],
 				loopData1: [],
 				message: [],
-				ktlist1: [{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-					}
-				],
-				ktlist2: [{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "/static/bg/0301162340.png",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					}
-				],
+				ktlist1: [],
+				ktlist2: [],
 				localData: [],
 				address: '郑州',
-				add: 1,
+				add: 2,
 				selectTab: 1,
 				iphonex: this.$iphonex.iphonex,
 				imgUrl: this.$imgUrl.img_base_url,
@@ -250,6 +187,22 @@
 			};
 		},
 		methods: {
+			//获取商品列表
+			async getIndexGoodsList(t,id) {
+				let data = {
+					city_id: id,
+					type: t
+				}
+				let res = await indexGoodsList(data)
+				console.log(res)
+				if(t == 1) {
+					//个人
+					this.ktlist2 = res.lists
+				} else {
+					//2是商家
+					this.ktlist1 = res.lists
+				}
+			},
 			// 获取热门品牌数据
 			async getBrandHot() {
 				let data = await brandHot()
@@ -261,30 +214,30 @@
 			async getWantBuy() {
 				let data = await wantBuy()
 				// console.log(data)
-				this.message =data.lists
+				this.message = data.lists
 			},
 			//切换商家个人
-			choose_status1() {
-				this.add = 1
-			},
-			choose_status2() {
-				this.add = 2
+			choose_status(e) {
+				//1是个人，2是商家
+				this.add = e
+				this.getIndexGoodsList(e)
+				
 			},
 			//tab栏跳转
 			slecetTab(e) {
 				// console.log(e)
 				this.selectTab = e
-				if(e == 4) {
+				if (e == 4) {
 					//跳转二手门店
 					uni.navigateTo({
 						url: '/pages/twoHand/twoHand'
 					})
-					}else if(e == 5) {
-						//跳转我的
-						uni.navigateTo({
-							url: '/pageA/pages/my/my'
-						})
-					}
+				} else if (e == 5) {
+					//跳转我的
+					uni.navigateTo({
+						url: '/pageA/pages/my/my'
+					})
+				}
 			},
 			//跳转搜索
 			ToSearch() {
@@ -296,18 +249,18 @@
 				//跳转家用空调
 				if (e == 'jia') {
 					this.selectTab = 2,
-					uni.navigateTo({
-						url: '/pages/hotProduct/hotProduct?item=' + e
-					})
-				} 
+						uni.navigateTo({
+							url: '/pages/hotProduct/hotProduct?item=' + e
+						})
+				}
 				//跳转商用空调
 				if (e == 'shang') {
 					this.selectTab = 3,
-					uni.navigateTo({
-						url: '/pages/hotProduct/hotProduct?item='+ e
-					})
+						uni.navigateTo({
+							url: '/pages/hotProduct/hotProduct?item=' + e
+						})
 				}
-				
+
 			},
 			//跳转商家详情
 			toProductDetail(e) {
@@ -330,11 +283,11 @@
 			// 跳转品牌
 			toBrand() {
 				uni.navigateTo({
-					url:'/pageC/pages/brand/brand'
+					url: '/pageC/pages/brand/brand'
 				})
 			},
 			// 跳转品牌二级列表
-			toBrandTwo(id,url) {
+			toBrandTwo(id, url) {
 				// console.log(url)
 				let c = url.split('c=')[1]
 				// console.log(c)
@@ -345,25 +298,58 @@
 			//跳转求购详情
 			toWantBuyDetail(id) {
 				uni.navigateTo({
-					url: '/pageC/pages/wantToBuy/wantBuyDetail?id='+ id
+					url: '/pageC/pages/wantToBuy/wantBuyDetail?id=' + id
 				})
 			},
 			// 获取地址
 			getGps() {
 				// console.log('gps')
+				let that = this
 				uni.authorize({
-				    scope: 'scope.userLocation',
-				    success() {
-				        uni.getLocation({
-				        	type: 'wgs84',
-				        	success: function (res) {
-				        		console.log('当前位置的经度：' + res.longitude);
-				        		console.log('当前位置的纬度：' + res.latitude);
-				        		console.log('当前位置：' + res.address);
-				        	}
-				        });
-				    }
-				})			
+					scope: 'scope.userLocation',
+					success() {
+						console.log("========")
+						uni.getLocation({
+							type: 'wgs84',
+							success: function(res) {
+								console.log("+++++++")
+								console.log('当前位置的经度：' + res.longitude);
+								console.log('当前位置的纬度：' + res.latitude);
+								that.indexGetCity(res.latitude,res.longitude)																																																																																																																																																																																																						  
+							}
+						});
+					},
+					fail: (res) => {
+						uni.showModal({
+							content: '检测到您没打开获取信息功能权限，是否去设置打开？',
+							confirmText: "确认",
+							cancelText: '取消',
+							success: (res) => {
+								if (res.confirm) {
+									uni.openSetting({
+										success: (res) => {
+											console.log(res);
+										}
+									})
+								} else {
+									console.log('取消');
+								}
+							}
+						})
+					}
+				})
+				// console.log(this.longitude,this.latitude,"1230")
+			},
+			//根据经纬度获取城市名称
+			async indexGetCity(latitude,longitude) {
+				let data = {
+					lat: latitude,
+					lng: longitude
+				}
+				console.log(data)
+				let res = await getCity(data)
+				console.log(res)
+				this.getIndexGoodsList(2,res.cityId)
 			},
 			// 地址选择三级联动
 			addressShow() {
@@ -371,15 +357,17 @@
 				this.$refs.picker.show()
 			},
 			// 节点变化后 （并非已经选择完毕）
-						onnodeclick(node) {
-							// console.log(JSON.stringify(node))
-						},
-						
-						// 整体选择完成以后
-						onchange(e) {
-							const value = e.detail.value
-							this.address = value.slice(-1)[0].text
-						},
+			onnodeclick(node) {
+				// console.log(JSON.stringify(node))
+			},
+
+			// 整体选择完成以后
+			onchange(e) {
+				const value = e.detail.value
+				this.address = value.slice(-1)[0].text
+				this.cityId = value.slice(0, 1)[0].value
+				// console.log(e)
+			},
 		},
 		onLoad() {
 			this.getGps()
@@ -388,11 +376,9 @@
 			// console.log(this.imgUrl)
 		},
 	};
-
 </script>
 <style>
 	@import '../../static/css/common.css';
-
 </style>
 
 <style lang="less" scoped>
@@ -403,7 +389,7 @@
 
 		.group_1 {
 			width: 750rpx;
-			
+
 			.group_2 {
 				width: 750rpx;
 				height: 110rpx;
@@ -438,7 +424,7 @@
 							margin: 10rpx 0 0 8rpx;
 						}
 					}
-					
+
 					.choose_address {
 						width: 0rpx;
 						height: 1rpx;
@@ -568,7 +554,7 @@
 
 							.image-wrapper_3 {
 								height: 80rpx;
-								background-color: #F09B0F ;
+								background-color: #F09B0F;
 								width: 80rpx;
 								border-radius: 50%;
 
@@ -814,6 +800,7 @@
 				border: 2px solid rgba(255, 254, 255, 1);
 				margin: 19rpx 0 0 27rpx;
 				padding-bottom: 128rpx;
+
 				.text-wrapper_2 {
 					width: 665rpx;
 					height: 32rpx;
@@ -821,6 +808,7 @@
 					padding-bottom: 15rpx;
 					border-bottom: 2rpx solid #A0A0A0;
 					position: relative;
+
 					.text_8 {
 						margin: 0 51rpx 0 22rpx;
 						font-size: 28rpx;
@@ -842,6 +830,7 @@
 						line-height: 32rpx;
 						color: rgba(51, 51, 51, 1);
 					}
+
 					.group_left {
 						background-color: rgba(230, 60, 49, 1);
 						border-radius: 2px;
@@ -851,7 +840,7 @@
 						width: 64rpx;
 						height: 4rpx;
 					}
-					
+
 					.group_right {
 						background-color: rgba(230, 60, 49, 1);
 						border-radius: 2px;
@@ -957,6 +946,7 @@
 					height: 72rpx;
 					margin: 19rpx 0 0 37rpx;
 					color: rgba(51, 51, 51, 1);
+
 					.label_6 {
 						width: 42rpx;
 						height: 40rpx;
@@ -984,6 +974,7 @@
 					height: 68rpx;
 					margin: 23rpx 0 0 85rpx;
 					color: rgba(51, 51, 51, 1);
+
 					.label_7 {
 						width: 48rpx;
 						height: 38rpx;
@@ -1010,6 +1001,7 @@
 					height: 75rpx;
 					margin: 16rpx 0 0 63rpx;
 					color: rgba(51, 51, 51, 1);
+
 					.label_8 {
 						width: 42rpx;
 						height: 42rpx;
@@ -1036,6 +1028,7 @@
 					height: 75rpx;
 					margin: 16rpx 0 0 62rpx;
 					color: rgba(51, 51, 51, 1);
+
 					.label_9 {
 						width: 42rpx;
 						height: 40rpx;
@@ -1062,6 +1055,7 @@
 					height: 73rpx;
 					margin: 18rpx 47rpx 0 86rpx;
 					color: rgba(51, 51, 51, 1);
+
 					.label_10 {
 						width: 36rpx;
 						height: 40rpx;
@@ -1082,12 +1076,11 @@
 						margin-top: 10rpx;
 					}
 				}
+
 				.color {
 					color: #E63C31;
 				}
 			}
 		}
 	}
-
 </style>
-

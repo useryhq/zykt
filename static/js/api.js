@@ -85,3 +85,21 @@ export function brandTwo(data) {
 		})
 	})
 }
+//首页商品列表
+export function indexGoodsList(data) {
+	let url = '/goods/page-lists'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//跟经纬度获取城市
+export function getCity(data) {
+	let url = '/common/get-city-id'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
