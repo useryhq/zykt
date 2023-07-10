@@ -7,7 +7,7 @@ export function qnToken() {
 	return new Promise((resolve, reject) => {
 	  request(url, 'GET').then(res => {
 	    resolve(res.data)
-		console.log("====",res)
+		// console.log("====",res)
 	  })
 	})
 }

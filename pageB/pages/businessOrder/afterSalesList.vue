@@ -55,7 +55,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toAfterSales()">
 					查看详情
 				</view>
 				<view class="button_1"  v-if="index == 0 || index == 1 || index == 2 || index == 3">
@@ -92,7 +92,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toAfterSales()">
 					查看详情
 				</view>
 				<view class="button_1">
@@ -129,7 +129,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toAfterSales()">
 					查看详情
 				</view>
 				<view class="button_1">
@@ -166,7 +166,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toAfterSales()">
 					查看详情
 				</view>
 				<view class="button_1">
@@ -203,7 +203,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toAfterSales()">
 					查看详情
 				</view>
 		  </view>
@@ -223,6 +223,12 @@
 			chooseNav(e) {
 				this.nav = e
 			},
+			//跳转售后详情
+			toAfterSales() {
+				uni.navigateTo({
+					url: '/pageB/pages/businessOrder/afterSales'
+				})
+			}
 		}
 	}
 </script>

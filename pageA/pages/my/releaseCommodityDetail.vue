@@ -38,14 +38,16 @@
 					"height": 330,
 				},
 				prompt: '',
+				token:''
 			};
 		},
 		methods: {
 			// 获取上传token
 			 async getQntoken() {
-				 const tokenData =await qnToken()
-				 this.token = tokenData.data.qiniu_token
-				 // console.log(this.token)
+				 let tokenData =await qnToken()
+				 // console.log(tokenData)
+				 this.token = tokenData.qiniu_token
+				 // console.log(tokenData)
 			 },
 			//选择图片
 			select(e) {

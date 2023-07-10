@@ -62,6 +62,12 @@ button:active {
     display: flex;
     align-items: flex-end;
 }
+.ml_30 {
+	margin-left: 30rpx;
+}
+.mt_50 {
+	margin-top: 50rpx;
+}
 @font-face {
   font-family: 'iconfont';
   src: url('~@/static/css/iconfont.woff2?t=1677049123721') format('woff2'),

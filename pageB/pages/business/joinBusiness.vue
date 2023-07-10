@@ -129,6 +129,7 @@
 
 <script>
 	import get_city_tree from '../../../static/js/cityData.js'
+	import {qnToken} from "../../../static/js/api.js"
 	export default {
 		data() {
 			return {
@@ -145,9 +146,16 @@
 					}
 				},
 				prompt: '',
+				token: ''
 			};
 		},
 		methods: {
+			// 获取上传token
+			 async getQntoken() {
+				 const tokenData =await qnToken()
+				 this.token = tokenData.qiniu_token
+				 // console.log(this.token)
+			 },
 			//选择图片
 			select(e) {
 				console.log('选择文件：', e)
@@ -211,10 +219,13 @@
 							//跳转商家中心
 							toBusiness() {
 								uni.navigateTo({
-									url: '/pages/business/business'
+									url: '/pageB/pages/business/business'
 								})
 							}	
 			},
+			onLoad() {
+				this.getQntoken()
+			}
 		}
 </script>
 <style>

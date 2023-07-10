@@ -165,7 +165,7 @@ export default {
 	// 跳转店铺装修
 	toShopDecoration() {
 		uni.navigateTo({
-			url: '/pageB/pages/shop/shopDecoration'
+			url: '/pageC/pages/shop/shopDecoration'
 		})
 	},
 	// 跳转商品管理

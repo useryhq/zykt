@@ -675,7 +675,7 @@
 			// 获取上传token
 			 async getQntoken() {
 				 const tokenData =await qnToken()
-				 this.token = tokenData.data.qiniu_token
+				 this.token = tokenData.qiniu_token
 				 // console.log(this.token)
 			 },
 			 //输入商品名称
