@@ -51,7 +51,7 @@
 			</view>
 			<view class="box flex-row justify-around">
 				<text class="iconfont icon1">&#xe63f;</text>
-				<view class="text_box flex-col justify-between">
+				<view class="text_box flex-col justify-between" @click="toApplyChange">
 					<text class="text_1">换货</text>
 					<text class="text_2">已收到货，需更换收到的货物</text>
 				</view>
@@ -67,6 +67,14 @@
 			return {
 				
 			};
+		},
+		methods: {
+			//跳转换货
+			toApplyChange() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/applyChange'
+				})
+			}
 		}
 	}
 </script>

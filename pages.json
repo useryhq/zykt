@@ -178,7 +178,17 @@
 					"navigationBarBackgroundColor": "#ffffff"
 
 				}
-			}
+			},{
+            "path" : "pages/order/applyChange",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "申请换货",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
 		]
 	}, {
 		// 商家中心
