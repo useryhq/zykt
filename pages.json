@@ -188,6 +188,16 @@
                 "navigationBarBackgroundColor": "#ffffff"
             }
             
+        },{
+            "path" : "pages/order/postComments",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发表评论",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
         }
 		]
 	}, {

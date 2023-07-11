@@ -1,4 +1,5 @@
 <template>
+	<!-- 个人中心换货 -->
 	<view class="page">
 		<view class="section_1">
 			<view class="block_2 flex-row justify-between align-center">
