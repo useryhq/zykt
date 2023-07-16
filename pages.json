@@ -198,6 +198,16 @@
                 "navigationBarBackgroundColor": "#ffffff"
             }
             
+        },{
+            "path" : "pages/order/oderDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单详情",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
         }
 		]
 	}, {

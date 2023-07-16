@@ -62,11 +62,23 @@ button:active {
     display: flex;
     align-items: flex-end;
 }
+.ml_12 {
+	margin-left: 12rpx;
+}
 .ml_30 {
 	margin-left: 30rpx;
 }
+.mt_40 {
+	margin-top: 40rpx;
+}
 .mt_50 {
 	margin-top: 50rpx;
+}
+.f-l {
+	float: left;
+}
+.f-r {
+	float: right;
 }
 @font-face {
   font-family: 'iconfont';

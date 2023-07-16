@@ -28,6 +28,9 @@
 </template>
 
 <script>
+	import {
+		qnToken
+	} from "../../../static/js/api.js"
 	export default {
 		data() {
 			return {

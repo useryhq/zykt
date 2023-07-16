@@ -63,7 +63,7 @@
 			  		<text class="iconfont icon_4">&#xe680;</text>
 			  		支付剩余24小时36分
 			  	</view>
-			  	<view class="button_1">
+			  	<view class="button_1" @click="toOderDetail">
 			  		去支付
 			  	</view>
 			  </view>
@@ -132,7 +132,7 @@
 			  		<text class="iconfont icon_4">&#xe680;</text>
 			  		支付剩余24小时36分
 			  	</view>
-			  	<view class="button_1">
+			  	<view class="button_1" @click="toOderDetail">
 			  		去支付
 			  	</view>
 			  </view>
@@ -244,7 +244,7 @@
 		  </view>
 		  <view class="block_3 flex-row align-center justify-end">
 			<view class="flex-row">
-				<view class="button_2">
+				<view class="button_2" @click="toPostComments">
 					评价晒单
 				</view>
 				<view class="button_1">
@@ -272,6 +272,18 @@
 			toAfterSales() {
 				uni.navigateTo({
 					url: '/pageA/pages/order/afterSales'
+				})
+			},
+			//跳转评价页面
+			toPostComments() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/postComments'
+				})
+			},
+			//跳转订单详情页面
+			toOderDetail() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/oderDetail'
 				})
 			}
 		},
