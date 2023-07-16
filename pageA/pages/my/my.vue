@@ -170,6 +170,7 @@ export default {
       width: 749rpx;
       height: 232rpx;
       background-color: #4182FE;
+	  position: relative;
       .box_2 {
         width: 675rpx;
         height: 110rpx;
@@ -181,10 +182,10 @@ export default {
         }
         .text-group_1 {
           width: 150rpx;
-          height: 63rpx;
+          height: 70rpx;
 		  margin-left: 24rpx;
           .text_2 {
-            height: 28rpx;
+            height: 30rpx;
             overflow-wrap: break-word;
             color: rgba(255, 255, 255, 1);
             font-size: 28rpx;
@@ -206,7 +207,7 @@ export default {
             text-align: left;
             white-space: nowrap;
             line-height: 24rpx;
-            margin: 17rpx 0 0 1rpx;
+            margin: 16rpx 0 0 1rpx;
           }
         }
         .icon_2 {
@@ -220,10 +221,12 @@ export default {
       .box_3 {
         width: 630rpx;
         height: 35rpx;
-        margin: 20rpx 0 0 40rpx;
+        margin-left: 40rpx;
 		padding: 20rpx 30rpx;
 		background-color: #FFE6C2;
 		border-radius: 20rpx 20rpx 0 0;
+		position: absolute;
+		bottom: 0;
         .text_4 {
           width: 110rpx;
           height: 28rpx;
