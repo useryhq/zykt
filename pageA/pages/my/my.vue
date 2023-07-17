@@ -193,7 +193,7 @@ export default {
             font-weight: NaN;
             text-align: left;
             white-space: nowrap;
-            line-height: 28rpx;
+            line-height: 30rpx;
 			text-overflow: ellipsis;
 			overflow: hidden;
           }

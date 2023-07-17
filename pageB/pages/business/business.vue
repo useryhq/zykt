@@ -221,10 +221,10 @@ export default {
         }
         .text-group_1 {
           width: 150rpx;
-          height: 63rpx;
+          height: 70rpx;
 		  margin-left: 24rpx;
           .text_2 {
-            height: 28rpx;
+            height: 30rpx;
             overflow-wrap: break-word;
             color: rgba(255, 255, 255, 1);
             font-size: 28rpx;
@@ -232,7 +232,7 @@ export default {
             font-weight: NaN;
             text-align: left;
             white-space: nowrap;
-            line-height: 28rpx;
+            line-height: 30rpx;
 			text-overflow: ellipsis;
 			overflow: hidden;
           }
