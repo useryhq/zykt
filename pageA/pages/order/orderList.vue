@@ -63,7 +63,7 @@
 			  		<text class="iconfont icon_4">&#xe680;</text>
 			  		支付剩余24小时36分
 			  	</view>
-			  	<view class="button_1" @click="toOderDetail">
+			  	<view class="button_1" @click="toOrderDetail">
 			  		去支付
 			  	</view>
 			  </view>
@@ -132,7 +132,7 @@
 			  		<text class="iconfont icon_4">&#xe680;</text>
 			  		支付剩余24小时36分
 			  	</view>
-			  	<view class="button_1" @click="toOderDetail">
+			  	<view class="button_1" @click="toOrderDetail">
 			  		去支付
 			  	</view>
 			  </view>
@@ -281,7 +281,7 @@
 				})
 			},
 			//跳转订单详情页面
-			toOderDetail() {
+			toOrderDetail() {
 				uni.navigateTo({
 					url: '/pageA/pages/order/oderDetail'
 				})

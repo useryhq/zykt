@@ -33,7 +33,7 @@
 			</view>
 		</view>
 		<view class="section_2">
-			<view class="box flex-row justify-around">
+			<view class="box flex-row justify-around" @click="toApplyReturnManey">
 				<text class="iconfont icon1">&#xe6ac;</text>
 				<view class="text_box flex-col justify-between">
 					<text class="text_1">仅退款(无需退货)</text>
@@ -41,7 +41,7 @@
 				</view>
 				<text class="iconfont icon2">&#xe6a3;</text>
 			</view>
-			<view class="box flex-row justify-around">
+			<view class="box flex-row justify-around" @click="toApplyReturnGoods">
 				<text class="iconfont icon1">&#xe62c;</text>
 				<view class="text_box flex-col justify-between">
 					<text class="text_1">退货退款</text>
@@ -49,9 +49,9 @@
 				</view>
 				<text class="iconfont icon2">&#xe6a3;</text>
 			</view>
-			<view class="box flex-row justify-around">
+			<view class="box flex-row justify-around" @click="toApplyChange">
 				<text class="iconfont icon1">&#xe63f;</text>
-				<view class="text_box flex-col justify-between" @click="toApplyChange">
+				<view class="text_box flex-col justify-between">
 					<text class="text_1">换货</text>
 					<text class="text_2">已收到货，需更换收到的货物</text>
 				</view>
@@ -73,6 +73,18 @@
 			toApplyChange() {
 				uni.navigateTo({
 					url: '/pageA/pages/order/applyChange'
+				})
+			},
+			//跳转退款
+			toApplyReturnManey() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/applyReturnManey'
+				})
+			},
+			//跳转退货退款 
+			toApplyReturnGoods() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/applyReturnGoods'
 				})
 			}
 		}

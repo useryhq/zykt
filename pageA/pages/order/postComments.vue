@@ -1,4 +1,5 @@
 <template>
+	<!-- 提交评价 -->
 	<view class="page">
 		<view class="section_1 flex-row align-center">
 			<text class="text_1">描述相符：</text>

@@ -58,7 +58,7 @@
 		  </view>
 		  <view class="block_3 flex-row align-center justify-end">
 			  <view class="flex-row" v-if="index == 0 || index == 1">
-			  	<view class="button_2">
+			  	<view class="button_2" @click="toOrderDetail()">
 			  		详情
 			  	</view>
 			  </view>
@@ -114,7 +114,7 @@
 		  </view>
 		  <view class="block_3 flex-row align-center justify-end">
 			  <view class="flex-row">
-			  	<view class="button_2">
+			  	<view class="button_2" @click="toOrderDetail">
 			  		详情
 			  	</view>
 			  </view>
@@ -249,6 +249,12 @@
 		// 			url: '/pages/order/afterSales'
 		// 		})
 		// 	}
+		//跳转订单详情页面
+		toOrderDetail() {
+			uni.navigateTo({
+				url: '/pageB/pages/businessOrder/oderDetail'
+			})
+		}
 		},
 		onLoad(option) {
 			//获取进入的nav导航状态

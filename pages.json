@@ -189,6 +189,26 @@
             }
             
         },{
+            "path" : "pages/order/applyReturnGoods",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "申请退货退款",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
+            "path" : "pages/order/applyReturnManey",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "申请退款",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
             "path" : "pages/order/postComments",
             "style" :                                                                                    
             {
@@ -328,6 +348,16 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "售后详情",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
+            "path" : "pages/businessOrder/oderDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单详情",
                 "enablePullDownRefresh": false,
                 "navigationBarTextStyle": "black",
                 "navigationBarBackgroundColor": "#ffffff"

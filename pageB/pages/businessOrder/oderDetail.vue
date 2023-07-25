@@ -1,36 +1,27 @@
 <template>
-	<!-- 个人中心订单详情 -->
+	<!-- 商家中心订单详情 -->
 	<view class="page">
 		<view class="section_1">
 			<view class="box_1 flex-row justify-center align-center">
 				<text class="icon_1 iconfont">&#xe680;</text>
-				<text class="text_1">等待付款</text>
-			</view>
-			<view class="text_2 flex-row justify-between">
-				<text>应付金额￥4898</text><text>支付剩余：23小时36分钟</text>
-			</view>
-			<view class="button_1">
-				去支付
+				<text class="text_1">等待买家付款</text>
 			</view>
 		</view>
-		<view class="section_2 flex-row align-center">
-			<text class="icon_2 iconfont">&#xe678;</text>
-			<view class="box_2 ml_12 flex-col">
-				<text class="text_3">赵云  136****1482</text>
-				<text class="text_4">河南省郑州市中原区某某小区几号楼</text>
+		<view class="section_2 ">
+			<view class="block-text">买家信息</view>
+			<view class="block_3 flex-row align-center">
+				<text class="icon_2 iconfont">&#xe678;</text>
+				<view class="box_2 ml_12 flex-col">
+					<text class="text_3">赵云  136****1482</text>
+					<text class="text_4">河南省郑州市中原区某某小区几号楼</text>
+				</view>
+				<text class="text_5 mt_40">修改</text>
 			</view>
-			<text class="text_5 mt_40">修改</text>
+			
 		</view>
 		<view class="section_3">
-			<view class="block_2 flex-row justify-between align-center">
-				<view class="image-text_1 flex-row align-center">
-					<text class="iconfont icon_2">&#xe676;</text>
-					<text class="text-group_1">格力二手空调专卖</text>
-					<text class="iconfont icon_3">&#xe6a3;</text>
-				</view>
-				<view class="image-text_3">
-					共计1件
-				</view>
+			<view class="block_2">
+				商品信息
 			</view>
 			<view class="image-text_2 flex-row">
 				<view class="group_5">
@@ -83,14 +74,6 @@
 				<text class="text_8">￥4917</text>
 			</view>
 		</view>
-		<view class="section_5 mt_50 flex-row justify-end align-center">
-			<view class="button_2">
-				取消订单
-			</view>
-			<view class="button_3">
-				立即支付
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -109,6 +92,7 @@
 <style lang="less">
 .page {
 	padding-bottom: 1rpx;
+	position: relative;
 	.section_1 {
 		width: 750rpx;
 		height: 240rpx;
@@ -131,17 +115,6 @@
 			font-size: 24rpx;
 			color: #fff;
 		}
-		.button_1 {
-			width: 160rpx;
-			height: 40rpx;
-			margin: 0 auto;
-			background-color: #F6F6F6;
-			border-radius: 20rpx;
-			color: #E63C31;
-			font-size: 22rpx;
-			text-align: center;
-			line-height: 40rpx;
-		}
 	}
 	.section_2 {
 		background-color: rgba(255, 255, 255, 1);
@@ -149,19 +122,28 @@
 		width: 630rpx;
 		margin: 0 30rpx;
 		padding: 20rpx 30rpx;
-		position: relative;
-		top: -10rpx;
-		.icon_2 {
-			font-size: 36rpx;
-			color: #999;
-		}
-		.text_3 {
-			font-size: 28rpx;
+		position: absolute;
+		top: 120rpx;
+		.block-text {
+			margin-bottom: 36rpx;
+			font-size: 30rpx;
 			color: #333;
+			font-weight: 500;
 		}
-		.text_4 {
-			font-size: 24rpx;
-			color: #999;
+		.block_3 {
+			height: 70rpx;
+			.icon_2 {
+				font-size: 36rpx;
+				color: #999;
+			}
+			.text_3 {
+				font-size: 28rpx;
+				color: #333;
+			}
+			.text_4 {
+				font-size: 24rpx;
+				color: #999;
+			}
 		}
 		.text_5 {
 			margin-left: 150rpx;
@@ -174,7 +156,7 @@
 		border-radius: 10px;
 		height: 210rpx;
 		width: 690rpx;
-		margin: 22rpx 0 0 32rpx;
+		margin: 90rpx 0 0 32rpx;
 		padding-top: 28rpx;
 	
 		.block_2 {
@@ -183,43 +165,9 @@
 			margin-left: 19rpx;
 			border-bottom: 1rpx solid #EEEEEE;
 			padding-bottom: 18rpx;
-	
-			.image-text_1 {
-				width: 430rpx;
-				height: 29rpx;
-	
-				.icon_2 {
-					font-size: 34rpx;
-					color: #666;
-				}
-	
-				.text-group_1 {
-					width: 250rpx;
-					height: 30rpx;
-					overflow-wrap: break-word;
-					color: rgba(51, 51, 51, 1);
-					font-size: 30rpx;
-					font-family: PingFang-SC-Regular;
-					font-weight: NaN;
-					text-align: left;
-					white-space: nowrap;
-					line-height: 30rpx;
-					text-overflow: ellipsis;
-					overflow: hidden;
-					margin-left: 10rpx;
-				}
-	
-				.icon_3 {
-					font-size: 24rpx;
-					color: #333;
-					margin-left: 14rpx;
-				}
-			}
-	
-			.image-text_3 {
-				font-size: 24rpx;
-				color: #999;
-			}
+			font-size: 30rpx;
+			color: #333;
+			font-weight: 500;
 	
 			.image-text_4 {
 				width: 120rpx;
@@ -298,7 +246,7 @@
 		background-color: rgba(255, 255, 255, 1);
 		border-radius: 10px;
 		width: 630rpx;
-		margin: 20rpx 30rpx 140rpx 30rpx;
+		margin: 20rpx 30rpx 0 30rpx;
 		padding: 20rpx 30rpx;
 		.block_1 {
 			margin-bottom: 30rpx;
@@ -321,36 +269,6 @@
 			}
 		}
 		
-	}
-	.section_5 {
-		width: 750rpx;
-		height: 100rpx;
-		background-color: #fff;
-		position: fixed;
-		left: 0;
-		bottom: 0;
-		.button_2 {
-			width: 124rpx;
-			height: 40rpx;
-			margin-left: 16rpx;
-			font-size: 22rpx;
-			color: #999;
-			line-height: 40rpx;
-			text-align: center;
-			border-radius: 20rpx;
-			border: 1rpx solid #BFBFBF;
-		}
-		.button_3 {
-			width: 124rpx;
-			height: 40rpx;
-			margin: 0 16rpx;			  
-			font-size: 22rpx;
-			color: #fff;
-			line-height: 40rpx;
-			text-align: center;
-			background-color: #E63C31;
-			border-radius: 20rpx;
-		}
 	}
 }
 </style>
