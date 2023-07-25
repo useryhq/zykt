@@ -1,6 +1,7 @@
 import {
     request,
   } from "./http.js";
+  //首页
 //获取七牛token
 export function qnToken() {
 	let url = '/common/qiniu-token'
@@ -29,15 +30,25 @@ export function wantBuy() {
 		})
 	})
 }
-//首页商品
-export function goodsList() {
-	let url = '/goods/lists?type=1&priceDesc=1&key=空调'
+//首页商品列表
+export function indexGoodsList(data) {
+	let url = '/goods/page-lists'
 	return new Promise((resolve,reject) => {
-		request(url,'POST').then(res => {
+		request(url,'POST',data).then(res => {
 			resolve(res.data)
 		})
 	})
 }
+//跟经纬度获取城市
+export function getCity(data) {
+	let url = '/common/get-city-id'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//搜索页面
 //推荐搜索
 export function search(data) {
 	let url = '/search/search-goods'
@@ -48,6 +59,15 @@ export function search(data) {
 		})
 	})
 }
+export function searchRec() {
+	let url = '/search/recommand'
+	return new Promise((resolve,reject) => {
+		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//求购
 //求购详情
 export function wantBuyDetail(data) {
 	let url = '/qiu-gou/info'
@@ -67,6 +87,7 @@ export function wantToBuy(data) {
 		})
 	})
 }
+//品牌分类
 //获取品牌列表
 export function brandList() {
 	let url = '/brands/all'
@@ -85,18 +106,9 @@ export function brandTwo(data) {
 		})
 	})
 }
-//首页商品列表
-export function indexGoodsList(data) {
-	let url = '/goods/page-lists'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res.data)
-		})
-	})
-}
-//跟经纬度获取城市
-export function getCity(data) {
-	let url = '/common/get-city-id'
+//商品列表
+export function goodsList(data) {
+	let url = '/goods/lists'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)

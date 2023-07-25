@@ -206,7 +206,7 @@
 			// 获取热门品牌数据
 			async getBrandHot() {
 				let data = await brandHot()
-				console.log(data)
+				// console.log(data)
 				this.loopData0 = data.hot1
 				this.loopData1 = data.hot2
 			},
@@ -308,7 +308,7 @@
 				uni.authorize({
 					scope: 'scope.userLocation',
 					success() {
-						console.log("========")
+						// console.log("========")
 						uni.getLocation({
 							type: 'wgs84',
 							success: function(res) {

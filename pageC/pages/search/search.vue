@@ -12,7 +12,7 @@
       <text class="text_3">推荐搜索</text>
       <view class="section_2 flex-row">
         <view class="text-wrapper_1" v-for="(item,index) in searchData" :key="index">
-          <text class="text_4">{{item.text}}</text>
+          <text class="text_4">{{item.key}}</text>
         </view>
       </view>
     </view>
@@ -32,32 +32,13 @@
   </view>
 </template>
 <script>
-	import {search} from '../../../static/js/api.js'
+	import {search,searchRec} from '../../../static/js/api.js'
 export default {
   data() {
     return {
 		searchKey: '',
 		img: this.$imgUrl. img_base_url,
-		searchData: [
-			{
-				text: '格力中央空调'
-			},
-			{
-				text: '风管机'
-			},
-			{
-				text: '格力中央空调'
-			},
-			{
-				text: '风管机'
-			},
-			{
-				text: '格力中央空调'
-			},
-			{
-				text: '风管机'
-			}
-		],
+		searchData: [],
 		searchList: [],
       constants: {}
     };
@@ -82,10 +63,16 @@ export default {
 	  //点击搜索
 	  toSearch() {
 		  this.getSearch()
+	  },
+	  // 获取推荐搜索
+	  async getSearchRec() {
+		 let res = await searchRec()
+		 this.searchData = res.lists
+		 console.log(res)
 	  }
   },
   onLoad() {
-  	
+  	this.getSearchRec()
   }
 };
 </script>
@@ -177,8 +164,8 @@ export default {
   }
 }
 		.group_8 {
-					width: 659rpx;
-					margin-left: 16rpx;
+					width: 710rpx;
+					margin: 0 20rpx;
 					flex-wrap: wrap;
 					border-radius: 4px;
 
