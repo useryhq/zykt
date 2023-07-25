@@ -128,8 +128,7 @@
 </template>
 
 <script>
-	import get_city_tree from '../../../static/js/cityData.js'
-	import {qnToken} from "../../../static/js/api.js"
+	import {qnToken,cityList} from "../../../static/js/api.js"
 	export default {
 		data() {
 			return {
@@ -202,10 +201,17 @@
 			// })
 			// console.log(this.filePath)
 			// },
+			// 获取城市分类
+			async getCityList() {
+				let res  =  await cityList()
+				this.localData = res
+				console.log(res)
+			},
+			// 地址选择三级联动
 			addressShow() {
-					this.localData = get_city_tree()
-					this.$refs.picker.show()
-				},
+				this.getCityList()
+				this.$refs.picker.show()
+			},
 				// 节点变化后 （并非已经选择完毕）
 							onnodeclick(node) {
 								// console.log(JSON.stringify(node))

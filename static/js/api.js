@@ -48,6 +48,15 @@ export function getCity(data) {
 		})
 	})
 }
+// 获取城市三级分类
+export function cityList() {
+	let url = '/provinces/city'
+	return new Promise((resolve,reject) => {
+		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}
 //搜索页面
 //推荐搜索
 export function search(data) {
