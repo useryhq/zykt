@@ -209,6 +209,36 @@
             }
             
         },{
+            "path" : "pages/order/returnGoodsManeyDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "退货退款",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
+            "path" : "pages/order/returnManeyDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "退款详情",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }, {
+            "path" : "pages/order/changeGoodsDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "换货详情",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
             "path" : "pages/order/postComments",
             "style" :                                                                                    
             {

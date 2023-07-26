@@ -89,7 +89,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toReturnManey">
 					查看详情
 				</view>
 		  </view>
@@ -123,7 +123,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toReturnGoodsManey">
 					查看详情
 				</view>
 		  </view>
@@ -157,7 +157,7 @@
 		      </view>
 		  </view>
 		  <view class="block_3 align-center justify-end">
-				<view class="button_2">
+				<view class="button_2" @click="toChangeGoods">
 					查看详情
 				</view>
 		  </view>
@@ -211,6 +211,24 @@
 			chooseNav(e) {
 				this.nav = e
 			},
+			// 跳转退款详情
+			toReturnManey() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/returnManeyDetail'
+				})
+			},
+			//跳转退货退款
+			toReturnGoodsManey() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/returnGoodsManeyDetail'
+				})
+			},
+			//跳转换货详情
+			toChangeGoods() {
+				uni.navigateTo({
+					url: '/pageA/pages/order/changeGoodsDetail'
+				})
+			}
 		}
 	}
 </script>
