@@ -6,13 +6,10 @@
 				<view class="block_2 flex-row justify-between">
 					<view class="image-text_1 flex-row" @click="addressShow">
 						<text class="text-group_1">{{address}}</text>
-						<image class="thumbnail_1" referrerpolicy="no-referrer"
-							src="/static/bg/psn0jpa0rv4jokgnpjgiyspa6d5ap30qwvka8534697-34f3-4d04-ad86-53aa6ed0ac52.png" />
+						<text class="thumbnail_1 iconfont">&#xe686;</text>
 					</view>
-					<view class="choose_address">
-						<uni-data-picker ref="picker" :localdata="localData" @change="onchange"
-							@nodeclick="onnodeclick">
-						</uni-data-picker>
+					<view v-if="addShow">
+						<uni-indexed-list :options="localData" @click="bindClick" />
 					</view>
 					<view class="text-wrapper_1 flex-col" @click="ToSearch">
 						<text class="text_2">搜索想要的空调产品</text>
@@ -66,8 +63,6 @@
 						</view>
 						<view class="image-text_9 flex-row justify-between" @click="toBrand()">
 							<text class="iconfont label_5">&#xe6b3;</text>
-							<!-- <image class="label_5" referrerpolicy="no-referrer"
-								src="../../static/bg/ps8w062b4dww78ren5gnd20n7t1lgq9wifk1489dc63-ba6a-4b28-81df-764d45f40f3c.png" /> -->
 							<text class="text-group_9">更多</text>
 						</view>
 					</view>
@@ -167,7 +162,7 @@
 		brandHot,
 		wantBuy,
 		getCity,
-		cityList
+		getCityList
 	} from '../../static/js/api.js'
 	export default {
 		data() {
@@ -179,6 +174,7 @@
 				ktlist2: [],
 				localData: [],
 				address: '郑州',
+				addShow: false,
 				add: 2,
 				selectTab: 1,
 				iphonex: this.$iphonex.iphonex,
@@ -194,7 +190,7 @@
 					type: t
 				}
 				let res = await indexGoodsList(data)
-				console.log(res)
+				// console.log(res)
 				if(t == 1) {
 					//个人
 					this.ktlist2 = res.lists
@@ -215,6 +211,12 @@
 				let data = await wantBuy()
 				// console.log(data)
 				this.message = data.lists
+			},
+			//获取市列表
+			async getCityLists() {
+				let res = await getCityList()
+				this.localData = res
+				console.log(res)
 			},
 			//切换商家个人
 			choose_status(e) {
@@ -315,7 +317,19 @@
 								console.log("+++++++")
 								console.log('当前位置的经度：' + res.longitude);
 								console.log('当前位置的纬度：' + res.latitude);
-								that.indexGetCity(res.latitude,res.longitude)																																																																																																																																																																																																						  
+								that.indexGetCity(res.latitude,res.longitude)
+								let storage = {
+										lat: res.latitude,
+										lng: res.longitude
+									}
+								let storageData = JSON.stringify(storage)	
+								uni.setStorage({
+									key:'longlat',
+									data: storageData,
+									success() {
+										// console.log("123")
+									}
+								})
 							}
 						});
 					},
@@ -346,39 +360,22 @@
 					lat: latitude,
 					lng: longitude
 				}
-				console.log(data)
+				// console.log(data)
 				let res = await getCity(data)
-				console.log(res)
+				this.address = res.cityName
+				// console.log(res)
 				this.getIndexGoodsList(2,res.cityId)
 			},
-			// 获取城市分类
-			async getCityList() {
-				let res  =  await cityList()
-				this.localData = res
-				console.log(res)
-			},
-			// 地址选择三级联动
+			//显示城市列表
 			addressShow() {
-				this.getCityList()
-				this.$refs.picker.show()
-			},
-			// 节点变化后 （并非已经选择完毕）
-			onnodeclick(node) {
-				// console.log(JSON.stringify(node))
-			},
-
-			// 整体选择完成以后
-			onchange(e) {
-				const value = e.detail.value
-				this.address = value.slice(-1)[0].text
-				this.cityId = value.slice(0, 1)[0].value
-				// console.log(e)
-			},
+				this.addShow = true
+			}
 		},
 		onLoad() {
 			this.getGps()
 			this.getBrandHot()
 			this.getWantBuy()
+			this.getCityLists()
 			// console.log(this.imgUrl)
 		},
 	};
@@ -425,9 +422,9 @@
 						}
 
 						.thumbnail_1 {
-							width: 18rpx;
-							height: 10rpx;
-							margin: 10rpx 0 0 8rpx;
+							font-size: 28rpx;
+							color: #fff;
+							margin-left: 8rpx;
 						}
 					}
 

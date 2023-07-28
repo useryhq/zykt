@@ -48,6 +48,16 @@ export function getCity(data) {
 		})
 	})
 }
+//获取市列表
+export function getCityList() {
+	let url = '/provinces/city'
+	return new Promise((resolve,reject) => {
+		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//添加地址
 // 获取城市三级分类
 export function cityList() {
 	let url = '/common/city-data'
@@ -118,6 +128,15 @@ export function brandTwo(data) {
 //商品列表
 export function goodsList(data) {
 	let url = '/goods/lists'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//二手门店
+export function twoHand(data) {
+	let url = '/shop/near-by'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)

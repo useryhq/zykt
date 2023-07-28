@@ -2,10 +2,6 @@
 	<!-- 二手门店 -->
   <view class="page flex-col justify-between">
     <view class="group_4 flex-col">
-      <!-- <view class="image-text_1 flex-row justify-between align-center">
-        <text class="text-group_1">区域</text>
-		<text class="thumbnail_1 iconfont">&#xe686;</text>
-      </view> -->
       <view class="list_1 flex-col">
         <view
           class="list-items_1 flex-row align-center  justify-between"
@@ -33,6 +29,7 @@
 	</view>
 </template>
 <script>
+	import {twoHand} from '../../static/js/api.js'
 export default {
   data() {
     return {
@@ -74,11 +71,28 @@ export default {
     };
   },
   methods: {
+	  async getData() {
+		  let data = ''
+		  uni.getStorage({
+		  	key: 'longlat',
+			success(res) {
+				data = res.data
+				console.log(data,"===")
+			}
+		  })
+		  // data = JSON.parse(data)
+		  let res = await twoHand(data)
+		  console.log(res,"123")
+	  },
+	  //拨打电话
 	  toTel() {
 	  		  uni.makePhoneCall({
 	  		  	phoneNumber: '18838000000'
 	  		  });
 	  }
+  },
+  onLoad() {
+  	this.getData()
   }
 };
 </script>
