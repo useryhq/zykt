@@ -50,7 +50,7 @@ export function getCity(data) {
 }
 // 获取城市三级分类
 export function cityList() {
-	let url = '/provinces/city'
+	let url = '/common/city-data'
 	return new Promise((resolve,reject) => {
 		request(url,'GET').then(res => {
 			resolve(res.data)

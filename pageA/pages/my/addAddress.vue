@@ -41,9 +41,7 @@
   </view>
 </template>
 <script>
-	import {
-		cityList
-	} from '../../../static/js/api.js'
+	import get_city_tree from '../../../static/js/cityData.js'
 export default {
   data() {
     return {
@@ -71,15 +69,10 @@ export default {
 	  			  this.$refs.popup.open('top')
 	  		  }
 			  },
-	  // 获取城市分类
-	  async getCityList() {
-	  	let res  =  await cityList()
-	  	this.localData = res
-	  	console.log(res)
-	  },
 	  // 地址选择三级联动
-	  addressShow() {
-	  	this.getCityList()
+	  async addressShow() {
+	  	this.localData = await get_city_tree()
+		console.log(this.localData)
 	  	this.$refs.picker.show()
 	  },
 	  // 节点变化后 （并非已经选择完毕）
