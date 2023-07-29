@@ -16,7 +16,7 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="addShow" class="choose_address">
+			<view v-show="addShow" class="choose_address">
 				<uni-indexed-list :options="localData" :show-select="true" @click="bindClick" />
 			</view>
 			<view class="group_5 flex-col">
@@ -479,7 +479,7 @@
 			.choose_address {
 				width: 750rpx;
 				height: 100%;
-				background-color: rgba(0, 0, 0, 0.4);
+				background-color: rgba(0, 0, 0, 0.6);
 				position: absolute;
 				z-index: 998;
 				@{aaa} .uni-indexed-list {
