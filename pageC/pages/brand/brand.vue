@@ -165,66 +165,6 @@ export default {
 				}
 			}
 		}
-	
-		.box_2 {
-			width: 671rpx;
-			height: 70rpx;
-			margin: 26rpx 0 37rpx 16rpx;
-	
-			.list_2 {
-				width: 530rpx;
-	
-				.image-text_5 {
-					width: 110rpx;
-					height: 69rpx;
-					margin: 5rpx 10rpx 0 0;
-	
-					.image_4 {
-						width: 110rpx;
-						height: 40rpx;
-					}
-	
-					.text-group_5 {
-						width: 46rpx;
-						height: 23rpx;
-						overflow-wrap: break-word;
-						color: rgba(51, 51, 51, 1);
-						font-size: 24rpx;
-						font-family: PingFang-SC-Regular;
-						font-weight: NaN;
-						text-align: left;
-						white-space: nowrap;
-						line-height: 24rpx;
-						margin: 6rpx 0 0 31rpx;
-					}
-				}
-			}
-	
-			.image-text_9 {
-				width: 82rpx;
-				height: 30rpx;
-				margin: 31rpx 0 0 20rpx;
-	
-				.label_5 {
-					width: 30rpx;
-					height: 30rpx;
-				}
-	
-				.text-group_9 {
-					width: 45rpx;
-					height: 23rpx;
-					overflow-wrap: break-word;
-					color: rgba(51, 51, 51, 1);
-					font-size: 24rpx;
-					font-family: PingFang-SC-Regular;
-					font-weight: NaN;
-					text-align: left;
-					white-space: nowrap;
-					line-height: 24rpx;
-					margin-top: 3rpx;
-				}
-			}
-		}
 	}
 }
 .box_3 {

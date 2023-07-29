@@ -40,7 +40,7 @@
 						page: 10
 				}
 				let res = await wantToBuy(data)
-				console.log(res)
+				// console.log(res)
 				this.loopData0 = res.lists
 			},
 			//上拉加载更多
@@ -59,7 +59,7 @@
 				}
 				console.log(data)
 				let res =  await wantToBuy(data)
-				console.log("res",res)
+				// console.log("res",res)
 				// this.loopData0 = res.lists
 				if(res.lists.length < 1) {
 					this.loading = 2
@@ -67,7 +67,7 @@
 					return
 				}
 				this.loopData0 = this.loopData0.concat(res.lists)
-				console.log(this.loopData0,"=======")
+				// console.log(this.loopData0,"=======")
 				this.num++
 				this.loading = 0
 				uni.hideLoading()

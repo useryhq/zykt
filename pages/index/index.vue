@@ -8,9 +8,6 @@
 						<text class="text-group_1">{{address}}</text>
 						<text class="thumbnail_1 iconfont">&#xe686;</text>
 					</view>
-					<view v-if="addShow">
-						<uni-indexed-list :options="localData" @click="bindClick" />
-					</view>
 					<view class="text-wrapper_1 flex-col" @click="ToSearch">
 						<text class="text_2">搜索想要的空调产品</text>
 					</view>
@@ -18,6 +15,9 @@
 						<text class="iconfont label_2">&#xe78b;</text>
 					</view>
 				</view>
+			</view>
+			<view v-if="addShow" class="choose_address">
+				<uni-indexed-list :options="localData" :show-select="true" @click="bindClick" />
 			</view>
 			<view class="group_5 flex-col">
 				<view class="block_3 flex-row justify-between">
@@ -216,7 +216,7 @@
 			async getCityLists() {
 				let res = await getCityList()
 				this.localData = res
-				console.log(res)
+				// console.log(res)
 			},
 			//切换商家个人
 			choose_status(e) {
@@ -369,6 +369,13 @@
 			//显示城市列表
 			addressShow() {
 				this.addShow = true
+			},
+			//选择地址
+			bindClick(e) {
+				this.address = e.item.itemobj.name
+				this.getIndexGoodsList(2,e.item.itemobj.id)
+				this.addShow = false
+				// console.log(e)
 			}
 		},
 		onLoad() {
@@ -385,9 +392,11 @@
 </style>
 
 <style lang="less" scoped>
+	@aaa: ~'>>>';
 	.page {
 		position: relative;
 		width: 750rpx;
+		height: 100%;
 		// overflow: hidden;
 
 		.group_1 {
@@ -405,12 +414,12 @@
 					margin: 0 0 39rpx 28rpx;
 
 					.image-text_1 {
-						width: 100rpx;
-						height: 23rpx;
+						width: 140rpx;
+						height: 24rpx;
 						margin-top: 18rpx;
 
 						.text-group_1 {
-							height: 23rpx;
+							height: 24rpx;
 							overflow-wrap: break-word;
 							color: rgba(255, 255, 255, 1);
 							font-size: 24rpx;
@@ -426,12 +435,6 @@
 							color: #fff;
 							margin-left: 8rpx;
 						}
-					}
-
-					.choose_address {
-						width: 0rpx;
-						height: 1rpx;
-						// background-color: #ff6842;
 					}
 
 					.text-wrapper_1 {
@@ -473,7 +476,17 @@
 					}
 				}
 			}
-
+			.choose_address {
+				width: 750rpx;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.4);
+				position: absolute;
+				z-index: 998;
+				@{aaa} .uni-indexed-list {
+						top: 100rpx;
+						left: 0;
+				}
+			}
 			.group_5 {
 				width: 750rpx;
 				height: 413rpx;

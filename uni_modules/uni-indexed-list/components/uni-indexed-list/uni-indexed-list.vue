@@ -294,6 +294,7 @@
 		top: 310rpx;
 		right: 0;
 		bottom: 0;
+		z-index: 999;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */

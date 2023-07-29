@@ -12,15 +12,15 @@
             <image
               class="image_3"
               referrerpolicy="no-referrer"
-              :src="item.lanhuimage0"
+              :src="imgUrl + item.logo"
             />
             <view class="text-group_2 flex-col">
-              <text class="text_2">{{item.lanhutext0}}</text>
-              <text class="text_3">{{item.lanhutext1}}</text>
-			  <text  class="text_3">{{item.lanhutext2}}</text>
+              <text class="text_2">{{item.shop_name}}</text>
+              <text class="text_3">{{item.intro}}</text>
+			  <text  class="text_3">地址:{{item.province}}{{item.city}}{{item.area}}{{item.address}}</text>
             </view>
           </view>
-          <view class="image-wrapper_1" @click="toTel()">
+          <view class="image-wrapper_1" @click="toTel(item.mobile)">
 			  <text class="label_3 iconfont">&#xe681;</text>
           </view>
         </view>
@@ -33,40 +33,8 @@
 export default {
   data() {
     return {
-      loopData0: [
-        {
-          lanhuimage0: '/static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-		  lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南郑州市航海路与城东路交叉口向西50米路南'
-          
-        },
-        {
-         lanhuimage0: '/static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-          lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南',
-		  
-        },
-        {
-         lanhuimage0: '/static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-          lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南',
-		  
-        },
-        {
-          lanhuimage0: '/static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-          lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南',
-		  
-        }
-      ],
+	  imgUrl: this.$imgUrl.img_base_url,
+      loopData0: [],
       constants: {}
     };
   },
@@ -77,17 +45,18 @@ export default {
 		  	key: 'longlat',
 			success(res) {
 				data = res.data
-				console.log(data,"===")
+				// console.log(data,"===")
 			}
 		  })
 		  // data = JSON.parse(data)
 		  let res = await twoHand(data)
-		  console.log(res,"123")
+		  this.loopData0 = res.lists
+		  // console.log(res,"123")
 	  },
 	  //拨打电话
-	  toTel() {
+	  toTel(e) {
 	  		  uni.makePhoneCall({
-	  		  	phoneNumber: '18838000000'
+	  		  	phoneNumber: e
 	  		  });
 	  }
   },
@@ -101,9 +70,8 @@ export default {
 </style>
 <style lang='less'>
 	.page {
-	  position: relative;
 	  width: 750rpx;
-	  overflow: hidden;
+	  /* overflow: scroll; */
 	  .group_4 {
 	    position: relative;
 	    width: 749rpx;
