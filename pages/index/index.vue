@@ -376,6 +376,13 @@
 				this.getIndexGoodsList(2,e.item.itemobj.id)
 				this.addShow = false
 				// console.log(e)
+				uni.setStorage({
+					key:'cityId',
+					data: e.item.itemobj.id,
+					success() {
+						// console.log("123")
+					}
+				})
 			}
 		},
 		onLoad() {

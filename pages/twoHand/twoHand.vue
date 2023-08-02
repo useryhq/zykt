@@ -40,17 +40,47 @@ export default {
   },
   methods: {
 	  async getData() {
-		  let data = ''
-		  uni.getStorage({
-		  	key: 'longlat',
-			success(res) {
-				data = res.data
-				// console.log(data,"===")
-			}
-		  })
+		  let data = {}
+		  let cityId = ''
+		  let lnglat = {}
+		  let flag = ''
+		  const res1 = uni.getStorageInfoSync()
+		  // console.log(res)
+			// console.log(keys)
+		  res1.keys.forEach(item => {
+		  console.log(item)
+			if(item === 'cityId'){
+			flag = true
+			console.log(flag)
+			   }		 							  
+			})	   
+		 
+		  if(flag) {
+			  const res2 = uni.getStorageSync('cityId')
+			  console.log(res2)
+			  data = {
+				  type: '2',
+				  cityId: res2
+			  }
+			  let res  = await twoHand(data)
+			  console.log(res)
+			  this.loopData0 = res.lists
+		  } else {
+			  const res3 = uni.getStorageSync('longlat')
+			  // console.log(res3)
+			  let jsonRes3 = JSON.parse(res3)
+			  data = {
+				  type: '1',
+				   lng: jsonRes3.lng,
+				   lat: jsonRes3.lat
+			  }
+			  // console.log(typeof(res3))
+			  console.log(data)
+			  let res = await twoHand(data)
+			  this.loopData0 = res.lists
+		  }
+		  
 		  // data = JSON.parse(data)
-		  let res = await twoHand(data)
-		  this.loopData0 = res.lists
 		  // console.log(res,"123")
 	  },
 	  //拨打电话
