@@ -103,20 +103,18 @@ export default {
       margin: 16rpx 0 0 26rpx;
       .block_1 {
         width: 648rpx;
-        height: 72rpx;
+        height: 80rpx;
         padding : 26rpx 0 24rpx 24rpx;
 		border: 1rpx solid #F6F6F6;
         .image-text_1 {
-          width: 70rpx;
-          height: 72rpx;
+          width: 150rpx;
+          height: 80rpx;
           .image_3 {
             width: 50rpx;
-            height: 39rpx;
-            margin-left: 9rpx;
+            height: 40rpx;
+            // margin-left: 9rpx;
           }
           .text-group_1 {
-            width: 70rpx;
-            height: 23rpx;
             overflow-wrap: break-word;
             color: rgba(51, 51, 51, 1);
             font-size: 24rpx;

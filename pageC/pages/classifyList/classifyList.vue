@@ -36,6 +36,7 @@
 	export default {
 		data() {
 			return {
+				imgUrl: this.$imgUrl.img_base_url,
 				upImgUrl:this.$upImgUrl.upImg_base_url,
 				activeKey: 1,
 				list: [],
