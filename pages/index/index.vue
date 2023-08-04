@@ -133,12 +133,12 @@
 					<text class="text-group_11">首页</text>
 				</view>
 				<view :class="[selectTab == 2 ? 'image-text_12 flex-col color' : 'image-text_12 flex-col']"
-					@click="ToHotProduct('jia')">
+					@click="ToHotProduct('1')">
 					<text class="iconfont label_7">&#xe60e;</text>
 					<text class="text-group_12">家用空调</text>
 				</view>
 				<view :class="[selectTab == 3 ? 'image-text_13 flex-col color' : 'image-text_13 flex-col']"
-					@click="ToHotProduct('shang')">
+					@click="ToHotProduct('2')">
 					<text class="iconfont label_8">&#xe610;</text>
 					<text class="text-group_13">商用空调</text>
 				</view>
@@ -249,20 +249,19 @@
 			},
 			ToHotProduct(e) {
 				//跳转家用空调
-				if (e == 'jia') {
+				if (e == 1) {
 					this.selectTab = 2,
 						uni.navigateTo({
 							url: '/pages/hotProduct/hotProduct?item=' + e
 						})
 				}
 				//跳转商用空调
-				if (e == 'shang') {
+				if (e == 2) {
 					this.selectTab = 3,
 						uni.navigateTo({
 							url: '/pages/hotProduct/hotProduct?item=' + e
 						})
 				}
-
 			},
 			//跳转商家详情
 			toProductDetail(e) {

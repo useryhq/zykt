@@ -19,7 +19,7 @@
 						</view>
 						<view class="right-img-block">
 							<view class="img-font-block" v-for="(i,c) in item.child" :key="c" @tap="togoodList(i.id)">
-								<image :src="i.banner" mode="aspectFit" lazy-load></image>
+								<image :src="upImgUrl + i.banner" mode="aspectFit" lazy-load></image>
 								<view>
 									{{i.name}}
 								</view>
@@ -32,269 +32,18 @@
 </template>
 
 <script>
+	import {category} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
+				upImgUrl:this.$upImgUrl.upImg_base_url,
 				activeKey: 1,
-				list: [
-            {
-                "id": "1",
-                "parent_id": "0",
-                "type": "goods",
-                "name": "家用空调",
-                "sub": [
-                    {
-                        "id": "20",
-                        "parent_id": "1",
-                        "type": "goods",
-                        "name": "普通空调",
-                        "child": [
-                            {
-                                "id": "27",
-                                "parent_id": "20",
-                                "type": "goods",
-                                "name": "壁挂式空调",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "28",
-                                "parent_id": "20",
-                                "type": "goods",
-                                "name": "立柜式空调",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "29",
-                                "parent_id": "20",
-                                "type": "goods",
-                                "name": "厨房专用空调",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "47",
-                                "parent_id": "20",
-                                "type": "goods",
-                                "name": "艺术类空调",
-                                "banner": "../../../static/bg/200711.png"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "38",
-                        "parent_id": "1",
-                        "type": "goods",
-                        "name": "家用中央空调",
-                        "child": [
-                            {
-                                "id": "49",
-                                "parent_id": "38",
-                                "type": "goods",
-                                "name": "风管机",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "50",
-                                "parent_id": "38",
-                                "type": "goods",
-                                "name": "天花机",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "51",
-                                "parent_id": "38",
-                                "type": "goods",
-                                "name": "变频多联机（外机）",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "311",
-                                "parent_id": "38",
-                                "type": "goods",
-                                "name": "变频多联机（内机）",
-                                "banner": "../../../static/bg/200711.png"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "48",
-                        "parent_id": "1",
-                        "type": "goods",
-                        "name": "其他类空调",
-                        "child": []
-                    },
-                    {
-                        "id": "171",
-                        "parent_id": "1",
-                        "type": "goods",
-                        "name": "空气净化",
-                        "child": []
-                    }
-                ]
-            },
-            {
-                "id": "39",
-                "parent_id": "0",
-                "type": "goods",
-                "name": "附属设备",
-                "sub": [
-                    {
-                        "id": "58",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "冷却塔",
-                        "child": []
-                    },
-                    {
-                        "id": "59",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "锅炉",
-                        "child": []
-                    },
-                    {
-                        "id": "60",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "水泵",
-                        "child": []
-                    },
-                    {
-                        "id": "61",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "换热器",
-                        "child": [
-                            {
-                                "id": "76",
-                                "parent_id": "61",
-                                "type": "goods",
-                                "name": "板式换热器",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "77",
-                                "parent_id": "61",
-                                "type": "goods",
-                                "name": "管式换热器",
-                                "banner": "../../../static/bg/200711.png"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "62",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "集分水器",
-                        "child": []
-                    },
-                    {
-                        "id": "63",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "水处理设备",
-                        "child": []
-                    },
-                    {
-                        "id": "64",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "水箱",
-                        "child": []
-                    },
-                    {
-                        "id": "87",
-                        "parent_id": "39",
-                        "type": "goods",
-                        "name": "恒压供水设备",
-                        "child": []
-                    }
-                ]
-            },
-            {
-                "id": "321",
-                "parent_id": "0",
-                "type": "goods",
-                "name": "商用空调",
-                "sub": [
-                    {
-                        "id": "169",
-                        "parent_id": "321",
-                        "type": "goods",
-                        "name": "末端设备",
-                        "child": [
-                            {
-                                "id": "166",
-                                "parent_id": "169",
-                                "type": "goods",
-                                "name": "新风机组",
-                                "banner": "../../../static/bg/200711.png"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "170",
-                        "parent_id": "321",
-                        "type": "goods",
-                        "name": "通风设备",
-                        "child": []
-                    },
-                    {
-                        "id": "187",
-                        "parent_id": "321",
-                        "type": "goods",
-                        "name": "工业空调",
-                        "child": []
-                    },
-                    {
-                        "id": "191",
-                        "parent_id": "321",
-                        "type": "goods",
-                        "name": "恒温恒湿",
-                        "child": []
-                    },
-                    {
-                        "id": "322",
-                        "parent_id": "321",
-                        "type": "goods",
-                        "name": "主机设备",
-                        "child": [
-                            {
-                                "id": "52",
-                                "parent_id": "322",
-                                "type": "goods",
-                                "name": "风冷模块机",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "55",
-                                "parent_id": "322",
-                                "type": "goods",
-                                "name": "螺杆式水（地）源热泵机组",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "177",
-                                "parent_id": "322",
-                                "type": "goods",
-                                "name": "风冷螺杆机组",
-                                "banner": "../../../static/bg/200711.png"
-                            },
-                            {
-                                "id": "329",
-                                "parent_id": "322",
-                                "type": "goods",
-                                "name": "风冷冷（热）水机组",
-                                "banner": "../../../static/bg/200711.png"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
+				list: [],
 				listIndex: 1,
 			};
 		},
-		onLoad(option) {
+		onLoad() {
+			this.GetCategory()
 			// this.activeKey = option.c_id
 			// this.listIndex = option.c_id
 		},
@@ -323,11 +72,11 @@
 			// 		url: "./goodsList?c_id=" + id
 			// 	})
 			// },
-			// async GetGoodsClassifyList() {
-			// 	let res = await goodsClassifyList()
-			// 	this.list = res.list
-			// 	// console.log(res)
-			// }
+			async GetCategory() {
+				let res = await category()
+				this.list = res.lists
+				// console.log(this.list)
+			}
 		}
 	}
 </script>

@@ -3,81 +3,82 @@
 	<view class="page flex-col">
 		<view class="section_2 flex-col">
 			<view class="group_2 flex-row justify-between">
-				<view class="image-text_1 flex-row justify-between" @click="toHotProduct()">
+				<view class="image-text_1 flex-row justify-between" @click="toClassifyList()">
 					<text class="iconfont menu">&#xe677;</text>
 					<text class="text-group_1">分类</text>
 				</view>
 				<view class="group_3 flex-row">
 					<text class="search_icon iconfont">&#xe65c;</text>
-					<input class="text-group_2" type="text" placeholder-style="font-size:22rpx;color:#999999" placeholder="搜索想要的空调产品" />
+					<input class="text-group_2" type="text" confirm-type="search" placeholder-style="font-size:22rpx;color:#999999" placeholder="搜索想要的空调产品" @confirm="searchKey($event)" />
 				</view>
 			</view>
 		</view>
 		<view class="section_3 flex-col" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
 			<view class="text-wrapper_1 flex-row align-center justify-start">
-				<text :class="[add == 1 ? 'text_2 click_text' : 'text_2']" @click="choose_status1">商家</text>
-				<text :class="[add == 2 ? 'text_3 click_text' : 'text_3']" @click="choose_status2">个人</text>
-				<view :class="[add == 1 ? 'group_left' : 'group_right']"></view>
-			</view>
-			<view v-if="add == 1" class="box_3 flex-row justify-between">
-				<view
-					:class="[parameter == 1 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
-					@click="chooseParameter(1)">
-					价格
-					<text :class="[parameter == 1 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
-				</view>
-				<view
-					:class="[parameter == 2 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
-					@click="chooseParameter(2)">
-					销量
-					<text :class="[parameter == 2 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
-				</view>
-				<view
-					:class="[parameter == 3 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
-					@click="chooseParameter(3)">
-					品牌
-					<text :class="[parameter == 3 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
-				</view>
-				<view
-					:class="[parameter == 4 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
-					@click="chooseParameter(4)">
-					成色
-					<text :class="[parameter == 4 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
-				</view>
+				<text :class="[add == 2 ? 'text_2 click_text' : 'text_2']" @click="choose_status(2)">商家</text>
+				<text :class="[add == 1 ? 'text_3 click_text' : 'text_3']" @click="choose_status(1)">个人</text>
+				<view :class="[add == 2 ? 'group_left' : 'group_right']"></view>
 			</view>
 			<view v-if="add == 2" class="box_3 flex-row justify-between">
 				<view
 					:class="[parameter == 1 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
 					@click="chooseParameter(1)">
 					价格
-					<text :class="[parameter == 1 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
+					<text :class="[parameter == 1 && arrow ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
+				</view>
+				<view
+					:class="[parameter == 2 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
+					@click="chooseParameter(2)">
+					销量
+					<text :class="[parameter == 2 && arrow ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
 				</view>
 				<view
 					:class="[parameter == 3 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
 					@click="chooseParameter(3)">
 					品牌
-					<text :class="[parameter == 3 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
+					<text :class="[parameter == 3 && arrow ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
 				</view>
 				<view
 					:class="[parameter == 4 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
 					@click="chooseParameter(4)">
 					成色
-					<text :class="[parameter == 4 ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
+					<text :class="[parameter == 4 && arrow ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
 				</view>
 			</view>
-			<view v-if="add == 1" class="group_8 flex-row justify-between">
-				<view class="box_3 flex-col" v-for="(item,i) in ktlist1" :key="i"
-					@click="toProductDetail(item.price)">
-					<image class="kt_img" :src="item.imgSrc"></image>
+			<view v-if="add == 1" class="box_3 flex-row justify-between">
+				<view
+					:class="[parameter == 1 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
+					@click="chooseParameter(1)">
+					价格
+					<text :class="[parameter == 1 && arrow ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
+				</view>
+				<view
+					:class="[parameter == 3 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
+					@click="chooseParameter(3)">
+					品牌
+					<text :class="[parameter == 3 && arrow ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
+				</view>
+				<view
+					:class="[parameter == 4 ? 'text_4 flex-row click_text2 align-center' : 'text_4 flex-rowv align-center']"
+					@click="chooseParameter(4)">
+					成色
+					<text :class="[parameter == 4 && arrow ? 'iconfont delta_transform' : 'iconfont']">&#xe688;</text>
+				</view>
+			</view>
+			<view v-if="add == 2" class="group_8 flex-row justify-between">
+				<view class="box_3 flex-col" v-for="(item,i) in ktlist" :key="i"
+					@click="toProductDetail(item.id)">
+					<image class="kt_img" :src="imgUrl + item.thumb"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
-							{{item.title}}
+							{{item.goods_name}}
 						</text>
 					</view>
 					<view class="text-wrapper_4 flex-row" @tap.stop.prevent>
-						<text class="text_10"><text v-if="item.price != '询价'">￥</text>{{item.price}}</text>
+						<text class="text_10" v-if="item.market_price != 0"><text>￥</text>{{item.market_price}}</text>
+						<text class="text_10" v-else>询价</text>
 						<text class="iconfont pk_text" @click="pkText(item)" v-if="item.pk">&#xe661;对比</text>
-						<text class="iconfont pk_text choose_color" v-else="!item.pk">&#xe661;已选</text>
+						<text class="iconfont pk_text choose_color" v-else>&#xe661;已选</text>
 					</view>
 					<view class="text-wrapper_4 flex-row">
 						<text class="iconfont agent_icon">&#xe67d; 代理商</text>
@@ -85,17 +86,17 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="add == 2" class="group_8 flex-row justify-between">
-				<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index"
-					@click="toProductDetailH(item.price)">
-					<image class="kt_img" :src="item.imgSrc"></image>
+			<view v-if="add == 1" class="group_8 flex-row justify-between">
+				<view class="box_3 flex-col" v-for="(item,index) in ktlist" :key="index"
+					@click="toProductDetailH(item.id)">
+					<image class="kt_img" :src="imgUrl + item.thumb"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
-							{{item.title}}
+							{{item.goods_name}}
 						</text>
 					</view>
 					<view class="text-wrapper_4 flex-row">
-						<text class="text_10">￥{{item.price}}</text>
+						<text class="text_10">￥{{item.market_price}}</text>
 						<text class="text_11">{{item.address}}</text>
 					</view>
 				</view>
@@ -125,114 +126,135 @@
 	</view>
 </template>
 <script>
+	import {goodsList} from '../../static/js/api.js'
 	export default {
 		data() {
 			return {
-				ktlist1: [{
-					    id:1,
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-						pk: true,
-					},
-					{
-						id:2,
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "询价",
-						address: "郑州",
-						pk: true,
-					},
-					{
-						id:3,
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-						pk: true,
-					},
-					{
-						id:4,
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "询价",
-						address: "郑州",
-						pk: true,
-					},
-					{
-						id:5,
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-						pk: true,
-					},
-					{
-						id:6,
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "8000.00",
-						address: "郑州",
-						pk: true,
-					}
-				],
-				ktlist2: [{
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: " ",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					},
-					{
-						imgSrc: "",
-						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
-						price: "10000.00",
-						address: "郑州",
-					}
-				],
-				add: 1,
+				ktlist: [],
+				add: 2,
 				parameter: 0,
+				arrow: false,
+				imgUrl: this.$imgUrl.img_base_url,
 				iphonex: this.$iphonex.iphonex,
 				pkBlock:false,
 				pkBlockadd: 0,
 				pkMessage:[],
-				constants: {}
+				use: '',
+				type: '2'
 			};
 		},
 		methods: {
-			choose_status1() {
-				this.add = 1
+			async getGoodList(data = {
+					use: '',
+					page: '20',
+					type: '',
+					key: '',
+					priceDesc:'',
+					brandDesc:'',
+					cengseDesc:''
+				}) {
+				let res = await goodsList(data)
+				console.log(res,"res")
+				this.ktlist = res.lists
+				console.log(data)
+				console.log(this.ktlist)
 			},
-			choose_status2() {
-				this.add = 2
+			//切换商家个人
+			choose_status(e) {
+				this.add = e
+				this.type = e
+				this.getGoodList({
+					use: this.use,
+					page: '20',
+					type: e,
+					key: '',
+					priceDesc:'',
+					brandDesc:'',
+					cengseDesc:''
+				})
 			},
 			// 价格、销量、品牌、成色筛选
 			chooseParameter(e) {
 				this.parameter = e
+				if(this.arrow) {
+					this.arrow = false
+				} else {
+					this.arrow = true 
+				}
+				if(e == 1 && this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'0',
+						brandDesc:'',
+						cengseDesc:''
+					})
+				} else if(e == 1 && !this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'1',
+						brandDesc:'',
+						cengseDesc:''
+					})
+				} else if(e == 3 && this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'',
+						brandDesc:'0',
+						cengseDesc:''
+					})
+				} else if(e == 3 && !this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'',
+						brandDesc:'1',
+						cengseDesc:''
+					})
+				} else if(e == 4 && this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'',
+						brandDesc:'',
+						cengseDesc:'0'
+					})
+				} else if(e == 4 && !this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'',
+						brandDesc:'',
+						cengseDesc:'1'
+					})
+				}
+			},
+			//搜索
+			searchKey(e) {
+				console.log(e)
+				this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: e.detail.value,
+						priceDesc:'',
+						brandDesc:'',
+						cengseDesc:''
+					})
 			},
 			// 对比弹窗
 			pkText(e) {
@@ -244,7 +266,7 @@
 					this.pkBlock = true
 					return
 				} else {
-					this.pkMessage.push({'title':e.title,'id':e.id})
+					this.pkMessage.push({'title':e.goods_name,'id':e.id})
 					// console.log(this.pkMessage)
 					e.pk = false,
 					this.pkBlock = true
@@ -268,41 +290,25 @@
 				}
 			},
 			// 对比弹窗结束
-			// 家用、商用空调不同参数
-			optionIndex(e) {
-				if (e == 'jia') {
-					for (let i = 0; i < this.ktlist1.length; i++) {
-						this.ktlist1[i].imgSrc = '/static/bg/200711.png'
-					}
-					for (let i = 0; i < this.ktlist2.length; i++) {
-						this.ktlist2[i].imgSrc = '/static/bg/200711.png'
-					}
-				}
-				if (e == 'shang') {
-					for (let i = 0; i < this.ktlist1.length; i++) {
-						this.ktlist1[i].imgSrc = '/static/bg/0301162340.png'
-					}
-					for (let i = 0; i < this.ktlist2.length; i++) {
-						this.ktlist2[i].imgSrc = '/static/bg/0301162340.png'
-					}
-				}
-			},
-			// 路由跳转
+			// 跳转商家商品详情
 			toProductDetail(e) {
 				uni.navigateTo({
 					url: '/pages/productDetail/productDetail?price=' + e
 				})
 			},
+			// 跳转个人商品详情
 			toProductDetailH(e) {
 				uni.navigateTo({
 					url: '/pages/productDetailH/productDetailH?price=' + e
 				})
 			},
-			toHotProduct() {
+			// 跳转热门分类
+			toClassifyList() {
 				uni.navigateTo({
 					url: '/pageC/pages/classifyList/classifyList'
 				})
 			},
+			//跳转对比详情
 			toContrastDetail() {
 				uni.navigateTo({
 					url: '/pageC/pages/contrastDetail/contrastDetail'
@@ -310,9 +316,17 @@
 			}
 		},
 		onLoad(option) {
-			// console.log(option.item)
-			this.optionIndex(option.item)
-
+			console.log(option)
+			this.getGoodList({
+					use: option.item,
+					page: '20',
+					type: '2',
+					key: '',
+					priceDesc:'',
+					brandDesc:'',
+					cengseDesc:''
+				})
+			this.use = option.item
 		},
 	};
 </script>

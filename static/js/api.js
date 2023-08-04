@@ -143,3 +143,12 @@ export function twoHand(data) {
 		})
 	})
 }
+// 三级分类
+export function category() {
+	let url = '/category/all'
+	return new Promise((resolve,reject) => {
+		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}

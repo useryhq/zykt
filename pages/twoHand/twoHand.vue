@@ -129,7 +129,6 @@ export default {
 	    }
 	    .list_1 {
 	      width: 690rpx;
-	      height: 755rpx;
 	      justify-content: space-between;
 	      margin: 16rpx 0 0 29rpx;
 	      .list-items_1 {
