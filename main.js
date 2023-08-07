@@ -1,11 +1,9 @@
 import App from './App'
-import iphonex from 'static/js/iphoneX.js'
 import {imgUrl,upImgUrl} from 'static/js/config.js'
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
-Vue.prototype.$iphonex = iphonex;
 Vue.prototype.$imgUrl = imgUrl;
 Vue.prototype.$upImgUrl = upImgUrl;
 const app = new Vue({

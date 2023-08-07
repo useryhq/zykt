@@ -13,7 +13,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="section_3 flex-col" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+		<view class="section_3 flex-col">
 			<view class="text-wrapper_1 flex-row align-center justify-start">
 				<text :class="[add == 2 ? 'text_2 click_text' : 'text_2']" @click="choose_status(2)">商家</text>
 				<text :class="[add == 1 ? 'text_3 click_text' : 'text_3']" @click="choose_status(1)">个人</text>
@@ -135,7 +135,6 @@
 				parameter: 0,
 				arrow: false,
 				imgUrl: this.$imgUrl.img_base_url,
-				iphonex: this.$iphonex.iphonex,
 				pkBlock:false,
 				pkBlockadd: 0,
 				pkMessage:[],
@@ -153,10 +152,11 @@
 					brandDesc:'',
 					cengseDesc:''
 				}) {
+				console.log(data,"====")
 				let res = await goodsList(data)
 				console.log(res,"res")
 				this.ktlist = res.lists
-				console.log(data)
+				
 				console.log(this.ktlist)
 			},
 			//切换商家个人
@@ -413,7 +413,6 @@
 			position: relative;
 			width: 694rpx;
 			margin-left: 33rpx;
-
 			.text-wrapper_1 {
 				width: 665rpx;
 				height: 32rpx;

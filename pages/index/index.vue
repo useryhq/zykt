@@ -90,7 +90,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="group_7 flex-col" :style="{'padding-bottom': iphonex ? '196rpx' : '128rpx'}">
+			<view class="group_7 flex-col">
 				<view class="text-wrapper_2 flex-row justify-start">
 					<text :class="[add == 2 ? 'text_8 click_text' : 'text_8']" @click="choose_status(2)">商家</text>
 					<text :class="[add == 1 ? 'text_9 click_text' : 'text_9']" @click="choose_status(1)">个人</text>
@@ -126,7 +126,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="group_12 flex-row" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+			<view class="group_12 flex-row">
 				<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']"
 					@click="slecetTab(1)">
 					<text class="iconfont label_6">&#xe674;</text>
@@ -177,7 +177,6 @@
 				addShow: false,
 				add: 2,
 				selectTab: 1,
-				iphonex: this.$iphonex.iphonex,
 				imgUrl: this.$imgUrl.img_base_url,
 				constants: {},
 			};
@@ -822,7 +821,8 @@
 				border: 2px solid rgba(255, 254, 255, 1);
 				margin: 19rpx 0 0 27rpx;
 				padding-bottom: 128rpx;
-
+				padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+				padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 				.text-wrapper_2 {
 					width: 665rpx;
 					height: 32rpx;
@@ -961,7 +961,8 @@
 				left: 0;
 				bottom: 0rpx;
 				z-index: 1000;
-
+				padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+				padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 
 				.image-text_11 {
 					width: 46rpx;

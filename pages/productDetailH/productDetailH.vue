@@ -93,7 +93,7 @@
 				</swiper-item>
 			</swiper>	
 		</view>
-		<view class="group_17 xj flex-row justify-around" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+		<view class="group_17 xj flex-row justify-around">
 		  <view class="image-text_8 flex-col justify-around" @click="tabClick(1)">
 		    <text class="iconfont label_9" :class="{'tab_color' : store == 1}">&#xe6eb;</text>
 		    <text class="text-group_10">分享</text>
@@ -122,7 +122,6 @@
 				store: 0,
 				collect: 0,
 				shoppingCart: 0,
-				iphonex: this.$iphonex.iphonex,
 				images:{
 					a:'/static/bg/200711.png',
 					b:'/static/bg/0301162340.png'
@@ -593,12 +592,14 @@
 			}
 		}
 		.group_17 {
-			width: 750rpx;
+		 width: 750rpx;
 		  box-shadow: 0px 5px 8px 0px rgba(92, 92, 92, 0.66);
 		  background-color: rgba(255, 255, 255, 1);
 		  position: fixed;
 		  left: 0;
 		  bottom: 0;
+		  padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+		  padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 		  .image-text_8 {
 		    width: 47rpx;
 		    height: 80rpx;

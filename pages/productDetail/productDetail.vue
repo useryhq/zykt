@@ -137,7 +137,7 @@
 		  </view>
 		   </view>        
       </view>
-    <view class="img_block" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+    <view class="img_block">
     	<view class="image-text_7 flex-row justify-between align-center">
     					  <text class="iconfont thumbnail_3">&#xe67c;</text>
     				    <text class="text-group_9">商品介绍</text>
@@ -146,7 +146,7 @@
     		<image v-for="(item,index) in images" :src="item" :key="index"></image>
     	</view>
     </view>
-	<view v-if="price == '询价'" class="words-written" :style="{'padding-bottom': iphonex ? '104rpx' : '36rpx'}">
+	<view v-if="price == '询价'" class="words-written">
 		<view class="written_text_icon">
 			<text class="iconfont written_icon">&#xe649;</text>
 			<text class="written_text">留言</text>
@@ -167,7 +167,7 @@
 			</swiper-item>
 		</swiper>	
 	</view>
-    <view v-if="price != '询价'" class="group_17 flex-row" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+    <view v-if="price != '询价'" class="group_17 flex-row">
       <view class="image-text_8 flex-col justify-around" @click="tabClick(1)">
         <text class="iconfont label_9" :class="{'tab_color' : store == 1}">&#xe676;</text>
         <text class="text-group_10">店铺</text>
@@ -187,7 +187,7 @@
         <text class="text_32">立即购买</text>
       </view>
     </view>
-	<view v-if="price == '询价'" class="group_17 xj flex-row justify-around" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+	<view v-if="price == '询价'" class="group_17 xj flex-row justify-around">
 	  <view class="image-text_8 flex-col justify-around" @click="tabClick(1)">
 	    <text class="iconfont label_9" :class="{'tab_color' : store == 1}">&#xe676;</text>
 	    <text class="text-group_10">店铺</text>
@@ -204,7 +204,7 @@
 	    <text class="text_32">立即询价</text>
 	  </view>
 	</view>
-	<view class="buy_block" v-if="buyBlock" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+	<view class="buy_block" v-if="buyBlock">
 		<view class="mask"></view>
 		<view class="mode">
 			<view class="buy_close" @click="buyClose(1)">×</view>
@@ -227,7 +227,7 @@
 			<view class="buy_btn">确定</view>
 	    </view>	
 	</view>
-	<view class="buy_block2" v-if="buyBlock2" :style="{'padding-bottom': iphonex ? '68rpx' : '0rpx'}">
+	<view class="buy_block2" v-if="buyBlock2">
 		<view class="mask"></view>
 		<view class="mode">
 			<view class="buy_close" @click="buyClose(2)">×</view>
@@ -275,7 +275,6 @@ export default {
 		specificationsIndex: 0,
 		buyBlock: false,
 		buyBlock2: false,
-		iphonex: this.$iphonex.iphonex,
 		specifications: {
 			a: '3匹颐享Ⅲ26-40㎡【一价全包版】',
 			b: '10匹一拖二变频',
@@ -1021,6 +1020,8 @@ export default {
 	border-radius: 10px;
 	width: 750rpx;
 	margin-top: 28rpx;
+	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 	.image-text_7 {
 	  width: 147rpx;
 	  height: 30rpx;
@@ -1057,6 +1058,8 @@ export default {
 	background-color: #fff;
 	margin: 18rpx 0 100rpx 0;
 	padding: 36rpx 30rpx;
+	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 	.written_text_icon {
 		.written_icon {
 			font-size: 26rpx;
@@ -1147,6 +1150,8 @@ export default {
     position: fixed;
     left: 0;
     bottom: 0;
+	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
     .image-text_8 {
       width: 47rpx;
       height: 80rpx;
@@ -1265,7 +1270,8 @@ export default {
   	top: 0;
   	left: 0;
   	z-index: 999;
-  
+	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
   	.mask {
   		width: 100%;
   		height: 100%;
@@ -1371,7 +1377,8 @@ export default {
 		  	top: 0;
 		  	left: 0;
 		  	z-index: 999;
-		  
+		    padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+		    padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 		  	.mask {
 		  		width: 100%;
 		  		height: 100%;
