@@ -67,8 +67,8 @@
 			</view>
 			<view v-if="add == 2" class="group_8 flex-row justify-between">
 				<view class="box_3 flex-col" v-for="(item,i) in ktlist" :key="i"
-					@click="toProductDetail(item.id)">
-					<image class="kt_img" :src="imgUrl + item.thumb"></image>
+					@click="toProductDetail(item.goods_id)">
+					<image class="kt_img" :src="imgUrl +  item.thumb"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
 							{{item.goods_name}}
@@ -82,13 +82,13 @@
 					</view>
 					<view class="text-wrapper_4 flex-row">
 						<text class="iconfont agent_icon">&#xe67d; 代理商</text>
-						<text class="text_11">{{item.address}}</text>
+						<text class="text_11">{{item.city_id}}</text>
 					</view>
 				</view>
 			</view>
 			<view v-if="add == 1" class="group_8 flex-row justify-between">
 				<view class="box_3 flex-col" v-for="(item,index) in ktlist" :key="index"
-					@click="toProductDetailH(item.id)">
+					@click="toProductDetailH(item.goods_id)">
 					<image class="kt_img" :src="imgUrl + item.thumb"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
@@ -97,7 +97,7 @@
 					</view>
 					<view class="text-wrapper_4 flex-row">
 						<text class="text_10">￥{{item.market_price}}</text>
-						<text class="text_11">{{item.address}}</text>
+						<text class="text_11">{{item.city_id}}</text>
 					</view>
 				</view>
 			</view>
@@ -201,7 +201,30 @@
 						brandDesc:'',
 						cengseDesc:''
 					})
-				} else if(e == 3 && this.arrow) {
+				} else if(e == 2 && this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'',
+						brandDesc:'',
+						salesDesc:'0',
+						cengseDesc:''
+					})
+				} else if(e == 2 && !this.arrow) {
+					this.getGoodList({
+						use: this.use,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'',
+						brandDesc:'',
+						salesDesc:'1',
+						cengseDesc:''
+					})
+				} 
+				else if(e == 3 && this.arrow) {
 					this.getGoodList({
 						use: this.use,
 						page: '20',
@@ -266,8 +289,8 @@
 					this.pkBlock = true
 					return
 				} else {
-					this.pkMessage.push({'title':e.goods_name,'id':e.id})
-					// console.log(this.pkMessage)
+					this.pkMessage.push({'title':e.goods_name,'id':e.goods_id})
+					console.log(this.pkMessage)
 					e.pk = false,
 					this.pkBlock = true
 				}
@@ -280,10 +303,12 @@
 				console.log(e)
 				if(this.pkBlockadd > 0) {
 					this.pkBlockadd --
-					for(let i = 0; i < this.ktlist1.length; i++) {
-						console.log("===",this.ktlist1[i].id)
-						if(this.ktlist1[i].id == this.pkMessage[e].id) {
-							this.ktlist1[i].pk = true
+					for(let i = 0; i < this.ktlist.length; i++) {
+						// console.log("===",this.ktlist[i].goods_id)
+						if(this.ktlist[i].goods_id == this.pkMessage[e].id) {
+							// console.log(this.ktlist[i].goods_id)
+							// console.log(this.pkMessage[e].id)
+							this.ktlist[i].pk = true
 						}
 					}
 					this.pkMessage.splice(e,1)
@@ -293,7 +318,7 @@
 			// 跳转商家商品详情
 			toProductDetail(e) {
 				uni.navigateTo({
-					url: '/pages/productDetail/productDetail?price=' + e
+					url: '/pages/productDetail/productDetail?id=' + e
 				})
 			},
 			// 跳转个人商品详情

@@ -42,6 +42,7 @@ export default {
 		  }
 		  let res = await brandTwo(data)
 		  this.setTitle(res.brand_name)
+		  this.title = res.brand_name
 		  this.list = res.categories
 		  console.log(res)
 	  },

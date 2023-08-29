@@ -98,7 +98,7 @@
 				</view>
 				<view v-if="add == 2" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index"
-						@click="toProductDetail(item.id)">
+						@click="toProductDetail(item.goods_id)">
 						<image class="kt_img" :src="imgUrl + item.thumb"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
@@ -113,7 +113,7 @@
 				</view>
 				<view v-if="add == 1" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,i) in ktlist2" :key="i"
-						@click="toProductDetailH(item.id)">
+						@click="toProductDetailH(item.goods_id)">
 						<image class="kt_img" :src="imgUrl + item.thumb"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
@@ -265,13 +265,13 @@
 			//跳转商家详情
 			toProductDetail(e) {
 				uni.navigateTo({
-					url: '/pages/productDetail/productDetail?price=' + e
+					url: '/pages/productDetail/productDetail?id=' + e
 				})
 			},
 			//跳转个人详情
 			toProductDetailH(e) {
 				uni.navigateTo({
-					url: '/pages/productDetailH/productDetailH?price=' + e
+					url: '/pages/productDetailH/productDetailH?id=' + e
 				})
 			},
 			// 跳转求购列表
@@ -821,8 +821,6 @@
 				border: 2px solid rgba(255, 254, 255, 1);
 				margin: 19rpx 0 0 27rpx;
 				padding-bottom: 128rpx;
-				padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
-				padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 				.text-wrapper_2 {
 					width: 665rpx;
 					height: 32rpx;

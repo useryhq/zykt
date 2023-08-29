@@ -2,7 +2,7 @@
 	<!-- 产品详情（商家） -->
   <view class="page flex-col">
     <view class="goods-detail-nav">
-    	<view v-if="price != '询价'" class="w">
+    	<view v-if="info.is_xunjia == 0" class="w">
     		<view class="nav-font" :class="{'nav-font-active': navIndex == 0}" @click="navChange(0)">
     			商品
     		</view>
@@ -13,7 +13,7 @@
     			评价
     		</view>
     	</view>
-		<view v-if="price == '询价'" class="w">
+		<view v-if="info.is_xunjia == 1" class="w">
 			<view class="nav-font" :class="{'nav-font-active': navIndex == 0}" @click="navChange(0)">
 				商品
 			</view>
@@ -28,35 +28,35 @@
 			<swiper class="swiper-block" :indicator-dots="true" :autoplay="true" indicator-active-color="#fa6a4a" :circular="true">
 				<block v-for="(item,index) in images" :key="index">
 					<swiper-item>
-						<image mode="aspectFill" :src="item"></image>
+						<image mode="aspectFill" :src="imgUrl + item"></image>
 					</swiper-item>
 				</block>
 			</swiper>
 		</view>
 		<view class="group_6 flex-col">
 		  <view class="box_2 flex-row justify-between">
-		    <text class="text_6"><text v-if="price != '询价'">￥</text>{{price}}</text>
+		    <text class="text_6"><text v-if="info.is_xunjia == 0">￥</text>{{info.market_price}}</text>
 		    <view class="image-text_1 flex-row justify-between">
 		      <text class="iconfont">&#xe64c;</text>
 		      <text class="text-group_1">收藏</text>
 		    </view>
 		  </view>
 		  <text class="text_7">
-		    二手中央空调10匹一拖二变频冷暖一级能效多联机商用空调机组二手中央空调10匹一拖二变频冷暖一级能效多联机商用空调机组
+		    {{info.goods_name}}
 		  </text>
 		  
 		  <view class="box_3 flex-row justify-between">
 		    <view class="text-wrapper_2">
 		      <text class="text_8">成色：</text>
-			  <text class="text_10">9成新</text>
+			  <text class="text_10">{{info.chengse}}成新</text>
 		    </view>
 		    <view class="text-wrapper_3">
 		      <text class="text_12">所在地：</text>
-			  <text class="text_13">郑州</text>
+			  <text class="text_13">{{info.city_id}}</text>
 		    </view>
 		  </view>
 		</view>
-		<view v-if="price != '询价'" class="group_8 flex-col">
+		<view v-if="info.is_xunjia == 0" class="group_8 flex-col">
 		  <view class="group_9 flex-row">
 		    <text class="text_14">已选:</text>
 		    <text class="text_15">{{choose}},{{numberValue}}个</text>
@@ -73,7 +73,7 @@
     
     <view class="group_7 flex-col">
       
-      <view v-if="price != '询价'" class="group_11 flex-col">
+      <view v-if="info.is_xunjia == 0" class="group_11 flex-col">
         <view class="block_2 flex-row justify-between">
           <view class="block_3 flex-col"></view>
           <text class="text_18">评价</text>
@@ -101,8 +101,8 @@
       </view>
       <view class="group_12 flex-col">
         <view class="image-text_2 flex-row justify-start align-center">
-         <image class=".label_6" src="../../static/bg/7220921.png" mode=""></image>
-          <text class="text-group_4">美的二手商用中央空调自营店</text>
+         <image class=".label_6" :src="imgUrl + info.seller.logo"  mode=""></image>
+          <text class="text-group_4">{{info.seller.shop_name}}</text>
         </view>
         <view class="box_4 flex-row justify-between">
           <view class="box_5 flex-row justify-center align-center">
@@ -127,7 +127,7 @@
 		      <text class="text-group_7">规格</text>
 		    </view>
 		    <view :style="{'height': openHeight + 'rpx'}" class="paragraph_5 flex-col">
-		      <text v-for="(item,index) in ktParameter" :key="index">{{item.text}}</text> 
+		      <text v-for="(item,index) in ktParameter" :key="index">{{item.attr_name}}:{{item.attr_value}}</text> 
 		    </view>
 			<view class="justify-center">
 			<view class="image-text_6 flex-row justify-center align-center" @click="open">
@@ -143,7 +143,7 @@
     				    <text class="text-group_9">商品介绍</text>
     				  </view>
     	<view class="img_list">
-    		<image v-for="(item,index) in images" :src="item" :key="index"></image>
+    		<image v-for="(item,index) in images" :src="imgUrl+item" :key="index"></image>
     	</view>
     </view>
 	<view v-if="price == '询价'" class="words-written">
@@ -209,9 +209,9 @@
 		<view class="mode">
 			<view class="buy_close" @click="buyClose(1)">×</view>
 			<view class="img_price flex-row align-center">
-				<image :src="images.a"></image>
+				<image :src="imgUrl+images[0]"></image>
 				<view class="price_choose flex-col justify-between">
-					<text class="price">￥{{price}}</text>
+					<text class="price">￥{{info.market_price}}</text>
 					<text class="exite">库存：2件</text>
 					<text class="choose">已选：{{choose}}</text>
 				</view>
@@ -259,9 +259,11 @@
   </view>
 </template>
 <script>
+	import {productDetail} from '../../static/js/api.js'
 export default {
   data() {
     return {
+		imgUrl: this.$imgUrl.img_base_url,
 		navIndex: 0,
 		openHeight: 330,
 		store: 0,
@@ -269,32 +271,19 @@ export default {
 		shoppingCart: 0,
 		join: 0,
 		buy: 0,
-		price: '',
+		id: '',
 		choose: '',
 		numberValue: 0,
 		specificationsIndex: 0,
 		buyBlock: false,
 		buyBlock2: false,
+		info: {},
 		specifications: {
 			a: '3匹颐享Ⅲ26-40㎡【一价全包版】',
 			b: '10匹一拖二变频',
 		},
-		images:{
-			a:'/static/bg/200711.png',
-			b:'/static/bg/0301162340.png'
-		},
-		appraise: [{
-			tel: '136******2',
-			time: '2023-01-28',
-			message: '制热效果非常好，特别要感谢安装师傅，不光技术熟练，还跟我打扫得干干净净。',
-			attribute: '空调面板颜色：陶白色'
-		},
-		{
-			tel: '136******2',
-			time: '2023-01-28',
-			message: '制热效果非常好，特别要感谢安装师傅，不光技术熟练，还跟我打扫得干干净净。',
-			attribute: '空调面板颜色：陶白色'
-		}],
+		images:[],
+		appraise: [],
 		wordsWritten: [{
 			tel: '136******2',
 				time: '2023-01-28',
@@ -305,44 +294,25 @@ export default {
 				time: '2023-01-28',
 				message: '请问价格是多少',
 		}],
-		ktParameter: [{
-			text: '型号：120'
-			},
-			{
-				text: '规格：制冷剂R32'
-				},
-			{
-				text: '电压/频率：380V/50Hz'
-				},
-			{
-				text: '内机净重：78kg'
-				},
-			{
-				text: '产品特色：除甲醛不支持除甲醛'
-				},
-			{
-				text: '独立除湿：支持独立除湿'
-				},
-			{
-				text: '自动清洁：内外机自动清洁'
-				},
-			{
-				text: '功能制冷量：12000W'
-				
-		},{
-				text: '独立除湿：支持独立除湿'
-				},
-			{
-				text: '自动清洁：内外机自动清洁'
-				},
-			{
-				text: '功能制冷量：12000W'
-				
-		}],
+		ktParameter: [],
       constants: {}
     };
   },
   methods: {
+	  // 获取商品详情数据
+	  async getProductDetail(id) {
+		  let data = {
+			  id: id
+		  }
+		  console.log(data)
+		  let res =await productDetail(data)
+		  console.log(res)
+		  this.info = res.info
+		  this.appraise = res.commonentInfo
+		  this.ktParameter = res.specInfo
+		  this.images.push(res.info.thumb)
+		  console.log(this.images)
+	  },
 	  //顶部nav切换，定位到相应栏目
 	  navChange(index) {
 	  	this.navIndex = index
@@ -439,8 +409,7 @@ export default {
 	  }
   },
   onLoad(option) {
-		  this.price = option.price
-  	
+	  this.getProductDetail(option.id)
   }
 };
 </script>
@@ -587,7 +556,7 @@ export default {
 	      }
 	    }
 	    .text-wrapper_3 {
-	      width: 136rpx;
+	      width: 150rpx;
 	      height: 30rpx;
 	      overflow-wrap: break-word;
 	      font-size: 0;
@@ -1020,8 +989,6 @@ export default {
 	border-radius: 10px;
 	width: 750rpx;
 	margin-top: 28rpx;
-	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
-	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 	.image-text_7 {
 	  width: 147rpx;
 	  height: 30rpx;
@@ -1058,8 +1025,6 @@ export default {
 	background-color: #fff;
 	margin: 18rpx 0 100rpx 0;
 	padding: 36rpx 30rpx;
-	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
-	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 	.written_text_icon {
 		.written_icon {
 			font-size: 26rpx;
@@ -1270,8 +1235,6 @@ export default {
   	top: 0;
   	left: 0;
   	z-index: 999;
-	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
-	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
   	.mask {
   		width: 100%;
   		height: 100%;
@@ -1377,8 +1340,6 @@ export default {
 		  	top: 0;
 		  	left: 0;
 		  	z-index: 999;
-		    padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
-		    padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 		  	.mask {
 		  		width: 100%;
 		  		height: 100%;

@@ -125,9 +125,9 @@ export function brandTwo(data) {
 		})
 	})
 }
-//获取品牌列表
+//获取品牌详情
 export function brandThree(data) {
-	let url = '/brands/select'
+	let url = '/brands/show'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)
@@ -152,11 +152,20 @@ export function twoHand(data) {
 		})
 	})
 }
-// 三级分类
+// 热门分类三级分类
 export function category() {
 	let url = '/category/all'
 	return new Promise((resolve,reject) => {
 		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}
+// 商家商品详情
+export function productDetail(data) {
+	let url = '/goods/shop-goods-info'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
 			resolve(res.data)
 		})
 	})
