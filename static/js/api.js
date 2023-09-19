@@ -170,3 +170,12 @@ export function productDetail(data) {
 		})
 	})
 }
+//获取小程序openID
+export function getOpenID(data) {
+	let url = '/common/get-openid'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}

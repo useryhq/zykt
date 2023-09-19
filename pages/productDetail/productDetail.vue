@@ -35,7 +35,7 @@
 		</view>
 		<view class="group_6 flex-col">
 		  <view class="box_2 flex-row justify-between">
-		    <text class="text_6"><text v-if="info.is_xunjia == 0">￥</text>{{info.market_price}}</text>
+		    <text class="text_6"><text v-if="info.is_xunjia == 0">￥{{info.market_price}}</text><text v-else>询价</text></text>
 		    <view class="image-text_1 flex-row justify-between">
 		      <text class="iconfont">&#xe64c;</text>
 		      <text class="text-group_1">收藏</text>

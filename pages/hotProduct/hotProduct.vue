@@ -139,10 +139,13 @@
 				pkBlockadd: 0,
 				pkMessage:[],
 				use: '',
-				type: '2'
+				type: '2',
+				num: 1,
+				loading: 0,
 			};
 		},
 		methods: {
+			// 获取商品列表
 			async getGoodList(data = {
 					use: '',
 					page: '20',
@@ -163,6 +166,7 @@
 			choose_status(e) {
 				this.add = e
 				this.type = e
+				this.loading = 0
 				this.getGoodList({
 					use: this.use,
 					page: '20',
@@ -266,6 +270,43 @@
 					})
 				}
 			},
+			//上拉加载更多
+			async loadingMore() {
+				console.log(this.loading)
+				if(this.loading !== 0)
+				return false
+				this.loading = 1
+				uni.showLoading({
+					title: 'Loading...', //提示的内容,
+					mask: true, //显示透明蒙层，防止触摸穿透,
+					success: res => {}
+				})
+				let data ={
+						use: this.use,
+						curpage: this.num,
+						page: '20',
+						type: this.type,
+						key: '',
+						priceDesc:'',
+						brandDesc:'',
+						cengseDesc:''
+					}
+					let res = await goodsList(data)
+					console.log(data)
+				// console.log("res",res)
+				// this.loopData0 = res.lists
+				if(res.lists.length < 1) {
+					this.loading = 2
+					uni.hideLoading()
+					return
+				}
+				this.ktlist = this.ktlist.concat(res.lists)
+				console.log(this.ktlist,"=======")
+				this.num++
+				this.loading = 0
+				uni.hideLoading()
+				
+			},
 			//搜索
 			searchKey(e) {
 				console.log(e)
@@ -353,6 +394,9 @@
 				})
 			this.use = option.item
 		},
+		onReachBottom() {
+			this.loadingMore()
+		}
 	};
 </script>
 <style lang='less'>

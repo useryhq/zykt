@@ -45,7 +45,16 @@
 				"navigationBarBackgroundColor": "#ffffff"
 			}
 
-		}
+		},{
+            "path" : "pages/login/login",
+            "style" :                                                                                    
+            {"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        }
     ],
 	"subpackages": [{
 		// 个人中心
