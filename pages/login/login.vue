@@ -4,9 +4,9 @@
 		<view class="img-block">
 			<image class="img" src="../../static/bg/logo.png" mode=""></image>
 		</view>
-		<view class="button color_1" @click="login">
+		<button class="button color_1" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">
 			微信一键登录
-		</view>
+		</button>
 		<view class="button color_2">
 			手机验证码登录
 		</view>
@@ -14,11 +14,13 @@
 </template>
 
 <script>
-	import {getOpenID} from '../../static/js/api.js'
+	import {
+		getOpenID
+	} from '../../static/js/api.js'
 	export default {
 		data() {
 			return {
-			code: ''
+				openId: ''
 			};
 		},
 		methods: {
@@ -36,41 +38,34 @@
 			// 		})
 			// 	})
 			// },
+			//获取openID
 			async loginGetOpenID(data) {
 				let res = await getOpenID(data)
+				this.openId = res.openid
 				console.log(res)
 			},
-			getLogin() {
-				return new Promise((resolve, reject) => {
-					uni.login({
-						success(res) {
-							resolve(res.code)
-						},
-						fail: (err) => {
-							reject(err)
-						}
-					})
-				})
-			},
-
+			// 微信登录获取code
 			login() {
-				// let userInfo = this.getUserInfo();
-				let wxCode = this.getLogin();
-
-
-				wxCode.then((res) => {
-					//都获取权限成功
-					console.log(res)
-					let data = {
-						code:res
+				uni.login({
+					success:(res) => {
+						// console.log(res)
+						let data = {
+							code: res.code
+						}
+						this.loginGetOpenID(data)
+						console.log(data)
+					},
+					fail: (err) => {
+						console.log(err)
 					}
-					
-					this.loginGetOpenID(data)
-					console.log(data)
-				}).catch(err => {
-					console.log(err)
-				})
+				}) 	
+			},
+			getPhoneNumber(res) {
+				console.log(res)
 			}
+		},
+		onLoad() {
+			this.login()
 		}
 	}
 </script>
