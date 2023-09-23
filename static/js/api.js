@@ -179,3 +179,12 @@ export function getOpenID(data) {
 		})
 	})
 }
+//小程序加密数据解密
+export function getData(data) {
+	let url = '/common/get-encrypted-info'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}

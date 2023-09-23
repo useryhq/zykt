@@ -15,7 +15,7 @@
 
 <script>
 	import {
-		getOpenID
+		getOpenID,getData
 	} from '../../static/js/api.js'
 	export default {
 		data() {
@@ -60,7 +60,19 @@
 					}
 				}) 	
 			},
+			//获取手机号
 			getPhoneNumber(res) {
+				console.log(res)
+				this.getDataTel(res.detail)
+			},
+			//手机号解密
+			async getDataTel(e) {
+				let data = {
+					iv:e.iv,
+					encryptData:e.encryptedData
+				}
+				console.log(data,'data')
+				let res = await getData(data)
 				console.log(res)
 			}
 		},
