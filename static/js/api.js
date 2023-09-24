@@ -188,3 +188,12 @@ export function getData(data) {
 		})
 	})
 }
+//微信登录
+export function wechatLogin(data) {
+	let url = '/login/wechat-login'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}

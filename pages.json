@@ -48,10 +48,21 @@
 		},{
             "path" : "pages/login/login",
             "style" :                                                                                    
-            {"navigationBarTitleText": "登录",
+            {
+				"navigationBarTitleText": "登录",
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#ffffff"
+            }
+            
+        },{
+            "path" : "pages/login/telLogin",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "绑定手机",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
             }
             
         }

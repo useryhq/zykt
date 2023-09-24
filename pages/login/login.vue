@@ -15,12 +15,14 @@
 
 <script>
 	import {
-		getOpenID,getData
+		getOpenID,getData,wechatLogin
 	} from '../../static/js/api.js'
 	export default {
 		data() {
 			return {
-				openId: ''
+				openId: '',
+				tel: '',
+				userId: ''
 			};
 		},
 		methods: {
@@ -42,7 +44,7 @@
 			async loginGetOpenID(data) {
 				let res = await getOpenID(data)
 				this.openId = res.openid
-				console.log(res)
+				// console.log(res)
 			},
 			// 微信登录获取code
 			login() {
@@ -53,7 +55,7 @@
 							code: res.code
 						}
 						this.loginGetOpenID(data)
-						console.log(data)
+						// console.log(data)
 					},
 					fail: (err) => {
 						console.log(err)
@@ -63,7 +65,14 @@
 			//获取手机号
 			getPhoneNumber(res) {
 				console.log(res)
-				this.getDataTel(res.detail)
+				if(res.detail.errno) {
+					uni.navigateTo({
+						url: '/pages/login/telLogin'
+					})
+				} else {
+					this.getDataTel(res.detail)
+				}
+				
 			},
 			//手机号解密
 			async getDataTel(e) {
@@ -71,9 +80,28 @@
 					iv:e.iv,
 					encryptData:e.encryptedData
 				}
-				console.log(data,'data')
+				// console.log(data,'data')
 				let res = await getData(data)
-				console.log(res)
+				// console.log(res)
+				this.tel = res.data.phoneNumber
+				this.wLogin(res.data.phoneNumber)
+			},
+			//微信登录
+			async wLogin(e) {
+				let data = {
+					open_id: this.openId,
+					module: e
+				}
+				let res =  await wechatLogin(data)
+				// console.log(res)
+				this.userId = res.user_id
+				uni.setStorage({
+					key:'userId',
+					data: res.user_id,
+					success() {
+						// console.log("123")
+					}
+				})
 			}
 		},
 		onLoad() {
@@ -81,7 +109,9 @@
 		}
 	}
 </script>
-
+<style>
+	@import url("../../static/css/common.css");
+</style>
 <style lang="less">
 	.page {
 		overflow: hidden;

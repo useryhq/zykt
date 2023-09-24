@@ -40,10 +40,10 @@ export function request(url, method, data, opt) {
                 'message': '连接服务器失败'
               })
               if (res.statusCode == 405) {
-				  // 跳转登录
-                // uni.navigateTo({
-                //   url: ''
-                // });
+				  跳转登录
+                uni.navigateTo({
+                  url: '/pages/login/login'
+                });
               }
             }
   
