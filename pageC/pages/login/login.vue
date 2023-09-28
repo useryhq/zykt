@@ -16,7 +16,7 @@
 <script>
 	import {
 		getOpenID,getData,wechatLogin
-	} from '../../static/js/api.js'
+	} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
@@ -67,7 +67,7 @@
 				console.log(res)
 				if(res.detail.errno) {
 					uni.navigateTo({
-						url: '/pages/login/telLogin'
+						url: '/pageC/pages/login/telLogin'
 					})
 				} else {
 					this.getDataTel(res.detail)
@@ -110,7 +110,7 @@
 	}
 </script>
 <style>
-	@import url("../../static/css/common.css");
+	@import url("../../../static/css/common.css");
 </style>
 <style lang="less">
 	.page {

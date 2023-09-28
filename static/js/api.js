@@ -197,3 +197,22 @@ export function wechatLogin(data) {
 		})
 	})
 }
+//获取手机登录验证码
+export function telLogin(data) {
+	let url = '/common/send-message'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//获取注册协议
+export function registrationAgreement() {
+	let url = '/common/protocal'
+	return new Promise((resolve,reject) => {
+		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}
+
