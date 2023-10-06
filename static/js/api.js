@@ -202,7 +202,7 @@ export function telLogin(data) {
 	let url = '/common/send-message'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
-			resolve(res.data)
+			resolve(res)
 		})
 	})
 }

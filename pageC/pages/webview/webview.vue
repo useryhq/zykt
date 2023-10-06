@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<web-view :webview-styles="webviewStyles" :src='htmlSrc'></web-view>
+		<web-view :webview-styles="webviewStyles" src='https://m.zykt.com/pages/show?id=15'></web-view>
 	</view>
 </template>
 
@@ -13,7 +13,8 @@
 						color: '#FF3333'
 					}
 				},
-				htmlSrc:  ''
+				htmlSrc:'',
+				title: ''
 			};
 		},
 		onLoad(option) {

@@ -6,7 +6,10 @@
 			</view>
 			<view class="block_1 mt_50 flex-row justify-between align-center">
 				<input class="block-num" type="number" placeholder="请输入验证码" placeholder-style="color:#999;font-size:24rpx">
-				<view class="num-btn">
+				<view v-if="flag" class="time-text">
+					<text>{{time}}</text>S
+				</view>
+				<view v-else class="num-btn" @click="getCode">
 					获取验证码
 				</view>
 			</view>
@@ -27,7 +30,10 @@
 		data() {
 			return {
 				tel: '',
-				prompt: ''
+				prompt: '',
+				reg: '',
+				time: '60',
+				flag: false
 			};
 		},
 		methods: {
@@ -35,8 +41,8 @@
 			inTel(e) {
 				let reg = /^1[3456789]\d{9}$/
 				if(!reg.test(e.detail.value)) {
-							  this.prompt = '请输入正确的电话号码'
-							  this.$refs.popup.open('top')
+					this.prompt = '请输入正确的电话号码'
+					this.$refs.popup.open('top')
 				} else {
 					this.tel = e.detail.value
 				}
@@ -44,22 +50,44 @@
 			},
 			//获取验证码
 			async getCode() {
-				let data = {
-					mobile: this.tel
+				if(this.tel) {
+					let data = {
+						mobile: this.tel
+					}
+					let res = await telLogin(data)
+					console.log(res)
+					if(res.code == 200) {
+						this.flag = true
+						const timer = setInterval(() => {
+							if(this.time > 0) {
+								this.time --
+							}else {
+								this.flag = false
+								clearInterval(timer)
+							}
+						},1000) 
+						
+					}
+				}else {
+					this.prompt = '请输入正确的电话号码'
+					this.$refs.popup.open('top')
 				}
-				let res = telLogin(data)
-				console.log(res)
+				
 			},
 			//获取注册协议
 			async getRegistrationAgreement() {
-				let res = registrationAgreement()
+				let res = await registrationAgreement()
+				this.reg = JSON.stringify(res)
 				console.log(res)
 			},
 			toWebview() {
 				uni.navigateTo({
-					url: '/pageC/pages/webview/webview?src='
+					url: '/pageC/pages/webview/webview?src=' + this.reg
 				})
 			}
+		},
+		onLoad() {
+			this.getRegistrationAgreement()
 		}
 	}
 </script>
@@ -87,6 +115,10 @@
 			color: #333;
 			.block-num {
 				width: 200rpx;
+			}
+			.time-text {
+				font-size: 22rpx;
+				color: #E63C31;
 			}
 			.num-btn {
 				width: 116rpx;
