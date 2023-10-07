@@ -63,7 +63,7 @@
 							user_id: ''
 					}
 					let res = await wantBuyDetail(data)
-					// console.log(res)
+					console.log(res)
 					this.info = res.info
 					this.loopData0 = res.recommand
 				},

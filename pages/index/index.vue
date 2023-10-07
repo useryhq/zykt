@@ -26,7 +26,7 @@
 							<view class="image-wrapper_2 flex-col">
 								<text class="iconfont label_3">&#xe60e;</text>
 							</view>
-							<view class="text-group_2 flex-col justify-between">
+							<view class="text-group_2 flex-col justify-between" @click="buyKt">
 								<text class="text_3">我要买空调</text>
 								<text class="text_4">一键发布&nbsp;&nbsp;快速匹配</text>
 							</view>
@@ -37,7 +37,7 @@
 							<view class="image-wrapper_3 flex-col">
 								<text class="iconfont label_4">&#xe6ac;</text>
 							</view>
-							<view class="text-group_3 flex-col justify-between">
+							<view class="text-group_3 flex-col justify-between" @click="sellKt">
 								<text class="text_5">我要卖空调</text>
 								<text class="text_6">一键发布&nbsp;&nbsp;快速匹配</text>
 							</view>
@@ -216,6 +216,42 @@
 				let res = await getCityList()
 				this.localData = res
 				// console.log(res)
+			},
+			//买空调一键发布
+			buyKt() {
+				uni.getStorage({
+					key: 'userId',
+					success:(res) => {
+						console.log(res)
+						uni.navigateTo({
+							url: '/pageA/pages/my/releaseWantBuy'
+						})
+					},
+					fail:(res) => {
+						console.log(res)
+						uni.navigateTo({
+							url: '/pageC/pages/login/login'
+						})
+					}
+				})
+			},
+			//卖空调一键发布
+			sellKt() {
+				uni.getStorage({
+					key: 'userId',
+					success:(res) => {
+						console.log(res)
+						uni.navigateTo({
+							url: '/pageC/pages/wantToBuy/wantToBuy'
+						})
+					},
+					fail:(res) => {
+						console.log(res)
+						uni.navigateTo({
+							url: '/pageC/pages/login/login'
+						})
+					}
+				})
 			},
 			//切换商家个人
 			choose_status(e) {

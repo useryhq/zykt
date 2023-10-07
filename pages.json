@@ -516,11 +516,13 @@
             }
             
         },{
-            "path" : "pages/webview/webview",
+            "path" : "pages/regAgreement/regAgreement",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "入驻协议",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationBarBackgroundColor": "#ffffff"
             }
             
         }]

@@ -146,7 +146,7 @@
     		<image v-for="(item,index) in images" :src="imgUrl+item" :key="index"></image>
     	</view>
     </view>
-	<view v-if="price == '询价'" class="words-written">
+	<view v-if="info.is_xunjia == 1" class="words-written">
 		<view class="written_text_icon">
 			<text class="iconfont written_icon">&#xe649;</text>
 			<text class="written_text">留言</text>
@@ -167,7 +167,7 @@
 			</swiper-item>
 		</swiper>	
 	</view>
-    <view v-if="price != '询价'" class="group_17 flex-row">
+    <view v-if="info.is_xunjia == 0" class="group_17 flex-row">
       <view class="image-text_8 flex-col justify-around" @click="tabClick(1)">
         <text class="iconfont label_9" :class="{'tab_color' : store == 1}">&#xe676;</text>
         <text class="text-group_10">店铺</text>
@@ -187,7 +187,7 @@
         <text class="text_32">立即购买</text>
       </view>
     </view>
-	<view v-if="price == '询价'" class="group_17 xj flex-row justify-around">
+	<view v-if="info.is_xunjia == 1" class="group_17 xj flex-row justify-around">
 	  <view class="image-text_8 flex-col justify-around" @click="tabClick(1)">
 	    <text class="iconfont label_9" :class="{'tab_color' : store == 1}">&#xe676;</text>
 	    <text class="text-group_10">店铺</text>
@@ -211,18 +211,18 @@
 			<view class="img_price flex-row align-center">
 				<image :src="imgUrl+images[0]"></image>
 				<view class="price_choose flex-col justify-between">
-					<text class="price">￥{{info.market_price}}</text>
-					<text class="exite">库存：2件</text>
+					<text class="price">￥{{price}}</text>
+					<text class="exite">库存：{{storeCount}}件</text>
 					<text class="choose">已选：{{choose}}</text>
 				</view>
 			</view>
-			<view class="specifications_block flex-col align-start">
+			<view v-if="specifications !== undefined && specifications!=null && specifications.length > 0" class="specifications_block flex-col align-start">
 				<view class="block_text">规格</view>
-				<text class="specifications_text" :class="{'click_specifications_text' : specificationsIndex == index}" v-for="(item,index) in specifications" :key="index" @click="clickSpecifications(item,index)">{{item}}</text>
+				<text class="specifications_text" :class="{'click_specifications_text' : specificationsIndex == index}" v-for="(item,index) in specifications" :key="index" @click="clickSpecifications(item,index)">{{item.name}}</text>
 			</view>
 			<view class="product_number flex-row justify-between">
 				<view class="number_text">购买数量</view>
-					<uni-number-box :value="numberValue" @change="change"></uni-number-box>				
+					<uni-number-box :value="numberValue" :max="storeCount" @change="change"></uni-number-box>				
 			</view>
 			<view class="buy_btn">确定</view>
 	    </view>	
@@ -272,16 +272,15 @@ export default {
 		join: 0,
 		buy: 0,
 		id: '',
+		price: '',
 		choose: '',
+		storeCount: '',
 		numberValue: 0,
 		specificationsIndex: 0,
 		buyBlock: false,
 		buyBlock2: false,
 		info: {},
-		specifications: {
-			a: '3匹颐享Ⅲ26-40㎡【一价全包版】',
-			b: '10匹一拖二变频',
-		},
+		specifications: [],
 		images:[],
 		appraise: [],
 		wordsWritten: [{
@@ -310,8 +309,16 @@ export default {
 		  this.info = res.info
 		  this.appraise = res.commonentInfo
 		  this.ktParameter = res.specInfo
+		  this.price = res.info.market_price
+		  this.storeCount = res.info.store_count
+		  this.specifications = res.info.spec
 		  this.images.push(res.info.thumb)
-		  console.log(this.images)
+		  console.log(this.specifications,"123")
+		  if(this.specifications !== undefined && this.specifications.length > 0) {
+			  console.log("true")
+		  } else {
+			  console.log("false")
+		  }
 	  },
 	  //顶部nav切换，定位到相应栏目
 	  navChange(index) {
@@ -374,11 +381,16 @@ export default {
 	  },
 	  //购买数量改变
 	  change(value) {
-	  				this.numberValue = value
-	  			},
+		  if(value <= this.storeCount) {
+			  console.log(value)
+			  this.numberValue = value
+		  }		
+	  		},
 	//选择购买规格	
 	  clickSpecifications(e,f) {
-		  this.choose = e
+		  this.choose = e.name
+		  this.price = e.price
+		  this.storeCount = e.store_count
 		  this.specificationsIndex = f
 	  },
 	  //关闭购买弹窗

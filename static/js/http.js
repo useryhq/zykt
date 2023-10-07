@@ -42,7 +42,7 @@ export function request(url, method, data, opt) {
               if (res.statusCode == 405) {
 				  跳转登录
                 uni.navigateTo({
-                  url: '/pageC/pages/login/telLogin'
+                  url: '/pageC/pages/login/login'
                 });
               }
             }

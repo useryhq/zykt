@@ -7,7 +7,7 @@
 		<button class="button color_1" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">
 			微信一键登录
 		</button>
-		<view class="button color_2">
+		<view class="button color_2" @click="toTelLogin">
 			手机验证码登录
 		</view>
 	</view>
@@ -101,6 +101,15 @@
 					success() {
 						// console.log("123")
 					}
+				})
+				uni.navigateTo({
+					url: '/pages/index/index'
+				})
+			},
+			//跳转手机号登录
+			toTelLogin() {
+				uni.navigateTo({
+					url: '/pageC/pages/login/telLogin'
 				})
 			}
 		},

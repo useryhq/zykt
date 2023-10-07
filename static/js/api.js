@@ -198,7 +198,7 @@ export function wechatLogin(data) {
 	})
 }
 //获取手机登录验证码
-export function telLogin(data) {
+export function telCode(data) {
 	let url = '/common/send-message'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
@@ -215,4 +215,12 @@ export function registrationAgreement() {
 		})
 	})
 }
-
+//手机号登录
+export function telLogin(data) {
+	let url = '/login/login'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
