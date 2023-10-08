@@ -5,7 +5,7 @@
 		  <view class="group_2 flex-col">
 		    <view class="text-wrapper_1 flex-row align-center">
 		      <text class="text_2">商品标题：</text>
-		      <input class="text_3" @blur="inCname" placeholder="请输入您要求购的商品" />
+		      <input class="text_3" @blur="inCname" placeholder="请输入商品的名称品牌等" />
 		    </view>
 			<view class="text-wrapper_1 flex-row align-center justify-between">
 			  <text class="text_2">商品分类：</text>

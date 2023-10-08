@@ -68,15 +68,15 @@
 				console.log(this.comList)
 			},
 			// 跳转产品列表页
-			// togoodList(id) {
-			// 	uni.navigateTo({
-			// 		url: "./goodsList?c_id=" + id
-			// 	})
-			// },
+			togoodList(id) {
+				uni.navigateTo({
+					url: "./goodsList?c_id=" + id
+				})
+			},
 			async GetCategory() {
 				let res = await category()
 				this.list = res.lists
-				// console.log(this.list)
+				console.log(this.list)
 			}
 		}
 	}

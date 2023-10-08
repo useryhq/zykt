@@ -113,6 +113,9 @@
 						uni.navigateTo({
 							url: '/pages/index/index'
 						})
+					} else if(res.code == 0) {
+						this.prompt = res.msg
+						this.$refs.popup.open('top')
 					}
 				}
 			},

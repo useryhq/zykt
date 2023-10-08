@@ -224,3 +224,21 @@ export function telLogin(data) {
 		})
 	})
 }
+//个人中心信息
+export function my(data) {
+	let url = '/user/my'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//个人发布求购
+export function releaseWantBuy(data) {
+	let url = '/user/qiugou-publish'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}

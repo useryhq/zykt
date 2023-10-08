@@ -162,7 +162,8 @@
 		brandHot,
 		wantBuy,
 		getCity,
-		getCityList
+		getCityList,
+		my
 	} from '../../static/js/api.js'
 	export default {
 		data() {
@@ -217,18 +218,54 @@
 				this.localData = res
 				// console.log(res)
 			},
+			//获取个人信息判断是否为商家
+			//卖空调
+			async getMy1(e) {
+				let data = {
+					userid: e
+				}
+				let res =  await my(data)
+				console.log(res)
+				if(res.shopStatus == 2) {
+					uni.navigateTo({
+						url: '/pageB/pages/business/releaseCommodity'
+					})
+				}else {
+					uni.navigateTo({
+						url: '/pageA/pages/my/releaseCommodity'
+					})
+				}
+			},
+			//买空调
+			async getMy2(e) {
+				let data = {
+					userid: e
+				}
+				let res =  await my(data)
+				console.log(res)
+				if(res.shopStatus == 2) {
+					uni.navigateTo({
+						url: '/pageB/pages/my/releaseWantBuy'
+					})
+				}else {
+					uni.navigateTo({
+						url: '/pageA/pages/my/releaseWantBuy'
+					})
+				}
+			},
 			//买空调一键发布
 			buyKt() {
 				uni.getStorage({
 					key: 'userId',
 					success:(res) => {
-						console.log(res)
-						uni.navigateTo({
-							url: '/pageA/pages/my/releaseWantBuy'
-						})
+						// console.log(res)
+						this.getMy2(res.data)
+						// uni.navigateTo({
+						// 	url: '/pageA/pages/my/releaseWantBuy'
+						// })
 					},
 					fail:(res) => {
-						console.log(res)
+						// console.log(res)
 						uni.navigateTo({
 							url: '/pageC/pages/login/login'
 						})
@@ -240,13 +277,14 @@
 				uni.getStorage({
 					key: 'userId',
 					success:(res) => {
-						console.log(res)
-						uni.navigateTo({
-							url: '/pageC/pages/wantToBuy/wantToBuy'
-						})
+						// console.log(res)
+						this.getMy1(res.data)
+						// uni.navigateTo({
+						// 	url: '/pageA/pages/my/releaseCommodity'
+						// })
 					},
 					fail:(res) => {
-						console.log(res)
+						// console.log(res)
 						uni.navigateTo({
 							url: '/pageC/pages/login/login'
 						})
@@ -271,8 +309,20 @@
 					})
 				} else if (e == 5) {
 					//跳转我的
-					uni.navigateTo({
-						url: '/pageA/pages/my/my'
+					uni.getStorage({
+						key: 'userId',
+						success:(res) => {
+							// console.log(res)
+							uni.navigateTo({
+								url: '/pageA/pages/my/my?userid=' + res.data
+							})
+						},
+						fail:(res) => {
+							// console.log(res)
+							uni.navigateTo({
+								url: '/pageC/pages/login/login'
+							})
+						}
 					})
 				}
 			},

@@ -159,7 +159,7 @@ export default {
 	//返回个人中心
 	toMy() {
 		uni.navigateBack({
-			delta: 2
+			delta: 1
 		})
 	},
 	// 跳转店铺装修

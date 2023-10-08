@@ -58,14 +58,27 @@
 			methods: {
 				//获取求购详情数据
 				async getWantBuyDetail(option) {
-					let data = {
-							id:option,
-							user_id: ''
+					const user = uni.getStorageSync('userId')
+					if(user) {
+						let data = {
+								id:option,
+								user_id: user
+						}
+						let res = await wantBuyDetail(data)
+						console.log(res)
+						this.info = res.info
+						this.loopData0 = res.recommand
+					}else {
+						let data = {
+								id:option,
+								user_id: ''
+						}
+						let res = await wantBuyDetail(data)
+						console.log(res)
+						this.info = res.info
+						this.loopData0 = res.recommand
 					}
-					let res = await wantBuyDetail(data)
-					console.log(res)
-					this.info = res.info
-					this.loopData0 = res.recommand
+					
 				},
 				//点击推荐重新请求求购详情
 				reRequst(item) {

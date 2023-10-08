@@ -45,7 +45,7 @@
 		    {{info.goods_name}}
 		  </text>
 		  
-		  <view class="box_3 flex-row justify-between">
+		  <view v-if="info.chengse" class="box_3 flex-row justify-between">
 		    <view class="text-wrapper_2">
 		      <text class="text_8">成色：</text>
 			  <text class="text_10">{{info.chengse}}成新</text>
@@ -151,7 +151,12 @@
 			<text class="iconfont written_icon">&#xe649;</text>
 			<text class="written_text">留言</text>
 		</view>
-		<textarea class="written_textarea" disable-default-padding='true' auto-blur='true' cols="30" rows="10" placeholder='有问题就点击问问更多细节吧!' placeholder-style='color:#333;font-size:24rpx;'></textarea>
+		<textarea @input="inTextarea" @blur="inTextareaEnd" class="written_textarea" disable-default-padding='true' auto-blur='true' cols="30" rows="10" placeholder='有问题就点击问问更多细节吧!' placeholder-style='color:#333;font-size:24rpx;'></textarea>
+		<view v-if="send" class="mt_20 justify-end">
+			<view class="send">
+				发送
+			</view>
+		</view>
 		<swiper class="written_block" vertical="true" :autoplay="true" :interval="3000" :duration="1000">
 			<swiper-item v-for="(item,index) in wordsWritten" :key="index">
 					<view class="block_4 flex-row align-center">
@@ -239,20 +244,20 @@
 				<view class="store_name flex-row align-center">
 					<view class="block_text flex-row align-center">
 						<text class="iconfont store_icon">&#xe676;</text>
-						<text class="name_text">河南诚鑫暖通设备</text>
+						<text class="name_text">{{info.seller.shop_name}}</text>
 						<text class="in_store">进店</text>
 					</view>
 				</view>
 				<view class="store_address flex-row align-center">
 					<text class="iconfont store_icon">&#xe678;</text>
-					<text class="name_text">地址：郑州市金水区北三环花园路</text>
+					<text class="name_text">地址：{{info.province_id}}{{info.city_id}}{{info.area_id}}</text>
 				</view>
 				<view class="flex-row align-center">
 					<text class="iconfont store_icon">&#xe681;</text>
-					<text class="name_text">电话:13213027456</text>
+					<text class="name_text">电话:{{info.seller.mobile}}</text>
 				</view>
 			</view>		
-			<view class="buy_btn2" @click="openTel()">拨打电话</view>
+			<view class="buy_btn2" @click="openTel(info.seller.mobile)">拨打电话</view>
 			<view class="point_out">建议同城当面验货交易,请不要提前私下转账付款或付定金或付押金，可能会被拉黑物财两空;私下交易转账付款造成的纠纷、损失及不法侵害本平台概不负责;</view>
 	    </view>	
 	</view>
@@ -277,6 +282,8 @@ export default {
 		storeCount: '',
 		numberValue: 0,
 		specificationsIndex: 0,
+		send: false,
+		textarea: '',
 		buyBlock: false,
 		buyBlock2: false,
 		info: {},
@@ -368,6 +375,18 @@ export default {
 			  this.collect = e
 		  } else if(e == 3) {
 			  this.shoppingCart = e
+			  let height = 0
+			  uni.createSelectorQuery().select('.goods-detail-nav').boundingClientRect(data => (
+			  height = data.height
+			  )).exec()
+			  uni.createSelectorQuery().select('.page').boundingClientRect(res => {
+			  	uni.createSelectorQuery().select('.words-written').boundingClientRect(data => {
+			  		uni.pageScrollTo({
+			  			duration:100,
+			  			scrollTop: data.top - res.top -height
+			  		})
+			  	}).exec()
+			  }).exec()
 		  } else if(e == 4) {
 			  this.join = e
 			  uni.navigateTo({
@@ -378,6 +397,20 @@ export default {
 		  } else {
 			  this.buyBlock2 = true
 		  }
+	  },
+	  //输入留言
+	  inTextarea(e) {
+		  console.log(e)
+		  if(e.detail.cursor > 0) {
+			  this.send = true
+		  }else {
+			  this.send = false
+		  }
+	  },
+	  //留言输入结束
+	  inTextareaEnd(e) {
+		  console.log(e)
+		  this.textarea = e.detail.value
 	  },
 	  //购买数量改变
 	  change(value) {
@@ -402,9 +435,9 @@ export default {
 		  }		  
 	  },
 	  //拨打电话
-	  openTel() {
+	  openTel(e) {
 		  uni.makePhoneCall({
-		  	phoneNumber: '18838000000'
+		  	phoneNumber: e
 		  });
 	  },
 	  //跳转购物车
@@ -1056,6 +1089,16 @@ export default {
 		border: 1rpx solid #BFBFBF;
 		border-radius: 10rpx;
 		font-size: 24rpx;
+	}
+	.send {
+		width: 100rpx;
+		height: 40rpx;
+		border-radius: 10rpx;
+		background-color: #E63C31;
+		font-size: 22rpx;
+		color: #fff;
+		line-height: 40rpx;
+		text-align: center;
 	}
 	.written_block {
 		width: 690rpx;

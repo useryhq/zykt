@@ -4,14 +4,15 @@
     <view class="group_1 flex-col">
       <view class="box_1 flex-col">
         <view class="box_2 flex-row align-center">
-          <image class="single-avatar_1" src="../../../static/bg/7220921.png"></image>
+          <image class="single-avatar_1" :src="upImgUrl + userInfo.thumb"></image>
           <view class="text-group_1 flex-col justify-between">
-            <text class="text_2">lightdrawlightdraw</text>
-            <text class="text_3">136****1482</text>
+            <text class="text_2">{{userInfo.nick_name}}</text>
+            <text class="text_3">{{userInfo.mobile}}</text>
           </view>
 		  <text class="iconfont icon_2">&#xe67e;</text>
         </view>
-        <view class="box_3 flex-row align-center">
+		<view v-if="res.shopStatus == 2" class="button_4" @click="toBusiness">进入商家中心</view>
+        <view v-else class="box_3 flex-row align-center">
           <text class="text_4">开通店铺</text>
           <text class="text_5">享受专属权益</text>
           <view class="button_1 flex-col" @click="onClick_1">
@@ -36,34 +37,34 @@
         </view>
         <view class="text-wrapper_1 flex-row justify-between">
           <text class="text_9">我的订单</text>
-          <text class="text_10" @click="toOrderList(0)">全部（10）</text>
+          <text class="text_10" @click="toOrderList(0)">全部（{{res.all}}）</text>
         </view>
         <view class="group_5 flex-col">
           <view class="box_5 flex-row justify-between">
             <view class="image-text_1 flex-col align-center" @click="toOrderList(1)">
 				<text class="iconfont icon_5">&#xe675;</text>
                 <text class="text_11">待付款</text>
-                <text class="text_12">6</text>
+                <text class="text_12">{{res.wait_pay}}</text>
             </view>
             <view class="image-text_1 flex-col align-center" @click="toOrderList(2)">
 			<text class="iconfont icon_5">&#xe67a;</text>
               <text class="text_11">待发货</text>
-			  <text class="text_12 color">6</text>
+			  <text class="text_12 color">{{res.wait_send}}</text>
             </view>
 			<view class="image-text_1 flex-col align-center" @click="toOrderList(3)">
 			<text class="iconfont icon_5">&#xe672;</text>
 			  <text class="text_11">待收货</text>
-			  <text class="text_12 color">6</text>
+			  <text class="text_12 color">{{res.wait_receive}}</text>
 			</view>
            <view class="image-text_1 flex-col align-center" @click="toOrderList(4)">
            <text class="iconfont icon_5">&#xe673;</text>
              <text class="text_11">待评价</text>
-             <text class="text_12 color">6</text>           
+             <text class="text_12 color">{{res.wait_comment}}</text>           
            </view>
 		   <view class="image-text_1 flex-col align-center" @click="toAfterSalesList">
 		   <text class="iconfont icon_5">&#xe6ac;</text>
 		     <text class="text_11">退款/售后</text>
-		     <text class="text_12">6</text>
+		     <text class="text_12">{{res.refund}}</text>
 		   </view>
           </view>
         </view>
@@ -90,13 +91,26 @@
   </view>
 </template>
 <script>
+	import {my} from '../../../static/js/api.js'
 export default {
   data() {
     return {
+		upImgUrl:this.$upImgUrl.upImg_base_url,
+		res: '',
+		userInfo: '',
       constants: {}
     };
   },
   methods: {
+	  //获取个人中心信息
+	  async getMy(e) {
+	  	let data = {
+	  		userid: e
+	  	}
+	  	this.res = await my(data)
+		this.userInfo = this.res.userInfo
+	  	console.log(this.res)
+		},
 	  // 跳转商家入驻
     onClick_1() {
       uni.navigateTo({
@@ -150,7 +164,17 @@ export default {
 		uni.navigateTo({
 			url: '/pageA/pages/my/myMessage'
 		})
+	},
+	//开通店铺后跳转商家中心
+	toBusiness() {
+		uni.navigateTo({
+			url: '/pageB/pages/business/business'
+		})
 	}
+  },
+  onLoad(option) {
+  	console.log(option)
+	this.getMy(option.userid)
   }
 };
 </script>
@@ -167,7 +191,7 @@ export default {
   .group_1 {
     width: 750rpx;
     .box_1 {
-      width: 749rpx;
+      width: 750rpx;
       height: 232rpx;
       background-color: #4182FE;
 	  position: relative;
@@ -218,6 +242,19 @@ export default {
 		  color: #fff;
         }
       }
+	  .button_4 {
+	    width: 170rpx;
+	    height: 40rpx;
+	    background-color: #E63C31;
+	    border-radius: 20rpx;
+	    font-size: 22rpx;
+	    color: #fff;
+	    line-height: 40rpx;
+	    text-align: center;
+		position: absolute;
+		right: 50rpx;
+		bottom: 20rpx;
+	  }
       .box_3 {
         width: 630rpx;
         height: 35rpx;
