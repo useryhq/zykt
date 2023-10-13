@@ -170,6 +170,15 @@ export function productDetail(data) {
 		})
 	})
 }
+// 商家商品详情留言提交
+export function sendMessage(data) {
+	let url = '/user/send-messages'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
 //获取小程序openID
 export function getOpenID(data) {
 	let url = '/common/get-openid'

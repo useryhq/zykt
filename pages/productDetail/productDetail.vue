@@ -147,16 +147,18 @@
     	</view>
     </view>
 	<view v-if="info.is_xunjia == 1" class="words-written">
+		<form @submit="postSendMessage">
 		<view class="written_text_icon">
 			<text class="iconfont written_icon">&#xe649;</text>
 			<text class="written_text">留言</text>
 		</view>
 		<textarea @input="inTextarea" @blur="inTextareaEnd" class="written_textarea" disable-default-padding='true' auto-blur='true' cols="30" rows="10" placeholder='有问题就点击问问更多细节吧!' placeholder-style='color:#333;font-size:24rpx;'></textarea>
 		<view v-if="send" class="mt_20 justify-end">
-			<view class="send">
+			<button form-type="submit" class ="send">
 				发送
-			</view>
+			</button>
 		</view>
+		</form>
 		<swiper class="written_block" vertical="true" :autoplay="true" :interval="3000" :duration="1000">
 			<swiper-item v-for="(item,index) in wordsWritten" :key="index">
 					<view class="block_4 flex-row align-center">
@@ -261,10 +263,13 @@
 			<view class="point_out">建议同城当面验货交易,请不要提前私下转账付款或付定金或付押金，可能会被拉黑物财两空;私下交易转账付款造成的纠纷、损失及不法侵害本平台概不负责;</view>
 	    </view>	
 	</view>
+	<uni-popup ref="popup" type="message">
+		<uni-popup-message type="warn" message="警告消息" :duration="3000">{{prompt}}</uni-popup-message>
+	</uni-popup>
   </view>
 </template>
 <script>
-	import {productDetail} from '../../static/js/api.js'
+	import {productDetail,sendMessage} from '../../static/js/api.js'
 export default {
   data() {
     return {
@@ -277,6 +282,7 @@ export default {
 		join: 0,
 		buy: 0,
 		id: '',
+		userid: '',
 		price: '',
 		choose: '',
 		storeCount: '',
@@ -301,6 +307,7 @@ export default {
 				message: '请问价格是多少',
 		}],
 		ktParameter: [],
+		prompt:'',
       constants: {}
     };
   },
@@ -326,6 +333,19 @@ export default {
 		  } else {
 			  console.log("false")
 		  }
+	  },
+	  //提交留言
+	  async postSendMessage() {
+		  let data = {
+			  userid: this.userid,
+			  type: '2',
+			  notes: this.textarea,
+			  goods_id: this.id
+		  }
+		  let res = await sendMessage(data) 
+		  console.log(res)
+		  this.prompt = res.msg
+		  this.$refs.popup.open('top')
 	  },
 	  //顶部nav切换，定位到相应栏目
 	  navChange(index) {
@@ -454,7 +474,14 @@ export default {
 	  }
   },
   onLoad(option) {
+	   this.id = option.id
 	  this.getProductDetail(option.id)
+	  uni.getStorage({
+	  	key: 'userId',
+	  	success: (res) => {
+	  		this.userid = res.data
+	  	}
+	  })
   }
 };
 </script>
