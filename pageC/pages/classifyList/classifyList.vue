@@ -18,7 +18,7 @@
 							</view>
 						</view>
 						<view class="right-img-block">
-							<view class="img-font-block" v-for="(i,c) in item.child" :key="c" @tap="togoodList(i.id)">
+							<view class="img-font-block" v-for="(i,c) in item.child" :key="c" @tap="toHotProduct(i.id)">
 								<image :src="upImgUrl + i.banner" mode="aspectFit" lazy-load></image>
 								<view>
 									{{i.name}}
@@ -41,10 +41,13 @@
 				activeKey: 1,
 				list: [],
 				listIndex: 1,
+				use: ''
 			};
 		},
-		onLoad() {
+		onLoad(option) {
 			this.GetCategory()
+			// console.log(option)
+			this.use = option.use
 			// this.activeKey = option.c_id
 			// this.listIndex = option.c_id
 		},
@@ -65,29 +68,30 @@
 			itemClick(index) {
 				this.listIndex = index
 				this.activeKey = index
-				console.log(this.comList)
+				// console.log(this.comList)
 			},
 			// 跳转产品列表页
-			togoodList(id) {
+			toHotProduct(id) {
 				uni.navigateTo({
-					url: "./goodsList?c_id=" + id
+					url: '/pages/hotProduct/hotProduct?cate_id=' + id + '&use=' + this.use
 				})
 			},
 			async GetCategory() {
 				let res = await category()
 				this.list = res.lists
-				console.log(this.list)
+				// console.log(this.list)
 			}
-		}
+		},
 	}
 </script>
-
+<style>
+	@import url("../../../static/css/common.css");
+</style>
 <style lang="less">
 	page {
 		width: 100%;
 		height: 100%;
 	}
-
 	.classify-list {
 		width: 100%;
 		height: 100%;

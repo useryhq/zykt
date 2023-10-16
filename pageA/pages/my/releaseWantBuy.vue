@@ -21,10 +21,9 @@
 							<text class="text_6">采购数量：</text>
 							<input class="input_1" @blur="inNum" type="number" placeholder="请输入采购数量">
 						</view>
-						<view class="image-text_1 flex-row justify-between">
-							<text class="text-group_1">台</text>
-							<text class="iconfont icon_2">&#xe686;</text>
-						</view>
+						<uni-data-select class="text-group_1" :localdata="danweiData" :clear="false" @change="chooseDanwei"></uni-data-select>
+							<!-- <text class="text-group_1">台</text>
+							<text class="iconfont icon_2">&#xe686;</text> -->
 					</view>
 					<view class="block_2 flex-row justify-between align-center">
 						<view class="flex-row align-center">
@@ -51,23 +50,44 @@
 	</template>
 	<script>
 		import {
-			releaseWantBuy
+			releaseWantBuy,other
 		} from '../../../static/js/api.js'
 		export default {
 			data() {
 				return {
 					userid: '',
+					danwei: '',
 					cname: '',
 					name: '',
 					tel: '',
 					num: '',
+					unit: '',
 					date: '请选择截止日期',
 					text: '',
 					prompt: '',
 					constants: {}
 				};
 			},
+			computed: {
+				danweiData() {
+					let dataList = []
+					// console.log(this.danwei)
+					for(let i = 0;i<this.danwei.length;i++) {
+						let json = {value:i,text:this.danwei[i]}
+						dataList.push(json)
+					}
+					// console.log(dataList)
+					return dataList
+				}
+			},
 			methods: {
+				//获取单位
+				async getOther() {
+					let res = await other()
+					this.danwei = res.danwei
+					// console.log(res)
+					// console.log(typeof(this.danwei),"123")
+				},
 				//输入商品
 				inCname(e) {
 					this.cname = e.detail.value
@@ -90,6 +110,17 @@
 				//输入求购数量
 				inNum(e) {
 					this.num = e.detail.value
+				},
+				//选择单位
+				chooseDanwei(e) {
+					// console.log(e)
+					this.danweiData.forEach((item) => {
+						if(item.value == e) {
+							this.unit = item.text
+						}
+					})
+					
+					// console.log(this.unit)
 				},
 				//输入描述
 				inText(e) {
@@ -132,8 +163,11 @@
 					} else if (this.num == '') {
 						this.prompt = '请输入采购数量'
 						this.$refs.popup.open('top')
+					} else if (this.unit == '') {
+						this.prompt = '请选择采购单位'
+						this.$refs.popup.open('top')
 					} else if (this.date == '请选择截止日期') {
-						this.prompt = '请选择截止日期'
+						this.prompt = '请选择采购单位'
 						this.$refs.popup.open('top')
 					} else {
 						let data = {
@@ -143,7 +177,7 @@
 							num: this.num,
 							date: this.date,
 							describe: this.text,
-							danwei: '台'
+							danwei: this.unit
 						}
 						this.postReleaseWantBuy(data)
 						console.log(this.text)
@@ -152,6 +186,7 @@
 				}
 			},
 			onLoad() {
+				this.getOther()
 				uni.getStorage({
 					key: 'userId',
 					success: (res) => {
@@ -241,13 +276,9 @@
 							color: #333;
 						}
 
-						.image-text_1 {
-							width: 52rpx;
-							height: 24rpx;
-
 							.text-group_1 {
-								width: 22rpx;
-								height: 24rpx;
+								width: 120rpx;
+								height: 70rpx;
 								overflow-wrap: break-word;
 								color: rgba(34, 34, 34, 1);
 								font-size: 25rpx;
@@ -256,13 +287,11 @@
 								text-align: left;
 								white-space: nowrap;
 								line-height: 25rpx;
-							}
+								.uni-select {
+									border: none;
+								}
 
-							.icon_2 {
-								font-size: 24rpx;
-								color: #333;
 							}
-						}
 
 						.image-text_2 {
 							width: 510rpx;

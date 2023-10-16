@@ -163,12 +163,12 @@
 			<swiper-item v-for="(item,index) in wordsWritten" :key="index">
 					<view class="block_4 flex-row align-center">
 					  <text class="iconfont label_4">&#xe682;</text>
-					  <text class="text_19">{{item.tel}}</text>
-					  <text class="text_20">{{item.time}}</text>
+					  <text class="text_19">{{item.username}}</text>
+					  <text class="text_20">{{item.created_at}}</text>
 					</view>
 					<view class="text-wrapper_4">
 					  <text class="paragraph_2">
-					    {{item.message}}
+					    {{item.notes}}
 					  </text>
 					</view>
 			</swiper-item>
@@ -296,16 +296,7 @@ export default {
 		specifications: [],
 		images:[],
 		appraise: [],
-		wordsWritten: [{
-			tel: '136******2',
-				time: '2023-01-28',
-				message: '请问多久能发货',
-			},
-			{
-				tel: '136******2',
-				time: '2023-01-28',
-				message: '请问价格是多少',
-		}],
+		wordsWritten: [],
 		ktParameter: [],
 		prompt:'',
       constants: {}
@@ -327,6 +318,7 @@ export default {
 		  this.storeCount = res.info.store_count
 		  this.specifications = res.info.spec
 		  this.images.push(res.info.thumb)
+		  this.wordsWritten = res.notesInfo
 		  console.log(this.specifications,"123")
 		  if(this.specifications !== undefined && this.specifications.length > 0) {
 			  console.log("true")

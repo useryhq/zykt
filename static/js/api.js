@@ -143,6 +143,15 @@ export function goodsList(data) {
 		})
 	})
 }
+//分类跳转商品列表
+export function fGoodsList(data) {
+	let url = '/goods/goods-lists-by-cate'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
 //二手门店
 export function twoHand(data) {
 	let url = '/shop/near-by'
@@ -245,6 +254,24 @@ export function my(data) {
 //个人发布求购
 export function releaseWantBuy(data) {
 	let url = '/user/qiugou-publish'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//退货原因、快速、单位
+export function other() {
+	let url = '/common/other'
+	return new Promise((resolve,reject) => {
+		request(url,'GET').then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//商品对比数据
+export function pk(data) {
+	let url = '/goods/pk'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res)

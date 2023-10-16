@@ -145,16 +145,38 @@
   </view>
 </template>
 <script>
+	import {pk} from '../../../static/js/api.js'
 export default {
   data() {
     return {
+		contrastData: '',
       constants: {}
     };
   },
   methods: {
+	  async getPk() {
+		  let ids = ''
+		  for(let i= 0;i<this.contrastData.length;i++) {
+			  if(i == this.contrastData.length-1) {
+				  ids += this.contrastData[i].id
+			  } else {
+				  ids += this.contrastData[i].id + ',' 
+			  }
+		  }
+		  let data = {
+			  ids:ids
+		  }
+		  let res = await pk(data)
+		  console.log(res)
+				},
 	  toBack() {
 		  uni.navigateBack()
 	  }
+  },
+  onLoad(option) {
+	this.contrastData = JSON.parse(option.pk)
+  	console.log(option)
+	this.getPk()
   }
 };
 </script>

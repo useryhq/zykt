@@ -126,7 +126,7 @@
 	</view>
 </template>
 <script>
-	import {goodsList} from '../../static/js/api.js'
+import {goodsList, fGoodsList} from '../../static/js/api.js'
 	export default {
 		data() {
 			return {
@@ -155,12 +155,21 @@
 					brandDesc:'',
 					cengseDesc:''
 				}) {
-				console.log(data,"====")
+				// console.log(data,"====")
 				let res = await goodsList(data)
-				console.log(res,"res")
+				// console.log(res,"res")
 				this.ktlist = res.lists
 				
-				console.log(this.ktlist)
+				// console.log(this.ktlist)
+			},
+			// 分类跳转获取商品列表
+			async getFgoodsList(id) {
+				let data = {
+					cate_id: id
+				}
+				let res = await fGoodsList(data)
+				this.ktlist = res.lists
+				console.log(res)
 			},
 			//切换商家个人
 			choose_status(e) {
@@ -272,7 +281,7 @@
 			},
 			//上拉加载更多
 			async loadingMore() {
-				console.log(this.loading)
+				// console.log(this.loading)
 				if(this.loading !== 0)
 				return false
 				this.loading = 1
@@ -325,13 +334,13 @@
 				this.pkBlockadd ++
 				// console.log(this.pkBlockadd)
 				if(this.pkBlockadd > 3) {
-					console.log('=====')
+					// console.log('=====')
 					this.$refs.popup.open()
 					this.pkBlock = true
 					return
 				} else {
 					this.pkMessage.push({'title':e.goods_name,'id':e.goods_id})
-					console.log(this.pkMessage)
+					// console.log(this.pkMessage)
 					e.pk = false,
 					this.pkBlock = true
 				}
@@ -341,7 +350,7 @@
 				this.pkBlock = false
 			},
 			deleProduct(e) {
-				console.log(e)
+				// console.log(e)
 				if(this.pkBlockadd > 0) {
 					this.pkBlockadd --
 					for(let i = 0; i < this.ktlist.length; i++) {
@@ -371,28 +380,34 @@
 			// 跳转热门分类
 			toClassifyList() {
 				uni.navigateTo({
-					url: '/pageC/pages/classifyList/classifyList'
+					url: '/pageC/pages/classifyList/classifyList?use=' + this.use
 				})
 			},
 			//跳转对比详情
 			toContrastDetail() {
+				let data = JSON.stringify(this.pkMessage)
 				uni.navigateTo({
-					url: '/pageC/pages/contrastDetail/contrastDetail'
+					url: '/pageC/pages/contrastDetail/contrastDetail?pk=' + data
 				})
 			}
 		},
 		onLoad(option) {
-			console.log(option)
-			this.getGoodList({
-					use: option.item,
-					page: '20',
-					type: '2',
-					key: '',
-					priceDesc:'',
-					brandDesc:'',
-					cengseDesc:''
-				})
-			this.use = option.item
+			// console.log(option)
+			if(option.item) {
+				this.getGoodList({
+						use: option.item,
+						page: '20',
+						type: '2',
+						key: '',
+						priceDesc:'',
+						brandDesc:'',
+						cengseDesc:''
+					})
+				this.use = option.item
+			} else if(option.cate_id) {
+				this.getFgoodsList(option.cate_id)
+				this.use = option.use
+			}
 		},
 		onReachBottom() {
 			this.loadingMore()
@@ -482,6 +497,7 @@
 			position: relative;
 			width: 694rpx;
 			margin-left: 33rpx;
+			padding-bottom: 10rpx;
 			.text-wrapper_1 {
 				width: 665rpx;
 				height: 32rpx;

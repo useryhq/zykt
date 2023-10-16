@@ -71,10 +71,9 @@
 			<view class="group_6 flex-col">
 				<view class="section_3 flex-row justify-between">
 					<text class="text_7">最新求购</text>
-					<view class="image-text_10 flex-row justify-between" @click="TowantToBuy()">
+					<view class="image-text_10 flex-row align-center justify-between" @click="TowantToBuy()">
 						<text class="text-group_10">查看更多</text>
-						<image class="thumbnail_2" referrerpolicy="no-referrer"
-							src="/static/bg/ps9eqtt3izc6df1bfdwxikkb9lerbbb0sf89be13a8-4627-4296-a69e-c90609ca556f.png" />
+						<text class="iconfont thumbnail_2">&#xe666;</text>
 					</view>
 				</view>
 				<view class="section_7">
@@ -174,7 +173,7 @@
 				ktlist1: [],
 				ktlist2: [],
 				localData: [],
-				address: '郑州',
+				address: '郑州市',
 				addShow: false,
 				add: 2,
 				selectTab: 1,
@@ -398,9 +397,9 @@
 						uni.getLocation({
 							type: 'wgs84',
 							success: function(res) {
-								console.log("+++++++")
-								console.log('当前位置的经度：' + res.longitude);
-								console.log('当前位置的纬度：' + res.latitude);
+								// console.log("+++++++")
+								// console.log('当前位置的经度：' + res.longitude);
+								// console.log('当前位置的纬度：' + res.latitude);
 								that.indexGetCity(res.latitude,res.longitude)
 								let storage = {
 										lat: res.latitude,
@@ -459,7 +458,7 @@
 				this.address = e.item.itemobj.name
 				this.getIndexGoodsList(2,e.item.itemobj.id)
 				this.addShow = false
-				// console.log(e)
+				console.log(e)
 				uni.setStorage({
 					key:'cityId',
 					data: e.item.itemobj.id,
@@ -518,6 +517,8 @@
 							font-weight: NaN;
 							text-align: left;
 							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
 							line-height: 24rpx;
 						}
 
@@ -856,9 +857,8 @@
 						}
 
 						.thumbnail_2 {
-							width: 10rpx;
-							height: 16rpx;
-							margin-top: 8rpx;
+							font-size: 22rpx;
+							color: #333;
 						}
 					}
 				}
