@@ -112,7 +112,7 @@
 				</view>
 				<view v-if="add == 1" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,i) in ktlist2" :key="i"
-						@click="toProductDetailH(item.goods_id)">
+						@click="toProductDetailH(item.id)">
 						<image class="kt_img" :src="imgUrl + item.thumb"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
@@ -189,10 +189,11 @@
 					type: t
 				}
 				let res = await indexGoodsList(data)
-				// console.log(res)
+				console.log(res)
 				if(t == 1) {
 					//个人
 					this.ktlist2 = res.lists
+					// console.log(this.ktlist2,"个人")
 				} else {
 					//2是商家
 					this.ktlist1 = res.lists

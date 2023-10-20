@@ -274,7 +274,43 @@ export function pk(data) {
 	let url = '/goods/pk'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//个人商品详情
+export function productDetailH(data) {
+	let url = '/goods/personal-goods-info'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//点击收藏
+export function collect(data) {
+	let url = '/collect/add'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
 			resolve(res)
+		})
+	})
+}
+//收藏店铺列表
+export function collectShop(data) {
+	let url = '/collect/shops'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//收藏商品列表
+export function collectGood(data) {
+	let url = '/collect/goods'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
 		})
 	})
 }

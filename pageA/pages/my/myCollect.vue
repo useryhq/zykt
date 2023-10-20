@@ -52,6 +52,7 @@
 </template>
 
 <script>
+	import {collectShop,collectGood} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
@@ -60,9 +61,43 @@
 			};
 		},
 		methods: {
+			// 获取收藏店铺列表
+			async pCollectShop(data) {
+				let res = await collectShop(data)
+				console.log(res)
+			},
+			// 获取收藏商品列表
+			async pCollectGood(data) {
+				let res = await collectGood(data)
+				console.log(res)
+			},
+			// 切换商品和店铺
 			changeNav(e) {
 				this.nav = e
+				let data = {
+					userid: this.userid
+				}
+				
+				if(e == 0) {
+					//收藏商品
+					this.pCollectGood(data)
+				} else {
+					//收藏店铺
+					this.pCollectShop(data)
+				}
 			}
+		},
+		onLoad() {
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userid = res.data
+					let data = {
+					userid: res.data
+				}
+				this.pCollectGood(data)
+				}
+			})
 		}
 	}
 </script>

@@ -4,7 +4,7 @@
     <view class="group_1 flex-col">
       <view class="box_1 flex-col">
         <view class="box_2 flex-row align-center">
-          <image class="single-avatar_1" :src="upImgUrl + userInfo.thumb"></image>
+          <image class="single-avatar_1" :src="imgUrl + userInfo.thumb"></image>
           <view class="text-group_1 flex-col justify-between">
             <text class="text_2">{{userInfo.nick_name}}</text>
             <text class="text_3">{{userInfo.mobile}}</text>
@@ -95,7 +95,7 @@
 export default {
   data() {
     return {
-		upImgUrl:this.$upImgUrl.upImg_base_url,
+		imgUrl: this.$imgUrl.img_base_url,
 		res: '',
 		userInfo: '',
       constants: {}
@@ -107,9 +107,10 @@ export default {
 	  	let data = {
 	  		userid: e
 	  	}
-	  	this.res = await my(data)
-		this.userInfo = this.res.userInfo
-	  	console.log(this.res)
+		let all = await my(data)
+	  	this.res = all
+		this.userInfo = all.userInfo
+	  	// console.log(this.res)
 		},
 	  // 跳转商家入驻
     onClick_1() {
@@ -173,7 +174,7 @@ export default {
 	}
   },
   onLoad(option) {
-  	console.log(option)
+  	// console.log(option)
 	this.getMy(option.userid)
   }
 };

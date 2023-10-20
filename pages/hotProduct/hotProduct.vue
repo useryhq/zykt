@@ -374,7 +374,7 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 			// 跳转个人商品详情
 			toProductDetailH(e) {
 				uni.navigateTo({
-					url: '/pages/productDetailH/productDetailH?price=' + e
+					url: '/pages/productDetailH/productDetailH?id=' + e
 				})
 			},
 			// 跳转热门分类
