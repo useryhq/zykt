@@ -43,8 +43,8 @@
 				<uni-tr>
 					<uni-td align="center">商品评价</uni-td>
 					<uni-td align="center">总共{{arr1.comment_count}}条</uni-td>
-  			        <uni-td v-if="arr2.length!=0" align="center">总共{{arr2.comment_count}}条</uni-td>
-  			        <uni-td v-if="arr3.length!=0" align="center">总共{{arr3.comment_count}}条</uni-td>
+					<uni-td v-if="arr2.length!=0" align="center">总共{{arr2.comment_count}}条</uni-td>
+					<uni-td v-if="arr3.length!=0" align="center">总共{{arr3.comment_count}}条</uni-td>
 				</uni-tr>
 				<uni-tr>
 					<uni-td align="center">商品店铺</uni-td>
@@ -60,7 +60,7 @@
 			</view>
 			<uni-table border stripe>
 				<uni-tr v-for="(item,index) in arr" :key="index">
-					<uni-td width="80" align="center">{{item.attr_name}}</uni-td>
+					<uni-td width="80" align="center">{{item}}</uni-td>
 					<uni-td width="90" align="center">{{attr1[index].attr_value}}</uni-td>
 					<uni-td width="90" align="center">{{attr2[index].attr_value}}</uni-td>
 					<uni-td width="90" align="center">{{attr3[index].attr_value}}</uni-td>
@@ -73,7 +73,7 @@
 	</view>
 </template>
 <script>
-import {
+	import {
 		pk
 	} from '../../../static/js/api.js'
 	export default {
@@ -84,9 +84,9 @@ import {
 				arr1: [],
 				arr2: [],
 				arr3: [],
-				attr1:[],
-				attr2:[],
-				attr3:[],
+				attr1: [],
+				attr2: [],
+				attr3: [],
 				constants: {}
 			};
 		},
@@ -105,76 +105,89 @@ import {
 					ids: ids
 				}
 				let res = await pk(data)
-				console.log(res)
+				// console.log(res)
+				this.arr = res.attrName
 				if (res.goods_info.length == 1) {
 					this.arr1 = res.goods_info[0]
-					this.attr1 = res.goods_info[0].attr
-					this.getMaxArr(this.attr1)
+					this.getMaxArr(res.goods_info[0].attr)
 				} else if (res.goods_info.length == 2) {
 					this.arr1 = res.goods_info[0]
 					this.arr2 = res.goods_info[1]
-					this.attr1 = res.goods_info[0].attr
-					this.attr2 = res.goods_info[1].attr
-					this.getMaxArr(this.attr1,this.attr2)
+					this.getMaxArr(res.goods_info[0].attr, res.goods_info[1].attr)
 				} else {
 					this.arr1 = res.goods_info[0]
 					this.arr2 = res.goods_info[1]
 					this.arr3 = res.goods_info[2]
-					this.attr1 = res.goods_info[0].attr
-					this.attr2 = res.goods_info[1].attr
-					this.attr3 = res.goods_info[2].attr
-					this.getMaxArr(this.attr1,this.attr2,this.attr3)
+					this.getMaxArr(res.goods_info[0].attr, res.goods_info[1].attr, res.goods_info[2].attr)
 				}
-				console.log("arr1", this.arr1, "arr2", this.arr2, "arr3", this.arr3)
-				console.log("attr1", this.attr1, "attr2", this.attr2, "attr3", this.attr3)
+				// console.log("arr1", this.arr1, "arr2", this.arr2, "arr3", this.arr3)
+				// console.log("attr1", this.attr1, "attr2", this.attr2, "attr3", this.attr3)
 			},
 			// 对比参数顺序不同,商品pk数据处理
-			getMaxArr(arr1,arr2,arr3) {
-				if(arr1) {
-					this.arr = arr1.attr
-				}
-				if (arr2) {
-					let len1 = arr1.attr.length
-					let len2 = arr2.attr.length
-					if (len1 > len2) {
-						this.arr = arr1.attr
-					} else {
-						this.arr = arr2.attr
-					}
-				}
+			getMaxArr(arr1, arr2, arr3) {
 				if (arr3) {
-					let len1 = arr1.attr.length
-					let len2 = arr2.attr.length
-					let len3 = arr3.attr.length
-					if (len1 > len2) {
-						if (len1 > len3) {
-							this.arr = arr1.attr
+					for (let i = 0; i < this.arr.length; i++) {
+						let a = arr1.find(item => this.arr[i] == item.attr_name)
+						let b = arr2.find(item => this.arr[i] == item.attr_name)
+						let c = arr3.find(item => this.arr[i] == item.attr_name)
+						if (a) {
+							this.attr1.push(a)
 						} else {
-							this.arr = arr3.attr
+							this.attr1.push({
+								attr_name: this.arr[i],
+								attr_value: '-'
+							})
 						}
-					} else {
-						if (len1 > len3) {
-							this.arr = arr2.attr
+						if(b) {
+							this.attr2.push(b)
 						} else {
-							if (len3 > len2) {
-								this.arr = arr3.attr
-							} else {
-								this.arr = arr2.attr
-							}
+							this.attr2.push({
+								attr_name: this.arr[i],
+								attr_value: '-'
+							})
+						}
+						if(c) {
+							this.attr3.push(c)
+						} else {
+							this.attr3.push({
+								attr_name: this.arr[i],
+								attr_value: '-'
+							})
 						}
 					}
+				} else if (arr2) {
+					for (let i = 0; i < this.arr.length; i++) {
+						let a = arr1.find(item => this.arr[i] == item.attr_name)
+						let b = arr2.find(item => this.arr[i] == item.attr_name)
+						if (a) {
+							this.attr1.push(a)
+						} else {
+							this.attr1.push({
+								attr_name: this.arr[i],
+								attr_value: '-'
+							})
+						}
+						if(b) {
+							this.attr2.push(b)
+						} else {
+							this.attr2.push({
+								attr_name: this.arr[i],
+								attr_value: '-'
+							})
+						}
+					}
+				} else {
+					this.attr1 = arr1
 				}
-				console.log("arr", this.arr)
 			},
 			toBack() {
 				uni.navigateBack()
 			}
 		},
-		computed: {
-		},
+		computed: {},
 		onLoad(option) {
 			this.contrastData = JSON.parse(option.pk)
-			console.log(option)
+			// console.log(option)
 			this.getPk()
 		}
 	};

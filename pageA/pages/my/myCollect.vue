@@ -12,36 +12,35 @@
 		</view>
 		<view class="colloct_block flex-row justify-between align-center">
 			<view class="block_text">
-				共收藏<text class="collocet_num">6</text>件<text v-if="nav == 0">商品</text><text v-if="nav == 1">店铺</text>
+				共收藏<text class="collocet_num">{{num}}</text>件<text v-if="nav == 0">商品</text><text v-if="nav == 1">店铺</text>
 			</view>
 			<text v-if="button" class="button">编辑</text>
 			<text v-else class="button">完成</text>
 		</view>
-		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
+				  <image :src="imgUrl + items.goodsInfo.thumb" mode="aspectFit"></image>
 			  </view>
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row">
 				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	  {{items.goodsInfo.goods_name}}
 				  	</text>
 				  </view>
-		        
 				<view class="flex-row">
-					<text class="text_8">￥4899</text>
+					<text class="text_8">￥{{items.goodsInfo.market_price}}</text>
 				</view>
 		      </view>
 		  </view>
 		</view>
-		<view v-if="nav == 1" class="section_3 d-block flex-col" v-for="(items,index) in 6" :key="index">
+		<view v-if="nav == 1" class="section_3 d-block flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 d-block_1 flex-row">
 		      <view class="d_group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
+				  <image :src="imgUrl + items.shopInfo.logo" mode="aspectFit"></image>
 			  </view>
 		      <view class="text-group_2 d-text">
-				  	  美的二手商用中央空调自营店
+				  	 {{items.shopInfo.shop_name}}
 		      </view>
 			  <view class="button_1">
 			  	进店
@@ -57,18 +56,25 @@
 		data() {
 			return {
 				nav: 0,
+				list: [],
+				num: '',
 				button: true,
+				imgUrl: this.$imgUrl.img_base_url,
 			};
 		},
 		methods: {
 			// 获取收藏店铺列表
 			async pCollectShop(data) {
 				let res = await collectShop(data)
+				this.list = res.lists
+				this.num = res.num
 				console.log(res)
 			},
 			// 获取收藏商品列表
 			async pCollectGood(data) {
 				let res = await collectGood(data)
+				this.list = res.lists
+				this.num = res.num
 				console.log(res)
 			},
 			// 切换商品和店铺
@@ -77,7 +83,6 @@
 				let data = {
 					userid: this.userid
 				}
-				
 				if(e == 0) {
 					//收藏商品
 					this.pCollectGood(data)
