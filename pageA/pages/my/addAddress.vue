@@ -2,6 +2,7 @@
 	<!-- 个人中心添加地址 -->
   <view class="page flex-col">
     <view class="box_1 flex-col">
+		<form @submit="submit">
       <view class="box_5 flex-col">
         <view class="text-wrapper_1 flex-row align-center">
           <text class="text_2">收货人：</text>
@@ -11,10 +12,10 @@
 		  <text class="text_4">联系电话：</text>
 		  <input class="text_3" type="number" @blur="inTel" placeholder="输入收货人手机号码" placeholder-style="color: rgba(153, 153, 153, 1);">
 		</view>
-        <view class="box_6 flex-row justify-between align-center">
-			<view class="" @click="addressShow">
+        <view @click="addressShow" class="box_6 flex-row justify-between align-center">
+			<view class="">
 				<text class="text_6">所在地区：</text>
-				<text class="text_7">{{address}}</text>
+				<text class="text_7"><text v-for="(i,n) in address" :key='n'> {{i.text}} <text v-if="n != 2">/</text></text></text>
 			</view>
 		  <text class="iconfont icon_2">&#xe6a3;</text>
         </view>
@@ -31,9 +32,10 @@
           <switch @change="chooseAddress" color="#E63C31" style="transform:scale(0.6)" />
         </view>
       </view>
-      <view class="box_8" @click="submit">
+      <button class="box_8" form-type="submit">
 			提交
-      </view>
+      </button>
+	  </form>
     </view>
 	<uni-popup ref="popup" type="message">
 		<uni-popup-message type="warn" message="警告消息" :duration="3000">{{prompt}}</uni-popup-message>
@@ -42,15 +44,18 @@
 </template>
 <script>
 	import get_city_tree from '../../../static/js/cityData.js'
+	import {addAddressH} from '../../../static/js/api.js'
 export default {
   data() {
     return {
+		userid: '',
 		name: '',
 		tel: '',
 		localData: [],
-		address: '选择所在地区',
+		address: [],
 		detailAddress: '',
 		prompt: '',
+		default: '',
       constants: {}
     };
   },
@@ -59,7 +64,6 @@ export default {
 	  inName(e) {
 	  		  this.name = e.detail.value
 	  },
-	  
 	  //输入电话
 	  inTel(e) {
 	  		  let reg = /^1[3456789]\d{9}$/
@@ -72,7 +76,7 @@ export default {
 	  // 地址选择三级联动
 	  async addressShow() {
 	  	this.localData = await get_city_tree()
-		console.log(this.localData)
+		// console.log(this.localData)
 	  	this.$refs.picker.show()
 	  },
 	  // 节点变化后 （并非已经选择完毕）
@@ -83,16 +87,27 @@ export default {
 	  			// 整体选择完成以后
 	  			onchange(e) {
 	  				const value = e.detail.value
-					console.log(value)
-	  				this.address = value[0].text + '/' + value[1].text + '/' + value[2].text
+					// console.log(value)
+	  				this.address = value
 	  			},
 				//输入详细地址
 		inDetailAddress(e) {
 			this.detailAddress = e.detail.value
 		},
 		//选择默认地址
-		chooseAddress() {
-			
+		chooseAddress(e) {
+			console.log(e)
+			if(e,detail.value) {
+				this.default = 1
+			} else {
+				this.default = 0
+			}
+		},
+		async pAddAddressH(data) {
+			let res  = await addAddressH(data)
+			this.prompt = res.msg
+			this.$refs.popup.open('top')
+			console.log(res)
 		},
     submit() {
       if(this.name == '') {
@@ -101,15 +116,36 @@ export default {
       } else if(this.tel == '') {
       	this.prompt = '请输入电话号码'
       	this.$refs.popup.open('top')
-      } else if(this.address == '选择所在地区') {
+      } else if(this.address.length == 0) {
       	this.prompt = '请选择所在地区'
       	this.$refs.popup.open('top')
       } else if(this.detailAddress == '') {
       	this.prompt = '请输入详细地址'
       	this.$refs.popup.open('top')
-      } 
+      } else {
+		  let data = {
+			  id: '',
+			  mobile: this.tel,
+			  name: this.name,
+			  prrovince: this.address[0].text,
+			  city: this.address[1].text,
+			  arrea: this.address[2].text,
+			  address: this.detailAddress,
+			  userid: this.userid,
+			  default: this.default
+		  }
+		  this.pAddAddressH(data)
+	  }
 	  console.log(this.name,this.tel,this.address,this.detailAddress)
     }
+  },
+  onLoad() {
+  	uni.getStorage({
+  		key: 'userId',
+  		success: (res) => {
+  			this.userid = res.data
+  		}
+  	})
   }
 };
 </script>

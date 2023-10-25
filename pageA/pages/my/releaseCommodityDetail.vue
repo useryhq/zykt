@@ -4,7 +4,7 @@
 		<view class="block_1">
 			<view class="detail-block">
 				<view class="text-block">
-					<textarea class="text-area" placeholder="请填写商品描述，详细介绍您所出售的商品，上传图片更能吸引人哦"
+					<textarea @input="inText" class="text-area" placeholder="请填写商品描述，详细介绍您所出售的商品，上传图片更能吸引人哦"
 						placeholder-style="font-size:24rpx" />
 				</view>
 				<view class="file-picker">
@@ -38,7 +38,8 @@
 					"height": 330,
 				},
 				prompt: '',
-				token:''
+				text: '',
+				token: ''
 			};
 		},
 		methods: {
@@ -84,8 +85,19 @@
 				})
 				// console.log(this.name)
 			},
+			inText(e) {
+				this.text = e.detail.value
+			},
 			//返回发布商品
 			toReleaseCommodity() {
+				let pages = getCurrentPages();
+				let prevPage = pages[pages.length - 2]; //上一个页面
+				let obj = {
+					describe: this.text,
+					pics: ''
+				}
+				console.log(obj)
+				prevPage.$vm.backFunction(obj)
 				uni.navigateBack()
 			}
 		},

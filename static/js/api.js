@@ -351,7 +351,7 @@ export function orderList(data) {
 	})
 }
 //个人商品列表
-export function myCoomodity(data) {
+export function myComodity(data) {
 	let url = '/user/my-goods'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
@@ -365,6 +365,24 @@ export function mReleaseComodity(data) {
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)
+		})
+	})
+}
+//个人地址列表
+export function manageAddressH(data) {
+	let url = '/address/lists'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//个人添加地址
+export function addAddressH(data) {
+	let url = '/address/add'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
 		})
 	})
 }

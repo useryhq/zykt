@@ -38,9 +38,11 @@
   </view>
 </template>
 <script>
+	import {manageAddressH} from '../../../static/js/api.js'
 export default {
   data() {
     return {
+		userid: '',
       loopData0: [
         {
           lanhutext0: '王婷婷',
@@ -68,6 +70,11 @@ export default {
     };
   },
   methods: {
+	  //获取地址列表
+	  async pManageAddress() {
+		  let res = await manageAddressH()
+		  console.log(res)
+	  },
 	  //选择默认地址
 	  chooseAddress(e) {
 		  this.loopData0.forEach((item,index) => {
@@ -84,6 +91,20 @@ export default {
       	url: '/pageA/pages/my/addAddress'
       })
     }
+  },
+  onLoad() {
+  	uni.getStorage({
+  		key: 'userId',
+  		success: (res) => {
+  			this.userid = res.data
+  		}
+  	})
+  },
+  onShow() {
+  	let data = {
+  		userid: this.data
+  	}
+  	this.pManageAddress(data)
   }
 };
 </script>

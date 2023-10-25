@@ -115,7 +115,7 @@
 					userid: res.data,
 					type: '',
 				}
-				this.pMyoomodity(data)
+				this.pMyComodity(data)
 				}
 			})
 		}
