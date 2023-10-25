@@ -14,11 +14,15 @@
 			<view class="block_text">
 				共收藏<text class="collocet_num">{{num}}</text>件<text v-if="nav == 0">商品</text><text v-if="nav == 1">店铺</text>
 			</view>
-			<text v-if="button" class="button">编辑</text>
-			<text v-else class="button">完成</text>
+			<text v-if="button" class="button" @click="edit">编辑</text>
+			<text v-else class="button" @click="complete">完成</text>
 		</view>
-		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in list" :key="index">
-		    <view class="image-text_2 flex-row">
+		<checkbox-group name="" @change="checkbox">
+		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in list" :key="item.id">
+		    <view class="image-text_2 flex-row align-center">
+			<label v-if="!button">
+				<checkbox :value="items.id" :checked="items.checked" />
+			</label>
 		      <view class="group_5">
 				  <image :src="imgUrl + items.goodsInfo.thumb" mode="aspectFit"></image>
 			  </view>
@@ -34,8 +38,13 @@
 		      </view>
 		  </view>
 		</view>
+		</checkbox-group>
+		<checkbox-group  name="" @change="checkbox">
 		<view v-if="nav == 1" class="section_3 d-block flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 d-block_1 flex-row">
+				<label v-if="!button">
+					<checkbox :value="items.id" :checked="items.checked" />
+				</label>
 		      <view class="d_group_5">
 				  <image :src="imgUrl + items.shopInfo.logo" mode="aspectFit"></image>
 			  </view>
@@ -47,19 +56,26 @@
 			  </view>
 		  </view>
 		</view>
+		</checkbox-group>
+		<uni-popup ref="popup" type="message">
+			<uni-popup-message type="success" message="成功消息" :duration="3000">{{prompt}}</uni-popup-message>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
-	import {collectShop,collectGood} from '../../../static/js/api.js'
+	import {collectShop,collectGood,collectCancel} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
+				userid: '',
 				nav: 0,
 				list: [],
 				num: '',
+				idarr: [],
 				button: true,
 				imgUrl: this.$imgUrl.img_base_url,
+				prompt: ''
 			};
 		},
 		methods: {
@@ -67,6 +83,9 @@
 			async pCollectShop(data) {
 				let res = await collectShop(data)
 				this.list = res.lists
+				// this.list.forEach(item => {
+				// 	item.checked = false
+				// })
 				this.num = res.num
 				console.log(res)
 			},
@@ -74,8 +93,26 @@
 			async pCollectGood(data) {
 				let res = await collectGood(data)
 				this.list = res.lists
+				// this.list.forEach(item => {
+				// 	item.checked = false
+				// })
 				this.num = res.num
-				console.log(res)
+				console.log(this.list)
+			},
+			// 取消收藏
+			async pCollectCancel(data) {
+				console.log(data)
+				let res = await collectCancel(data)
+				if(res.code == 200) {
+					this.prompt = res.msg
+					this.$refs.popup.open('top')
+					clearTimeout(time)
+					let time = setTimeout(() => {
+						uni.redirectTo({
+							url: '/pageA/pages/my/myCollect'
+						})
+					},2000)
+				}
 			},
 			// 切换商品和店铺
 			changeNav(e) {
@@ -90,6 +127,45 @@
 					//收藏店铺
 					this.pCollectShop(data)
 				}
+			},
+			// 选择框状态改变
+			checkbox(e) {
+				console.log(e)
+				this.idarr = e.detail.value
+				let values = e.detail.value,list = this.list
+				for(let i = 0,len = list.length;i < len;++i){
+					const item = list[i]
+					if(values.includes(item.id)) {
+						console.log(item)
+						this.$set(item,'checked',true)
+						// item.checked = true
+					} else {
+						// item.checked = false
+						this.$set(item,'checked',false)
+					}
+				}
+				// console.log(this.list)
+			},
+			//编辑切换完成
+			edit() {
+				this.button = false
+			},
+			// 完成按钮
+			complete() {
+				let ids = ''
+				this.idarr.forEach((item,index) => {
+					if(index < this.idarr.length-1){
+						ids += item +','
+					} else {
+						ids += item
+					}
+				})
+				let data = {
+					userid:this.userid,
+					ids: ids
+				}
+				this.pCollectCancel(data)
+				this.button = true
 			}
 		},
 		onLoad() {
@@ -163,7 +239,7 @@
 	  width: 690rpx;
 	  margin: 22rpx 0 0 32rpx;
 	    .image-text_2 {
-	      width: 660rpx;
+	      width: 670rpx;
 	      height: 110rpx;
 	      margin: 30rpx 0 0 17rpx;
 		  padding-bottom: 20rpx;

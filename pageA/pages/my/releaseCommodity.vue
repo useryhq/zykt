@@ -71,13 +71,13 @@
 					</view>
 					<view class="choose-text flex-row justify-around">
 						<view class="text-block flex-col align-center">
-							<text :class="{'text-font_active':listIndex == item.id}" v-for="(item,index) in textList" :key="index" class="text-font" @click="chooseProduct(item.id,item.t1)">{{item.t1}}</text>
+							<text :class="{'text-font_active':listIndex == item.id}" v-for="(item,index) in textList" :key="index" class="text-font" @click="chooseProduct(item.id,item.name)">{{item.name}}</text>
 						</view>
 						<view class="text-block flex-col align-center">
-							<text :class="{'text-font_active':sListIndex == item.c_id}" v-for="(item,i) in sList[0].sub" :key="i" class="text-font" @click="chooseSproduct(item.c_id,item.s1)">{{item.s1}}</text>
+							<text :class="{'text-font_active':sListIndex == item.id}" v-for="(item,i) in sList[0].sub" :key="i" class="text-font" @click="chooseSproduct(item.id,item.name)">{{item.name}}</text>
 						</view>
 						<view class="text-block flex-col align-center">
-							<text :class="{'text-font_active':tListIndex == item.d_id}" v-for="(item,i) in tList[0].child" :key="i" class="text-font" @click="chooseTproduct(item.d_id,item.x1)">{{item.x1}}</text>
+							<text :class="{'text-font_active':tListIndex == item.id}" v-for="(item,i) in tList[0].child" :key="i" class="text-font" @click="chooseTproduct(item.id,item.name)">{{item.name}}</text>
 						</view>
 					</view>
 					<!-- <view class="pk_btn" @click="choose()">确定</view> -->
@@ -105,7 +105,7 @@
 						</view>
 					</view>
 					<view class="brand-text flex-row">
-						<text v-for="(i,n) in brandList" :key='n' class="text-block" @click="chooseBrand(i)">{{i}}</text>
+						<text v-for="(i,n) in brandList" :key='n' class="text-block" @click="chooseBrand(i)">{{i.name}}</text>
 					</view>
 				</view>
 			</view>
@@ -117,7 +117,7 @@
 </template>
 
 <script>
-	import {qnToken} from "../../../static/js/api.js"
+	import {qnToken,mReleaseComodity,category,brandList} from "../../../static/js/api.js"
 	export default {
 		data() {
 			return {
@@ -138,204 +138,7 @@
 				name: '',
 				tel: '',
 				prompt: '',
-				textList: [{
-						t1: '家用空调',
-						//一级分类id
-						id: '1',
-						sub: [{
-							//一级分类id
-							p_id: '1',
-							//二级分类id
-							c_id: '1',
-							s1: '家用普通空调',
-								child:[{
-									//二级分类id
-									s_id: '1',
-									//三级分类id
-									d_id: '1',
-									x1: '普壁挂空调',
-									},
-									{
-									s_id: '1',
-									d_id: '2',
-									x1: '普通立式空调'
-								}],
-							},
-							{
-							s1: '家用中央空调',
-							p_id: '1',
-							c_id: '2',
-							child:[{
-								s_id: '2',
-								d_id: '1',
-								x1: '中央壁挂空调',
-								},
-								{
-								s_id: '2',
-								d_id: '2',
-								x1: '中央立式空调'
-							}],
-							},
-							{
-							s1: '其他类空调',
-							c_id: '3',
-							p_id: '1',
-							child:[{
-								s_id: '3',
-								d_id: '1',
-								x1: '其他壁挂空调',
-								},
-								{
-								s_id: '3',
-								d_id: '2',
-								x1: '其他立式空调'
-							}],
-							},
-							{
-							s1: '空气净化',
-							c_id: '4',
-							p_id: '1',
-							child:[{
-								s_id: '4',
-								d_id: '1',
-								x1: '空气净化壁挂空调',
-								},
-								{
-								s_id: '4',
-								d_id: '2',
-								x1: '空气净化立式空调'
-							}],
-						}]
-					},
-					{
-						t1: '商用空调',
-						id: '2',
-						sub: [{
-							p_id: '2',
-							c_id: '1',
-							s1: '商用普通空调',
-							child:[{
-								s_id: '1',
-								d_id: '1',
-								x1: '商用普通壁挂空调',
-								},
-								{
-								s_id: '1',
-								d_id: '2',
-								x1: '普通立式空调'
-							}],
-							},
-							{
-							s1: '商用家用中央空调',
-							p_id: '2',
-							c_id: '2',
-							child:[{
-								s_id: '2',
-								d_id: '1',
-								x1: '中央壁挂空调',
-								},
-								{
-								s_id: '2',
-								d_id: '2',
-								x1: '中央立式空调'
-							}],
-							},
-							{
-							s1: '商用其他类空调',
-							p_id: '2',
-							c_id: '3',
-							child:[{
-								s_id: '3',
-								d_id: '1',
-								x1: '其他壁挂空调',
-								},
-								{
-								s_id: '3',
-								d_id: '2',
-								x1: '其他立式空调'
-							}],
-							},
-							{
-							s1: '商用空气净化',
-							p_id: '2',
-							c_id: '4',
-							child:[{
-								s_id: '4',
-								d_id: '1',
-								x1: '空气净化壁挂空调',
-								},
-								{
-								s_id: '4',
-								d_id: '2',
-								x1: '空气净化立式空调'
-							}],
-						}]
-					},
-						{
-						t1: '其他类空调',
-						id: '3',
-						sub: [
-							{
-							p_id: '3',
-							c_id: '1',
-							s1: '其他类普通空调',
-							child:[{
-								s_id: '1',
-								x1: '其他普通壁挂空调',
-								d_id: '1',
-								},
-								{
-								s_id: '1',
-								d_id: '2',
-								x1: '其他普通立式空调'
-							}],
-							},
-							{
-							s1: '家用中央空调',
-							c_id: '2',
-							p_id: '3',
-							child:[{
-								s_id: '2',
-								d_id: '1',
-								x1: '中央壁挂空调',
-								},
-								{
-								s_id: '2',
-								d_id: '2',
-						        x1: '中央立式空调'
-							}],
-							},
-							{
-							s1: '其他类空调',
-							p_id: '3',
-							c_id: '3',
-							child:[{
-								s_id: '3',
-								d_id: '1',
-								x1: '其他类壁挂空调',
-								},
-								{
-								s_id: '3',
-								d_id: '2',
-								x1: '其他类立式空调'
-							}],
-							},
-							{
-							s1: '其他类空气净化',
-							p_id: '3',
-							c_id: '4',
-							child:[{
-								s_id: '4',
-								d_id: '1',
-								x1: '壁挂空调',
-								},
-								{
-								s_id: '4',
-								d_id: '2',
-								x1: '立式空调'
-							}],
-						}]
-						}],
+				textList: [],
 						//选择分类弹窗
 						choose: false,
 						//一级分类索引
@@ -365,48 +168,7 @@
 						finenessText: '',
 						//品牌弹窗
 						brand: false,
-						brandList: [
-							 '奥克斯',
-							 '艾尔斯派',
-							 '奥普',
-							 '班工防护',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '奥普',
-							 '班工防护',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-							 '百维',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-							 '百维',
-							 '百维',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-						],
+						brandList: [],
 						brandText: '',
 			};
 		},
@@ -427,6 +189,7 @@
 				// console.log(this.sListC,"123")
 					return sList
 				},
+				//选择计算分类三级分类
 				tList() {
 					let tList = []
 					for(let i = 0; i < this.textList.length; i++){
@@ -435,14 +198,13 @@
 							console.log(item)
 							for(i = 0; i < item.sub.length; i++) {
 								// console.log("item",item)
-								if(this.sListIndex == item.sub[i].c_id) {
+								if(this.sListIndex == item.sub[i].id) {
 									tList.push(item.sub[i])
 								}
 							}
 						}
 						
-					}
-							
+					}	
 						// console.log("===",tList)
 						return tList
 				},
@@ -454,6 +216,22 @@
 				 const tokenData =await qnToken()
 				 this.token = tokenData.qiniu_token
 				 // console.log(tokenData)
+			 },
+			 //获取分类列表
+			 async GetCategory() {
+			 	let res = await category()
+			 	this.textList = res.lists
+			 	// console.log(this.list)
+			 },
+			 //获取品牌列表
+			 async getBrandList() {
+			 		  let res = await brandList()
+			 		  // console.log(res)
+					  res.forEach(item => {
+						  item.data.forEach(i => {
+							  this.brandList.push({id:i.id,name:i.name})
+						  })
+					  })
 			 },
 			 //输入商品名称
 			 inCname(e) {
@@ -508,7 +286,7 @@
 			 },
 			 //选择品牌
 			 chooseBrand(text) {
-				this.brandText = text 
+				this.brandText = text.name
 				this.brand = false
 			 },
 			 //输入价格
@@ -608,7 +386,9 @@
 		},
 		onLoad() {
 			this.getQntoken()
-			console.log(this.sListIndex)
+			this.GetCategory()
+			this.getBrandList()
+			// console.log(this.sListIndex)
 		}
 	}
 </script>
@@ -619,6 +399,7 @@
 .page {
 	position: relative;
 	width: 750rpx;
+	height: 100%;
 	overflow: hidden;
 	.block_1 {
 	  width: 750rpx;
@@ -733,7 +514,7 @@
 			}
 			.mode {
 				width: 686rpx;
-				height: 480rpx;
+				height: 600rpx;
 				background-color: #fff;
 				position: absolute;
 				top: 0;
@@ -765,18 +546,16 @@
 					}
 				}
 				.choose-text {
-					margin-top: 40rpx;
+					margin-top: 20rpx;
 					.text-block {
 						width: 200rpx;
-						height: 300rpx;
+						height: 500rpx;
 						border: 1rpx solid #A0A0A0;
 						.text-font {
-							margin-top: 20rpx;
-							height: 40rpx;
-							padding: 0 16rpx;
+							padding: 14rpx 16rpx;
 							font-size: 24rpx;
 							color: #333;
-							line-height: 40rpx;
+							line-height: 30rpx;
 						}
 						.text-font_active {
 							background-color: #E63C31;
@@ -786,16 +565,16 @@
 					}
 				}
 				
-				.pk_btn {
-					width: 148rpx;
-					height: 40rpx;
-					margin: 26rpx auto 18rpx auto;
-					background-color: #E63C31;
-					font-size: 30rpx;
-					color: #fff;
-					line-height: 40rpx;
-					text-align: center;
-				}
+				// .pk_btn {
+				// 	width: 148rpx;
+				// 	height: 40rpx;
+				// 	margin: 26rpx auto 18rpx auto;
+				// 	background-color: #E63C31;
+				// 	font-size: 30rpx;
+				// 	color: #fff;
+				// 	line-height: 40rpx;
+				// 	text-align: center;
+				// }
 		}
 		}
 		.fineness-block {

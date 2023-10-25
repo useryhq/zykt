@@ -143,6 +143,15 @@ export function goodsList(data) {
 		})
 	})
 }
+//商品对比数据
+export function pk(data) {
+	let url = '/goods/pk'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
 //分类跳转商品列表
 export function fGoodsList(data) {
 	let url = '/goods/goods-lists-by-cate'
@@ -182,6 +191,24 @@ export function productDetail(data) {
 // 商家商品详情留言提交
 export function sendMessage(data) {
 	let url = '/user/send-messages'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//个人商品详情
+export function productDetailH(data) {
+	let url = '/goods/personal-goods-info'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//点击收藏
+export function collect(data) {
+	let url = '/collect/add'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res)
@@ -260,39 +287,21 @@ export function releaseWantBuy(data) {
 		})
 	})
 }
+//我的求购列表
+export function myWantBuy(data) {
+	let url = '/user/my-qiugou'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
 //退货原因、快速、单位
 export function other() {
 	let url = '/common/other'
 	return new Promise((resolve,reject) => {
 		request(url,'GET').then(res => {
 			resolve(res.data)
-		})
-	})
-}
-//商品对比数据
-export function pk(data) {
-	let url = '/goods/pk'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res.data)
-		})
-	})
-}
-//个人商品详情
-export function productDetailH(data) {
-	let url = '/goods/personal-goods-info'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res.data)
-		})
-	})
-}
-//点击收藏
-export function collect(data) {
-	let url = '/collect/add'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res)
 		})
 	})
 }
@@ -308,6 +317,51 @@ export function collectShop(data) {
 //收藏商品列表
 export function collectGood(data) {
 	let url = '/collect/goods'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//取消收藏
+export function collectCancel(data) {
+	let url = '/collect/cancel'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//购物车列表
+export function cartList(data) {
+	let url = '/cart/lists'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//个人订单列表
+export function orderList(data) {
+	let url = '/orders/lists'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//个人商品列表
+export function myCoomodity(data) {
+	let url = '/user/my-goods'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//个人发布商品
+export function mReleaseComodity(data) {
+	let url = '/user/add-goods'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)

@@ -70,7 +70,7 @@ export default {
 			  // console.log(res3)
 			  let jsonRes3 = JSON.parse(res3)
 			  data = {
-				  type: '1',
+				   type: '1',
 				   lng: jsonRes3.lng,
 				   lat: jsonRes3.lat
 			  }

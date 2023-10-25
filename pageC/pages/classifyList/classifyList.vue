@@ -76,6 +76,7 @@
 					url: '/pages/hotProduct/hotProduct?cate_id=' + id + '&use=' + this.use
 				})
 			},
+			//获取分类列表
 			async GetCategory() {
 				let res = await category()
 				this.list = res.lists

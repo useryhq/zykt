@@ -57,7 +57,7 @@
 						curpage: this.num,
 						page: 10
 				}
-				console.log(data)
+				// console.log(data)
 				let res =  await wantToBuy(data)
 				// console.log("res",res)
 				// this.loopData0 = res.lists

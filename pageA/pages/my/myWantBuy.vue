@@ -13,16 +13,16 @@
             v-for="(item, index) in loopData0"
             :key="index"
           >
-            <text class="text_2">{{item.lanhutext0}}</text>
-            <text class="text_3">{{item.lanhutext1}}</text>
+            <text class="text_2">{{item.title}}</text>
+            <text class="text_3">{{item.content}}</text>
             <view class="block_2 flex-row justify-between">
               <view class="image-text_2 flex-row justify-between">
                 <text class="iconfont icon_3">&#xe680;</text>
-                <text class="text-group_2">{{item.lanhutext2}}</text>
+                <text class="text-group_2">{{item.created_at}}</text>
               </view>
               <view class="image-text_3 flex-row justify-between">
 				<text class="iconfont icon_4">&#xe651;</text>
-                <text class="text-group_3">{{item.lanhutext3}}</text>
+                <text class="text-group_3">{{item.province}}{{item.city}}{{item.area}}</text>
               </view>
             </view>
             <view class="block_3 flex-row justify-between">
@@ -42,33 +42,21 @@
   </view>
 </template>
 <script>
+	import {myWantBuy} from '../../../static/js/api.js'
 export default {
   data() {
     return {
-      loopData0: [
-        {
-          lanhutext0: '求购中央空调商用',
-          lanhutext1: '本公司专业收售空调，大小空调，中央空调，风冷模块本公司专业收售空调，大小空调，中央空调，风冷模块',
-          lanhutext2: '2013-01-30',
-          lanhutext3: '河南省郑州市金水区',
-        },
-        {
-          lanhutext0: '求购中央空调商用',
-          lanhutext1: '本公司专业收售空调，大小空调，中央空调，风冷模块0',
-          lanhutext2: '2013-01-30',
-          lanhutext3: '河南省郑州市金水区',
-        },
-        {
-          lanhutext0: '求购中央空调商用',
-          lanhutext1: '本公司专业收售空调，大小空调，中央空调，风冷模块1',
-          lanhutext2: '2013-01-30',
-          lanhutext3: '河南省郑州市金水区',
-        }
-      ],
+      loopData0: [],
       constants: {}
     };
   },
   methods: {
+	  //获取求购列表
+	  async pMyWantBuy(data) {
+		  let res = await myWantBuy(data)
+		  this.loopData0 = res.lists
+		  console.log(res)
+	  },
 	  //跳转发布求购
     onClick_1() {
       uni.navigateTo({
@@ -86,6 +74,18 @@ export default {
 		this.loopData0.splice(e,1)
 		console.log(this.loopData0)
 	}
+  },
+  onLoad() {
+  	uni.getStorage({
+  		key: 'userId',
+  		success: (res) => {
+  			this.userid = res.data
+  			let data = {
+  			userid: res.data
+  		}
+  		this.pMyWantBuy(data)
+  		}
+  	})
   }
 };
 </script>
@@ -128,7 +128,6 @@ export default {
       }
       .list_1 {
         width: 690rpx;
-        height: 820rpx;
         margin-left: 30rpx;
         .list-items_1 {
           background-color: rgba(255, 255, 255, 1);

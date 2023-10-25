@@ -301,7 +301,7 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 						cengseDesc:''
 					}
 					let res = await goodsList(data)
-					console.log(data)
+					// console.log(data)
 				// console.log("res",res)
 				// this.loopData0 = res.lists
 				if(res.lists.length < 1) {

@@ -59,18 +59,37 @@
   </view>
 </template>
 <script>
+	import {cartList} from '../../../static/js/api.js'
 export default {
   data() {
     return {
+		userid:'',
 		choose: false,
 		write: false,
       constants: {}
     };
   },
   methods: {
+	  //获取购物车列表
+	  async pCartList(data) {
+		  let res = await cartList(data)
+		  console.log(res)
+	  },
     onClick_1() {
       alert(1);
     }
+  },
+  onLoad() {
+  	uni.getStorage({
+  		key: 'userId',
+  		success: (res) => {
+  			this.userid = res.data
+  			let data = {
+  			userid: res.data
+  		}
+  		this.pCartList(data)
+  		}
+  	})
   }
 };
 </script>

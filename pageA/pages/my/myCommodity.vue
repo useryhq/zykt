@@ -82,13 +82,20 @@
 </template>
 
 <script>
+	import {myComodity} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
 				nav: 0,
+				userid: ''
 			};
 		},
 		methods: {
+			//获取商品列表
+			async pMyComodity(data) {
+				let res = await myComodity(data)
+				console.log(res)
+			},
 			changeNav(e) {
 				this.nav = e
 			},
@@ -98,6 +105,19 @@
 					url: '/pageA/pages/my/releaseCommodity'
 				})
 			}
+		},
+		onLoad() {
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userid = res.data
+					let data = {
+					userid: res.data,
+					type: '',
+				}
+				this.pMyoomodity(data)
+				}
+			})
 		}
 	}
 </script>

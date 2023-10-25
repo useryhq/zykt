@@ -17,23 +17,23 @@
 			<text class="nav" :class="{'nav_active' : nav == 3}" @click="chooseNav(3)">待收货</text>
 			<text class="nav" :class="{'nav_active' : nav == 4}" @click="chooseNav(4)">待评价</text>
 		</view>
-		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		<view class="section_3 flex-col" v-for="(items,index) in list" :key="index">
 		  <view class="block_2 flex-row justify-between align-center" >
 		    <view class="image-text_1 flex-row align-center">
 				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
+		      <text class="text-group_1">{{item.sellerInfo.shop_name}}</text>
 		      <text class="iconfont icon_3">&#xe6a3;</text>
 		    </view>
-			<view class="image-text_3" v-if="index == 0 || index == 1">
+			<view class="image-text_3" v-if="item.pay_status == 0">
 				等待付款
 			</view>
-			<view class="image-text_3" v-if="index == 2">
+			<view class="image-text_3" v-if="item.order_status == 5">
 				待发货
 			</view>
-			<view class="image-text_3" v-if="index == 3">
+			<view class="image-text_3" v-if="item.order_status == 40">
 				待收货
 			</view>
-			<view class="image-text_4 flex-row align-center justify-between" v-if="index === 4 || index == 5">
+			<view class="image-text_4 flex-row align-center justify-between" v-if="item.order_status == 60">
 				<text>完成</text>|
 				<text class="iconfont delet">&#xe665;</text>
 			</view>
@@ -45,20 +45,20 @@
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row justify-between">
 				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	  {{item.goodsInfo.goods_name}}
 				  	</text>
 					<text class="num_text">
-						×1
+						×{{item.goodsInfo.goods_num}}
 					</text>
 				  </view>
 		        
 				<view class="flex-row justify-end">
-					<text class="text_8" v-if="index == 0 || index == 1">应付：4899元</text>
+					<text class="text_8" v-if="item.pay_status == 0">应付：{{item.goodsInfo.market_price}}元</text>
 				</view>
 		      </view>
 		  </view>
 		  <view class="block_3 flex-row align-center justify-end">
-			  <view class="flex-row" v-if="index == 0 || index == 1">
+			  <view class="flex-row" v-if="item.pay_status == 0">
 			  	<view class="time">
 			  		<text class="iconfont icon_4">&#xe680;</text>
 			  		支付剩余24小时36分
@@ -67,7 +67,7 @@
 			  		去支付
 			  	</view>
 			  </view>
-			  <view class="flex-row" v-if="index == 2">
+			  <view class="flex-row" v-if="item.order_status == 30">
 			  	<view class="button_2">
 			  		取消订单
 			  	</view>
@@ -75,7 +75,7 @@
 					提醒发货
 				</view>
 			  </view>
-			<view class="flex-row" v-if="index == 3">
+			<view class="flex-row" v-if="item.order_status == 40">
 				<view class="button_2" @click="toAfterSales">
 					退换/售后
 				</view>
@@ -86,165 +86,8 @@
 					确认收货
 				</view>
 			</view>
-			<view class="flex-row" v-if="index === 4 || index == 5">
+			<view class="flex-row" v-if="item.order_status == 50">
 				<view class="button_2">
-					评价晒单
-				</view>
-				<view class="button_1">
-					再次购买
-				</view>
-			</view>
-		  </view>
-		</view>
-		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
-		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
-		    </view>
-			<view class="image-text_3">
-				等待付款
-			</view>
-		  </view>
-		    <view class="image-text_2 flex-row">
-		      <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
-			  </view>
-		      <view class="text-group_2 flex-col">
-				  <view class="text-group_3 flex-row justify-between">
-				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
-				  	</text>
-					<text class="num_text">
-						×1
-					</text>
-				  </view>
-		        
-				<view class="flex-row justify-end">
-					<text class="text_8">应付：4899元</text>
-				</view>
-		      </view>
-		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			  <view class="flex-row">
-			  	<view class="time">
-			  		<text class="iconfont icon_4">&#xe680;</text>
-			  		支付剩余24小时36分
-			  	</view>
-			  	<view class="button_1" @click="toOrderDetail">
-			  		去支付
-			  	</view>
-			  </view>
-		  </view>
-		</view>
-		<view v-if="nav == 2" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
-		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
-		    </view>
-			<view class="image-text_3">
-				待发货
-			</view>
-		  </view>
-		    <view class="image-text_2 flex-row">
-		      <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
-			  </view>
-		      <view class="text-group_2 flex-col">
-				  <view class="text-group_3 flex-row justify-between">
-				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
-				  	</text>
-					<text class="num_text">
-						×1
-					</text>
-				  </view>
-		      </view>
-		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			  <view class="flex-row">
-			  	<view class="button_2">
-			  		取消订单
-			  	</view>
-				<view class="button_1">
-					提醒发货
-				</view>
-			  </view>
-		  </view>
-		</view>
-		<view v-if="nav == 3" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
-		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
-		    </view>
-			<view class="image-text_3">
-				待收货
-			</view>
-		  </view>
-		    <view class="image-text_2 flex-row">
-		      <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
-			  </view>
-		      <view class="text-group_2 flex-col">
-				  <view class="text-group_3 flex-row justify-between">
-				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
-				  	</text>
-					<text class="num_text">
-						×1
-					</text>
-				  </view>
-		      </view>
-		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			<view class="flex-row">
-				<view class="button_2" @click="toAfterSales">
-					退换/售后
-				</view>
-				<view class="button_2">
-					查看物流
-				</view>
-				<view class="button_1">
-					确认收货
-				</view>
-			</view>
-		  </view>
-		</view>
-		<view v-if="nav == 4" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
-		  <view class="block_2 flex-row justify-between align-center" >
-		    <view class="image-text_1 flex-row align-center">
-				<text class="iconfont icon_2">&#xe676;</text>
-		      <text class="text-group_1">格力二手空调专卖</text>
-		      <text class="iconfont icon_3">&#xe6a3;</text>
-		    </view>
-			<view class="image-text_4 flex-row align-center justify-between">
-				<text>完成</text>|
-				<text class="iconfont delet">&#xe665;</text>
-			</view>
-		  </view>
-		    <view class="image-text_2 flex-row">
-		      <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
-			  </view>
-		      <view class="text-group_2 flex-col">
-				  <view class="text-group_3 flex-row justify-between">
-				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
-				  	</text>
-					<text class="num_text">
-						×1
-					</text>
-				  </view>
-		      </view>
-		  </view>
-		  <view class="block_3 flex-row align-center justify-end">
-			<view class="flex-row">
-				<view class="button_2" @click="toPostComments">
 					评价晒单
 				</view>
 				<view class="button_1">
@@ -257,16 +100,39 @@
 </template>
 
 <script>
+	import {orderList} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
+				userid: '2',
 				nav: 0,
+				list:[],
+				num: 1
 			};
 		},
 		methods: {
+			//获取订单列表
+			async pOrderList(data = {
+				userid: '',
+				type: '',
+				curpage: '',
+				page: '10',
+			}) {
+				console.log(data)
+				let res = await orderList()
+				this.list = res.lists
+				console.log(res)
+			},
 			//切换Nav导航条
 			chooseNav(e) {
 				this.nav = e
+				let data = {
+					userid: this.userid,
+					type: e,
+					curpage: 1,
+					page: '10',
+				}
+				this.pOrderList(data)
 			},
 			//跳转售后页面
 			toAfterSales() {
@@ -285,11 +151,59 @@
 				uni.navigateTo({
 					url: '/pageA/pages/order/oderDetail'
 				})
-			}
+			},
+			//上拉加载更多
+			async loadingMore() {
+				if(this.loading !== 0)
+				return false
+				this.loading = 1
+				uni.showLoading({
+					title: 'Loading...', //提示的内容,
+					mask: true, //显示透明蒙层，防止触摸穿透,
+					success: res => {}
+				})
+				let data = {
+					userid: '',
+					type: '',
+					curpage: this.num,
+					page: 10
+				}
+				console.log(data)
+				let res =  await orderList(data)
+				// console.log("res",res)
+				// this.loopData0 = res.lists
+				if(res.lists.length < 1) {
+					this.loading = 2
+					uni.hideLoading()
+					return
+				}
+				this.list = this.list.concat(res.lists)
+				// console.log(this.loopData0,"=======")
+				this.num++
+				this.loading = 0
+				uni.hideLoading()
+				
+			},
 		},
 		onLoad(option) {
 			//获取进入的nav导航状态
 			this.nav = option.nav
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					// this.userid = res.data
+					let data = {
+					userid: 2,
+					type: option.nav,
+					curpage: 1,
+					page: '10',
+				}
+				this.pOrderList(data)
+				}
+			})
+		},
+		onReachBottom() {
+			this.loadingMore()
 		}
 	}
 </script>
