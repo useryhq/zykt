@@ -170,7 +170,7 @@
 					.select('#list')
 					.boundingClientRect()
 					.exec(ret => {
-						console.log(ret,'ret')
+						// console.log(ret,'ret')
 						this.winOffsetY = ret[0].top
 						this.winHeight = ret[0].height
 						this.itemHeight = this.winHeight / this.lists.length
