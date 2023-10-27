@@ -9,81 +9,95 @@
             :key="index"
           >
             <view class="text-wrapper_1 flex-row justify-between">
-              <text class="text_2">{{item.lanhutext0}}</text>
-              <text class="text_3">{{item.lanhutext1}}</text>
+              <text class="text_2">{{item.name}}</text>
+              <text class="text_3">{{item.mobile}}</text>
             </view>
-            <text class="text_4">{{item.lanhutext2}}</text>
+            <text class="text_4">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</text>
             <view class="group_3 flex-col"></view>
             <view class="group_4 flex-row align-center">
 				<view class="image-text flex-row">
-					<text v-if="item.slot1 == 1" class="iconfont icon">&#xe63e;</text>
-					<text v-else class="icon_2 flex-col" @click="chooseAddress(index)"></text>
+					<text v-if="item.is_default == 1" class="iconfont icon">&#xe63e;</text>
+					<text v-else class="icon_2 flex-col" @click="chooseAddress(item)"></text>
 					<text class="text_5">默认地址</text>
 				</view>
               <view class="image-text_1 flex-row justify-between">
 				<text class="iconfont icon_3">&#xe66e;</text>
                 <text class="text-group_1">编辑</text>
               </view>
-              <view class="image-text_2 flex-row justify-between">
+              <view class="image-text_2 flex-row justify-between" @click="delet(item)">
                 <text class="iconfont icon_4">&#xe665;</text>
                 <text class="text-group_2">删除</text>
               </view>
             </view>
           </view>
-        <view class="button_1" @click="onClick_1">
-          <text class="text_6">新增地址</text>
-        </view>
       </view>
     </view>
+	<view class="button_1" @click="onClick_1">
+	  <text class="text_6">新增地址</text>
+	</view>
+	<uni-popup ref="popup" type="message">
+		<uni-popup-message type="warn" message="警告消息" :duration="3000">{{prompt}}</uni-popup-message>
+	</uni-popup>
   </view>
 </template>
 <script>
-	import {manageAddressH} from '../../../static/js/api.js'
+	import {manageAddressH,setAddressH,delAddressH} from '../../../static/js/api.js'
 export default {
   data() {
     return {
 		userid: '',
-      loopData0: [
-        {
-          lanhutext0: '王婷婷',
-          lanhutext1: '155****0123',
-          lanhutext2:
-            '河南省郑州市金水区南阳路农业路227号叠翠园1号楼2单元3楼东户',
-          slot1: 1
-        },
-        {
-         lanhutext0: '王婷婷',
-         lanhutext1: '155****0123',
-         lanhutext2:
-           '河南省郑州市金水区南阳路农业路227号叠翠园1号楼2单元3楼东户',
-          slot1: 0
-        },
-        {
-          lanhutext0: '王婷婷',
-          lanhutext1: '155****0123',
-          lanhutext2:
-            '河南省郑州市金水区南阳路农业路227号叠翠园1号楼2单元3楼东户',
-          slot1: 0
-        }
-      ],
-      constants: {}
+		loopData0: [],
+		prompt: '',
+		constants: {}
     };
   },
   methods: {
 	  //获取地址列表
-	  async pManageAddress() {
-		  let res = await manageAddressH()
-		  console.log(res)
+	  async pManageAddress(data) {
+		  let res = await manageAddressH(data)
+		  this.loopData0 = res.lists
+		  // console.log(res)
+	  },
+	  //设置默认地址
+	  async pSetAddressH(data) {
+		  let res = await setAddressH(data)
+		  // console.log(res)
+		  this.prompt = res.msg
+		  this.$refs.popup.open('top')
+		  if(res.code == 200) {
+			 let data = {
+			 	userid: this.userid
+			 }
+			  this.pManageAddress(data)
+			  // this.$forceUpdate()
+		  }
+	  },
+	  //删除地址接口
+	  async pDelAddressH(data) {
+		  let res = await delAddressH(data)
+		  this.prompt = res.msg
+		  this.$refs.popup.open('top')
+		  if(res.code == 200) {
+		  			 let data = {
+		  			 	userid: this.userid
+		  			 }
+		  			  this.pManageAddress(data)
+		  			  // this.$forceUpdate()
+		  }
+	  },
+	  delet(e) {
+		  let data = {
+			  id: e.id
+		  }
+		  this.pDelAddressH(data)
 	  },
 	  //选择默认地址
 	  chooseAddress(e) {
-		  this.loopData0.forEach((item,index) => {
-			  if(index == e) {
-				  item.slot1 = 1
-			  } else{
-				  item.slot1 = 0
-			  }
-		  })
+		 let data = {
+			 id: e.id,
+			 userid: this.userid
+		 }
+		 this.pSetAddressH(data)
 	  },
 	  //跳转填写地址
     onClick_1() {
@@ -93,18 +107,19 @@ export default {
     }
   },
   onLoad() {
-  	uni.getStorage({
-  		key: 'userId',
-  		success: (res) => {
-  			this.userid = res.data
-  		}
-  	})
+  	
   },
   onShow() {
-  	let data = {
-  		userid: this.data
-  	}
-  	this.pManageAddress(data)
+	  uni.getStorage({
+	  	key: 'userId',
+	  	success: (res) => {
+	  		this.userid = res.data
+			let data = {
+				userid: res.data
+			}
+			this.pManageAddress(data)
+	  	}
+	  })
   }
 };
 </script>
@@ -123,8 +138,8 @@ export default {
     margin-top: 15rpx;
       .list_1 {
         width: 693rpx;
-        height: 890rpx;
         margin: 25rpx 0 0 30rpx;
+		padding-bottom: 120rpx;
         .list-items_1 {
           background-color: rgba(255, 255, 255, 1);
           border-radius: 4px;
@@ -250,28 +265,28 @@ export default {
             }
           }
         }
-      .button_1 {
-        background-color: rgba(230, 60, 49, 1);
-        border-radius: 30px;
-        height: 60rpx;
-        width: 464rpx;
-		margin: 0 auto;
-		 text-align: center;
-       position: fixed;
-	   left: 0;
-	   right: 0;
-	   bottom: 42rpx;
-        .text_6 {
-          color: rgba(255, 255, 255, 1);
-          font-size: 24rpx;
-          font-family: PingFang-SC-Regular;
-          font-weight: NaN;
-          white-space: nowrap;
-          line-height: 60rpx;
-        }
-      }
 	  }
     }
+	.button_1 {
+	  background-color: rgba(230, 60, 49, 1);
+	  border-radius: 30px;
+	  height: 60rpx;
+	  width: 464rpx;
+			margin: 0 auto;
+			 text-align: center;
+	 position: fixed;
+	 left: 0;
+	 right: 0;
+	 bottom: 40rpx;
+	  .text_6 {
+	    color: rgba(255, 255, 255, 1);
+	    font-size: 24rpx;
+	    font-family: PingFang-SC-Regular;
+	    font-weight: NaN;
+	    white-space: nowrap;
+	    line-height: 60rpx;
+	  }
+	}
   }
 
 </style>

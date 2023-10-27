@@ -170,6 +170,7 @@
 					.select('#list')
 					.boundingClientRect()
 					.exec(ret => {
+						console.log(ret,'ret')
 						this.winOffsetY = ret[0].top
 						this.winHeight = ret[0].height
 						this.itemHeight = this.winHeight / this.lists.length
@@ -189,6 +190,7 @@
 				let pageY = this.isPC ? e.pageY : e.touches[0].pageY
 				// console.log('e',e,'pageY',pageY)
 				let index = Math.floor((pageY - this.winOffsetY) / this.itemHeight)
+				// console.log(index,'index')
 				let item = this.lists[index]
 				if (item) {
 					this.scrollViewId = 'uni-indexed-list-' + index

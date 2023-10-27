@@ -97,7 +97,7 @@ export default {
 		//选择默认地址
 		chooseAddress(e) {
 			console.log(e)
-			if(e,detail.value) {
+			if(e.detail.value) {
 				this.default = 1
 			} else {
 				this.default = 0
@@ -127,9 +127,9 @@ export default {
 			  id: '',
 			  mobile: this.tel,
 			  name: this.name,
-			  prrovince: this.address[0].text,
-			  city: this.address[1].text,
-			  arrea: this.address[2].text,
+			  province: this.address[0].value,
+			  city: this.address[1].value,
+			  area: this.address[2].value,
 			  address: this.detailAddress,
 			  userid: this.userid,
 			  default: this.default

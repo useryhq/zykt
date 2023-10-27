@@ -66,7 +66,7 @@ export default {
 	  }
   },
   onLoad(option) {
-	  console.log(option)
+	  // console.log(option)
 	  this.getBrandTwo(option.id,option.c)
   }
 };

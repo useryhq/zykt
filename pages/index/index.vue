@@ -16,8 +16,8 @@
 					</view>
 				</view>
 			</view>
-			<view v-show="addShow" class="choose_address">
-				<uni-indexed-list :options="localData" :show-select="true" @click="bindClick" />
+			<view :class="{zindex:addShow}" class="choose_address">
+				<uni-indexed-list :options="localData" :showSelect="false" @click="bindClick" />
 			</view>
 			<view class="group_5 flex-col">
 				<view class="block_3 flex-row justify-between">
@@ -492,7 +492,7 @@
 
 		.group_1 {
 			width: 750rpx;
-
+			background-color: #f6f6f6;
 			.group_2 {
 				width: 750rpx;
 				height: 110rpx;
@@ -574,11 +574,14 @@
 				height: 100%;
 				background-color: rgba(0, 0, 0, 0.6);
 				position: absolute;
-				z-index: 998;
+				z-index: -10;
 				@{aaa} .uni-indexed-list {
 						top: 100rpx;
 						left: 0;
 				}
+			}
+			.zindex {
+				z-index: 1000;
 			}
 			.group_5 {
 				width: 750rpx;
@@ -1045,7 +1048,7 @@
 				position: fixed;
 				left: 0;
 				bottom: 0rpx;
-				z-index: 1000;
+				z-index: 999;
 				padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
 				padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 

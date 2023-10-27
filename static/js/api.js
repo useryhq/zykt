@@ -386,3 +386,21 @@ export function addAddressH(data) {
 		})
 	})
 }
+//个人设置默认地址
+export function setAddressH(data) {
+	let url = '/address/default'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//个人删除地址
+export function delAddressH(data) {
+	let url = '/address/del'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}

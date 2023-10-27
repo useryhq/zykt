@@ -16,7 +16,7 @@
 	  	</view>
 	  </view>
       </view>
-	  <view :style="{height: Height}" class="box_3">
+	  <view class="box_3">
 		  <uni-indexed-list :options="list" @click="bindClick" />
 	  </view>
     </view>
@@ -47,7 +47,7 @@ export default {
 	  	this.loopData0 = data.hot1
 	  	this.loopData0 = this.loopData0.concat(data.hot2)
 	  },
-	  //设置品牌列表高度
+	  //设置品牌列表高度（不用）
 	  setHeight() {
 		  let h = 0
 		  let that = this
@@ -64,7 +64,7 @@ export default {
 		  }).exec()
   },
   bindClick(e) {
-	  console.log(e)
+	  // console.log(e)
 	  let id = e.item.itemobj.id
 	  let c = e.item.itemobj.url.split('c=')[1]
 	  // console.log(c)
@@ -83,7 +83,7 @@ export default {
 			},
   },
   onLoad() {
-	 this.setHeight()
+	 // this.setHeight()
 	 this.getBrandHot()
 	 this.getBrandList()
   }
@@ -98,13 +98,14 @@ export default {
 .page {
   position: relative;
   width: 750rpx;
+  height: 100%;
   overflow: hidden;
   .box_2 {
-    width: 749rpx;
+    width: 750rpx;
     .group_3 {
       width: 718rpx;
       height: 36rpx;
-      margin: 20rpx 0 0 28rpx;
+      margin: 20rpx 0 0 26rpx;
       .block_2 {
         background-color: rgba(255, 0, 0, 1);
         border-radius: 3px;
@@ -168,8 +169,9 @@ export default {
 	}
 }
 .box_3 {
-	width: 720rpx;
-	margin-left: 27rpx;
+	width: 724rpx;
+	height: 74%;
+	margin-left: 26rpx;
 }
 }
 
