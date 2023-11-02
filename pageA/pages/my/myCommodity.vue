@@ -6,28 +6,28 @@
 		    <text class="text-group_1">发布商品</text>
 		</view>
 		<view class="nav_box flex-row justify-around">
-			<view class="nav_text" :class="{'nav_text-avtive' : nav == 0}" @click="changeNav(0)">
+			<view class="nav_text" :class="{'nav_text-avtive' : nav == 1}" @click="changeNav(1)">
 				我发布的
 			</view>
-			<view class="nav_text" :class="{'nav_text-avtive' : nav == 1}" @click="changeNav(1)">
+			<view class="nav_text" :class="{'nav_text-avtive' : nav == 2}" @click="changeNav(2)">
 				已下架
 			</view>
-			<view class="avtive_line" :class="{'avtive_line-active_left' : nav == 0, 'avtive_line-active_right' : nav== 1}"></view>
+			<view class="avtive_line" :class="{'avtive_line-active_left' : nav == 1, 'avtive_line-active_right' : nav== 2}"></view>
 		</view>
-		<view v-if="nav == 0" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
+				  <image :src="upimg + thumb" mode="aspectFit" ></image>
 			  </view>
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row">
 				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	  {{items.title}}
 				  	</text>
 				  </view>
 		        
 				<view class="flex-row">
-					<text class="text_8">￥4899</text>
+					<text class="text_8">￥{{items.market_price}}</text>
 				</view>
 		      </view>
 		  </view>
@@ -46,20 +46,20 @@
 			 </view>
 		  </view>
 		</view>
-		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+		<view v-if="nav == 2" class="section_3 flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
+				  <image :src="upimg + thumb" mode="aspectFit"></image>
 			  </view>
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row">
 				  	<text class="paragraph_1">
-				  	  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+				  	  {{items.title}}
 				  	</text>
 				  </view>
 		        
 				<view class="flex-row">
-					<text class="text_8">￥4899</text>
+					<text class="text_8">￥{{items.market_price}}</text>
 				</view>
 		      </view>
 		  </view>
@@ -86,17 +86,28 @@
 	export default {
 		data() {
 			return {
-				nav: 0,
-				userid: ''
+				nav: 1,
+				userid: '',
+				upimg: this.$upImgUrl.upImg_base_url,
+				list: [],
+				thumb: ''
 			};
 		},
 		methods: {
 			//获取商品列表
 			async pMyComodity(data) {
 				let res = await myComodity(data)
+				this.list = res.lists
+				let img = res.lists[0].thumb
+				this.thumb = img.substring(0,img.indexOf(','))
 				console.log(res)
 			},
 			changeNav(e) {
+				let data = {
+					userid: this.userid,
+					type: e,
+				}
+				this.pMyComodity(data)
 				this.nav = e
 			},
 			//跳转发布商品
@@ -113,7 +124,7 @@
 					this.userid = res.data
 					let data = {
 					userid: res.data,
-					type: '',
+					type: this.nav,
 				}
 				this.pMyComodity(data)
 				}

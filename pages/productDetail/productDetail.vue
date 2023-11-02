@@ -36,7 +36,7 @@
 			</view>
 			<view class="group_6 flex-col">
 				<view class="box_2 flex-row justify-between">
-					<text class="text_6"><text v-if="info.is_xunjia == 0">￥{{info.market_price}}</text><text
+					<text class="text_6"><text v-if="info.is_xunjia == 0">￥{{info.shop_price}}</text><text
 							v-else>询价</text></text>
 					<view class="image-text_1 flex-row justify-between" :class="{'tab_color' : join == 1}"
 						@click="postCollect(1)">
@@ -281,7 +281,8 @@
 	import {
 		productDetail,
 		sendMessage,
-		collect
+		collect,
+		addCart
 	} from '../../static/js/api.js'
 	export default {
 		data() {
@@ -328,7 +329,7 @@
 				this.store = res.info.shop_id
 				this.appraise = res.commonentInfo
 				this.ktParameter = res.specInfo
-				this.price = res.info.market_price
+				this.price = res.info.shop_price
 				this.storeCount = res.info.store_count
 				this.specifications = res.info.spec
 				this.images.push(res.info.thumb)
@@ -370,6 +371,12 @@
 				this.prompt = res.msg
 				this.$refs.popup.open('center')
 				// console.log(res)
+			},
+			async pAddCart(data) {
+				let res = await addCart(data)
+				this.prompt = res.msg
+				this.$refs.popup.open('center')
+				console.log(res)
 			},
 			//顶部nav切换，定位到相应栏目
 			navChange(index) {
@@ -431,9 +438,18 @@
 						}).exec()
 					}).exec()
 				} else if (e == 4) {
-					uni.navigateTo({
-						url: '/pageA/pages/my/shoppingCart'
-					})
+					let data = {
+						userid: this.userid,
+						goods_id: this.info.id,
+						goods_name: this.info.goods_name,
+						shop_id: this.store,
+						market_price: this.info.market_price,
+						shop_price: this.price
+					}
+					this.pAddCart(data)
+					// uni.navigateTo({
+					// 	url: '/pageA/pages/my/shoppingCart'
+					// })
 				} else if (e == 5) {
 					this.buyBlock = true
 				} else if (e == 33) {
@@ -504,6 +520,11 @@
 				key: 'userId',
 				success: (res) => {
 					this.userid = res.data
+				},
+				fail() {
+					uni.navigateTo({
+						url: '/pageC/pages/login/login'
+					})
 				}
 			})
 		}

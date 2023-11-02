@@ -142,6 +142,7 @@
 	export default {
 		data() {
 			return {
+				userid: '',
 				cname: '',
 				price: '',
 				imageValue: [],
@@ -156,6 +157,7 @@
 				},
 				token: '',
 				filePath: '',
+				thumb: '',
 				name: '',
 				tel: '',
 				prompt: '',
@@ -261,6 +263,13 @@
 					})
 				})
 			},
+			//发布商品提交
+			async pMReleaseComodity(data) {
+				let res = await mReleaseComodity(data)
+				this.prompt = res.msg
+				this.$refs.popup.open('top')
+				console.log(res)
+			},
 			//输入商品名称
 			inCname(e) {
 				this.cname = e.detail.value
@@ -348,6 +357,8 @@
 						console.log("上传成功", res)
 						that.prompt = "上传成功，如果另有图片请再次上传"
 						that.$refs.popup.open('top')
+						let data = JSON.parse(res.data)
+						that.thumb += data.key + ',' 
 						setTimeout(() => {
 							that.$refs.file.clearFiles()
 						}, 2000)
@@ -428,14 +439,38 @@
 				} else if (this.price == '') {
 					this.prompt = '请输入商品价格'
 					this.$refs.popup.open('top')
-				} else if (this.tel == '') {
+				} else if (this.thumb == '') {
+					this.prompt = '请选择商品主图'
+					this.$refs.popup.open('top')
+				}else if (this.tel == '') {
 					this.prompt = '请输入电话号码'
 					this.$refs.popup.open('top')
-				}else if (this.address == []) {
+				}else if (this.address.length == 0) {
 					this.prompt = '请选择所在地'
 					this.$refs.popup.open('top')
+				} else {
+					let data = {
+						userid: this.userid,
+						parent_cat_id: this.listIndex,
+						sub_cat_id: this.sListIndex,
+						cat_id: this.tListIndex,
+						goods_title: this.cname,
+						province: this.address[0].value,
+						city: this.address[1].value,
+						area: this.address[2].value,
+						thumb: this.thumb,
+						pics: this.backData.pics,
+						chengse: this.finenessText,
+						shop_price: this.price,
+						describe: this.backData.describe,
+						mobile: this.tel,
+						brand_id: this.brandid,
+						id: ''
+					} 
+					this.pMReleaseComodity(data)
+					console.log(data)
 				}
-				console.log(this.cname, this.listText, this.brandText, this.finenessText, this.price, this.tel)
+				
 			}
 		},
 		onShow() {
@@ -445,6 +480,12 @@
 			this.getQntoken()
 			this.GetCategory()
 			this.getBrandList()
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userid = res.data
+				}
+			})
 			// console.log(this.sListIndex)
 		}
 	}

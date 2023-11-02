@@ -15,7 +15,7 @@
 			</view>
 			<view class="group_6 flex-col">
 				<view class="box_2 flex-row justify-between">
-					<text class="text_6">￥{{info.market_price}}</text>
+					<text class="text_6">￥{{info.shop_price}}</text>
 					<view class="image-text_1 flex-row justify-between" :class="{'tab_color' : store == 1}" @click="postCollect(1)">
 						<text class="iconfont">&#xe64c;</text>
 						<text class="text-group_1">收藏</text>

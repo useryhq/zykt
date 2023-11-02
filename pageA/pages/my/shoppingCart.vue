@@ -5,30 +5,30 @@
       <view class="group_4 flex-col">
         <text class="text_7">编辑</text>
 		<text v-if="write" class="text_7">完成</text>
-        <view class="section_3 flex-col" v-for="(items,index) in 6" :key="index">
+        <view class="section_3 flex-col" v-for="(items,index) in list" :key="index">
           <view class="block_2 flex-row" >
             <view class="checkbox_1" @click="choose_1()"></view>
 			<text v-if="choose" class="iconfont checkbox">&#xe63e;</text>
             <view class="image-text_1 flex-row align-center">
 				<text class="iconfont icon_2">&#xe676;</text>
-              <text class="text-group_1">格力二手空调专卖</text>
+              <text class="text-group_1">{{items.shop_name}}</text>
               <text class="iconfont icon_3">&#xe6a3;</text>
             </view>
           </view>
-          <view class="block_3 flex-row">
+          <view class="block_3 flex-row" v-for="(item,n) in items.goodsInfo" :key="n">
             <view class="checkbox_2"></view>
 			<text  v-if="choose" class="iconfont checkbox">&#xe63e;</text>
             <view class="image-text_2 flex-row">
               <view class="group_5">
-				  <image src="../../../static/bg/0301162340.png" mode="aspectFit"></image>
+				  <image :src="imgUrl + item.thumb" mode="aspectFit"></image>
 			  </view>
               <view class="text-group_2 flex-col justify-between">
                 <text class="paragraph_1">
-                  科龙（KELON）2/3/5匹天花机商用家用中央空调科龙（KELON）2/3/5匹天花机商用家用中央空调
+                  {{item.goods_name}}
                 </text>
 				<view class="flex-row justify-between">
-					<text class="text_8">￥4899</text>
-					<uni-number-box class="num_box" min="1" @change=""></uni-number-box>
+					<text class="text_8">￥{{item.shop_price}}</text>
+					<uni-number-box :value="item.goods_num" class="num_box" min="1" @change=""></uni-number-box>
 				</view>
               </view>
             </view>
@@ -64,8 +64,10 @@ export default {
   data() {
     return {
 		userid:'',
+		list: [],
 		choose: false,
 		write: false,
+		imgUrl: this.$imgUrl.img_base_url,
       constants: {}
     };
   },
@@ -73,6 +75,7 @@ export default {
 	  //获取购物车列表
 	  async pCartList(data) {
 		  let res = await cartList(data)
+		  this.list = res.lists
 		  console.log(res)
 	  },
     onClick_1() {

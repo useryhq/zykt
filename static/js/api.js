@@ -332,6 +332,15 @@ export function collectCancel(data) {
 		})
 	})
 }
+//加入购物车
+export function addCart(data) {
+	let url = '/cart/add-info'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
 //购物车列表
 export function cartList(data) {
 	let url = '/cart/lists'
@@ -364,7 +373,7 @@ export function mReleaseComodity(data) {
 	let url = '/user/add-goods'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
-			resolve(res.data)
+			resolve(res)
 		})
 	})
 }

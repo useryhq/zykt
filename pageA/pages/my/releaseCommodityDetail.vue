@@ -39,7 +39,8 @@
 				},
 				prompt: '',
 				text: '',
-				token: ''
+				token: '',
+				pics: ''
 			};
 		},
 		methods: {
@@ -74,7 +75,8 @@
 						console.log("上传成功", res)
 						that.prompt = "上传成功，如果另有图片请再次上传"
 						that.$refs.popup.open('top')
-
+						let data = JSON.parse(res.data)
+						that.pics += data.key + ','
 						setTimeout(() => {
 							that.$refs.file.clearFiles()
 						}, 2000)
@@ -94,7 +96,7 @@
 				let prevPage = pages[pages.length - 2]; //上一个页面
 				let obj = {
 					describe: this.text,
-					pics: ''
+					pics: this.pics
 				}
 				console.log(obj)
 				prevPage.$vm.backFunction(obj)

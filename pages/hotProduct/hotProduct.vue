@@ -75,7 +75,7 @@
 						</text>
 					</view>
 					<view class="text-wrapper_4 flex-row" @tap.stop.prevent>
-						<text class="text_10" v-if="item.market_price != 0"><text>￥</text>{{item.market_price}}</text>
+						<text class="text_10" v-if="item.is_xunjia != 1"><text>￥</text>{{item.shop_price}}</text>
 						<text class="text_10" v-else>询价</text>
 						<text class="iconfont pk_text" @click="pkText(item)" v-if="item.pk">&#xe661;对比</text>
 						<text class="iconfont pk_text choose_color" v-else>&#xe661;已选</text>
