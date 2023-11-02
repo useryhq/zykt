@@ -17,7 +17,7 @@
 		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
-				  <image :src="upimg + thumb" mode="aspectFit" ></image>
+				  <image :src="upimg + items.thumb[0]" mode="aspectFit" ></image>
 			  </view>
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row">
@@ -98,8 +98,6 @@
 			async pMyComodity(data) {
 				let res = await myComodity(data)
 				this.list = res.lists
-				let img = res.lists[0].thumb
-				this.thumb = img.substring(0,img.indexOf(','))
 				console.log(res)
 			},
 			changeNav(e) {
