@@ -3,12 +3,12 @@
   <view class="page flex-col">
     <view class="block_1 flex-col justify-end">
       <view class="group_4 flex-col">
-        <text class="text_7">编辑</text>
-		<text v-if="write" class="text_7">完成</text>
+		<text v-if="write" @click="complete" class="text_7">完成</text>
+		<text v-else class="text_7" @click="edite">编辑</text>
         <view class="section_3 flex-col" v-for="(items,index) in list" :key="index">
           <view class="block_2 flex-row" >
-            <view class="checkbox_1" @click="choose_1()"></view>
-			<text v-if="choose" class="iconfont checkbox">&#xe63e;</text>
+            <view class="checkbox_1" @click="choose_1"></view>
+			<text v-if="choose1" class="iconfont checkbox">&#xe63e;</text>
             <view class="image-text_1 flex-row align-center">
 				<text class="iconfont icon_2">&#xe676;</text>
               <text class="text-group_1">{{items.shop_name}}</text>
@@ -37,10 +37,10 @@
       </view>
     </view>
 	<view class="group_3 flex-row align-center">
-			<view class="checkbox_2"></view>
+	  <view class="checkbox_2"></view>
 	  <text class="text_2">全选</text>
 	  <text  v-if="choose" class="iconfont checkbox">&#xe63e;</text>
-	  <view v-if="false" class="text-wrapper_2">
+	  <view v-if="write" class="text-wrapper_2">
 		<view class="button_2">
 			移入收藏夹
 		</view>
@@ -48,11 +48,11 @@
 			删除
 		</view>
 	  </view>
-	  <view class="text-wrapper_1">
+	  <view v-if="!write" class="text-wrapper_1">
 	    <text class="text_3">合计</text>
 	    <text class="text_5">￥9798.00</text>
 	  </view>
-	  <view class="button_1" @click="onClick_1">
+	  <view v-if="!write" class="button_1" @click="onClick_1">
 	    <text class="text_6">去计算(1)</text>
 	  </view>
 	</view>
@@ -65,7 +65,7 @@ export default {
     return {
 		userid:'',
 		list: [],
-		choose: false,
+		choose1: false,
 		write: false,
 		imgUrl: this.$imgUrl.img_base_url,
       constants: {}
@@ -77,6 +77,18 @@ export default {
 		  let res = await cartList(data)
 		  this.list = res.lists
 		  console.log(res)
+	  },
+	  //编辑按钮
+	  edite() {
+		  this.write = true
+	  },
+	  //完成按钮
+	  complete() {
+		  this.write = false
+	  },
+	  //单选商品未选中按钮
+	  choose_1() {
+		 this.choose1 = true 
 	  },
     onClick_1() {
       alert(1);
@@ -310,9 +322,16 @@ export default {
 	    }
 	  }
 	  .text-wrapper_2 {
+		  width: 540rpx;
+		  margin-left: 20rpx;
+		  display: flex;
+		  flex-direction: row;
+		  justify-content: flex-end;
+		  align-items: center;
 		  .button_2 {
 			  width: 148rpx;
 			  height: 46rpx;
+			  margin-right: 20rpx;
 			  background-color: #E63C31;
 			  border-radius: 23rpx;
 			  color: #fff;
@@ -321,15 +340,15 @@ export default {
 			  text-align: center;
 		  }
 		  .button_3 {
-		  			  width: 148rpx;
-		  			  height: 46rpx;
-		  			  background-color: #fff;
-		  			  border-radius: 23rpx;
-		  			  color: #333;
-		  			  font-size: 24rpx;
-		  			  line-height: 46rpx;
-		  			  text-align: center;
-					  border: 1rpx solid #D2D2D2;
+		  		width: 148rpx;
+		  		height: 46rpx;
+		  		background-color: #fff;
+		  		border-radius: 23rpx;
+		  		color: #333;
+		  		font-size: 24rpx;
+		  		line-height: 46rpx;
+		  		text-align: center;
+				border: 1rpx solid #D2D2D2;
 		  }
 	  }
 	  .button_1 {

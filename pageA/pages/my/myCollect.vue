@@ -153,18 +153,20 @@
 			// 完成按钮
 			complete() {
 				let ids = ''
-				this.idarr.forEach((item,index) => {
-					if(index < this.idarr.length-1){
-						ids += item +','
-					} else {
-						ids += item
+				if(this.idarr.length != 0) {
+					this.idarr.forEach((item,index) => {
+						if(index < this.idarr.length-1){
+							ids += item +','
+						} else {
+							ids += item
+						}
+					})
+					let data = {
+						userid:this.userid,
+						ids: ids
 					}
-				})
-				let data = {
-					userid:this.userid,
-					ids: ids
+					this.pCollectCancel(data)
 				}
-				this.pCollectCancel(data)
 				this.button = true
 			}
 		},
