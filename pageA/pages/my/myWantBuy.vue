@@ -3,10 +3,6 @@
   <view class="page flex-col">
     <view class="section_1 flex-col">
       <view class="section_3 flex-col">
-        <view class="button_1 flex-row justify-center" @click="onClick_1">
-            <text class="iconfont icon_2">&#xe649;</text>
-            <text class="text-group_1">发布求购</text>
-        </view>
         <view class="list_1 flex-col">
           <view
             class="list-items_1 flex-col"
@@ -57,12 +53,6 @@ export default {
 		  this.loopData0 = res.lists
 		  console.log(res)
 	  },
-	  //跳转发布求购
-    onClick_1() {
-      uni.navigateTo({
-      	url: '/pageA/pages/my/releaseWantBuy'
-      })
-    },
     onClick_2() {
       alert(1);
     },

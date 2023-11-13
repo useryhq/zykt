@@ -11,58 +11,8 @@
           </view>
 		  <text class="icon_2" @click="toMy">返回个人中心</text>
         </view>
-        <view class="box_3 flex-row align-center justify-between">
-          <view class="text-block flex-col align-center">
-          	<text class="text_4">订单数</text>
-			<text class="text_5">10</text>
-			<text class="text_4">昨日30</text>
-          </view>
-		  <view class="text-block flex-col align-center">
-		  	<text class="text_4">成交额（￥）</text>
-		  	<text class="text_5">10000.00</text>
-		  	<text class="text_4">昨日5000</text>
-		  </view>
-		  <view class="text-block flex-col align-center">
-		  	<text class="text_4">总资产（￥）</text>
-		  	<text class="text_5">10000.00</text>
-		  	<text class="button_1">查看</text>
-		  </view>
-        </view>
       </view>
       <view class="box_4 flex-col">
-        <view class="text-wrapper_1 flex-row justify-between">
-          <text class="text_9">销售订单</text>
-          <text class="text_10" @click="toOrderList(0)">全部（10）</text>
-        </view>
-        <view class="group_5 flex-col">
-          <view class="box_5 flex-row justify-between">
-            <view class="image-text_1 flex-col align-center" @click="toOrderList(1)">
-				<text class="iconfont icon_5">&#xe675;</text>
-                <text class="text_11">待付款</text>
-                <text class="text_12">6</text>
-            </view>
-            <view class="image-text_1 flex-col align-center" @click="toOrderList(2)">
-			<text class="iconfont icon_5">&#xe67a;</text>
-              <text class="text_11">待发货</text>
-			  <text class="text_12 color">6</text>
-            </view>
-			<view class="image-text_1 flex-col align-center" @click="toOrderList(3)">
-			<text class="iconfont icon_5">&#xe672;</text>
-			  <text class="text_11">待收货</text>
-			  <text class="text_12 color">6</text>
-			</view>
-           <view class="image-text_1 flex-col align-center" @click="toOrderList(4)">
-           <text class="iconfont icon_5">&#xe673;</text>
-             <text class="text_11">待评价</text>
-             <text class="text_12 color">6</text>           
-           </view>
-		   <view class="image-text_1 flex-col align-center" @click="toAfterSalesList">
-		   <text class="iconfont icon_5">&#xe6ac;</text>
-		     <text class="text_11">退款/售后</text>
-		     <text class="text_12">6</text>
-		   </view>
-          </view>
-        </view>
 		<view class="box_6">
 			常用工具
 		</view>
@@ -106,10 +56,6 @@
           	<text class="iconfont icon_10">&#xe612;</text>
             <text class="text-group_7">开通城市分站</text>
           </view>
-          <view class="image-text_6 flex-row" @click="toManageAddress">
-            <text class="iconfont icon_10">&#xe651;</text>
-            <text class="text-group_7">地址管理</text>
-          </view>
         </view>
       </view>
     </view>
@@ -123,39 +69,12 @@ export default {
     };
   },
   methods: {
-    onClick_1() {
-      
-    },
-	//跳转订单列表
-	toOrderList(e) {
-			uni.navigateTo({
-				url: '/pageB/pages/businessOrder/orderList?nav=' + e
-			})
-	},
-	//跳转售后列表
-	toAfterSalesList() {
-		uni.navigateTo({
-			url: '/pageB/pages/businessOrder/afterSalesList'
-		})
-	},
 	//跳转发布商品
 	toReleaseCommodity() {
 		uni.navigateTo({
 			url: '/pageB/pages/business/releaseCommodity'
 		})
 	},
-	//跳转地址管理
-	toManageAddress() {
-		uni.navigateTo({
-			url: '/pageB/pages/business/manageAddress'
-		})
-	},
-	//跳转我的收藏
-	// toMyCollect() {
-	// 	uni.navigateTo({
-	// 		url: '/pages/my/myCollect'
-	// 	})
-	// },
 	//返回个人中心
 	toMy() {
 		uni.navigateBack({
@@ -186,6 +105,7 @@ export default {
 			url: '/pageB/pages/business/manageWantBuy'
 		})
 	},
+	// 打开开通城市分账
 	toOpenCity() {
 		uni.navigateTo({
 			url: '/pageB/pages/business/openCity'
@@ -208,7 +128,7 @@ export default {
     width: 750rpx;
     .box_1 {
       width: 749rpx;
-      height: 290rpx;
+      height: 180rpx;
       background-color: #4182FE;
       .box_2 {
         width: 675rpx;
@@ -376,7 +296,7 @@ export default {
         border-radius: 10px;
         position: relative;
         width: 690rpx;
-        height: 330rpx;
+        height: 260rpx;
         margin: 34rpx 0 0 30rpx;
         .image-text_6 {
           width: 650rpx;

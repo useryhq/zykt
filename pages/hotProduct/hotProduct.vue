@@ -169,7 +169,7 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 				}
 				let res = await fGoodsList(data)
 				this.ktlist = res.lists
-				console.log(res)
+				// console.log(res)
 			},
 			//切换商家个人
 			choose_status(e) {

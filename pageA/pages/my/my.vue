@@ -22,57 +22,28 @@
       </view>
       <view class="box_4 flex-col">
         <view class="group_4 flex-row justify-between">
-          <view class="button_2 flex-col" @click="onClick_2">
+          <view class="button_2 flex-col" @click="onClick">
             <view class="icon_3 flex-col">
 				<text class="iconfont label_2">&#xe6af;</text>
             </view>
-            <text class="text_7">我的求购</text>
+            <text class="text_7">发布求购</text>
           </view>
-          <view class="button_3 flex-col" @click="onClick_3">
+          <view class="button_3 flex-col" @click="toReleaseCommodity">
             <view class="icon_4 flex-col">
 				<text class="iconfont label_3">&#xe649;</text>
             </view>
-            <text class="text_8">我的发布</text>
-          </view>
-        </view>
-        <view class="text-wrapper_1 flex-row justify-between">
-          <text class="text_9">我的订单</text>
-          <text class="text_10" @click="toOrderList(0)">全部（{{res.all}}）</text>
-        </view>
-        <view class="group_5 flex-col">
-          <view class="box_5 flex-row justify-between">
-            <view class="image-text_1 flex-col align-center" @click="toOrderList(1)">
-				<text class="iconfont icon_5">&#xe675;</text>
-                <text class="text_11">待付款</text>
-                <text class="text_12">{{res.wait_pay}}</text>
-            </view>
-            <view class="image-text_1 flex-col align-center" @click="toOrderList(2)">
-			<text class="iconfont icon_5">&#xe67a;</text>
-              <text class="text_11">待发货</text>
-			  <text class="text_12 color">{{res.wait_send}}</text>
-            </view>
-			<view class="image-text_1 flex-col align-center" @click="toOrderList(3)">
-			<text class="iconfont icon_5">&#xe672;</text>
-			  <text class="text_11">待收货</text>
-			  <text class="text_12 color">{{res.wait_receive}}</text>
-			</view>
-           <view class="image-text_1 flex-col align-center" @click="toOrderList(4)">
-           <text class="iconfont icon_5">&#xe673;</text>
-             <text class="text_11">待评价</text>
-             <text class="text_12 color">{{res.wait_comment}}</text>           
-           </view>
-		   <view class="image-text_1 flex-col align-center" @click="toAfterSalesList">
-		   <text class="iconfont icon_5">&#xe6ac;</text>
-		     <text class="text_11">退款/售后</text>
-		     <text class="text_12">{{res.refund}}</text>
-		   </view>
+            <text class="text_8">发布商品</text>
           </view>
         </view>
         <view class="group_6 flex-col">
-          <view class="image-text_6 flex-row" @click="toShoppingCart">
+          <view class="image-text_6 flex-row" @click="onClick_2">
 			  <text class="iconfont icon_10">&#xe6af;</text>
-            <text class="text-group_7">购物车</text>
+            <text class="text-group_7">求购管理</text>
           </view>
+		  <view class="image-text_6 flex-row" @click="onClick_3">
+		    <text class="iconfont icon_10">&#xe651;</text>
+		    <text class="text-group_7">商品管理</text>
+		  </view>
           <view class="image-text_6 flex-row" @click="toMyMessage">
 			  <text class="iconfont icon_10">&#xe66b;</text>
             <text class="text-group_7">我的消息</text>
@@ -80,10 +51,6 @@
           <view class="image-text_6 flex-row" @click="toMyCollect">
           			  <text class="iconfont icon_10">&#xe64c;</text>
             <text class="text-group_7">我的收藏</text>
-          </view>
-          <view class="image-text_6 flex-row" @click="toManageAddress">
-            <text class="iconfont icon_10">&#xe651;</text>
-            <text class="text-group_7">收货地址</text>
           </view>
         </view>
       </view>
@@ -112,6 +79,18 @@ export default {
 		this.userInfo = all.userInfo
 	  	// console.log(this.res)
 		},
+		//跳转发布商品
+		toReleaseCommodity() {
+			uni.navigateTo({
+				url: '/pageA/pages/my/releaseCommodity'
+			})
+		},
+		//跳转发布求购
+		onClick() {
+		  uni.navigateTo({
+		  	url: '/pageA/pages/my/releaseWantBuy'
+		  })
+		},
 	  // 跳转商家入驻
     onClick_1() {
       uni.navigateTo({
@@ -130,30 +109,6 @@ export default {
       	url: '/pageA/pages/my/myCommodity'
       })
     },
-	//跳转订单列表
-	toOrderList(e) {
-			uni.navigateTo({
-				url: '/pageA/pages/order/orderList?nav=' + e
-			})
-	},
-	//跳转售后列表
-	toAfterSalesList() {
-		uni.navigateTo({
-			url: '/pageA/pages/order/afterSalesList'
-		})
-	},
-	//跳转购物车
-	toShoppingCart() {
-			  uni.navigateTo({
-			  	url: '/pageA/pages/my/shoppingCart'
-			  })
-	},
-	//跳转地址管理
-	toManageAddress() {
-		uni.navigateTo({
-			url: '/pageA/pages/my/manageAddress'
-		})
-	},
 	//跳转我的收藏
 	toMyCollect() {
 		uni.navigateTo({

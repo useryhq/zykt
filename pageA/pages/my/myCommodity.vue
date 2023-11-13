@@ -1,10 +1,6 @@
 <template>
 	<!-- 个人中心我的发布 -->
 	<view class="page">
-		<view class="button_1 flex-row justify-center" @click="toReleaseCommodity">
-		    <text class="iconfont icon_2">&#xe649;</text>
-		    <text class="text-group_1">发布商品</text>
-		</view>
 		<view class="nav_box flex-row justify-around">
 			<view class="nav_text" :class="{'nav_text-avtive' : nav == 1}" @click="changeNav(1)">
 				我发布的
@@ -108,12 +104,6 @@
 				this.pMyComodity(data)
 				this.nav = e
 			},
-			//跳转发布商品
-			toReleaseCommodity() {
-				uni.navigateTo({
-					url: '/pageA/pages/my/releaseCommodity'
-				})
-			}
 		},
 		onLoad() {
 			uni.getStorage({
