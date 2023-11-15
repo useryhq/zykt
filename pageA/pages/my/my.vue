@@ -62,9 +62,11 @@
 export default {
   data() {
     return {
+		userid:'',
 		imgUrl: this.$imgUrl.img_base_url,
 		res: '',
 		userInfo: '',
+		shopStatus: '',
       constants: {}
     };
   },
@@ -124,13 +126,14 @@ export default {
 	//开通店铺后跳转商家中心
 	toBusiness() {
 		uni.navigateTo({
-			url: '/pageB/pages/business/business'
+			url: '/pageB/pages/business/business?userid=' + this.userid
 		})
 	}
   },
   onLoad(option) {
   	// console.log(option)
 	this.getMy(option.userid)
+	this.userid = option.userid
   }
 };
 </script>

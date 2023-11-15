@@ -62,6 +62,7 @@
   </view>
 </template>
 <script>
+	import {sellerInfo} from '../../../static/js/api.js'
 export default {
   data() {
     return {
@@ -69,6 +70,12 @@ export default {
     };
   },
   methods: {
+	  // 获取商家入驻信息
+	  async pSellerInfo(data) {
+	  	let res = await sellerInfo(data)
+	  	console.log(res)
+	  	this.shopStatus = res.status
+	  },
 	//跳转发布商品
 	toReleaseCommodity() {
 		uni.navigateTo({
@@ -111,6 +118,18 @@ export default {
 			url: '/pageB/pages/business/openCity'
 		})
 	}
+  },
+  onLoad(option) {
+  	uni.getStorage({
+  		key: 'sellerid',
+  		success: (res) => {
+  			let data = {
+  				seller_id: res.data,
+  				user_id: option.userid
+  			}
+  			this.pSellerInfo(data)
+  		}
+  	})
   }
 };
 </script>

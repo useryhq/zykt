@@ -16,18 +16,18 @@
                 <text class="iconfont icon_3">&#xe680;</text>
                 <text class="text-group_2">{{item.created_at}}</text>
               </view>
-              <view class="image-text_3 flex-row justify-between">
+              <!-- <view class="image-text_3 flex-row justify-between">
 				<text class="iconfont icon_4">&#xe651;</text>
                 <text class="text-group_3">{{item.province}}{{item.city}}{{item.area}}</text>
-              </view>
+              </view> -->
             </view>
             <view class="block_3 flex-row justify-between">
-				<view class="button" @click="deleList(index)">
+				<view class="button" @click="deleList(item.id)">
 					<text class="iconfont icon_5">&#xe665;</text>
 					<text class="text_4">删除</text>
 				</view>
-			  <view class="button">
-			<text class="iconfont icon_5">&#xe66e;</text>
+			  <view class="button" @click="onClick_2(item.id)">
+			<text class="iconfont icon_5" >&#xe66e;</text>
               <text class="text_4">编辑</text>
 				</view>
             </view>
@@ -38,12 +38,13 @@
   </view>
 </template>
 <script>
-	import {myWantBuy} from '../../../static/js/api.js'
+	import {myWantBuy,deleWantBuy} from '../../../static/js/api.js'
 export default {
   data() {
     return {
-      loopData0: [],
-      constants: {}
+		userid: '',
+		loopData0: [],
+		constants: {}
     };
   },
   methods: {
@@ -53,16 +54,31 @@ export default {
 		  this.loopData0 = res.lists
 		  console.log(res)
 	  },
-    onClick_2() {
-      alert(1);
+	  // 删除求购
+	async pDeleWantBuy(id) {
+		  let data = {
+			  userid: this.userid,
+			  id: id
+		  }
+		  let res = await deleWantBuy(data)
+		  if (res.code == 200) {
+			  let data = {
+			  	userid: this.userid
+			  }
+			this.pMyWantBuy(data)  
+		  }
+	  },
+	// 编辑求购
+    onClick_2(e) {
+	 uni.navigateTo({
+	 	url: '/pageB/pages/business/releaseWantBuy?id=' + e
+	 })
     },
     onClick_3() {
-      alert(1);
+      
     },
 	deleList(e) {
-		// console.log(e,this.loopData0)
-		this.loopData0.splice(e,1)
-		console.log(this.loopData0)
+		this.pDeleWantBuy(e)
 	}
   },
   onLoad() {

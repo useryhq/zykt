@@ -296,6 +296,15 @@ export function myWantBuy(data) {
 		})
 	})
 }
+//个人删除求购
+export function deleWantBuy(data) {
+	let url = '/user/del-qiugou'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
 //退货原因、快速、单位
 export function other() {
 	let url = '/common/other'
@@ -332,33 +341,6 @@ export function collectCancel(data) {
 		})
 	})
 }
-//加入购物车
-export function addCart(data) {
-	let url = '/cart/add-info'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res)
-		})
-	})
-}
-//购物车列表
-export function cartList(data) {
-	let url = '/cart/lists'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res.data)
-		})
-	})
-}
-//个人订单列表
-export function orderList(data) {
-	let url = '/orders/lists'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res.data)
-		})
-	})
-}
 //个人商品列表
 export function myComodity(data) {
 	let url = '/user/my-goods'
@@ -377,39 +359,30 @@ export function mReleaseComodity(data) {
 		})
 	})
 }
-//个人地址列表
-export function manageAddressH(data) {
-	let url = '/address/lists'
+//商家品牌列表
+export function sBrandList(data) {
+	let url = '/sellers/get-brands'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//商家申请入驻
+export function addSeller(data) {
+	let url = '/sellers/settle-info-add'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//获取商家入驻信息
+export function sellerInfo(data) {
+	let url = '/sellers/settle-info'
 	return new Promise((resolve,reject) => {
 		request(url,'POST',data).then(res => {
 			resolve(res.data)
-		})
-	})
-}
-//个人添加地址
-export function addAddressH(data) {
-	let url = '/address/add'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res)
-		})
-	})
-}
-//个人设置默认地址
-export function setAddressH(data) {
-	let url = '/address/default'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res)
-		})
-	})
-}
-//个人删除地址
-export function delAddressH(data) {
-	let url = '/address/del'
-	return new Promise((resolve,reject) => {
-		request(url,'POST',data).then(res => {
-			resolve(res)
 		})
 	})
 }

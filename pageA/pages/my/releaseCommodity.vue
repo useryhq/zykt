@@ -33,7 +33,7 @@
 				</view>
 				<view class="text-wrapper_1 text-wrapper_2 flex-col">
 					<text class="text_2 text_4">商品主图：</text>
-					<uni-file-picker ref="file" auto-upload="false" v-model="imageValue" :image-styles="imageStyles"
+					<uni-file-picker ref="file" auto-upload="false" :image-styles="imageStyles"
 						limit="1" :del-icon="false" file-mediatype="image" @select="select">
 						<view class="button_2 flex-col align-center">
 							<text class="iconfont icon_2">&#xe67b;</text>
@@ -145,7 +145,6 @@
 				userid: '',
 				cname: '',
 				price: '',
-				imageValue: [],
 				imageStyles: {
 					"width": 80,
 					"height": 70,
@@ -273,7 +272,7 @@
 			//输入商品名称
 			inCname(e) {
 				this.cname = e.detail.value
-				console.log(this.cname)
+				// console.log(this.cname)
 			},
 			//选择分类
 			//选择一级分类
@@ -413,9 +412,8 @@
 
 			// 整体选择完成以后
 			onchange(e) {
-				const value = e.detail.value
 				// console.log(value)
-				this.address = value
+				this.address = e.detail.value
 			},
 			// 图文详情页返回的数据
 			backFunction(obj) {
