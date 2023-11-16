@@ -74,7 +74,7 @@
 </template>
 <script>
 	import {
-		pk
+		pk,brandPk
 	} from '../../../static/js/api.js'
 	export default {
 		data() {
@@ -87,6 +87,7 @@
 				attr1: [],
 				attr2: [],
 				attr3: [],
+				m: '',
 				constants: {}
 			};
 		},
@@ -187,6 +188,7 @@
 		computed: {},
 		onLoad(option) {
 			this.contrastData = JSON.parse(option.pk)
+			this.m = option.m
 			// console.log(option)
 			this.getPk()
 		}

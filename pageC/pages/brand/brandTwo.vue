@@ -5,7 +5,7 @@
       <text class="text_2">{{items.name}}</text>
       <view class="section_2 flex-col">
         <view class="block_1 flex-row justify-between"  v-for="(item,i) in items.son" :key="i">
-          <view class="image-text_1 flex-col justify-between align-center" @click="toBrandThree(item.id,item.cat_id)">
+          <view class="image-text_1 flex-col justify-between align-center" @click="toBrandThree(item.cat_id,item.name,items.name)">
             <image
               class="image_3"
               referrerpolicy="no-referrer"
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
 		title: '',
+		id: '',
 		list:[],
 		imgUrl: this.$imgUrl.img_base_url,
       constants: {}
@@ -53,9 +54,9 @@ export default {
 		  });
 	  },
 	  //跳转品牌三级页面
-	  toBrandThree(text0,text1) {
+	  toBrandThree(c_id,n,ns) {
 		  uni.navigateTo({
-		  	url: '/pageC/pages/brand/brandThree?title=' + this.title + '&text0=' + text0 +'&text1=' + text1
+		  	url: '/pageC/pages/brand/brandThree?title=' + this.title + '&id=' + this.id +'&c_id=' + c_id + '&name=' + n +'&names=' + ns
 		  })
 	  },
 	  //跳转询价
@@ -66,8 +67,9 @@ export default {
 	  }
   },
   onLoad(option) {
-	  // console.log(option)
+	  console.log(option)
 	  this.getBrandTwo(option.id,option.c)
+	  this.id = option.id
   }
 };
 </script>

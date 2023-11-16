@@ -221,7 +221,7 @@
 				for (let i = 0; i < this.textList.length; i++) {
 					if (this.listIndex == this.textList[i].id) {
 						let item = this.textList[i]
-						console.log(item)
+						// console.log(item)
 						for (i = 0; i < item.sub.length; i++) {
 							// console.log("item",item)
 							if (this.sListIndex == item.sub[i].id) {

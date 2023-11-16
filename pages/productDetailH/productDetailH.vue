@@ -242,6 +242,7 @@
 				// console.log(e)
 				this.textarea = e.detail.value
 			},
+			// 详情下方点击功能
 			tabClick(e) {
 				this.collect = e
 				if (e == 1) {

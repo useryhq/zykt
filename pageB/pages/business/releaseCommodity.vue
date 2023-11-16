@@ -137,13 +137,13 @@
 					</view>
 					<view class="choose-text flex-row justify-around">
 						<view class="text-block flex-col align-center">
-							<text :class="{'text-font_active':listIndex == item.id}" v-for="(item,index) in textList" :key="index" class="text-font" @click="chooseProduct(item.id,item.t1)">{{item.t1}}</text>
+							<text :class="{'text-font_active':listIndex == item.id}" v-for="(item,index) in textList" :key="index" class="text-font" @click="chooseProduct(item.id,item.name)">{{item.name}}</text>
 						</view>
 						<view class="text-block flex-col align-center">
-							<text :class="{'text-font_active':sListIndex == item.c_id}" v-for="(item,i) in sList[0].sub" :key="i" class="text-font" @click="chooseSproduct(item.c_id,item.s1)">{{item.s1}}</text>
+							<text :class="{'text-font_active':sListIndex == item.id}" v-for="(item,i) in sList[0].sub" :key="i" class="text-font" @click="chooseSproduct(item.id,item.name)">{{item.name}}</text>
 						</view>
 						<view class="text-block flex-col align-center">
-							<text :class="{'text-font_active':tListIndex == item.d_id}" v-for="(item,i) in tList[0].child" :key="i" class="text-font" @click="chooseTproduct(item.d_id,item.x1)">{{item.x1}}</text>
+							<text :class="{'text-font_active':tListIndex == item.id}" v-for="(item,i) in tList[0].child" :key="i" class="text-font" @click="chooseTproduct(item.id,item.name)">{{item.name}}</text>
 						</view>
 					</view>
 					<!-- <view class="pk_btn" @click="choose()">确定</view> -->
@@ -167,11 +167,11 @@
 				<view class="mask"></view>
 				<view class="mode">
 					<view class="pk_title">
-						<text>选择产品成色</text>
+						<text>选择产品型号</text>
 						<text class="close_pk" @click="closeModel">×</text>
 					</view>
 					<view class="model-text flex-row">
-						<text v-for="(i,n) in modelList" :key='n' class="text-block" @click="chooseModel(i)">{{i}}</text>
+						<text v-for="(i,n) in modelList" :key='n' class="text-block" @click="chooseModel(i.id,i.model_name)">{{i.model_name}}</text>
 					</view>
 				</view>
 			</view>
@@ -186,7 +186,7 @@
 						</view>
 					</view>
 					<view class="brand-text flex-row">
-						<text v-for="(i,n) in brandList" :key='n' class="text-block" @click="chooseBrand(i)">{{i}}</text>
+						<text v-for="(i,n) in brandList" :key='n' class="text-block" @click="chooseBrand(i)">{{i.name}}</text>
 					</view>
 				</view>
 			</view>
@@ -324,7 +324,7 @@
 </template>
 
 <script>
-	import {qnToken} from "../../../static/js/api.js"
+	import {qnToken,category,brandList,brandThree} from "../../../static/js/api.js"
 	export default {
 		data() {
 			return {
@@ -345,204 +345,7 @@
 				name: '',
 				tel: '',
 				prompt: '',
-				textList: [{
-						t1: '家用空调',
-						//一级分类id
-						id: '1',
-						sub: [{
-							//一级分类id
-							p_id: '1',
-							//二级分类id
-							c_id: '1',
-							s1: '家用普通空调',
-								child:[{
-									//二级分类id
-									s_id: '1',
-									//三级分类id
-									d_id: '1',
-									x1: '普壁挂空调',
-									},
-									{
-									s_id: '1',
-									d_id: '2',
-									x1: '普通立式空调'
-								}],
-							},
-							{
-							s1: '家用中央空调',
-							p_id: '1',
-							c_id: '2',
-							child:[{
-								s_id: '2',
-								d_id: '1',
-								x1: '中央壁挂空调',
-								},
-								{
-								s_id: '2',
-								d_id: '2',
-								x1: '中央立式空调'
-							}],
-							},
-							{
-							s1: '其他类空调',
-							c_id: '3',
-							p_id: '1',
-							child:[{
-								s_id: '3',
-								d_id: '1',
-								x1: '其他壁挂空调',
-								},
-								{
-								s_id: '3',
-								d_id: '2',
-								x1: '其他立式空调'
-							}],
-							},
-							{
-							s1: '空气净化',
-							c_id: '4',
-							p_id: '1',
-							child:[{
-								s_id: '4',
-								d_id: '1',
-								x1: '空气净化壁挂空调',
-								},
-								{
-								s_id: '4',
-								d_id: '2',
-								x1: '空气净化立式空调'
-							}],
-						}]
-					},
-					{
-						t1: '商用空调',
-						id: '2',
-						sub: [{
-							p_id: '2',
-							c_id: '1',
-							s1: '商用普通空调',
-							child:[{
-								s_id: '1',
-								d_id: '1',
-								x1: '商用普通壁挂空调',
-								},
-								{
-								s_id: '1',
-								d_id: '2',
-								x1: '普通立式空调'
-							}],
-							},
-							{
-							s1: '商用家用中央空调',
-							p_id: '2',
-							c_id: '2',
-							child:[{
-								s_id: '2',
-								d_id: '1',
-								x1: '中央壁挂空调',
-								},
-								{
-								s_id: '2',
-								d_id: '2',
-								x1: '中央立式空调'
-							}],
-							},
-							{
-							s1: '商用其他类空调',
-							p_id: '2',
-							c_id: '3',
-							child:[{
-								s_id: '3',
-								d_id: '1',
-								x1: '其他壁挂空调',
-								},
-								{
-								s_id: '3',
-								d_id: '2',
-								x1: '其他立式空调'
-							}],
-							},
-							{
-							s1: '商用空气净化',
-							p_id: '2',
-							c_id: '4',
-							child:[{
-								s_id: '4',
-								d_id: '1',
-								x1: '空气净化壁挂空调',
-								},
-								{
-								s_id: '4',
-								d_id: '2',
-								x1: '空气净化立式空调'
-							}],
-						}]
-					},
-						{
-						t1: '其他类空调',
-						id: '3',
-						sub: [
-							{
-							p_id: '3',
-							c_id: '1',
-							s1: '其他类普通空调',
-							child:[{
-								s_id: '1',
-								x1: '其他普通壁挂空调',
-								d_id: '1',
-								},
-								{
-								s_id: '1',
-								d_id: '2',
-								x1: '其他普通立式空调'
-							}],
-							},
-							{
-							s1: '家用中央空调',
-							c_id: '2',
-							p_id: '3',
-							child:[{
-								s_id: '2',
-								d_id: '1',
-								x1: '中央壁挂空调',
-								},
-								{
-								s_id: '2',
-								d_id: '2',
-						        x1: '中央立式空调'
-							}],
-							},
-							{
-							s1: '其他类空调',
-							p_id: '3',
-							c_id: '3',
-							child:[{
-								s_id: '3',
-								d_id: '1',
-								x1: '其他类壁挂空调',
-								},
-								{
-								s_id: '3',
-								d_id: '2',
-								x1: '其他类立式空调'
-							}],
-							},
-							{
-							s1: '其他类空气净化',
-							p_id: '3',
-							c_id: '4',
-							child:[{
-								s_id: '4',
-								d_id: '1',
-								x1: '壁挂空调',
-								},
-								{
-								s_id: '4',
-								d_id: '2',
-								x1: '立式空调'
-							}],
-						}]
-						}],
+				textList: [],
 						//选择分类弹窗
 						choose: false,
 						//一级分类索引
@@ -572,62 +375,13 @@
 						finenessText: '',
 						//品牌弹窗
 						brand: false,
-						brandList: [
-							 '奥克斯',
-							 '艾尔斯派',
-							 '奥普',
-							 '班工防护',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '奥普',
-							 '班工防护',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-							 '百维',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-							 '百维',
-							 '百维',
-							 '安林空调',
-							 '百维',
-							 '奥克斯',
-							 '艾尔斯派',
-							 '长泽',
-							 '长虹',
-							 '安林空调',
-						],
+						brandid: '',
+						brandList: [],
 						brandText: '',
 						model: '',
 						openmodel: false,
-						modelList: [
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-							'KFR-35GW/BpR3QYQ1+1',
-						],
+						modelList: [],
+						modelid: '',
 						date: '',
 						help: false,
 						city: false
@@ -655,10 +409,10 @@
 					for(let i = 0; i < this.textList.length; i++){
 						if(this.listIndex == this.textList[i].id)  {
 							let item = this.textList[i]
-							console.log(item)
+							// console.log(item)
 							for(i = 0; i < item.sub.length; i++) {
 								// console.log("item",item)
-								if(this.sListIndex == item.sub[i].c_id) {
+								if(this.sListIndex == item.sub[i].id) {
 									tList.push(item.sub[i])
 								}
 							}
@@ -678,10 +432,39 @@
 				 this.token = tokenData.qiniu_token
 				 // console.log(this.token)
 			 },
+			 //获取分类列表
+			 async GetCategory() {
+			 	let res = await category()
+			 	this.textList = res.lists
+			 	// console.log(this.list)
+			 },
+			 //获取品牌列表
+			 async getBrandList() {
+			 	let res = await brandList()
+			 	// console.log(res)
+			 	res.forEach(item => {
+			 		item.data.forEach(i => {
+			 			this.brandList.push({
+			 				id: i.id,
+			 				name: i.name
+			 			})
+			 		})
+			 	})
+			 },
+			 // 获取品牌型号
+			 async pBrandThree(id,c_id) {
+			 		  let data = {
+			 			  b_id: id,
+			 			  c_id: c_id
+			 		  }
+			 		  let res = await brandThree(data)
+			 		  this.modelList = res.product_models
+			 		  // console.log(res)
+			 },
 			 //输入商品名称
 			 inCname(e) {
 				 this.cname = e.detail.value
-				 console.log(this.cname)
+				 // console.log(this.cname)
 			 },
 			 //选择分类
 			 //选择一级分类
@@ -723,15 +506,17 @@
 			 },
 			 //打开型号弹窗
 			 openModel() {
+				 this.pBrandThree(this.brandid,this.tListIndex)
 			 	 this.openmodel = true
 			 },
-			 //关闭成色弹窗
+			 //关闭型号弹窗
 			 closeModel() {
 			 	this.openmodel = false
 			 },
-			 //选择成色
-			 chooseModel(text) {
+			 //选择型号
+			 chooseModel(id,text) {
 			 	this.model = text
+				this.modelid = id
 			 	this.openmodel = false
 			 },
 			 //打开品牌弹窗
@@ -744,7 +529,8 @@
 			 },
 			 //选择品牌
 			 chooseBrand(text) {
-				this.brandText = text 
+				this.brandText = text.name
+				this.brandid = text.id
 				this.brand = false
 			 },
 			 //输入价格
@@ -868,7 +654,9 @@
 		},
 		onLoad() {
 			this.getQntoken()
-			console.log(this.sListIndex)
+			this.GetCategory()
+			this.getBrandList()
+			// console.log(this.sListIndex)
 		}
 	}
 </script>
@@ -1017,88 +805,94 @@
 			line-height: 60rpx;
 			text-align: center;
 		}
-		.choose-block {
-			width: 100%;
-			height: 100%;
-			position: fixed;
-			top: 0;
-			left: 0;
-			z-index: 999;
-			.mask {
+	.choose-block {
 				width: 100%;
 				height: 100%;
-				position: absolute;
+				position: fixed;
 				top: 0;
 				left: 0;
-				background-color: rgba(0, 0, 0, 0.6);
-			}
-			.mode {
-				width: 686rpx;
-				height: 480rpx;
-				background-color: #fff;
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				border-radius: 10rpx;
-				margin: auto;
-				.pk_title {
+				z-index: 999;
+
+				.mask {
 					width: 100%;
-					height: 60rpx;
-					background-color: #eee;
-					color: #333;
-					font-size: 30rpx;
-					font-weight: 500;
-					line-height: 60rpx;
-					text-align: center;
-					.close_pk {
-						width: 38rpx;
-						height: 38rpx;
-						margin: 11rpx 26rpx 0 0;
-						background-color: #666;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background-color: rgba(0, 0, 0, 0.6);
+				}
+
+				.mode {
+					width: 686rpx;
+					height: 600rpx;
+					background-color: #fff;
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					border-radius: 10rpx;
+					margin: auto;
+
+					.pk_title {
+						width: 100%;
+						height: 60rpx;
+						background-color: #eee;
+						color: #333;
 						font-size: 30rpx;
-						line-height: 38rpx;
+						font-weight: 500;
+						line-height: 60rpx;
 						text-align: center;
-						color: #fff;
-						border-radius: 50%;
-						float: right;
-					}
-				}
-				.choose-text {
-					margin-top: 40rpx;
-					.text-block {
-						width: 200rpx;
-						height: 300rpx;
-						border: 1rpx solid #A0A0A0;
-						.text-font {
-							margin-top: 20rpx;
-							height: 40rpx;
-							padding: 0 16rpx;
-							font-size: 24rpx;
-							color: #333;
-							line-height: 40rpx;
-						}
-						.text-font_active {
-							background-color: #E63C31;
+
+						.close_pk {
+							width: 38rpx;
+							height: 38rpx;
+							margin: 11rpx 26rpx 0 0;
+							background-color: #666;
+							font-size: 30rpx;
+							line-height: 38rpx;
+							text-align: center;
 							color: #fff;
-							font-weight: 500;
+							border-radius: 50%;
+							float: right;
 						}
 					}
+
+					.choose-text {
+						margin-top: 20rpx;
+
+						.text-block {
+							width: 200rpx;
+							height: 500rpx;
+							border: 1rpx solid #A0A0A0;
+
+							.text-font {
+								padding: 14rpx 16rpx;
+								font-size: 24rpx;
+								color: #333;
+								line-height: 30rpx;
+							}
+
+							.text-font_active {
+								background-color: #E63C31;
+								color: #fff;
+								font-weight: 500;
+							}
+						}
+					}
+
+					// .pk_btn {
+					// 	width: 148rpx;
+					// 	height: 40rpx;
+					// 	margin: 26rpx auto 18rpx auto;
+					// 	background-color: #E63C31;
+					// 	font-size: 30rpx;
+					// 	color: #fff;
+					// 	line-height: 40rpx;
+					// 	text-align: center;
+					// }
 				}
-				
-				.pk_btn {
-					width: 148rpx;
-					height: 40rpx;
-					margin: 26rpx auto 18rpx auto;
-					background-color: #E63C31;
-					font-size: 30rpx;
-					color: #fff;
-					line-height: 40rpx;
-					text-align: center;
-				}
-		}
-		}
+			}
 		.fineness-block {
 			width: 100%;
 			height: 100%;
@@ -1178,8 +972,8 @@
 				background-color: rgba(0, 0, 0, 0.6);
 			}
 			.mode {
-				width: 600rpx;
-				height: 400rpx;
+				width: 740rpx;
+				height: 500rpx;
 				background-color: #fff;
 				position: absolute;
 				top: 0;
@@ -1213,11 +1007,11 @@
 				.model-text {
 					flex-wrap: wrap;
 					.text-block {
-						width: 260rpx;
+						width: 350rpx;
 						height: 40rpx;
-						margin: 16rpx 0 0 16rpx;
+						margin: 16rpx 0 0 10rpx;
 						border: 1rpx solid #eee;
-						font-size: 20rpx;
+						font-size: 22rpx;
 						color: #333;
 						line-height: 40rpx;
 						text-align: center;

@@ -258,11 +258,12 @@
 				this.$refs.popup.open('center')
 				// console.log(res)
 			},
+			// 加入购物车
 			async pAddCart(data) {
 				let res = await addCart(data)
 				this.prompt = res.msg
 				this.$refs.popup.open('center')
-				console.log(res)
+				// console.log(res)
 			},
 			//顶部nav切换，定位到相应栏目
 			navChange(index) {
