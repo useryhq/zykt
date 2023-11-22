@@ -45,7 +45,7 @@ export default {
 		  this.setTitle(res.brand_name)
 		  this.title = res.brand_name
 		  this.list = res.categories
-		  console.log(res)
+		  // console.log(res)
 	  },
 	  //设置页面title
 	  setTitle(T) {
@@ -67,7 +67,7 @@ export default {
 	  }
   },
   onLoad(option) {
-	  console.log(option)
+	  // console.log(option)
 	  this.getBrandTwo(option.id,option.c)
 	  this.id = option.id
   }

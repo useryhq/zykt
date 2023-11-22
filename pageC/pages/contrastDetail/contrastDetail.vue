@@ -4,18 +4,27 @@
 		<view class="section_2 flex-col">
 			<view class="group_2 flex-row">
 				<view class="text-wrapper_1 flex-col">
-					<text class="paragraph_1">
+					<text v-if="arr1.goods_name" class="paragraph_1">
 						{{arr1.goods_name}}
+					</text>
+					<text v-else class="paragraph_1">
+						{{arr1.model_name}}
 					</text>
 				</view>
 				<view v-if="arr2.length!=0" class="text-wrapper_2 flex-col">
-					<text class="paragraph_2">
+					<text v-if="arr2.goods_name" class="paragraph_2">
 						{{arr2.goods_name}}
+					</text>
+					<text v-else class="paragraph_2">
+						{{arr2.model_name}}
 					</text>
 				</view>
 				<view v-if="arr3.length!=0" class="text-wrapper_3 flex-col">
-					<text class="paragraph_3">
+					<text v-if="arr3.goods_name" class="paragraph_3">
 						{{arr3.goods_name}}
+					</text>
+					<text v-else class="paragraph_3">
+						{{arr3.model_name}}
 					</text>
 				</view>
 			</view>
@@ -36,17 +45,20 @@
 			<uni-table border stripe>
 				<uni-tr>
 					<uni-td class="td_first" width="80" align="center">商品价格</uni-td>
-					<uni-td width="100" align="center">{{arr1.market_price}}</uni-td>
-					<uni-td v-if="arr2.length!=0" align="center">{{arr2.market_price}}</uni-td>
-					<uni-td v-if="arr3.length!=0" align="center">{{arr3.market_price}}</uni-td>
+					<uni-td v-if="arr1.market_price" width="100" align="center">{{arr1.market_price}}</uni-td>
+					<uni-td v-else width="100" align="center">{{arr1.guide_price}}</uni-td>
+					<uni-td v-if="arr1.market_price" width="100" align="center">{{arr2.market_price}}</uni-td>
+					<uni-td v-else width="100" align="center">{{arr2.guide_price}}</uni-td>
+					<uni-td v-if="arr1.market_price" width="100" align="center">{{arr3.market_price}}</uni-td>
+					<uni-td v-else width="100" align="center">{{arr3.guide_price}}</uni-td>
 				</uni-tr>
-				<uni-tr>
+				<uni-tr v-if="arr1.comment_count">
 					<uni-td align="center">商品评价</uni-td>
 					<uni-td align="center">总共{{arr1.comment_count}}条</uni-td>
 					<uni-td v-if="arr2.length!=0" align="center">总共{{arr2.comment_count}}条</uni-td>
 					<uni-td v-if="arr3.length!=0" align="center">总共{{arr3.comment_count}}条</uni-td>
 				</uni-tr>
-				<uni-tr>
+				<uni-tr v-if="arr1.sellerInfo">
 					<uni-td align="center">商品店铺</uni-td>
 					<uni-td align="center">{{arr1.sellerInfo.shop_name}}</uni-td>
 					<uni-td v-if="arr2.length!=0" align="center">{{arr2.sellerInfo.shop_name}}</uni-td>
@@ -87,25 +99,42 @@
 				attr1: [],
 				attr2: [],
 				attr3: [],
-				m: '',
 				constants: {}
 			};
 		},
 		methods: {
 			// 获取pk商品数据
 			async getPk() {
-				let ids = ''
-				for (let i = 0; i < this.contrastData.length; i++) {
-					if (i == this.contrastData.length - 1) {
-						ids += this.contrastData[i].id
-					} else {
-						ids += this.contrastData[i].id + ','
+				let res = {}
+				if(this.contrastData[0].sgb_id) {
+					let id = '', m = ''
+					for (let i = 0; i < this.contrastData.length; i++) {
+						id = this.contrastData[0].sgb_id
+						if (i == this.contrastData.length - 1) {
+							m += this.contrastData[i].id
+						} else {
+							m += this.contrastData[i].id + ','
+						}
 					}
+					let data = {
+						id: id,
+						m: m
+					}
+					res = await brandPk(data)
+				} else {
+					let ids = ''
+					for (let i = 0; i < this.contrastData.length; i++) {
+						if (i == this.contrastData.length - 1) {
+							ids += this.contrastData[i].id
+						} else {
+							ids += this.contrastData[i].id + ','
+						}
+					}
+					let data = {
+						ids: ids
+					}
+					res = await pk(data)
 				}
-				let data = {
-					ids: ids
-				}
-				let res = await pk(data)
 				// console.log(res)
 				this.arr = res.attrName
 				if (res.goods_info.length == 1) {
@@ -188,8 +217,8 @@
 		computed: {},
 		onLoad(option) {
 			this.contrastData = JSON.parse(option.pk)
-			this.m = option.m
-			// console.log(option)
+			// this.m = option.m
+			console.log(this.contrastData)
 			this.getPk()
 		}
 	};

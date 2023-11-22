@@ -41,7 +41,7 @@
 			</view>
 	  	</view>
 	  </view>  
-      <view class="button_3 flex-row justify-center" @click="toContrastDetail">
+      <view class="button_3 flex-row justify-center" @click="toContrastDetail()">
         <text class="text_10">PK</text>
         <text class="text_11">(已选{{pkBlockadd}}/3)</text>
       </view>
@@ -50,7 +50,7 @@
 		<view class="mask"></view>
 		<view class="mode">
 			<view class="pk_title">
-				<text>同类产品对比（2/3）</text>
+				<text>同类产品对比（{{pkBlockadd}}/3）</text>
 				<text class="close_pk" @click="closePk">×</text>
 			</view>
 			<view class="product_message flex-row justify-between" v-for="(item,index) in pkMessage" :key="index">
@@ -109,12 +109,13 @@ export default {
 	  	this.pkBlockadd ++
 	  	// console.log(this.pkBlockadd)
 	  	if(this.pkBlockadd > 3) {
+			this.pkBlockadd = 3
 	  		// console.log('=====')
 	  		this.$refs.popup.open()
 	  		this.pkBlock = true
 	  		return
 	  	} else {
-	  		this.pkMessage.push({'title':e.model_name,'id':e.id})
+	  		this.pkMessage.push({'title':e.model_name,'sgb_id':e.sgb_id,'id':e.id})
 	  		// console.log(this.pkMessage)
 	  		e.pk = false,
 	  		this.pkBlock = true
@@ -144,6 +145,7 @@ export default {
 	toContrastDetail() {
 		if(this.pkBlockadd > 0) {
 			let data = JSON.stringify(this.pkMessage)
+			// console.log(data,"====")
 			uni.navigateTo({
 				url: '/pageC/pages/contrastDetail/contrastDetail?pk=' + data
 			})

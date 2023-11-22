@@ -106,7 +106,7 @@
 			<view class="mask"></view>
 			<view class="mode">
 				<view class="pk_title">
-					<text>同类产品对比（2/3）</text>
+					<text>同类产品对比（{{pkBlockadd}}/3）</text>
 					<text class="close_pk" @click="closePk">×</text>
 				</view>
 				<view class="product_message flex-row justify-between" v-for="(item,index) in pkMessage" :key="index">
@@ -334,6 +334,7 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 				this.pkBlockadd ++
 				// console.log(this.pkBlockadd)
 				if(this.pkBlockadd > 3) {
+					this.pkBlockadd = 3
 					// console.log('=====')
 					this.$refs.popup.open()
 					this.pkBlock = true

@@ -69,6 +69,7 @@
 				};
 			},
 			computed: {
+				// 单位数据
 				danweiData() {
 					let dataList = []
 					// console.log(this.danwei)
@@ -290,7 +291,6 @@
 								.uni-select {
 									border: none;
 								}
-
 							}
 
 						.image-text_2 {

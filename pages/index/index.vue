@@ -189,7 +189,7 @@
 					type: t
 				}
 				let res = await indexGoodsList(data)
-				console.log(res)
+				// console.log(res)
 				if(t == 1) {
 					//个人
 					this.ktlist2 = res.lists
@@ -225,7 +225,7 @@
 					userid: e
 				}
 				let res =  await my(data)
-				console.log(res)
+				// console.log(res)
 				if(res.shopStatus == 2) {
 					uni.navigateTo({
 						url: '/pageB/pages/business/releaseCommodity'
@@ -242,7 +242,7 @@
 					userid: e
 				}
 				let res =  await my(data)
-				console.log(res)
+				// console.log(res)
 				if(res.shopStatus == 2) {
 					uni.navigateTo({
 						url: '/pageB/pages/my/releaseWantBuy'
@@ -459,7 +459,7 @@
 				this.address = e.item.itemobj.name
 				this.getIndexGoodsList(2,e.item.itemobj.id)
 				this.addShow = false
-				console.log(e)
+				// console.log(e)
 				uni.setStorage({
 					key:'cityId',
 					data: e.item.itemobj.id,

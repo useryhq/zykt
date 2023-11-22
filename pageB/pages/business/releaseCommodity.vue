@@ -36,10 +36,10 @@
 			</view>
 			<view class="text-wrapper_1 flex-row align-center justify-between">
 			  <text class="text_2">销售方式：</text>
-			  <view class="button_3">
+			  <view class="button_3" @click="changeButton(0)">
 			  	在线购买
 			  </view>
-			  <view class="button_5 button_3">
+			  <view class="button_5 button_3" @click="changeButton(1)">
 			  	在线询价
 			  </view>
 			  <text class="iconfont icon_1" @click="openHlep">&#xe8e9;</text>
@@ -75,19 +75,18 @@
 			<view class="group_2">
 				<view class="text-wrapper_1 flex-row align-center justify-between" @click="">
 				  <text class="text_2">计量单位：</text>
-				  <text class="text_5"></text>
-				  <text class="iconfont icon_1">&#xe686;</text>
+				  <uni-data-select class="text-group_1" :localdata="danweiData" :clear="false" @change="chooseDanwei"></uni-data-select>
 				</view>
 				<view class="text-wrapper_1 flex-row align-center">
 				  <text class="text_2 text_6">库存：</text>
-				  <input class="text_3" type="number" @blur="inPrice" placeholder="请输入商品库存" />
+				  <input class="text_3" type="number" @blur="inVentory" placeholder="请输入商品库存" />
 				</view>
 				<view class="text-wrapper_1 flex-row align-center">
 				  <text class="text_2 text_7">最小起订量：</text>
-				  <input class="text_3" type="number" @blur="inPrice" placeholder="请输入最小起订量" />
+				  <input class="text_3" type="number" @blur="inMinNum" placeholder="请输入最小起订量" />
 				</view>
 			</view>
-			<view class="commodity-title">
+			<!-- <view class="commodity-title">
 				物流信息
 			</view>
 			<view class="group_2">
@@ -111,7 +110,7 @@
 				  </view>
 				  <text class="text_8">（以物流实收为准）</text>
 				</view>
-			</view>
+			</view> -->
 			<view class="group_2">
 				<view class="text-wrapper_1 text-wrapper_3 flex-row align-center justify-between" @click="">
 				  <text class="text_2">售卖区域：</text>
@@ -171,7 +170,8 @@
 						<text class="close_pk" @click="closeModel">×</text>
 					</view>
 					<view class="model-text flex-row">
-						<text v-for="(i,n) in modelList" :key='n' class="text-block" @click="chooseModel(i.id,i.model_name)">{{i.model_name}}</text>
+						<view v-if="modelText != ''" class="model-font">{{modelText}}</view>
+						<text v-else v-for="(i,n) in modelList" :key='n' class="text-block" @click="chooseModel(i.id,i.model_name)">{{i.model_name}}</text>
 					</view>
 				</view>
 			</view>
@@ -324,7 +324,7 @@
 </template>
 
 <script>
-	import {qnToken,category,brandList,brandThree} from "../../../static/js/api.js"
+	import {qnToken,category,brandList,brandThree,other} from "../../../static/js/api.js"
 	export default {
 		data() {
 			return {
@@ -381,7 +381,11 @@
 						model: '',
 						openmodel: false,
 						modelList: [],
+						modelText: '',
 						modelid: '',
+						danwei: '',
+						inventory: '',
+						minNum: '',
 						date: '',
 						help: false,
 						city: false
@@ -423,7 +427,17 @@
 						// console.log("===",tList)
 						return tList
 				},
-				
+				// 单位数据
+				danweiData() {
+					let dataList = []
+					// console.log(this.danwei)
+					for(let i = 0;i<this.danwei.length;i++) {
+						let json = {value:i,text:this.danwei[i]}
+						dataList.push(json)
+					}
+					// console.log(dataList)
+					return dataList
+				}
 		},
 		methods: {
 			// 获取上传token
@@ -458,8 +472,19 @@
 			 			  c_id: c_id
 			 		  }
 			 		  let res = await brandThree(data)
-			 		  this.modelList = res.product_models
+					  if(res.product_models.length == 0) {
+						  this.modelText = '该分类，该品牌目录下没有型号，可以不填'
+					  } else {
+						  this.modelList = res.product_models
+					  }			 		  
 			 		  // console.log(res)
+			 },
+			 //获取单位
+			 async getOther() {
+			 	let res = await other()
+			 	this.danwei = res.danwei
+			 	// console.log(res)
+			 	// console.log(typeof(this.danwei),"123")
 			 },
 			 //输入商品名称
 			 inCname(e) {
@@ -536,7 +561,25 @@
 			 //输入价格
 			 inPrice(e) {
 				 this.price = e.detail.value
-				 console.log(this.price)
+				 // console.log(this.price)
+			 },
+			 //选择单位
+			 chooseDanwei(e) {
+			 	// console.log(e)
+			 	this.danweiData.forEach((item) => {
+			 		if(item.value == e) {
+			 			this.unit = item.text
+			 		}
+			 	})
+			 	
+			 	// console.log(this.unit)
+			 },
+			 // 输入库存
+			 inVentory(e) {
+				 this.inventory = e.detail.value
+			 },
+			 inMinNum(e) {
+				 this.minNum = e.detail.value
 			 },
 			 //选择图片
 						select(e){
@@ -645,7 +688,10 @@
 							} else if(this.price == '') {
 								this.prompt = '请输入商品价格'
 								this.$refs.popup.open('top')
-							} else if(this.tel == '') {
+							} else if (this.unit == '') {
+								this.prompt = '请选择采购单位'
+								this.$refs.popup.open('top')
+							}else if(this.tel == '') {
 								this.prompt = '请输入电话号码'
 								this.$refs.popup.open('top')
 							}
@@ -656,6 +702,7 @@
 			this.getQntoken()
 			this.GetCategory()
 			this.getBrandList()
+			this.getOther()
 			// console.log(this.sListIndex)
 		}
 	}
@@ -717,6 +764,21 @@
 			  width: 380rpx;
 			  color: #666;
 			  font-size: 24rpx;
+		  }
+		  .text-group_1 {
+		  	width: 120rpx;
+		  	height: 70rpx;
+		  	overflow-wrap: break-word;
+		  	color: rgba(34, 34, 34, 1);
+		  	font-size: 25rpx;
+		  	font-family: PingFang-SC-Regular;
+		  	font-weight: NaN;
+		  	text-align: left;
+		  	white-space: nowrap;
+		  	line-height: 25rpx;
+		  	.uni-select {
+		  		border: none;
+		  	}
 		  }
 		  .botton_1 {
 			  width: 128rpx;
@@ -1006,6 +1068,14 @@
 				}
 				.model-text {
 					flex-wrap: wrap;
+					.model-font {
+						width: 600rpx;
+						height: 50rpx;
+						font-size: 30rpx;
+						color: #333;
+						line-height: 50rpx;
+						margin: auto;
+					}
 					.text-block {
 						width: 350rpx;
 						height: 40rpx;
