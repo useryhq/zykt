@@ -36,10 +36,10 @@
 			</view>
 			<view class="text-wrapper_1 flex-row align-center justify-between">
 			  <text class="text_2">销售方式：</text>
-			  <view class="button_3" @click="changeButton(0)">
+			  <view class="button_5" :class='{"button_3" : buy == 0}' @click="changeButton(0)">
 			  	在线购买
 			  </view>
-			  <view class="button_5 button_3" @click="changeButton(1)">
+			  <view class=" button_5" :class='{"button_3" : buy == 1}' @click="changeButton(1)">
 			  	在线询价
 			  </view>
 			  <text class="iconfont icon_1" @click="openHlep">&#xe8e9;</text>
@@ -73,7 +73,7 @@
 				交易信息
 			</view>
 			<view class="group_2">
-				<view class="text-wrapper_1 flex-row align-center justify-between" @click="">
+				<view class="text-wrapper_1 flex-row align-center justify-between">
 				  <text class="text_2">计量单位：</text>
 				  <uni-data-select class="text-group_1" :localdata="danweiData" :clear="false" @change="chooseDanwei"></uni-data-select>
 				</view>
@@ -86,7 +86,7 @@
 				  <input class="text_3" type="number" @blur="inMinNum" placeholder="请输入最小起订量" />
 				</view>
 			</view>
-			<!-- <view class="commodity-title">
+	<!-- 		<view class="commodity-title">
 				物流信息
 			</view>
 			<view class="group_2">
@@ -117,7 +117,7 @@
 				  <view class="button_3" @click="openCity">
 				  	开通新城市
 				  </view>
-				  <view class="button_5 button_3">
+				  <view class="button_5">
 				  	更改
 				  </view>
 				  <text class="text_9">默认展示已开通城市</text>
@@ -383,6 +383,7 @@
 						modelList: [],
 						modelText: '',
 						modelid: '',
+						buy: '',
 						danwei: '',
 						inventory: '',
 						minNum: '',
@@ -472,9 +473,13 @@
 			 			  c_id: c_id
 			 		  }
 			 		  let res = await brandThree(data)
-					  if(res.product_models.length == 0) {
+					  // console.log(res,"=======")
+					  if(!res) {
+						  this.modelText = '请先选择分类、品牌'
+					  } else if(res.product_models.length == 0) {
 						  this.modelText = '该分类，该品牌目录下没有型号，可以不填'
 					  } else {
+						  this.modelText = ''
 						  this.modelList = res.product_models
 					  }			 		  
 			 		  // console.log(res)
@@ -557,6 +562,10 @@
 				this.brandText = text.name
 				this.brandid = text.id
 				this.brand = false
+			 },
+			 // 选择销售方式
+			 changeButton(e) {
+				this.buy = e 
 			 },
 			 //输入价格
 			 inPrice(e) {
@@ -685,6 +694,9 @@
 							} else if(this.finenessText == '') {
 								this.prompt = '请选择成色'
 								this.$refs.popup.open('top')
+							} else if(this.buy == '') {
+								this.prompt = '请选择销售方式'
+								this.$refs.popup.open('top')
 							} else if(this.price == '') {
 								this.prompt = '请输入商品价格'
 								this.$refs.popup.open('top')
@@ -790,19 +802,25 @@
 			  text-align: center;
 			  line-height: 40rpx;
 		  }
-		  .button_3 {
+		  .button_5 {
 			  width: 144rpx;
 			  height: 40rpx;
-			  background-color: #DD1215;
+			  background-color: #EEEEEE;
 			  border-radius: 20rpx;
 			  font-size: 24rpx;
-			  color: #fff;
 			  text-align: center;
 			  line-height: 40rpx;
-		  }
-		  .button_5 {
-			  background-color: #EEEEEE;
 			  color: #333;
+		  }
+		  .button_3 {
+		  			  width: 144rpx;
+		  			  height: 40rpx;
+		  			  background-color: #DD1215;
+		  			  border-radius: 20rpx;
+		  			  font-size: 24rpx;
+		  			  color: #fff;
+		  			  text-align: center;
+		  			  line-height: 40rpx;
 		  }
 		  .icon_1 {
 			  font-size: 30rpx;
