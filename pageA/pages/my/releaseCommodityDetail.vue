@@ -87,6 +87,7 @@
 				})
 				// console.log(this.name)
 			},
+			// 输入详细描述
 			inText(e) {
 				this.text = e.detail.value
 			},

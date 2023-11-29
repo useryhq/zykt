@@ -395,3 +395,48 @@ export function sellerInfo(data) {
 		})
 	})
 }
+//商家发布商品 
+export function sReleaseComodity(data) {
+	let url = '/sellers/add-goods'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//城市分站
+export function cityLists(data) {
+	let url = '/sellers/fenzhan-lists'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//商家店铺商品列表 
+export function shopGoodList(data) {
+	let url = '/sellers/goods'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//商家店铺装修 
+export function shopDec(data) {
+	let url = '/sellers/decorate'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//商家店铺首页 
+export function shopIndex(data) {
+	let url = '/sellers/page'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}

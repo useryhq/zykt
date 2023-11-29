@@ -3,8 +3,8 @@
 	<view class="page">
 		<view class="shop-message flex-row justify-between">
 			<view class="img-text flex-row align-center">
-				<image class="shop-img" src="../../../static/bg/7220921.png"></image>
-				<text class="shop-text">ice空调旗舰店</text>
+				<image class="shop-img" :src="upImgUrl + shop.logo"></image>
+				<text class="shop-text">{{shop.shop_name}}</text>
 			</view>
 			<view class="box_5 flex-row justify-center align-center">
 			     <text class="iconfont label_7">&#xe64c;</text>
@@ -37,13 +37,13 @@
 </template>
 
 <script>
+	import {shopIndex,shopGoodList} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
-				images:{
-					a:'../../../static/bg/200711.png',
-					b:'../../../static/bg/0301162340.png'
-				},
+				imgUrl: this.$imgUrl.img_base_url,
+				upImgUrl:this.$upImgUrl.upImg_base_url,
+				images:{},
 				ktlist2: [{
 						imgSrc: "../../../static/bg/200711.png",
 						title: "(二手8成新)大金（DAIKIN）一拖五中央空调,金制全效",
@@ -81,7 +81,29 @@
 						address: "郑州",
 					}
 				],
+				shop: '',
 			};
+		},
+		methods: {
+			// 获取店铺首页数据
+			async pShopIndex(data) {
+				let res = await shopIndex(data)
+				this.ktlist2 = res.goodsLists
+				this.shop = res.shopInfo
+				this.images = res.sliderInfo
+			}
+		},
+		onLoad() {
+			uni.getStorage({
+				key: 'sellerid',
+				success: (res) => {
+					this.sellerid = res.data
+					let data = {
+						seller_id: res.data
+					}
+					this.pShopIndex(data)
+				}
+			})
 		}
 	}
 </script>

@@ -440,7 +440,7 @@
 				} else if (this.thumb == '') {
 					this.prompt = '请选择商品主图'
 					this.$refs.popup.open('top')
-				}else if (this.tel == '') {
+				} else if (this.tel == '') {
 					this.prompt = '请输入电话号码'
 					this.$refs.popup.open('top')
 				}else if (this.address.length == 0) {

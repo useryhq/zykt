@@ -225,9 +225,9 @@
 						</view>
 						<view class="table-tr flex-row">
 							<text class="table-td border-b">价格</text>
-							<text class="table-td_2">2000元</text>
-							<text class="table-td_2">50元</text>
-							<text class="table-td_2">10元</text>
+							<text class="table-td_2">{{cityMoney.all}}元</text>
+							<text class="table-td_2">{{cityMoney.province}}元</text>
+							<text class="table-td_2">{{cityMoney.city}}元</text>
 						</view>
 					</view>
 					<view class="area-list">
@@ -235,88 +235,32 @@
 							<view class="round"></view>
 							<text class="city-text">全中国</text>
 						</view>
-						<view v-for="(item,index) in 3" :key="index">
+						<view v-for="(items,index) in cityList" :key="index">
 							<view class="city-title">
-								华北地区
+								{{items.name}}
 							</view>
-							<view class="city-list flex-row align-start">
+							<view v-for="(item,i) in items.son" :key="i" class="city-list flex-row align-start">
 								<view class="city-sheng flex-row align-center">
 									<!-- <view class="round"></view> -->
-									<text class="list-text">北京</text>
+									<text class="list-text">{{item.name}}</text>
 								</view>
 								<view class="city-shi flex-row align-center">
-									<view class="shi-list flex-row align-center">
-										<view class="round">
-											<view class="drop"></view>
+									<view v-for="(k,n) in item.cities" :key="n" class="shi-list flex-row align-center">
+										<view class="round" @click="chooseCity(items.name,item.id,k.id)">
+											<view v-if="k.selected" class="drop"></view>
 										</view>
-										<text class="list-text">北京</text>
-									</view>
-								</view>
-							</view>
-							<view class="city-list flex-row align-start">
-								<view class="city-sheng flex-row align-center">
-									<!-- <view class="round"></view> -->
-									<text class="list-text">天津</text>
-								</view>
-								<view class="city-shi flex-row align-center">
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">天津</text>
-									</view>
-								</view>
-							</view>
-							<view class="city-list flex-row align-start">
-								<view class="city-sheng flex-row align-center">
-									<!-- <view class="round"></view> -->
-									<text class="list-text">河北省</text>
-								</view>
-								<view class="city-shi flex-row align-center">
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">石家庄</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">唐山</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">秦皇岛</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">邯郸</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">邢台</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">保定</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">张家口</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">承德</text>
-									</view>
-									<view class="shi-list flex-row align-center">
-									<view class="round"></view>
-									<text class="list-text">沧州</text>
+										<text class="list-text">{{k.name}}</text>
 									</view>
 								</view>
 							</view>
 						</view>
 					</view>
-					<view class="button_7">
+					<view class="button_7" @click="submitOpenCity">
 						确认开通
 					</view>
 				</view>
 			</view>
-            <uni-popup ref="popup" type="message">
+            <uni-popup class="popup" ref="popup" type="message">
             	<uni-popup-message type="success" message="成功消息" :duration="3000">{{prompt}}</uni-popup-message>
             </uni-popup>
 			</view>
@@ -324,12 +268,13 @@
 </template>
 
 <script>
-	import {qnToken,category,brandList,brandThree,other} from "../../../static/js/api.js"
+	import {qnToken,category,brandList,brandThree,other,sReleaseComodity,cityLists} from "../../../static/js/api.js"
 	export default {
 		data() {
 			return {
 				cname: '',
 				price: '',
+				thumb: '',
 				imageValue: [],
 				imageStyles: {
 					"width": 80,
@@ -387,9 +332,16 @@
 						danwei: '',
 						inventory: '',
 						minNum: '',
-						date: '',
+						// date: '',
 						help: false,
-						city: false
+						city: false,
+						backData: '',
+						sellerid: '',
+						userId: '',
+						cityMoney: '',
+						cityList: '',
+						//开通城市分站id数组
+						openCityArr: []
 			};
 		},
 		computed: {
@@ -441,11 +393,30 @@
 				}
 		},
 		methods: {
+			//商品提交
+			async PsReleaseComodity(data) {
+				let res = await sReleaseComodity(data)
+				this.prompt = res.msg
+				this.$refs.popup.open('top')
+				if(res.code == 200) {
+					setTimeout(() =>{
+						uni.navigateBack()
+					},4000)	
+				}
+				// console.log(res)
+			},
 			// 获取上传token
 			 async getQntoken() {
 				 const tokenData =await qnToken()
 				 this.token = tokenData.qiniu_token
 				 // console.log(this.token)
+			 },
+			 //获取城市分站列表
+			 async pcityLists(data) {
+				 let res = await cityLists(data)
+				 this.cityMoney = res.money
+				 this.cityList = res.area
+				 // console.log(res,"===")
 			 },
 			 //获取分类列表
 			 async GetCategory() {
@@ -587,6 +558,7 @@
 			 inVentory(e) {
 				 this.inventory = e.detail.value
 			 },
+			 //输入最小起订量
 			 inMinNum(e) {
 				 this.minNum = e.detail.value
 			 },
@@ -614,7 +586,8 @@
 									console.log("上传成功",res)
 									that.prompt = "上传成功，如果另有图片请再次上传"
 									that.$refs.popup.open('top')
-									
+									let data = JSON.parse(res.data)
+									that.thumb += data.key + ',' 
 									setTimeout(() =>{
 										that.$refs.file.clearFiles()
 									},2000)
@@ -645,22 +618,27 @@
 								url: '/pageB/pages/business/releaseCommodityDetail'
 							})
 						},
+						// 图文详情页返回的数据
+						backFunction(obj) {
+							this.backData = obj
+							console.log(this.backData)
+						},
 						//打开日历
-						open() {
-								this.$refs.calendar.open()
-								},
+						// open() {
+						// 		this.$refs.calendar.open()
+						// 		},
 								//关闭日历
-							close(){
-								if(this.date == '请选择截止日期') {
-									this.prompt = '请选择截止日期'
-									this.$refs.popup.open('top')
-								} 
-								},
+							// close(){
+							// 	if(this.date == '请选择截止日期') {
+							// 		this.prompt = '请选择截止日期'
+							// 		this.$refs.popup.open('top')
+							// 	} 
+							// 	},
 								//日历返回日期赋值
-							confirm(e) {
-								console.log('confirm 返回:', e)
-								this.date = e.fulldate
-								},
+							// confirm(e) {
+							// 	console.log('confirm 返回:', e)
+							// 	this.date = e.fulldate
+							// 	},
 								//打开销售方式帮助
 								openHlep() {
 									this.help = true
@@ -677,18 +655,48 @@
 								closeCity() {
 									this.city = false
 								},
+								//城市分站选择城市
+								chooseCity(areaName,provincid,cityid) {
+									this.cityList.forEach(items => {
+										if(items.name ==  areaName) {
+											items.son.forEach(item => {
+												if(item.id == provincid) {
+													item.cities.forEach(i => {
+														// console.log(i)
+														if(i.id ==  cityid) {
+															if(i.selected  == false) {
+																i.selected = true
+																this.openCityArr.push(i.id)
+															} else {
+																i.selected  = false
+																this.openCityArr.splice(this.openCityArr.indexOf(i.id),1)
+															}
+															// this.$forceUpdate()
+															// console.log(this.openCityArr)
+														}
+													})
+												}
+											})
+										}
+									})
+								},
+								//城市分站提交
+								submitOpenCity() {
+									this.prompt = '暂不支持该功能，敬请期待下一版本'
+									this.$refs.popup.open('center')
+								},
 						//提交数据
 						submit() {
 							if(this.cname == '') {
 								this.prompt = '请输入商品名字'
 								this.$refs.popup.open('top')
-							} else if(this.listText == '') {
+							} else if(this.tListIndex == '') {
 								this.prompt = '请选择产品分类'
 								this.$refs.popup.open('top')
-							} else if(this.brandText == '') {
+							} else if(this.brandid == '') {
 								this.prompt = '请选择品牌'
 								this.$refs.popup.open('top')
-							} else if(this.model == '') {
+							} else if(this.modelid == '') {
 								this.prompt = '请选择型号'
 								this.$refs.popup.open('top')
 							} else if(this.finenessText == '') {
@@ -700,22 +708,63 @@
 							} else if(this.price == '') {
 								this.prompt = '请输入商品价格'
 								this.$refs.popup.open('top')
+							} else if (this.thumb == '') {
+								this.prompt = '请选择商品主图'
+								this.$refs.popup.open('top')
 							} else if (this.unit == '') {
-								this.prompt = '请选择采购单位'
+								this.prompt = '请选择计量单位'
 								this.$refs.popup.open('top')
-							}else if(this.tel == '') {
-								this.prompt = '请输入电话号码'
+							} else if (this.inventory == '') {
+								this.prompt = '请输入库存'
 								this.$refs.popup.open('top')
+							} else if(this.minNum == '') {
+								this.prompt = '请输入最小起订量'
+								this.$refs.popup.open('top')
+							} else {
+								let data = {
+									goods_name: this.cname,
+									parent_cat_id: this.listIndex,
+									sub_cat_id: this.sListIndex,
+									cat_id: this.tListIndex,
+									brand_id: this.brandid,
+									sgb_id: this.modelid,
+									thumb: this.thumb,
+									pics: this.backData.pics,
+									chengse: this.finenessText,
+									shop_price: this.price,
+									describe: this.backData.describe,
+									danwei: this.unit,
+									num: this.inventory,
+									min_num: this.minNum,
+									sale_type: this.buy,
+									seller_id: this.sellerid,
+									userid: this.userId
+								}
+								// console.log(data)
+								this.PsReleaseComodity(data)
 							}
-							console.log(this.cname,this.listText,this.brandText,this.finenessText,this.price,this.tel)
-						}
+							// console.log(this.cname,this.listText,this.brandText,this.finenessText,this.price,this.tel)
+						},
 		},
 		onLoad() {
 			this.getQntoken()
 			this.GetCategory()
 			this.getBrandList()
 			this.getOther()
+			this.pcityLists()
 			// console.log(this.sListIndex)
+			uni.getStorage({
+				key: 'sellerid',
+				success: (res) => {
+					this.sellerid = res.data
+				}
+			})
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userId = res.data
+				}
+			})
 		}
 	}
 </script>
@@ -1351,6 +1400,7 @@
 							margin-left: 36rpx;
 							flex-wrap: wrap;
 							.list-text {
+								width: auto;
 								margin-right: 8rpx;
 								color: #333;
 							}
@@ -1371,6 +1421,9 @@
 				}
 				}
 		}
+		.popup {
+			z-index: 1000;
 		}
+		}	
 }
 </style>

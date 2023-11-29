@@ -6,8 +6,8 @@
         <view class="box_2 flex-row align-center">
           <image class="single-avatar_1" src="../../../static/bg/7220921.png"></image>
           <view class="text-group_1 flex-col justify-between">
-            <text class="text_2">lightdrawlightdraw</text>
-            <text class="text_3">136****1482</text>
+            <text class="text_2">{{shopInfo.shop_name}}</text>
+            <text class="text_3">{{shopInfo.fuzerenshoujihao}}</text>
           </view>
 		  <text class="icon_2" @click="toMy">返回个人中心</text>
         </view>
@@ -41,7 +41,7 @@
 		  </view>
 		</view>
         <view class="group_6 flex-col">
-          <view class="image-text_6 flex-row">
+          <view class="image-text_6 flex-row" @click="toJoinInformation">
 			  <text class="iconfont icon_10">&#xe6a8;</text>
             <text class="text-group_7">入驻资料</text>
           </view>
@@ -66,6 +66,8 @@
 export default {
   data() {
     return {
+		shopInfo: '',
+		sellerid: '',
       constants: {}
     };
   },
@@ -73,8 +75,9 @@ export default {
 	  // 获取商家入驻信息
 	  async pSellerInfo(data) {
 	  	let res = await sellerInfo(data)
-	  	console.log(res)
-	  	this.shopStatus = res.status
+		this.shopInfo = res
+	  	// console.log(res)
+	  	// this.shopStatus = res.status
 	  },
 	//跳转发布商品
 	toReleaseCommodity() {
@@ -97,19 +100,25 @@ export default {
 	// 跳转商品管理
 	toManageCommodity() {
 		uni.navigateTo({
-			url: '/pageB/pages/business/manageCommodity'
+			url: '/pageB/pages/business/manageCommodity?sellerid=' + this.sellerid
 		})
 	},
 	// 跳转发布求购
 	toReleaseWantBuy() {
 		uni.navigateTo({
-			url: '/pageB/pages/business/releaseWantBuy'
+			url: '/pageA/pages/my/releaseWantBuy'
 		})
 	},
 	//跳转求购管理
 	toManageWantBuy() {
 		uni.navigateTo({
-			url: '/pageB/pages/business/manageWantBuy'
+			url: '/pageA/pages/my/myWantBuy'
+		})
+	},
+	// 跳转入驻资料
+	toJoinInformation() {
+		uni.navigateTo({
+			url: '/pageB/pages/business/joinInformation?sellerid=' + this.sellerid
 		})
 	},
 	// 打开开通城市分账
@@ -123,6 +132,7 @@ export default {
   	uni.getStorage({
   		key: 'sellerid',
   		success: (res) => {
+			this.sellerid = res.data
   			let data = {
   				seller_id: res.data,
   				user_id: option.userid

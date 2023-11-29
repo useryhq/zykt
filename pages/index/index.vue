@@ -555,16 +555,16 @@
 
 					.image-wrapper_1 {
 						background-color: rgba(255, 255, 255, 1);
-						border-radius: 50%;
-						height: 48rpx;
-						border: 1px solid rgba(191, 191, 191, 1);
+						clip-path: circle(45% at center);
 						width: 48rpx;
+						height: 48rpx;
+						// border: 1px solid rgba(191, 191, 191, 1);
 						margin: 4rpx 0 0 28rpx;
 
 						.label_2 {
-							font-size: 35rpx;
+							font-size: 30rpx;
 							color: #333333;
-							margin: 7rpx 0 0 7rpx;
+							margin: 8rpx 0 0 6rpx;
 						}
 					}
 				}

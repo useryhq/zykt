@@ -189,6 +189,8 @@
 				},
 				prompt: '',
 				token: '',
+				filePath: '',
+				cname: '',
 				sale: false,
 				front: '',
 				back: '',
@@ -232,7 +234,7 @@
 							key:'sellerid',
 							data: res.data.sellerInfo.seller_id,
 							success() {
-								console.log("sellerid123")
+								// console.log("sellerid123")
 							}
 						})
 					}
@@ -275,7 +277,7 @@
 			 },
 			 // 输入联系人
 			 inName(e) {
-				 this.name = e.detail.value
+				 this.cname = e.detail.value
 			 },
 			 //输入电话号码
 			 inTel(e) {
@@ -419,7 +421,7 @@
 						},
 				// 提交数据
 				submit() {
-					if(this.name == '') {
+					if(this.cname == '') {
 						this.prompt = "请输入联系人"
 						this.$refs.popup.open('top')
 					} else if(this.tel == '') {
@@ -460,7 +462,7 @@
 							sellerid: 0,
 							userid: this.userid,
 							mobile: this.tel,
-							name: this.name,
+							name: this.cname,
 							front_identity: this.front,
 							back_identity: this.back,
 							brand_id: this.brandid,

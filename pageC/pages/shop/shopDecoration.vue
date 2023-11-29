@@ -3,13 +3,13 @@
 		<view class="group_1">
 			<view class="name-block flex-row">
 				<text class="shop-name">店铺名称:</text>
-				<input class="name-input" type="text">
+				<input @input="inSname" class="name-input" type="text">
 			</view>
 		</view>
 		<view class="group_1">
 			<view class="logo-block flex-row">
 				<text class="shop-name">店铺logo:</text>
-				<uni-file-picker ref="file" auto-upload="false" v-model="imageValue" :image-styles="imageStyles"
+				<uni-file-picker ref="file1" auto-upload="false" v-model="imageValue" :image-styles="imageStyles"
 					limit="1" :del-icon="false" file-mediatype="image" @select="select">
 					<view class="button_2 flex-col align-center">
 						<text class="iconfont icon_2">&#xe67b;</text>
@@ -24,7 +24,7 @@
 		<view class="group_1">
 			<view class="img-block flex-row">
 				<text class="shop-name">店铺轮播图:</text>
-				<uni-file-picker ref="file" auto-upload="false" v-model="imageValue" :image-styles="imageStyles"
+				<uni-file-picker ref="file2" auto-upload="false" v-model="imageValue" :image-styles="imageStyles"
 					limit="1" :del-icon="false" file-mediatype="image" @select="select">
 					<view class="button_2 flex-col align-center">
 						<text class="iconfont icon_2">&#xe67b;</text>
@@ -41,7 +41,7 @@
 			</view>
 
 		</view>
-		<view class="button_1">
+		<view class="button_1" @click="submit">
 			提交
 		</view>
 		<uni-popup ref="popup" type="message">
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+	import {shopDec,qnToken} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
@@ -64,10 +65,32 @@
 						"style": "solid"
 					}
 				},
-				prompt: ''
+				prompt: '',
+				sname: '',
+				logo: '',
+				sliders: '',
+				token: '',
+				filePath: '',
+				name: ''
 			};
 		},
 		methods: {
+			// 获取上传token
+			 async getQntoken() {
+				 const tokenData =await qnToken()
+				 this.token = tokenData.qiniu_token
+				 // console.log(this.token)
+			 },
+			//店铺装修数据提交
+			async pShopDec(data) {
+				let res = await shopDec(data)
+				this.prompt = res.msg
+				this.$refs.popup.open('top')
+			},
+			inSname(e) {
+				this.sname = e.detail.value
+				// console.log(this.sname)
+			},
 			//选择图片
 			select(e) {
 				console.log('选择文件：', e)
@@ -89,13 +112,21 @@
 						key: that.name
 					},
 					success(res) {
-						console.log("上传成功", res)
-						that.prompt = "上传成功，如果另有图片请再次上传"
-						that.$refs.popup.open('top')
-
-						setTimeout(() => {
-							that.$refs.file.clearFiles()
-						}, 2000)
+						if(that.$refs.file1.files.length != 0) {
+							that.prompt = "上传成功"
+							that.$refs.popup.open('top')
+							let data = JSON.parse(res.data)
+							that.logo = data.key
+						} 
+						if(that.$refs.file2.files.length != 0) {
+							that.prompt = "上传成功，如果另有图片请再次上传"
+							that.$refs.popup.open('top')
+							let data = JSON.parse(res.data)
+							that.sliders += data.key + ','
+							setTimeout(() => {
+								that.$refs.file2.clearFiles()
+							}, 2000)
+						}
 					},
 					fail(res) {
 						console.log("上传失败", res)
@@ -114,6 +145,36 @@
 			// })
 			// console.log(this.filePath)
 			// },
+			// 提交数据
+			submit() {
+				if(this.sname == '') {
+					this.prompt = "请输入店铺名称"
+					this.$refs.popup.open('top')
+				} else if(this.logo == '') {
+					this.prompt = "请上传店铺logo"
+					this.$refs.popup.open('top')
+				} else if(this.sliders == '') {
+					this.prompt = "请上传店铺轮播图"
+					this.$refs.popup.open('top')
+				} else {
+					let data = {
+						seller_id: this.sellerid,
+						shop_name: this.sname,
+						logo: this.logo,
+						sliders: this.sliders
+					}
+					this.pShopDec(data)
+				}
+			}
+		},
+		onLoad() {
+			this.getQntoken()
+			uni.getStorage({
+				key: 'sellerid',
+				success: (res) => {
+					this.sellerid = res.data
+				}
+			})
 		}
 	}
 </script>

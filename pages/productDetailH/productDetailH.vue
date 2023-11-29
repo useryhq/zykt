@@ -105,7 +105,9 @@
 		</view>
 		<view class="group_17 xj flex-row justify-around">
 			<view class="image-text_8 flex-col justify-around" @click="tabClick(1)">
-				<text class="iconfont label_9" :class="{'tab_color' : collect == 1}">&#xe6eb;</text>
+				<button class="btn" open-type="share" plain="true">
+					<text class="iconfont labe_9">&#xe6eb;</text>
+				</button>
 				<text class="text-group_10">分享</text>
 			</view>
 			<view class="image-text_9 flex-col justify-around" @click="tabClick(2)">
@@ -276,7 +278,17 @@
 					this.userid = res.data
 				}
 			})
-		}
+		},
+		//页面内按钮分享
+		onShareAppMessage(res) {
+		    if (res.from === 'button') {// 来自页面内分享按钮
+		      console.log(res.target)
+		    }
+		    return {
+		      title: '商品分享',
+		      path: '/pages/productDetailH/productDetailH?id=' + this.id
+		    }
+		  }
 	}
 </script>
 <style lang='less'>
@@ -745,18 +757,24 @@
 
 			/*兼容 IOS>11.2*/
 			.image-text_8 {
-				width: 47rpx;
+				width: 48rpx;
 				height: 80rpx;
 				margin: 14rpx 0 0 33rpx;
-
-				.label_9 {
-					width: 47rpx;
-					height: 44rpx;
-					font-size: 44rpx;
+				.btn {
+					width: 48rpx;
+					height: 40rpx;
+					border: none;
+					// font-size: 24rpx;
+					line-height: 40rpx;
+					color: #333;
+					padding: 0;
+					margin: 0;
+					.labe_9 {
+						font-size: 44rpx;
+						color: #333;
+					}
 				}
-
 				.text-group_10 {
-					width: 46rpx;
 					height: 24rpx;
 					overflow-wrap: break-word;
 					color: rgba(51, 51, 51, 1);
@@ -765,7 +783,7 @@
 					font-weight: NaN;
 					text-align: left;
 					white-space: nowrap;
-					line-height: 20rpx;
+					line-height: 24rpx;
 				}
 			}
 

@@ -39,7 +39,7 @@
 				<view class="box_3 flex-row justify-between">
 					<view class="text-wrapper_2">
 						<text class="text_8">成色：</text>
-						<text class="text_10"><text v-if="info.cengse">{{info.cengse}}</text><text v-else>?</text>成新</text>
+						<text class="text_10"><text v-if="info.chengse">{{info.chengse}}</text><text v-else>?</text></text>
 					</view>
 					<view class="text-wrapper_3">
 						<text class="text_12">所在地：</text>

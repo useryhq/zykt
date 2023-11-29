@@ -164,24 +164,6 @@
 				}
 
 			}, {
-				"path": "pages/business/releaseWantBuy",
-				"style": {
-					"navigationBarTitleText": "发布求购",
-					"enablePullDownRefresh": false,
-					"navigationBarTextStyle": "black",
-					"navigationBarBackgroundColor": "#ffffff"
-				}
-
-			}, {
-				"path": "pages/business/manageWantBuy",
-				"style": {
-					"navigationBarTitleText": "求购管理",
-					"enablePullDownRefresh": false,
-					"navigationBarTextStyle": "black",
-					"navigationBarBackgroundColor": "#ffffff"
-				}
-
-			}, {
 				"path": "pages/business/openCity",
 				"style": {
 					"navigationBarTitleText": "开通城市分站",
@@ -199,7 +181,17 @@
 					"navigationBarBackgroundColor": "#ffffff"
 				}
 
+			},
+		{
+			"path" : "pages/business/joinInformation",
+			"style" : 
+			{
+				"navigationBarTitleText": "入驻资料",
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff"
 			}
+		}
 		]
 	},{
 		// 内部展示页

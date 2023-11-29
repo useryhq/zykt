@@ -96,7 +96,7 @@
 						</text>
 					</view>
 					<view class="text-wrapper_4 flex-row">
-						<text class="text_10">￥{{item.market_price}}</text>
+						<text class="text_10">￥{{item.shop_price}}</text>
 						<text class="text_11">{{item.city_id}}</text>
 					</view>
 				</view>
@@ -159,7 +159,7 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 				let res = await goodsList(data)
 				// console.log(res,"res")
 				this.ktlist = res.lists
-				
+				// console.log(this.ktlist,"====")
 				// console.log(this.ktlist)
 			},
 			// 分类跳转获取商品列表

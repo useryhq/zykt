@@ -12,9 +12,9 @@
 				</view>
 				<view class="table-tr flex-row">
 					<text class="table-td border-b">价格</text>
-					<text class="table-td_2">2000元</text>
-					<text class="table-td_2">50元</text>
-					<text class="table-td_2">10元</text>
+					<text class="table-td_2">{{cityMoney.all}}元</text>
+					<text class="table-td_2">{{cityMoney.province}}元</text>
+					<text class="table-td_2">{{cityMoney.city}}元</text>
 				</view>
 			</view>
 			<view class="area-list">
@@ -22,95 +22,89 @@
 					<view class="round"></view>
 					<text class="city-text">全中国</text>
 				</view>
-				<view v-for="(item,index) in 3" :key="index">
+				<view v-for="(items,index) in cityList" :key="index">
 					<view class="city-title">
-						华北地区
+						{{items.name}}
 					</view>
-					<view class="city-list flex-row align-start">
+					<view v-for="(item,i) in items.son" :key="i" class="city-list flex-row align-start">
 						<view class="city-sheng flex-row align-center">
 							<!-- <view class="round"></view> -->
-							<text class="list-text">北京</text>
+							<text class="list-text">{{item.name}}</text>
 						</view>
 						<view class="city-shi flex-row align-center">
-							<view class="shi-list flex-row align-center">
-								<view class="round">
-									<view class="drop"></view>
+							<view v-for="(k,n) in item.cities" :key="n" class="shi-list flex-row align-center">
+								<view class="round" @click="chooseCity(items.name,item.id,k.id)">
+									<view v-if="k.selected" class="drop"></view>
 								</view>
-								<text class="list-text">北京</text>
-							</view>
-						</view>
-					</view>
-					<view class="city-list flex-row align-start">
-						<view class="city-sheng flex-row align-center">
-							<!-- <view class="round"></view> -->
-							<text class="list-text">天津</text>
-						</view>
-						<view class="city-shi flex-row align-center">
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">天津</text>
-							</view>
-						</view>
-					</view>
-					<view class="city-list flex-row align-start">
-						<view class="city-sheng flex-row align-center">
-							<!-- <view class="round"></view> -->
-							<text class="list-text">河北省</text>
-						</view>
-						<view class="city-shi flex-row align-center">
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">石家庄</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">唐山</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">秦皇岛</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">邯郸</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">邢台</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">保定</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">张家口</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">承德</text>
-							</view>
-							<view class="shi-list flex-row align-center">
-							<view class="round"></view>
-							<text class="list-text">沧州</text>
+								<text class="list-text">{{k.name}}</text>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="button">
+		<view class="button" @click="submitOpenCity">
 			确认开通
 		</view>
+		<uni-popup ref="popup" type="message">
+			<uni-popup-message type="success" message="成功消息" :duration="3000">{{prompt}}</uni-popup-message>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
+	import {cityLists} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
-				
+				prompt: '',
+				cityMoney: '',
+				cityList: '',
+				//开通城市分站id数组
+				openCityArr: []
 			};
+		},
+		methods: {
+			//获取城市分站列表
+			async pcityLists(data) {
+				let res = await cityLists(data)
+				this.cityMoney = res.money
+				this.cityList = res.area
+							 // console.log(res,"===")
+			},
+			//城市分站选择城市
+			chooseCity(areaName,provincid,cityid) {
+				this.cityList.forEach(items => {
+					if(items.name ==  areaName) {
+						items.son.forEach(item => {
+							if(item.id == provincid) {
+								item.cities.forEach(i => {
+									// console.log(i)
+									if(i.id ==  cityid) {
+										if(i.selected  == false) {
+											i.selected = true
+											this.openCityArr.push(i.id)
+										} else {
+											i.selected  = false
+											this.openCityArr.splice(this.openCityArr.indexOf(i.id),1)
+										}
+										// this.$forceUpdate()
+										// console.log(this.openCityArr)
+									}
+								})
+							}
+						})
+					}
+				})
+			},
+			//城市分站提交
+			submitOpenCity() {
+				this.prompt = '暂不支持该功能，敬请期待下一版本'
+				this.$refs.popup.open('center')
+			},
+		},
+		onLoad() {
+			this.pcityLists()
 		}
 	}
 </script>
@@ -216,6 +210,7 @@
 					margin-left: 36rpx;
 					flex-wrap: wrap;
 					.list-text {
+						width: auto;
 						margin-right: 8rpx;
 						color: #333;
 					}

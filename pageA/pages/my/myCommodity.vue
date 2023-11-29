@@ -10,7 +10,7 @@
 			</view>
 			<view class="avtive_line" :class="{'avtive_line-active_left' : nav == 1, 'avtive_line-active_right' : nav== 2}"></view>
 		</view>
-		<view v-if="nav == 1" class="section_3 flex-col" v-for="(items,index) in list" :key="index">
+		<view class="section_3 flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
 				  <image :src="upimg + items.thumb[0]" mode="aspectFit" ></image>
@@ -27,7 +27,7 @@
 				</view>
 		      </view>
 		  </view>
-		  <view class="block_3 flex-row align-center justify-around">
+		  <view v-if="nav == 1" class="block_3 flex-row align-center justify-around">
 			 <view class="button_text">
 			 	<text class="iconfont icon">&#xe66e;</text>
 				<text class="text">编辑</text>
@@ -41,37 +41,19 @@
 				<text class="text">删除</text>
 			 </view>
 		  </view>
-		</view>
-		<view v-if="nav == 2" class="section_3 flex-col" v-for="(items,index) in list" :key="index">
-		    <view class="image-text_2 flex-row">
-		      <view class="group_5">
-				  <image :src="upimg + thumb" mode="aspectFit"></image>
-			  </view>
-		      <view class="text-group_2 flex-col">
-				  <view class="text-group_3 flex-row">
-				  	<text class="paragraph_1">
-				  	  {{items.title}}
-				  	</text>
-				  </view>
-		        
-				<view class="flex-row">
-					<text class="text_8">￥{{items.market_price}}</text>
-				</view>
-		      </view>
-		  </view>
-		  <view class="block_3 flex-row align-center justify-around">
-			 <view class="button_text">
-			 	<text class="iconfont icon">&#xe66e;</text>
-				<text class="text">编辑</text>
-			 </view>
-			 <view class="button_text">
-			 	<text class="iconfont icon">&#xe739;</text>
-				<text class="text">上架</text>
-			 </view>		
-		 	 <view class="button_text">
-			 	<text class="iconfont icon"> &#xe665;</text>
-				<text class="text">删除</text>
-			 </view>
+		  <view v-if="nav == 2" class="block_3 flex-row align-center justify-around">
+		  			 <view class="button_text">
+		  			 	<text class="iconfont icon">&#xe66e;</text>
+		  				<text class="text">编辑</text>
+		  			 </view>
+		  			 <view class="button_text">
+		  			 	<text class="iconfont icon">&#xe739;</text>
+		  				<text class="text">上架</text>
+		  			 </view>		
+		  		 	 <view class="button_text">
+		  			 	<text class="iconfont icon"> &#xe665;</text>
+		  				<text class="text">删除</text>
+		  			 </view>
 		  </view>
 		</view>
 	</view>
