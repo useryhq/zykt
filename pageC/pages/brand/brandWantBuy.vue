@@ -14,12 +14,12 @@
         >
           <view class="image-text_2 flex-row justify-between">
             <view class="text-group_2 flex-col">
-              <text class="text_2">{{item.lanhutext0}}</text>
-              <text class="text_3">{{item.lanhutext1}}</text>
-			  <text  class="text_3">{{item.lanhutext2}}</text>
+              <text class="text_2">{{item.shop_name}}</text>
+			  <text  class="text_3">地址：{{item.province}}{{item.city}}{{item.area}}{{item.address}}</text>
+			  <text class="text_3">详细地址：{{item.address}}</text>
             </view>
           </view>
-          <view class="image-wrapper_1" @click="toTel()">
+          <view class="image-wrapper_1" @click="toTel(item.mobile)">
 			  <text class="label_3 iconfont">&#xe681;</text>
           </view>
         </view>
@@ -28,60 +28,44 @@
 	</view>
 </template>
 <script>
+	import {brandAsk} from '../../../static/js/api.js'
 export default {
   data() {
     return {
-      loopData0: [
-        {
-          lanhuimage0: '../../../static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-		  lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南郑州市航海路与城东路交叉口向西50米路南'
-          
-        },
-        {
-         lanhuimage0: '../../../static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-          lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南',
-		  
-        },
-        {
-         lanhuimage0: '../../../static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-          lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南',
-		  
-        },
-        {
-          lanhuimage0: '../../../static/bg/200711.png',
-          lanhutext0: '郑州亿通空调设备有限公司',
-          lanhutext1:
-            '主营：二手格力',
-          lanhutext2: '地址：郑州市航海路与城东路交叉口向西50米路南',
-		  
-        }
-      ],
+      loopData0: [],
       constants: {}
     };
   },
   methods: {
-	  toTel() {
+	  async pBrandAsk(name,id) {
+		 let data = {
+			 name:name,
+			 userid: id
+		 } 
+		let res = await brandAsk(data)
+		this.loopData0 = res.lists
+	  },
+	  //拨打电话
+	  toTel(e) {
 	  		  uni.makePhoneCall({
-	  		  	phoneNumber: '18838000000'
+	  		  	phoneNumber: e
 	  		  });
 	  },
+	  //设置导航名称
 	  setTitle(T) {
 	  		  uni.setNavigationBarTitle({
 	  		  	title: T
 	  		  });
-	  }
+	  }  
   },
   onLoad(option) {
   	this.setTitle(option.title)
+	uni.getStorage({
+		key: 'userId',
+		success: (res) => {
+			this.pBrandAsk(option.title,res.data)
+		}
+	})
   }
 };
 </script>

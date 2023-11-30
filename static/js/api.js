@@ -143,6 +143,15 @@ export function brandPk(data) {
 		})
 	})
 }
+//品牌询价
+export function brandAsk(data) {
+	let url = '/brands/ask'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
 //商品列表
 export function goodsList(data) {
 	let url = '/goods/lists'

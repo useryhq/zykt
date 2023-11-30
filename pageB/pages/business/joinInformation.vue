@@ -100,7 +100,7 @@
 			uni.getStorage({
 				key: 'userId',
 				success: (res) => {
-					this.sellerid = res.data
+					this.sellerid = option.sellerid
 					let data = {
 						seller_id: option.sellerid,
 						user_id: res.data

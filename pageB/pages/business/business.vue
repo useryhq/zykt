@@ -4,7 +4,7 @@
     <view class="group_1 flex-col">
       <view class="box_1 flex-col">
         <view class="box_2 flex-row align-center">
-          <image class="single-avatar_1" src="../../../static/bg/7220921.png"></image>
+          <image class="single-avatar_1" :src="imgUrl + shopInfo.logo"></image>
           <view class="text-group_1 flex-col justify-between">
             <text class="text_2">{{shopInfo.shop_name}}</text>
             <text class="text_3">{{shopInfo.fuzerenshoujihao}}</text>
@@ -68,6 +68,7 @@ export default {
     return {
 		shopInfo: '',
 		sellerid: '',
+		imgUrl: this.$upImgUrl.upImg_base_url,
       constants: {}
     };
   },
