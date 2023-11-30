@@ -83,7 +83,6 @@
 							<view class="section_6"></view>
 							<text class="paragraph_1" @click="toWantBuyDetail(item.id)">
 								{{item.title}}
-								<br />
 							</text>
 						</view>
 					</view>
@@ -578,7 +577,7 @@
 				height: 100%;
 				background-color: rgba(0, 0, 0, 0.6);
 				position: absolute;
-				z-index: 999;
+				z-index: 1000;
 				@{aaa} .uni-indexed-list {
 						top: 150rpx;
 						left: 0;
