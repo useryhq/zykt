@@ -216,7 +216,7 @@
 		methods: {
 			// 商家入驻申请提交
 			async pAddSeller(data) {
-				console.log(data)
+				// console.log(data)
 				let res = await addSeller(data)
 				this.prompt = res.msg
 				this.$refs.popup.open('top')

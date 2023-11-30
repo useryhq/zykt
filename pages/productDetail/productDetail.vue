@@ -60,7 +60,7 @@
 						<text class="iconfont label_7" :class="{'color' : join == 2}">&#xe64c;</text>
 						<text class="text-group_5" :class="{'color' : join == 2}">收藏店铺</text>
 					</view>
-					<view class="box_6 flex-row justify-center align-center" @click="toShop">
+					<view class="box_6 flex-row justify-center align-center" @click="toShop(info.shop_id)">
 						<text class="iconfont label_8">&#xe676;</text>
 						<text class="text-group_6">进入店铺</text>
 					</view>
@@ -343,9 +343,9 @@
 				});
 			},
 			//跳转店铺
-			toShop() {
+			toShop(e) {
 				uni.navigateTo({
-					url: '/pageC/pages/shop/shop'
+					url: '/pageC/pages/shop/shop?id=' + e
 				})
 			}
 		},
@@ -525,7 +525,7 @@
 					}
 
 					.text-wrapper_3 {
-						width: 150rpx;
+						width: 170rpx;
 						height: 30rpx;
 						overflow-wrap: break-word;
 						font-size: 0;

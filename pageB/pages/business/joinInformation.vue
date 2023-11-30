@@ -30,10 +30,7 @@
 			<view class="box_1 flex-row justify-between align-center">
 				<text class="text-block">销售类型：</text>
 				<view class="input-icon flex-row justify-between">
-					<view class="input_1" v-if="shopInfo.shop_cate == 10">厂家直销</view>
-					<view class="input_1" v-if="shopInfo.shop_cate == 20">代理商</view>
-					<view class="input_1" v-if="shopInfo.shop_cate == 30">专卖店</view>
-					<view class="input_1" v-if="shopInfo.shop_cate == 40">授权业务</view>
+					<view class="input_1">{{shopInfo.sales_type}}</view>
 				</view>
 			</view>
 			<view class="box_1 flex-row justify-between align-center">
@@ -43,13 +40,13 @@
 			<view class="box_1 flex-row justify-between align-center">
 				<text class="text-block">入驻类目：</text>
 				<view class="input-icon flex-row justify-between">
-					<view class="input_1"></view>
+					<view class="input_1">{{shopInfo.cate_name}}</view>
 				</view>
 			</view>
 			<view class="box_1 flex-row justify-between align-center">
 				<text class="text-block">入驻品牌：</text>
 				<view class="input-icon flex-row justify-between">
-					<view class="input_1"></view>
+					<view class="input_1">{{shopInfo.brands}}</view>
 				</view>
 			</view>
 			<view class="box_1 flex-row justify-between align-center">

@@ -26,6 +26,7 @@ export function request(url, method, data, opt) {
         method: method,
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
+			// console.log(res)
           if (debug) {
             console.log('response:', res)
             console.log('###############################################结束请求###########################################################################################')
@@ -40,14 +41,13 @@ export function request(url, method, data, opt) {
               // reject({
               //   'message': '连接服务器失败'
               // })
-              if (res.statusCode == 405) {
-				  跳转登录
-                uni.navigateTo({
-                  url: '/pageC/pages/login/login'
-                });
-              }
             }
-  
+			if (res.data.code == 405) {
+			// 跳转登录
+			  uni.navigateTo({
+			    url: '/pageC/pages/login/login'
+			  });
+			}
             uni.hideLoading();
             reject(res.data.msg)
           }

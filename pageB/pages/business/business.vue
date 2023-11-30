@@ -129,17 +129,22 @@ export default {
 	}
   },
   onLoad(option) {
-  	uni.getStorage({
-  		key: 'sellerid',
-  		success: (res) => {
-			this.sellerid = res.data
+	  // console.log(option)
+	  if(option.sellerid) {
+		  this.sellerid = option.sellerid
+		  uni.setStorage({
+		  	key:'sellerid',
+		  	data: option.sellerid,
+		  	success() {
+		  		// console.log("sellerid123")
+		  	}
+		  })
+	  }
   			let data = {
-  				seller_id: res.data,
+  				seller_id: option.sellerid,
   				user_id: option.userid
   			}
   			this.pSellerInfo(data)
-  		}
-  	})
   }
 };
 </script>

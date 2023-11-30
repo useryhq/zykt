@@ -67,6 +67,7 @@ export default {
 		res: '',
 		userInfo: '',
 		shopStatus: '',
+		sellerid: '',
       constants: {}
     };
   },
@@ -79,6 +80,7 @@ export default {
 		let all = await my(data)
 	  	this.res = all
 		this.userInfo = all.userInfo
+		this.sellerid = all.shopInfo.id
 	  	// console.log(this.res)
 		},
 		//跳转发布商品
@@ -126,7 +128,7 @@ export default {
 	//开通店铺后跳转商家中心
 	toBusiness() {
 		uni.navigateTo({
-			url: '/pageB/pages/business/business?userid=' + this.userid
+			url: '/pageB/pages/business/business?userid=' + this.userid + '&sellerid=' + this.sellerid
 		})
 	}
   },
