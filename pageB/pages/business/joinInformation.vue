@@ -15,11 +15,11 @@
 			</view>
 			<view class="box_1 flex-row justify-star align-center">
 				<text class="text-block">身份证正面：</text>
-				<image class="img" :src="upImgUrl + shopInfo.shenfenzhengzhengmian" mode=""></image>
+				<image class="img" :src="shopInfo.shenfenzhengzhengmian" mode=""></image>
 			</view>
 			<view class="box_1 flex-row justify-star align-center">
 				<text class="text-block">身份证反面：</text>
-				<image class="img" :src="upImgUrl + shopInfo.shenfenzhengfanmian" mode=""></image>
+				<image class="img" :src="shopInfo.shenfenzhengfanmian" mode=""></image>
 			</view>
 		</view>
 		<view class="group_1">
@@ -56,7 +56,7 @@
 			<view class="box_1 flex-row justify-between align-center">
 				<text class="text-block">营业执照电子版：</text>
 				<view class="file-block file-block_1">
-					<image class="img" :src="upImgUrl + shopInfo.yingyezhizhao" mode=""></image>
+					<image class="img" :src="shopInfo.yingyezhizhao" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -84,14 +84,27 @@
 			return {
 				shopInfo: '',
 				sellerid: '',
-				imgUrl: this.$imgUrl.img_base_url,
-				upImgUrl:this.$upImgUrl.upImg_base_url,
 			};
 		},
 		methods: {
 			async pSellerInfo(data) {
 				let res = await sellerInfo(data)
 					this.shopInfo = res
+					if(this.shopInfo.shenfenzhengzhengmian.substring(0,5) == 'upload') {
+						this.shopInfo.shenfenzhengzhengmian = 'https://img.zykt.com/' + this.shopInfo.shenfenzhengzhengmian
+					} else {
+						this.shopInfo.shenfenzhengzhengmian = 'https://qn.zykt.com/' + this.shopInfo.shenfenzhengzhengmian
+					}
+					if(this.shopInfo.shenfenzhengfanmian.substring(0,5) == 'upload') {
+						this.shopInfo.shenfenzhengfanmian = 'https://img.zykt.com/' + this.shopInfo.shenfenzhengfanmian
+					} else {
+						this.shopInfo.shenfenzhengfanmian = 'https://qn.zykt.com/' + this.shopInfo.shenfenzhengfanmian
+					}
+					if(this.shopInfo.yingyezhizhao.substring(0,5) == 'upload') {
+						this.shopInfo.yingyezhizhao = 'https://img.zykt.com/' + this.shopInfo.yingyezhizhao
+					} else {
+						this.shopInfo.yingyezhizhao = 'https://qn.zykt.com/' + this.shopInfo.yingyezhizhao
+					}
 				// console.log(res)
 				// this.shopStatus = res.status
 			},

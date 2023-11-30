@@ -63,7 +63,7 @@ export default {
   data() {
     return {
 		userid:'',
-		imgUrl: this.$imgUrl.img_base_url,
+		imgUrl: '',
 		res: '',
 		userInfo: '',
 		shopStatus: '',
@@ -81,6 +81,11 @@ export default {
 	  	this.res = all
 		this.userInfo = all.userInfo
 		this.sellerid = all.shopInfo.id
+		if(this.userInfo.thumb.substring(0,5) == 'upload') {
+			this.imgUrl = this.$imgUrl.img_base_url
+		} else {
+			this.imgUrl = this.$upImgUrl.upImg_base_url
+		}
 	  	// console.log(this.res)
 		},
 		//跳转发布商品

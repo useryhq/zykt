@@ -68,7 +68,7 @@ export default {
     return {
 		shopInfo: '',
 		sellerid: '',
-		imgUrl: this.$upImgUrl.upImg_base_url,
+		imgUrl: '',
       constants: {}
     };
   },
@@ -77,6 +77,11 @@ export default {
 	  async pSellerInfo(data) {
 	  	let res = await sellerInfo(data)
 		this.shopInfo = res
+		if(this.shopInfo.logo.substring(0,5) == 'upload') {
+			this.imgUrl = this.$imgUrl.img_base_url
+		} else {
+			this.imgUrl = this.$upImgUrl.upImg_base_url
+		}
 	  	// console.log(res)
 	  	// this.shopStatus = res.status
 	  },

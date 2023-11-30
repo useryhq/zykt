@@ -24,7 +24,7 @@
 				<checkbox :value="items.id" :checked="items.checked" />
 			</label>
 		      <view class="group_5">
-				  <image :src="imgUrl + items.goodsInfo.thumb" mode="aspectFit"></image>
+				  <image :src="items.goodsInfo.thumb[0]" mode="aspectFit"></image>
 			  </view>
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row">
@@ -46,7 +46,7 @@
 					<checkbox :value="items.id" :checked="items.checked" />
 				</label>
 		      <view class="d_group_5">
-				  <image :src="imgUrl + items.shopInfo.logo" mode="aspectFit"></image>
+				  <image :src="items.shopInfo.logo" mode="aspectFit"></image>
 			  </view>
 		      <view class="text-group_2 d-text">
 				  	 {{items.shopInfo.shop_name}}
@@ -74,7 +74,7 @@
 				num: '',
 				idarr: [],
 				button: true,
-				imgUrl: this.$imgUrl.img_base_url,
+				imgUrl: '',
 				prompt: ''
 			};
 		},
@@ -83,9 +83,13 @@
 			async pCollectShop(data) {
 				let res = await collectShop(data)
 				this.list = res.lists
-				// this.list.forEach(item => {
-				// 	item.checked = false
-				// })
+				this.list.forEach(item => {
+					if(item.goodsInfo.thumb[0].substring(0,5) == 'upload') {
+						item.goodsInfo.thumb[0] = 'https://img.zykt.com/' + item.goodsInfo.thumb[0]
+					} else {
+						item.goodsInfo.thumb[0] = 'https://qn.zykt.com/' + item.goodsInfo.thumb[0]
+					}
+				})
 				this.num = res.num
 				console.log(res)
 			},
@@ -93,11 +97,15 @@
 			async pCollectGood(data) {
 				let res = await collectGood(data)
 				this.list = res.lists
-				// this.list.forEach(item => {
-				// 	item.checked = false
-				// })
+				this.list.forEach(item => {
+					if(item.shopInfo.logo.substring(0,5) == 'upload') {
+						item.shopInfo.logo = 'https://img.zykt.com/' + item.shopInfo.logo
+					} else {
+						item.shopInfo.logo = 'https://qn.zykt.com/' + item.shopInfo.logo
+					}
+				})
 				this.num = res.num
-				console.log(this.list)
+				// console.log(this.list)
 			},
 			// 取消收藏
 			async pCollectCancel(data) {
@@ -130,7 +138,7 @@
 			},
 			// 选择框状态改变
 			checkbox(e) {
-				console.log(e)
+				// console.log(e)
 				this.idarr = e.detail.value
 				let values = e.detail.value,list = this.list
 				for(let i = 0,len = list.length;i < len;++i){
