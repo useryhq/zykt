@@ -16,7 +16,7 @@
 					</view>
 				</view>
 			</view>
-			<view :class="{zindex:addShow}" class="choose_address">
+			<view v-if="addShow" class="choose_address" @click="closeAddress">
 				<uni-indexed-list :options="localData" :showSelect="false" @click="bindClick" />
 			</view>
 			<view class="group_5 flex-col">
@@ -454,6 +454,10 @@
 			addressShow() {
 				this.addShow = true
 			},
+			// 关闭城市列表
+			closeAddress() {
+				this.addShow = false
+			},
 			//选择地址
 			bindClick(e) {
 				this.address = e.item.itemobj.name
@@ -574,14 +578,11 @@
 				height: 100%;
 				background-color: rgba(0, 0, 0, 0.6);
 				position: absolute;
-				z-index: -10;
+				z-index: 999;
 				@{aaa} .uni-indexed-list {
-						top: 100rpx;
+						top: 150rpx;
 						left: 0;
 				}
-			}
-			.zindex {
-				z-index: 1000;
 			}
 			.group_5 {
 				width: 750rpx;

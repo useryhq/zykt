@@ -114,7 +114,7 @@
 				scrollViewId: '',
 				touchmovable: true,
 				loaded: false,
-				isPC: false
+				isPC: false,
 			}
 		},
 		watch: {
@@ -141,7 +141,7 @@
 				let index = 0;
 				this.lists = []
 				this.options.forEach((value, index) => {
-					// console.log('===',value)
+					// console.log('===',index)
 					if (value.data.length === 0) {
 						return
 					}
@@ -164,31 +164,34 @@
 					})
 					// console.log('lists',this.lists)
 				})
-				// #ifndef APP-NVUE
-				uni.createSelectorQuery()
-					.in(this)
-					.select('#list')
-					.boundingClientRect()
-					.exec(ret => {
-						// console.log(ret,'ret')
-						this.winOffsetY = ret[0].top
-						this.winHeight = ret[0].height
+				// console.log(this.$addShow)
+					console.log(this.$addShow)
+					// #ifndef APP-NVUE
+					uni.createSelectorQuery()
+						.in(this)
+						.select('#list')
+						.boundingClientRect()
+						.exec(ret => {
+							console.log(ret,'ret')
+							this.winOffsetY = ret[0].top
+							this.winHeight = ret[0].height
+							this.itemHeight = this.winHeight / this.lists.length
+						})
+					// #endif
+					// #ifdef APP-NVUE
+					dom.getComponentRect(this.$refs['list'], (res) => {
+						this.winOffsetY = res.size.top
+						this.winHeight = res.size.height
 						this.itemHeight = this.winHeight / this.lists.length
 					})
-				// #endif
-				// #ifdef APP-NVUE
-				dom.getComponentRect(this.$refs['list'], (res) => {
-					this.winOffsetY = res.size.top
-					this.winHeight = res.size.height
-					this.itemHeight = this.winHeight / this.lists.length
-				})
-				// #endif
+					// #endif
 			},
 			touchStart(e) {
 				// console.log('winOffsetY',this.winOffsetY,'winHeight',this.winHeight)
 				this.touchmove = true
 				let pageY = this.isPC ? e.pageY : e.touches[0].pageY
 				// console.log('e',e,'pageY',pageY)
+				// console.log(this.itemHeight,"===")
 				let index = Math.floor((pageY - this.winOffsetY) / this.itemHeight)
 				// console.log(index,'index')
 				let item = this.lists[index]
