@@ -341,7 +341,7 @@
 			 },
 			//选择图片
 			select(e) {
-				console.log('选择文件：', e)
+				// console.log('选择文件：', e)
 				// console.log(this.$refs)
 				//多文件上传
 				// e.tempFilePaths.forEach(value => {
@@ -361,7 +361,7 @@
 						key: that.name
 					},
 					success(res) {
-						console.log("上传成功", res)
+						// console.log("上传成功", res)
 						if(that.$refs.file1.files.length != 0) {
 							that.prompt = "上传成功"
 							that.$refs.popup.open('top')
@@ -382,7 +382,7 @@
 						}
 					},
 					fail(res) {
-						console.log("上传失败", res)
+						// console.log("上传失败", res)
 					}
 				})
 				// console.log(this.name)

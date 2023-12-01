@@ -99,9 +99,9 @@
 						mobile: this.tel,
 						code: this.code
 					}
-					console.log(data)
+					// console.log(data)
 					let res = await telLogin(data)
-					console.log(res)
+					// console.log(res)
 					if (res.code == 200) {
 						uni.setStorage({
 							key: 'userId',

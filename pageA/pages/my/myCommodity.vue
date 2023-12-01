@@ -13,7 +13,7 @@
 		<view class="section_3 flex-col" v-for="(items,index) in list" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
-				  <image :src="upimg + items.thumb[0]" mode="aspectFit" ></image>
+				  <image :src="items.thumb[0]" mode="aspectFit" ></image>
 			  </view>
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row">
@@ -66,7 +66,6 @@
 			return {
 				nav: 1,
 				userid: '',
-				upimg: this.$upImgUrl.upImg_base_url,
 				list: [],
 				thumb: ''
 			};
@@ -76,7 +75,14 @@
 			async pMyComodity(data) {
 				let res = await myComodity(data)
 				this.list = res.lists
-				console.log(res)
+				this.list.forEach(item => {
+					if(item.thumb[0].substring(0,6) == 'upload') {
+						item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+					} else {
+						item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+					}
+				})
+				// console.log(res)
 			},
 			changeNav(e) {
 				let data = {

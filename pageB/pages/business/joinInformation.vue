@@ -90,17 +90,17 @@
 			async pSellerInfo(data) {
 				let res = await sellerInfo(data)
 					this.shopInfo = res
-					if(this.shopInfo.shenfenzhengzhengmian.substring(0,5) == 'upload') {
+					if(this.shopInfo.shenfenzhengzhengmian.substring(0,6) == 'upload') {
 						this.shopInfo.shenfenzhengzhengmian = 'https://img.zykt.com/' + this.shopInfo.shenfenzhengzhengmian
 					} else {
 						this.shopInfo.shenfenzhengzhengmian = 'https://qn.zykt.com/' + this.shopInfo.shenfenzhengzhengmian
 					}
-					if(this.shopInfo.shenfenzhengfanmian.substring(0,5) == 'upload') {
+					if(this.shopInfo.shenfenzhengfanmian.substring(0,6) == 'upload') {
 						this.shopInfo.shenfenzhengfanmian = 'https://img.zykt.com/' + this.shopInfo.shenfenzhengfanmian
 					} else {
 						this.shopInfo.shenfenzhengfanmian = 'https://qn.zykt.com/' + this.shopInfo.shenfenzhengfanmian
 					}
-					if(this.shopInfo.yingyezhizhao.substring(0,5) == 'upload') {
+					if(this.shopInfo.yingyezhizhao.substring(0,6) == 'upload') {
 						this.shopInfo.yingyezhizhao = 'https://img.zykt.com/' + this.shopInfo.yingyezhizhao
 					} else {
 						this.shopInfo.yingyezhizhao = 'https://qn.zykt.com/' + this.shopInfo.yingyezhizhao

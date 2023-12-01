@@ -9,7 +9,7 @@
             <image
               class="image_3"
               referrerpolicy="no-referrer"
-              :src="imgUrl + item.files"
+              :src="item.files"
             />
             <text class="text-group_1">{{item.name}}</text>
           </view>
@@ -30,7 +30,6 @@ export default {
 		title: '',
 		id: '',
 		list:[],
-		imgUrl: this.$imgUrl.img_base_url,
       constants: {}
     };
   },
@@ -45,6 +44,15 @@ export default {
 		  this.setTitle(res.brand_name)
 		  this.title = res.brand_name
 		  this.list = res.categories
+		  this.list.forEach(items => {
+			  items.son.forEach(item => {
+				  if(item.files.substring(0,6) == 'upload') {
+				  	item.files = 'https://img.zykt.com/' + item.files
+				  } else {
+				  	item.files = 'https://qn.zykt.com/' + item.files
+				  }
+			  })
+		  })
 		  // console.log(res)
 	  },
 	  //设置页面title

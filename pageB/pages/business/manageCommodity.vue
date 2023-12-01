@@ -18,7 +18,7 @@
 		<view v-if="nav != 0" class="section_3 flex-col" v-for="(items,index) in goodsList" :key="index">
 		    <view class="image-text_2 flex-row">
 		      <view class="group_5">
-				  <image :src="upImg + items.thumb[0]" mode="aspectFit"></image>
+				  <image :src="items.thumb[0]" mode="aspectFit"></image>
 			  </view>
 		      <view class="text-group_2 flex-col">
 				  <view class="text-group_3 flex-row">
@@ -65,7 +65,7 @@
 		<view v-if="nav == 0" class="section_3 section_4 flex-col" v-for="(items,index) in goodsList" :key="index">
 				    <view class="image-text_2 flex-row">
 				      <view class="group_5">
-						  <image :src="upImg + items.thumb[0]" mode="aspectFit"></image>
+						  <image :src="items.thumb[0]" mode="aspectFit"></image>
 					  </view>
 				      <view class="text-group_2 flex-col">
 						  <view class="text-group_3 flex-row">
@@ -93,7 +93,6 @@
 				nav: 1,
 				sellerid: '',
 				goodsList: '',
-				upImg: this.$upImgUrl.upImg_base_url
 			};
 		},
 		methods: {
@@ -105,7 +104,14 @@
 				}
 				let res = await shopGoodList(data)
 				this.goodsList =  res.lists
-				console.log(res)
+				this.goodsList.forEach(item => {
+					if(item.thumb[0].substring(0,6) == 'upload') {
+						item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+					} else {
+						item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+					}
+				})
+				// console.log(res)
 			},
 			// 切换导航栏
 			changeNav(e) {

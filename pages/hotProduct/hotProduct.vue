@@ -68,7 +68,7 @@
 			<view v-if="add == 2" class="group_8 flex-row justify-between">
 				<view class="box_3 flex-col" v-for="(item,i) in ktlist" :key="i"
 					@click="toProductDetail(item.goods_id)">
-					<image class="kt_img" :src="imgUrl +  item.thumb"></image>
+					<image class="kt_img" :src="item.thumb[0]"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
 							{{item.goods_name}}
@@ -89,7 +89,7 @@
 			<view v-if="add == 1" class="group_8 flex-row justify-between">
 				<view class="box_3 flex-col" v-for="(item,index) in ktlist" :key="index"
 					@click="toProductDetailH(item.goods_id)">
-					<image class="kt_img" :src="imgUrl + item.thumb"></image>
+					<image class="kt_img" :src="item.thumb[0]"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
 							{{item.goods_name}}
@@ -134,7 +134,6 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 				add: 2,
 				parameter: 0,
 				arrow: false,
-				imgUrl: this.$imgUrl.img_base_url,
 				pkBlock:false,
 				pkBlockadd: 0,
 				pkMessage:[],
@@ -159,6 +158,14 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 				let res = await goodsList(data)
 				// console.log(res,"res")
 				this.ktlist = res.lists
+				this.ktlist.forEach(item => {
+					// console.log(item.thumb[0].substring(0,))
+					if(item.thumb[0].substring(0,6) == 'upload') {
+						item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+					} else {
+						item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+					}
+				})
 				// console.log(this.ktlist,"====")
 				// console.log(this.ktlist)
 			},
@@ -169,6 +176,13 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 				}
 				let res = await fGoodsList(data)
 				this.ktlist = res.lists
+				this.ktlist.forEach(item => {
+					if(item.thumb[0].substring(0,6) == 'upload') {
+						item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+					} else {
+						item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+					}
+				})
 				// console.log(res)
 			},
 			//切换商家个人
@@ -310,7 +324,14 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 					return
 				}
 				this.ktlist = this.ktlist.concat(res.lists)
-				console.log(this.ktlist,"=======")
+				this.ktlist.forEach(item => {
+					if(item.thumb[0].substring(0,6) == 'upload') {
+						item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+					} else {
+						item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+					}
+				})
+				// console.log(this.ktlist,"=======")
 				this.num++
 				this.loading = 0
 				uni.hideLoading()
@@ -318,7 +339,7 @@ import {goodsList, fGoodsList} from '../../static/js/api.js'
 			},
 			//搜索
 			searchKey(e) {
-				console.log(e)
+				// console.log(e)
 				this.getGoodList({
 						use: this.use,
 						page: '20',

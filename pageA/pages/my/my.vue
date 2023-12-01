@@ -81,7 +81,7 @@ export default {
 	  	this.res = all
 		this.userInfo = all.userInfo
 		this.sellerid = all.shopInfo.id
-		if(this.userInfo.thumb.substring(0,5) == 'upload') {
+		if(this.userInfo.thumb.substring(0,6) == 'upload') {
 			this.imgUrl = this.$imgUrl.img_base_url
 		} else {
 			this.imgUrl = this.$upImgUrl.upImg_base_url

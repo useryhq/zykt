@@ -11,14 +11,14 @@
       </view>
       <text class="text_3">推荐搜索</text>
       <view class="section_2 flex-row">
-        <view class="text-wrapper_1" v-for="(item,index) in searchData" :key="index">
+        <view class="text-wrapper_1" v-for="(item,index) in searchData" :key="index" @click="getSearch(item.key)">
           <text class="text_4">{{item.key}}</text>
         </view>
       </view>
     </view>
 	<view v-if="searchList" class="group_8 flex-row justify-between">
-		<view class="box_3 flex-col" v-for="(item,index) in searchList" :key="index" @click="toProductDetail(item.shop_id)">
-			<image class="kt_img" :src="img + item.thumb"></image>
+		<view class="box_3 flex-col" v-for="(item,index) in searchList" :key="index" @click="toProductDetail(item.goods_id)">
+			<image class="kt_img" :src="item.thumb[0]"></image>
 			<view class="text-wrapper_3 flex-row justify-between">
 				<text class="paragraph_2">
 					{{item.goods_name}}
@@ -37,7 +37,6 @@ export default {
   data() {
     return {
 		searchKey: '',
-		img: this.$imgUrl. img_base_url,
 		searchData: [],
 		searchList: [],
       constants: {}
@@ -46,19 +45,36 @@ export default {
   methods: {
 	  //搜索关键字赋值
 	  inSearch(e) {
-		  console.log(e)
+		  // console.log(e)
 		  this.searchKey = e.detail.value
 	  },
 	  // 请求搜索接口
-	  async getSearch() {
-		  let data = {
-			  body:{
-			  key:this.searchKey,
-		    },
+	  async getSearch(e) {
+		  let data ={}
+		  if(e) {
+			 data = {
+			 	body:{
+			 		key:e
+			   },
+			 } 
+		  } else {
+			 data = {
+			 	body:{
+			 		key:this.searchKey,
+			   },
+			 } 
 		  }
 		  let res = await search(data)
-		  console.log(res)
+		  // console.log(res)
 		  this.searchList = res.lists
+		  this.searchList.forEach(item => {
+			  if(item.thumb[0].substring(0,6) == 'upload') {
+					item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+				} else {
+					item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+			}
+		  })
+		  // console.log(this.searchList)
 	  },
 	  //点击搜索
 	  toSearch() {
@@ -68,7 +84,7 @@ export default {
 	  async getSearchRec() {
 		 let res = await searchRec()
 		 this.searchData = res.lists
-		 console.log(res)
+		 // console.log(res)
 	  }
   },
   onLoad() {

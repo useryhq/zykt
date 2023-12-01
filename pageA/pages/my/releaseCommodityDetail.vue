@@ -53,7 +53,7 @@
 			 },
 			//选择图片
 			select(e) {
-				console.log('选择文件：', e)
+				// console.log('选择文件：', e)
 				//多文件上传
 				// e.tempFilePaths.forEach(value => {
 				// 	this.filePath.push(value)
@@ -72,7 +72,7 @@
 						key: that.name
 					},
 					success(res) {
-						console.log("上传成功", res)
+						// console.log("上传成功", res)
 						that.prompt = "上传成功，如果另有图片请再次上传"
 						that.$refs.popup.open('top')
 						let data = JSON.parse(res.data)
@@ -82,7 +82,7 @@
 						}, 2000)
 					},
 					fail(res) {
-						console.log("上传失败", res)
+						// console.log("上传失败", res)
 					}
 				})
 				// console.log(this.name)
@@ -99,7 +99,7 @@
 					describe: this.text,
 					pics: this.pics
 				}
-				console.log(obj)
+				// console.log(obj)
 				prevPage.$vm.backFunction(obj)
 				uni.navigateBack()
 			}

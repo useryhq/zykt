@@ -8,7 +8,7 @@
 					:circular="true">
 					<block v-for="(item,index) in images" :key="index">
 						<swiper-item>
-							<image mode="aspectFill" :src="imgUrl + item"></image>
+							<image mode="aspectFill" :src="item"></image>
 						</swiper-item>
 					</block>
 				</swiper>
@@ -70,7 +70,7 @@
 		</view>
 		<view class="img_block">
 			<view class="img_list">
-				<image v-for="(item,index) in images" :src="imgUrl + item" :key="index"></image>
+				<image v-for="(item,index) in images" :src="item" :key="index"></image>
 			</view>
 		</view>
 		<view class="words-written">
@@ -146,7 +146,6 @@
 				store: 0,
 				collect: 0,
 				shoppingCart: 0,
-				imgUrl: this.$imgUrl.img_base_url,
 				images: [],
 				ktParameter: [{
 						text: '型号：120'
@@ -198,7 +197,19 @@
 				// console.log(res)
 				this.info = res.info
 				this.wordsWritten = res.notesInfo
-				this.images.push(res.info.thumb)
+				this.images = res.info.thumb
+				// console.log(this.images)
+				this.images.forEach((item,index,arr) => {
+					// console.log(item)
+					if(item.substring(0,6) == 'upload') {
+						arr[index] = 'https://img.zykt.com/' + item
+						// console.log(item)
+					} else {
+						arr[index] = 'https://qn.zykt.com/' + item
+					}
+					// this.images = arr
+					// this.images.push(item)
+				})
 			},
 			//提交留言
 			async postSendMessage() {
@@ -282,7 +293,7 @@
 		//页面内按钮分享
 		onShareAppMessage(res) {
 		    if (res.from === 'button') {// 来自页面内分享按钮
-		      console.log(res.target)
+		      // console.log(res.target)
 		    }
 		    return {
 		      title: '商品分享',

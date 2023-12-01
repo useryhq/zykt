@@ -58,13 +58,13 @@
 						// console.log(data)
 					},
 					fail: (err) => {
-						console.log(err)
+						// console.log(err)
 					}
 				}) 	
 			},
 			//获取手机号
 			getPhoneNumber(res) {
-				console.log(res)
+				// console.log(res)
 				if(res.detail.errno) {
 					uni.navigateTo({
 						url: '/pageC/pages/login/telLogin'

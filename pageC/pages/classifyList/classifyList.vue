@@ -19,7 +19,7 @@
 						</view>
 						<view class="right-img-block">
 							<view class="img-font-block" v-for="(i,c) in item.child" :key="c" @tap="toHotProduct(i.id)">
-								<image :src="upImgUrl + i.banner" mode="aspectFit" lazy-load></image>
+								<image :src="i.banner" mode="aspectFit" lazy-load></image>
 								<view>
 									{{i.name}}
 								</view>
@@ -36,8 +36,6 @@
 	export default {
 		data() {
 			return {
-				imgUrl: this.$imgUrl.img_base_url,
-				upImgUrl:this.$upImgUrl.upImg_base_url,
 				activeKey: 1,
 				list: [],
 				listIndex: 1,
@@ -59,6 +57,17 @@
 						inList.push(this.list[i])
 					}
 				}
+				inList.forEach(items => {
+					items.sub.forEach(item => {
+						item.child.forEach(i => {
+							if(i.banner.substring(0,6) == 'upload') {
+								i.banner = 'https://img.zykt.com/' + i.banner
+							} else {
+								i.banner = 'https://qn.zykt.com/' + i.banner
+							}
+						})
+					})
+				})
 				return inList;
 				
 			}

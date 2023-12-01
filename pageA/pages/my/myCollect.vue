@@ -84,21 +84,21 @@
 				let res = await collectShop(data)
 				this.list = res.lists
 				this.list.forEach(item => {
-					if(item.goodsInfo.thumb[0].substring(0,5) == 'upload') {
+					if(item.goodsInfo.thumb[0].substring(0,6) == 'upload') {
 						item.goodsInfo.thumb[0] = 'https://img.zykt.com/' + item.goodsInfo.thumb[0]
 					} else {
 						item.goodsInfo.thumb[0] = 'https://qn.zykt.com/' + item.goodsInfo.thumb[0]
 					}
 				})
 				this.num = res.num
-				console.log(res)
+				// console.log(res)
 			},
 			// 获取收藏商品列表
 			async pCollectGood(data) {
 				let res = await collectGood(data)
 				this.list = res.lists
 				this.list.forEach(item => {
-					if(item.shopInfo.logo.substring(0,5) == 'upload') {
+					if(item.shopInfo.logo.substring(0,6) == 'upload') {
 						item.shopInfo.logo = 'https://img.zykt.com/' + item.shopInfo.logo
 					} else {
 						item.shopInfo.logo = 'https://qn.zykt.com/' + item.shopInfo.logo
@@ -109,7 +109,7 @@
 			},
 			// 取消收藏
 			async pCollectCancel(data) {
-				console.log(data)
+				// console.log(data)
 				let res = await collectCancel(data)
 				if(res.code == 200) {
 					this.prompt = res.msg
@@ -144,7 +144,7 @@
 				for(let i = 0,len = list.length;i < len;++i){
 					const item = list[i]
 					if(values.includes(item.id)) {
-						console.log(item)
+						// console.log(item)
 						this.$set(item,'checked',true)
 						// item.checked = true
 					} else {

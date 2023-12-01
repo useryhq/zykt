@@ -14,14 +14,14 @@
 		<swiper class="swiper-block" :indicator-dots="true" :autoplay="true" indicator-active-color="#fa6a4a" :circular="true">
 			<block v-for="(item,index) in images" :key="index">
 				<swiper-item>
-					<image mode="aspectFill" :src="upImgUrl + item.thumb"></image>
+					<image mode="aspectFill" :src="item.thumb"></image>
 				</swiper-item>
 			</block>
 		</swiper>
 		<view class="group_8 flex-row justify-between">
 			<view class="box_3 flex-col" v-for="(item,index) in ktlist2" :key="index"
 				@click="toProductDetail(item.id)">
-				<image class="kt_img" :src="upImgUrl + item.thumb[0]"></image>
+				<image class="kt_img" :src="item.thumb[0]"></image>
 				<view class="text-wrapper_3 flex-row justify-between">
 					<text class="paragraph_2">
 						{{item.goods_name}}
@@ -44,8 +44,6 @@
 	export default {
 		data() {
 			return {
-				imgUrl: this.$imgUrl.img_base_url,
-				upImgUrl:this.$upImgUrl.upImg_base_url,
 				images:{},
 				ktlist2: [],
 				shop: '',
@@ -62,6 +60,20 @@
 				this.ktlist2 = res.goodsLists
 				this.shop = res.shopInfo
 				this.images = res.sliderInfo
+				this.ktlist2.forEach(item => {
+					if(item.thumb[0].substring(0,6) == 'upload'){
+						item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+					} else {
+						item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+					}
+				})
+				this.images.forEach(item => {
+					if(item.thumb.substring(0,6) == 'upload'){
+						item.thumb = 'https://img.zykt.com/' + item.thumb
+					} else {
+						item.thumb = 'https://qn.zykt.com/' + item.thumb
+					}
+				})
 			},
 			//商品、店铺收藏
 			async postCollect(e) {

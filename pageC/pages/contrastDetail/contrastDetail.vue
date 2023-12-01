@@ -218,7 +218,7 @@
 		onLoad(option) {
 			this.contrastData = JSON.parse(option.pk)
 			// this.m = option.m
-			console.log(this.contrastData)
+			// console.log(this.contrastData)
 			this.getPk()
 		}
 	};

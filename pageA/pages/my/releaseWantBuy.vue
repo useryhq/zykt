@@ -126,7 +126,7 @@
 				//输入描述
 				inText(e) {
 					this.text = e.detail.value
-					console.log(this.text)
+					// console.log(this.text)
 				},
 				//打开日历
 				open() {
@@ -141,13 +141,13 @@
 				},
 				//日历返回日期赋值
 				confirm(e) {
-					console.log('confirm 返回:', e)
+					// console.log('confirm 返回:', e)
 					this.date = e.fulldate
 				},
 				//提交数据
 				async postReleaseWantBuy(data) {
 					let res = await releaseWantBuy(data)
-					console.log(res)
+					// console.log(res)
 					this.prompt = res.msg
 					this.$refs.popup.open('top')
 				},
@@ -181,8 +181,8 @@
 							danwei: this.unit
 						}
 						this.postReleaseWantBuy(data)
-						console.log(this.text)
-						console.log(data)
+						// console.log(this.text)
+						// console.log(data)
 					}
 				}
 			},

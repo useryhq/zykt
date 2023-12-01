@@ -12,7 +12,7 @@
             <image
               class="image_3"
               referrerpolicy="no-referrer"
-              :src="imgUrl + item.logo"
+              :src="item.logo"
             />
             <view class="text-group_2 flex-col">
               <text class="text_2">{{item.shop_name}}</text>
@@ -33,7 +33,6 @@
 export default {
   data() {
     return {
-	  imgUrl: this.$imgUrl.img_base_url,
       loopData0: [],
       constants: {}
     };
@@ -48,23 +47,30 @@ export default {
 		  // console.log(res)
 			// console.log(keys)
 		  res1.keys.forEach(item => {
-		  console.log(item)
+		  // console.log(item)
 			if(item === 'cityId'){
 			flag = true
-			console.log(flag)
+			// console.log(flag)
 			   }		 							  
 			})	   
 		 
 		  if(flag) {
 			  const res2 = uni.getStorageSync('cityId')
-			  console.log(res2)
+			  // console.log(res2)
 			  data = {
 				  type: '2',
 				  cityId: res2
 			  }
 			  let res  = await twoHand(data)
-			  console.log(res)
+			  // console.log(res)
 			  this.loopData0 = res.lists
+			  this.loopData0.forEach(item => {
+			  if(item.logo.substring(0,6) == 'upload') {
+			  		item.logo = 'https://img.zykt.com/' + item.logo
+			  	} else {
+			  		item.logo = 'https://qn.zykt.com/' + item.logo
+			  	}
+			  })
 		  } else {
 			  const res3 = uni.getStorageSync('longlat')
 			  // console.log(res3)
@@ -75,9 +81,16 @@ export default {
 				   lat: jsonRes3.lat
 			  }
 			  // console.log(typeof(res3))
-			  console.log(data)
+			  // console.log(data)
 			  let res = await twoHand(data)
 			  this.loopData0 = res.lists
+			  this.loopData0.forEach(item => {
+				  if(item.logo.substring(0,6) == 'upload') {
+				  		item.logo = 'https://img.zykt.com/' + item.logo
+				  	} else {
+				  		item.logo = 'https://qn.zykt.com/' + item.logo
+				  }
+			  })
 		  }
 		  
 		  // data = JSON.parse(data)

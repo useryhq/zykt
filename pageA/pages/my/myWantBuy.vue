@@ -52,7 +52,7 @@ export default {
 	  async pMyWantBuy(data) {
 		  let res = await myWantBuy(data)
 		  this.loopData0 = res.lists
-		  console.log(res)
+		  // console.log(res)
 	  },
 	  // 删除求购
 	async pDeleWantBuy(id) {

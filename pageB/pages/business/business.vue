@@ -77,7 +77,7 @@ export default {
 	  async pSellerInfo(data) {
 	  	let res = await sellerInfo(data)
 		this.shopInfo = res
-		if(this.shopInfo.logo.substring(0,5) == 'upload') {
+		if(this.shopInfo.logo.substring(0,6) == 'upload') {
 			this.imgUrl = this.$imgUrl.img_base_url
 		} else {
 			this.imgUrl = this.$upImgUrl.upImg_base_url

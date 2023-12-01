@@ -267,7 +267,7 @@
 				let res = await mReleaseComodity(data)
 				this.prompt = res.msg
 				this.$refs.popup.open('top')
-				console.log(res)
+				// console.log(res)
 			},
 			//输入商品名称
 			inCname(e) {
@@ -329,11 +329,11 @@
 			//输入价格
 			inPrice(e) {
 				this.price = e.detail.value
-				console.log(this.price)
+				// console.log(this.price)
 			},
 			//选择图片
 			select(e) {
-				console.log('选择文件：', e)
+				// console.log('选择文件：', e)
 				//多文件上传
 				// e.tempFilePaths.forEach(value => {
 				// 	this.filePath.push(value)
@@ -353,7 +353,7 @@
 						key: that.name
 					},
 					success(res) {
-						console.log("上传成功", res)
+						// console.log("上传成功", res)
 						that.prompt = "上传成功，如果另有图片请再次上传"
 						that.$refs.popup.open('top')
 						let data = JSON.parse(res.data)
@@ -363,7 +363,7 @@
 						}, 2000)
 					},
 					fail(res) {
-						console.log("上传失败", res)
+						// console.log("上传失败", res)
 					}
 				})
 				// console.log(this.name)
@@ -418,7 +418,7 @@
 			// 图文详情页返回的数据
 			backFunction(obj) {
 				this.backData = obj
-				console.log(this.backData)
+				// console.log(this.backData)
 			},
 			//提交数据
 			submit() {
@@ -466,7 +466,7 @@
 						id: ''
 					} 
 					this.pMReleaseComodity(data)
-					console.log(data)
+					// console.log(data)
 				}
 				
 			}

@@ -17,7 +17,9 @@
 				</view>
 			</view>
 			<view v-if="addShow" class="choose_address" @click="closeAddress">
-				<uni-indexed-list :options="localData" :showSelect="false" @click="bindClick" />
+				<view class="choose_block" @tap.stop.prevent>
+					<uni-indexed-list :options="localData" :showSelect="false" @click="bindClick" />
+				</view>
 			</view>
 			<view class="group_5 flex-col">
 				<view class="block_3 flex-row justify-between">
@@ -97,7 +99,7 @@
 				<view v-if="add == 2" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index"
 						@click="toProductDetail(item.goods_id)">
-						<image class="kt_img" :src="imgUrl + item.thumb"></image>
+						<image class="kt_img" :src="item.thumb"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
 								{{item.goods_name}}
@@ -112,7 +114,7 @@
 				<view v-if="add == 1" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,i) in ktlist2" :key="i"
 						@click="toProductDetailH(item.id)">
-						<image class="kt_img" :src="imgUrl + item.thumb"></image>
+						<image class="kt_img" :src="item.thumb"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
 								{{item.goods_name}}
@@ -192,10 +194,24 @@
 				if(t == 1) {
 					//个人
 					this.ktlist2 = res.lists
+					this.ktlist2.forEach(item => {
+						if(item.thumb[0].substring(0,6) == 'upload') {
+							item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+						} else {
+							item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+						}
+					})
 					// console.log(this.ktlist2,"个人")
 				} else {
 					//2是商家
 					this.ktlist1 = res.lists
+					this.ktlist1.forEach(item => {
+						if(item.thumb[0].substring(0,6) == 'upload') {
+							item.thumb[0] = 'https://img.zykt.com/' + item.thumb[0]
+						} else {
+							item.thumb[0] = 'https://qn.zykt.com/' + item.thumb[0]
+						}
+					})
 				}
 			},
 			// 获取热门品牌数据
@@ -425,11 +441,11 @@
 								if (res.confirm) {
 									uni.openSetting({
 										success: (res) => {
-											console.log(res);
+											// console.log(res);
 										}
 									})
 								} else {
-									console.log('取消');
+									// console.log('取消');
 								}
 							}
 						})
@@ -578,10 +594,17 @@
 				background-color: rgba(0, 0, 0, 0.6);
 				position: absolute;
 				z-index: 1000;
-				@{aaa} .uni-indexed-list {
-						top: 150rpx;
+				.choose_block {
+					width: 100%;
+					height: 80%;
+					position: absolute;
+					top: 150rpx;
+					@{aaa} .uni-indexed-list {
+						top: 0;
 						left: 0;
+					}
 				}
+				
 			}
 			.group_5 {
 				width: 750rpx;

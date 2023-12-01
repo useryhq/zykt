@@ -93,7 +93,7 @@
 			},
 			//选择图片
 			select(e) {
-				console.log('选择文件：', e)
+				// console.log('选择文件：', e)
 				//多文件上传
 				// e.tempFilePaths.forEach(value => {
 				// 	this.filePath.push(value)
@@ -129,7 +129,7 @@
 						}
 					},
 					fail(res) {
-						console.log("上传失败", res)
+						// console.log("上传失败", res)
 					}
 				})
 				// console.log(this.name)

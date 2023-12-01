@@ -18,7 +18,7 @@
 					:circular="true">
 					<block v-for="(item,index) in images" :key="index">
 						<swiper-item>
-							<image mode="aspectFill" :src="imgUrl + item"></image>
+							<image mode="aspectFill" :src="item"></image>
 						</swiper-item>
 					</block>
 				</swiper>
@@ -94,7 +94,7 @@
 				<text class="text-group_9">商品介绍</text>
 			</view>
 			<view class="img_list">
-				<image v-for="(item,index) in images" :src="imgUrl+item" :key="index"></image>
+				<image v-for="(item,index) in images" :src="item" :key="index"></image>
 			</view>
 		</view>
 		<view class="words-written">
@@ -188,7 +188,6 @@
 	export default {
 		data() {
 			return {
-				imgUrl: this.$imgUrl.img_base_url,
 				navIndex: 0,
 				openHeight: 330,
 				store: 0,
@@ -219,8 +218,20 @@
 				this.info = res.info
 				this.store = res.info.shop_id
 				this.ktParameter = res.specInfo
-				this.images.push(res.info.thumb)
 				this.wordsWritten = res.notesInfo
+				this.images = res.info.thumb
+				this.images.forEach((item,index,arr) => {
+					// console.log(item)
+					if(item.substring(0,6) == 'upload') {
+						arr[index] = 'https://img.zykt.com/' + item
+						// console.log(item)
+					} else {
+						arr[index] = 'https://qn.zykt.com/' + item
+					}
+					// this.images = arr
+					// this.images.push(item)
+				})
+				// console.log(this.images)
 			},
 			//提交留言
 			async postSendMessage() {
