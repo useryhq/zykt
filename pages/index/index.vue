@@ -579,11 +579,13 @@
 						height: 48rpx;
 						// border: 1px solid rgba(191, 191, 191, 1);
 						margin: 4rpx 0 0 28rpx;
+						text-align: center;
+						line-height: 48rpx;
 
 						.label_2 {
 							font-size: 30rpx;
 							color: #333333;
-							margin: 8rpx 0 0 6rpx;
+							// margin: 8rpx 0 0 6rpx;
 						}
 					}
 				}
