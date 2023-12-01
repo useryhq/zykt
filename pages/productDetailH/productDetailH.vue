@@ -91,7 +91,7 @@
 			<swiper class="written_block" vertical="true" :autoplay="true" :interval="3000" :duration="1000">
 				<swiper-item v-for="(item,index) in wordsWritten" :key="index">
 					<view class="block_4 flex-row align-center">
-						<image class="label_4" :src="imgUrl + item.avatar"></image>
+						<image class="label_4" :src="item.avatar"></image>
 						<text class="text_19">{{item.username}}</text>
 						<text class="text_20">{{item.created_at}}</text>
 					</view>
@@ -141,6 +141,7 @@
 				id: '',
 				info: '',
 				textarea: '',
+				imgUrl: '',
 				openHeight: 330,
 				send: false,
 				store: 0,
@@ -199,6 +200,11 @@
 				this.wordsWritten = res.notesInfo
 				this.images = res.info.thumb
 				// console.log(this.images)
+				if(this.info.user.thumb.substring(0,6) == 'upload') {
+					this.imgUrl = this.$imgUrl.img_base_url
+				} else {
+					this.imgUrl = this.$upImgUrl.upImg_base_url
+				}
 				this.images.forEach((item,index,arr) => {
 					// console.log(item)
 					if(item.substring(0,6) == 'upload') {
@@ -209,6 +215,13 @@
 					}
 					// this.images = arr
 					// this.images.push(item)
+				})
+				this.wordsWritten.forEach(item => {
+					if(item.avatar.substring(0,6) == 'upload'|| item.avatar.substring(0,6) == 'images') {
+						item.avatar = 'https://img.zykt.com/' + item.avatar
+					} else {
+						item.avatar = 'https://qn.zykt.com/' + item.avatar
+					}	
 				})
 			},
 			//提交留言

@@ -25,7 +25,7 @@
 				</text>
 			</view>
 			<view class="text-wrapper_4 flex-row">
-				<text class="text_10">￥{{item.market_price}}</text>
+				<text class="text_10">￥{{item.shop_price}}</text>
 			</view>
 		</view>
 	</view>
@@ -85,6 +85,12 @@ export default {
 		 let res = await searchRec()
 		 this.searchData = res.lists
 		 // console.log(res)
+	  },
+	  //跳转商家商品详情
+	  toProductDetail(e) {
+		  uni.navigateTo({
+		  	url: '/pages/productDetail/productDetail?id=' + e
+		  })
 	  }
   },
   onLoad() {

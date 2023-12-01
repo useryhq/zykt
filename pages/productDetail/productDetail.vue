@@ -18,7 +18,7 @@
 					:circular="true">
 					<block v-for="(item,index) in images" :key="index">
 						<swiper-item>
-							<image mode="aspectFill" :src="item"></image>
+							<image v-if="item" mode="aspectFill" :src="item"></image>
 						</swiper-item>
 					</block>
 				</swiper>
@@ -52,7 +52,7 @@
 		<view class="group_7 flex-col">
 			<view class="group_12 flex-col">
 				<view class="image-text_2 flex-row justify-start align-center">
-					<image class=".label_6" :src="imgUrl + info.seller.logo" mode=""></image>
+					<image v-if="info.seller.logo" class=".label_6" :src="imgUrl + info.seller.logo" mode=""></image>
 					<text class="text-group_4">{{info.seller.shop_name}}</text>
 				</view>
 				<view class="box_4 flex-row justify-between">
@@ -94,7 +94,9 @@
 				<text class="text-group_9">商品介绍</text>
 			</view>
 			<view class="img_list">
-				<image v-for="(item,index) in images" :src="item" :key="index"></image>
+				<view v-for="(item,index) in images" :key="index">
+					<image v-if="item"  :src="item" ></image>
+				</view>
 			</view>
 		</view>
 		<view class="words-written">
@@ -115,7 +117,7 @@
 			<swiper class="written_block" vertical="true" :autoplay="true" :interval="3000" :duration="1000">
 				<swiper-item v-for="(item,index) in wordsWritten" :key="index">
 					<view class="block_4 flex-row align-center">
-						<text class="iconfont label_4">&#xe682;</text>
+						<image v-if="item.avatar" class="label_4" :src="item.avatar"></image>
 						<text class="text_19">{{item.username}}</text>
 						<text class="text_20">{{item.created_at}}</text>
 					</view>
@@ -201,8 +203,42 @@
 				info: {},
 				images: [],
 				wordsWritten: [],
-				ktParameter: [],
+				ktParameter: [{
+						text: '型号：120'
+					},
+					{
+						text: '规格：制冷剂R32'
+					},
+					{
+						text: '电压/频率：380V/50Hz'
+					},
+					{
+						text: '内机净重：78kg'
+					},
+					{
+						text: '产品特色：除甲醛不支持除甲醛'
+					},
+					{
+						text: '独立除湿：支持独立除湿'
+					},
+					{
+						text: '自动清洁：内外机自动清洁'
+					},
+					{
+						text: '功能制冷量：12000W'
+
+					}, {
+						text: '独立除湿：支持独立除湿'
+					},
+					{
+						text: '自动清洁：内外机自动清洁'
+					},
+					{
+						text: '功能制冷量：12000W'
+
+					}],
 				prompt: '',
+				imgUrl: '',
 				constants: {}
 			};
 		},
@@ -220,6 +256,11 @@
 				this.ktParameter = res.specInfo
 				this.wordsWritten = res.notesInfo
 				this.images = res.info.thumb
+				if(this.info.seller.logo.substring(0,6) == 'upload') {
+					this.imgUrl = this.$imgUrl.img_base_url
+				} else {
+					this.imgUrl = this.$upImgUrl.upImg_base_url
+				}
 				this.images.forEach((item,index,arr) => {
 					// console.log(item)
 					if(item.substring(0,6) == 'upload') {
@@ -230,6 +271,13 @@
 					}
 					// this.images = arr
 					// this.images.push(item)
+				})
+				this.wordsWritten.forEach(item => {
+					if(item.avatar.substring(0,6) == 'upload' || item.avatar.substring(0,6) == 'images') {
+						item.avatar = 'https://img.zykt.com/' + item.avatar
+					} else {
+						item.avatar = 'https://qn.zykt.com/' + item.avatar
+					}	
 				})
 				// console.log(this.images)
 			},
