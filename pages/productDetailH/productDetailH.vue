@@ -222,7 +222,7 @@
 				let res = await sendMessage(data)
 				// console.log(res)
 				this.prompt = res.msg
-				this.$refs.popup.open('top')
+				this.$refs.popup.open('center')
 			},
 			//商品收藏
 			async postCollect(e) {

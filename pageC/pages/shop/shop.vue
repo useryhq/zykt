@@ -226,8 +226,8 @@
 				}
 	
 				.text_11 {
-					width: 42rpx;
-					height: 21rpx;
+					width: 160rpx;
+					height: 22rpx;
 					overflow-wrap: break-word;
 					color: rgba(153, 153, 153, 1);
 					font-size: 22rpx;
@@ -235,8 +235,9 @@
 					font-weight: NaN;
 					text-align: left;
 					white-space: nowrap;
-					line-height: 36rpx;
-					margin-right: 20rpx;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					line-height: 22rpx;
 				}
 	
 				.pk_text {

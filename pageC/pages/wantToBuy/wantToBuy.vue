@@ -4,8 +4,8 @@
 		<view class="list_1 flex-col">
 			<view class="list-items_1 flex-col" v-for="(item, index) in loopData0" :key="index" @click="toWantBUyDetail(item.id)">
 				<view class="text-group_1 flex-col justify-between">
-					<text class="text_2">{{item.title}}</text>
-					<text class="text_3">{{item.content}}</text>
+					<text class="text_2" :user-select='true'>{{item.title}}</text>
+					<text class="text_3" :user-select='true'>{{item.content}}</text>
 				</view>
 				<view class="box_3 flex-row justify-between">
 					<view class="image-text_1 flex-row justify-between align-center">

@@ -23,7 +23,7 @@
 				  </view>
 		        
 				<view class="flex-row">
-					<text class="text_8">￥{{items.market_price}}</text>
+					<text class="text_8">￥{{items.shop_price}}</text>
 				</view>
 		      </view>
 		  </view>
@@ -32,42 +32,45 @@
 			 	<text class="iconfont icon">&#xe66e;</text>
 				<text class="text">编辑</text>
 			 </view>
-			 <view class="button_text">
+			 <view class="button_text" @click="down(items.goods_id)">
 			 	<text class="iconfont icon">&#xe739;</text>
 				<text class="text">下架</text>
 			 </view>		
-		 	 <view class="button_text">
+		 	 <view class="button_text" @click="del(items.goods_id)">
 			 	<text class="iconfont icon"> &#xe665;</text>
 				<text class="text">删除</text>
 			 </view>
 		  </view>
 		  <view v-if="nav == 2" class="block_3 flex-row align-center justify-around">
-		  			 <view class="button_text">
-		  			 	<text class="iconfont icon">&#xe66e;</text>
-		  				<text class="text">编辑</text>
-		  			 </view>
-		  			 <view class="button_text">
-		  			 	<text class="iconfont icon">&#xe739;</text>
-		  				<text class="text">上架</text>
-		  			 </view>		
-		  		 	 <view class="button_text">
-		  			 	<text class="iconfont icon"> &#xe665;</text>
-		  				<text class="text">删除</text>
-		  			 </view>
+		  		<view class="button_text">
+		  			<text class="iconfont icon">&#xe66e;</text>
+		  			<text class="text">编辑</text>
+		  		</view>
+		  		<view class="button_text">
+		  			<text class="iconfont icon">&#xe739;</text>
+		  			<text class="text">上架</text>
+		  		</view>		
+		  		<view class="button_text" @click="del(items.goods_id)">
+		  			<text class="iconfont icon"> &#xe665;</text>
+		  			<text class="text">删除</text>
+		  		</view>
 		  </view>
 		</view>
+		<uni-popup ref="popup" type="message">
+			<uni-popup-message type="success" message="成功消息" :duration="3000">{{prompt}}</uni-popup-message>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
-	import {myComodity} from '../../../static/js/api.js'
+	import {myComodity,downGood,delGood} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
 				nav: 1,
 				userid: '',
 				list: [],
-				thumb: ''
+				prompt: ''
 			};
 		},
 		methods: {
@@ -84,6 +87,7 @@
 				})
 				// console.log(res)
 			},
+			// 切换nav导航
 			changeNav(e) {
 				let data = {
 					userid: this.userid,
@@ -92,6 +96,40 @@
 				this.pMyComodity(data)
 				this.nav = e
 			},
+			//下架商品
+		    async down(id) {
+				let data = {
+					id: id,
+					userid: this.userid
+				}
+				let res = await downGood(data)
+				this.prompt = res.msg
+				this.$refs.popup.open('top')
+				if(res.code == 200) {
+					let data = {
+						userid: this.userid,
+						type: this.nav,
+					}
+					this.pMyComodity(data)
+				}
+			},
+			//删除商品
+			async del(id) {
+				let data = {
+					id: id,
+					userid: this.userid
+				}
+				let res = await delGood(data)
+				this.prompt = res.msg
+				this.$refs.popup.open('top')
+				if(res.code == 200) {
+					let data = {
+						userid: this.userid,
+						type: this.nav,
+					}
+					this.pMyComodity(data)
+				}
+			}
 		},
 		onLoad() {
 			uni.getStorage({

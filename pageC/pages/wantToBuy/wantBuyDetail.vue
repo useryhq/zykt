@@ -26,8 +26,8 @@
 			<view class="list_1 flex-col">
 				<view class="list-items_1 flex-col" v-for="(item, index) in loopData0" :key="index" @click="reRequst(item.id)">
 					<view class="text-group_1 flex-col justify-between">
-						<text class="text_2">{{item.title}}</text>
-						<text class="text_3">{{item.content}}</text>
+						<text class="text_2" :user-select='true'>{{item.title}}</text>
+						<text class="text_3" :user-select='true'>{{item.content}}</text>
 					</view>
 					<view class="box_3 flex-row justify-between">
 						<view class="image-text_1 flex-row justify-between align-center">
@@ -42,6 +42,9 @@
 				</view>
 			</view>
 		</view>
+		<uni-popup ref="popup" type="message">
+			<uni-popup-message type="success" message="成功消息" :duration="3000">{{prompt}}</uni-popup-message>
+		</uni-popup>
 	</view>
 	</template>
 	<script>
@@ -52,6 +55,7 @@
 					info:[],
 					loopData0: [],
 					tel: false,
+					prompt: '',
 					constants: {}
 				};
 			},
@@ -88,11 +92,23 @@
 				},
 				// 查看联系方式
 				lookTel(e) {
-					if(e) {
-						this.tel = true
-					} else {
-						this.tel = false
-					}
+					uni.getStorage({
+						key: 'userId',
+						success: (res) => {
+							if(e) {
+								this.tel = true
+							} else {
+								this.prompt = '该用户没有留手机号'
+								this.$refs.popup.open('top')
+							}
+						},
+						fail() {
+							uni.navigateTo({
+								url: '/pageC/pages/login/login'
+							})
+						}
+					})
+					
 				}
 			},
 			onLoad(option) {

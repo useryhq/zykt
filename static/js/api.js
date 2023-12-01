@@ -323,6 +323,33 @@ export function deleWantBuy(data) {
 		})
 	})
 }
+//个人我的消息
+export function myMessages(data) {
+	let url = '/user/my-messages'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res.data)
+		})
+	})
+}
+//个人下架商品
+export function downGood(data) {
+	let url = '/user/off-goods'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
+//个人下架商品
+export function delGood(data) {
+	let url = '/user/del-goods'
+	return new Promise((resolve,reject) => {
+		request(url,'POST',data).then(res => {
+			resolve(res)
+		})
+	})
+}
 //退货原因、快速、单位
 export function other() {
 	let url = '/common/other'

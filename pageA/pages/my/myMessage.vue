@@ -10,20 +10,20 @@
 			</view>
 			<view class="avtive_line" :class="{'avtive_line-active_left' : nav == 0, 'avtive_line-active_right' : nav== 1}"></view>
 		</view>
-		<view class="group_1">
+		<view class="group_1" v-for="(item,index) in list" :key="index">
 			<view class="box_1 flex-row">
 				<view class="img-block">
-					<image class="head-img" src="../../../static/bg/7220921.png"></image>
+					<image class="head-img" :src="item.thumb"></image>
 					<view class="drop">
 					</view>
 				</view>
 				<view class="text-block">
 					<view class="tel-time flex-row justify-between">
-						<text class="tel-text">136******2</text>
-						<text class="time-text">2023-01-28</text>
+						<text class="tel-text">{{item.userInfo.username}}</text>
+						<text class="time-text">{{item.created_at}}</text>
 					</view>
 					<view class="message-block">
-						 请问您这边有其他品牌的空调吗？支持物流吗？
+						 {{item.notes}}
 					</view>
 				</view>
 			</view>
@@ -50,14 +50,31 @@
 </template>
 
 <script>
+	import {myMessages} from '../../../static/js/api.js'
 	export default {
 		data() {
 			return {
 				nav: 0,
-				send: false
+				send: false,
+				list: []
 			};
 		},
 		methods: {
+			// 获取消息列表
+			async pMyMessages(e) {
+				let data = {
+					userid: e
+				}
+				let res = await myMessages(data)
+				this.list = res.lists
+				this.list.forEach(item => {
+					if(item.userInfo.username.substring(0,6) == 'upload') {
+						item.userInfo.username = 'https://img.zykt.com/' + item.userInfo.username
+					} else {
+						item.userInfo.username = 'https://qn.zykt.com/' + item.userInfo.username
+					}
+				})
+			},
 			// 选择顶部nav
 			changeNav(e) {
 				this.nav = e
@@ -69,6 +86,9 @@
 			closeSend() {
 				this.send = false
 			}
+		},
+		onLoad(option) {
+			this.pMyMessages(option.userid)
 		}
 	}
 </script>

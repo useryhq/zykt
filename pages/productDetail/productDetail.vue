@@ -244,7 +244,7 @@
 				let res = await sendMessage(data)
 				// console.log(res)
 				this.prompt = res.msg
-				this.$refs.popup.open('top')
+				this.$refs.popup.open('center')
 			},
 			//商品、店铺收藏
 			async postCollect(e) {
@@ -312,7 +312,7 @@
 				this.collect = e
 				if (e == 1) {
 					uni.navigateTo({
-						url: '/pageC/pages/shop/shop'
+						url: '/pageC/pages/shop/shop?id=' + this.store
 					})
 				} else if (e == 2) {
 					this.postCollect()

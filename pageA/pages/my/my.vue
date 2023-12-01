@@ -63,7 +63,7 @@ export default {
   data() {
     return {
 		userid:'',
-		imgUrl: '',
+		imgUrl: this.$imgUrl.img_base_url,
 		res: '',
 		userInfo: '',
 		shopStatus: '',
@@ -81,11 +81,6 @@ export default {
 	  	this.res = all
 		this.userInfo = all.userInfo
 		this.sellerid = all.shopInfo.id
-		if(this.userInfo.thumb.substring(0,6) == 'upload') {
-			this.imgUrl = this.$imgUrl.img_base_url
-		} else {
-			this.imgUrl = this.$upImgUrl.upImg_base_url
-		}
 	  	// console.log(this.res)
 		},
 		//跳转发布商品
@@ -127,7 +122,7 @@ export default {
 	//跳转我的消息
 	toMyMessage() {
 		uni.navigateTo({
-			url: '/pageA/pages/my/myMessage'
+			url: '/pageA/pages/my/myMessage?userid='+ this.userid
 		})
 	},
 	//开通店铺后跳转商家中心
