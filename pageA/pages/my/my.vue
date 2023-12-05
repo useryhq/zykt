@@ -55,6 +55,33 @@
         </view>
       </view>
     </view>
+	<view class="group_12 flex-row">
+		<view :class="[selectTab == 1 ? 'image-text_11 flex-col color' : 'image-text_11 flex-col']"
+			@click="slecetTab(1)">
+			<text class="iconfont label_6">&#xe674;</text>
+			<text class="text-group_11">首页</text>
+		</view>
+		<view :class="[selectTab == 2 ? 'image-text_12 flex-col color' : 'image-text_12 flex-col']"
+			@click="ToHotProduct('1')">
+			<text class="iconfont label_7">&#xe60e;</text>
+			<text class="text-group_12">家用空调</text>
+		</view>
+		<view :class="[selectTab == 3 ? 'image-text_13 flex-col color' : 'image-text_13 flex-col']"
+			@click="ToHotProduct('2')">
+			<text class="iconfont label_8">&#xe610;</text>
+			<text class="text-group_13">商用空调</text>
+		</view>
+		<view :class="[selectTab == 4 ? 'image-text_14 flex-col color' : 'image-text_14 flex-col']"
+			@click="slecetTab(4)">
+			<text class="iconfont label_9">&#xe676;</text>
+			<text class="text-group_14">二手门店</text>
+		</view>
+		<view :class="[selectTab == 5 ? 'image-text_15 flex-col color' : 'image-text_15 flex-col']"
+			@click="slecetTab(5)">
+			<text class="iconfont label_10">&#xe682;</text>
+			<text class="text-group_15">我的</text>
+		</view>
+	</view>
   </view>
 </template>
 <script>
@@ -68,6 +95,7 @@ export default {
 		userInfo: '',
 		shopStatus: '',
 		sellerid: '',
+		selectTab: 5,
       constants: {}
     };
   },
@@ -130,12 +158,47 @@ export default {
 		uni.navigateTo({
 			url: '/pageB/pages/business/business?userid=' + this.userid + '&sellerid=' + this.sellerid
 		})
-	}
+	},
+	//tab栏跳转
+	slecetTab(e) {
+		// console.log(e)
+		this.selectTab = e
+		if (e == 4) {
+			//跳转二手门店
+			uni.navigateTo({
+				url: '/pages/twoHand/twoHand'
+			})
+		} else if (e == 1) {
+			//跳转首页
+			uni.navigateTo({
+				url: '/pages/index/index'
+			})
+		}
+	},
+	ToHotProduct(e) {
+		//跳转家用空调
+		if (e == 1) {
+			this.selectTab = 2,
+				uni.navigateTo({
+					url: '/pages/hotProduct/hotProduct?item=' + e
+				})
+		}
+		//跳转商用空调
+		if (e == 2) {
+			this.selectTab = 3,
+				uni.navigateTo({
+					url: '/pages/hotProduct/hotProduct?item=' + e
+				})
+		}
+	},
   },
   onLoad(option) {
   	// console.log(option)
 	this.getMy(option.userid)
 	this.userid = option.userid
+  },
+  onShow() {
+  	this.selectTab = 5
   }
 };
 </script>
@@ -447,6 +510,160 @@ export default {
         }
       }
     }
+  }
+  .group_12 {
+  	background-color: rgba(255, 255, 255, 1);
+  	box-shadow: 0 -8rpx 4rpx #e6e6e6;
+  	width: 750rpx;
+  	height: 98rpx;
+  	padding-bottom: 6rpx;
+  	// margin: 25rpx 0 5rpx 0;
+  	position: fixed;
+  	left: 0;
+  	bottom: 0rpx;
+  	z-index: 999;
+  	padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+  	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
+  
+  	.image-text_11 {
+  		width: 46rpx;
+  		height: 72rpx;
+  		margin: 19rpx 0 0 37rpx;
+  		color: rgba(51, 51, 51, 1);
+  
+  		.label_6 {
+  			width: 42rpx;
+  			height: 40rpx;
+  			font-size: 42rpx;
+  			margin-left: 1rpx;
+  		}
+  
+  
+  		.text-group_11 {
+  			width: 46rpx;
+  			height: 23rpx;
+  			overflow-wrap: break-word;
+  			font-size: 24rpx;
+  			font-family: PingFang-SC-Regular;
+  			font-weight: NaN;
+  			text-align: left;
+  			white-space: nowrap;
+  			line-height: 36rpx;
+  			margin-top: 9rpx;
+  		}
+  	}
+  
+  	.image-text_12 {
+  		width: 93rpx;
+  		height: 68rpx;
+  		margin: 23rpx 0 0 85rpx;
+  		color: rgba(51, 51, 51, 1);
+  
+  		.label_7 {
+  			width: 48rpx;
+  			height: 38rpx;
+  			font-size: 44rpx;
+  			margin-left: 26rpx;
+  		}
+  
+  		.text-group_12 {
+  			width: 93rpx;
+  			height: 23rpx;
+  			overflow-wrap: break-word;
+  			font-size: 24rpx;
+  			font-family: PingFang-SC-Regular;
+  			font-weight: NaN;
+  			text-align: left;
+  			white-space: nowrap;
+  			line-height: 36rpx;
+  			margin-top: 7rpx;
+  		}
+  	}
+  
+  	.image-text_13 {
+  		width: 93rpx;
+  		height: 75rpx;
+  		margin: 16rpx 0 0 63rpx;
+  		color: rgba(51, 51, 51, 1);
+  
+  		.label_8 {
+  			width: 42rpx;
+  			height: 42rpx;
+  			font-size: 42rpx;
+  			margin-left: 26rpx;
+  		}
+  
+  		.text-group_13 {
+  			width: 93rpx;
+  			height: 23rpx;
+  			overflow-wrap: break-word;
+  			font-size: 24rpx;
+  			font-family: PingFang-SC-Regular;
+  			font-weight: NaN;
+  			text-align: left;
+  			white-space: nowrap;
+  			line-height: 36rpx;
+  			margin-top: 10rpx;
+  		}
+  	}
+  
+  	.image-text_14 {
+  		width: 94rpx;
+  		height: 75rpx;
+  		margin: 16rpx 0 0 62rpx;
+  		color: rgba(51, 51, 51, 1);
+  
+  		.label_9 {
+  			width: 42rpx;
+  			height: 40rpx;
+  			font-size: 44rpx;
+  			margin-left: 29rpx;
+  		}
+  
+  		.text-group_14 {
+  			width: 94rpx;
+  			height: 23rpx;
+  			overflow-wrap: break-word;
+  			font-size: 24rpx;
+  			font-family: PingFang-SC-Regular;
+  			font-weight: NaN;
+  			text-align: left;
+  			white-space: nowrap;
+  			line-height: 36rpx;
+  			margin-top: 12rpx;
+  		}
+  	}
+  
+  	.image-text_15 {
+  		width: 45rpx;
+  		height: 73rpx;
+  		margin: 18rpx 47rpx 0 86rpx;
+  		color: rgba(51, 51, 51, 1);
+  
+  		.label_10 {
+  			width: 36rpx;
+  			height: 40rpx;
+  			font-size: 44rpx;
+  			margin-left: 2rpx;
+  		}
+  
+  		.text-group_15 {
+  			width: 45rpx;
+  			height: 23rpx;
+  			overflow-wrap: break-word;
+  			font-size: 24rpx;
+  			font-family: PingFang-SC-Regular;
+  			font-weight: NaN;
+  			text-align: left;
+  			white-space: nowrap;
+  			line-height: 36rpx;
+  			margin-top: 10rpx;
+  		}
+  	}
+  
+  	.color {
+  		color: #E63C31;
+  	}
   }
 }
 

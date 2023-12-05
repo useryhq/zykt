@@ -36,10 +36,10 @@
 			</view>
 			<view class="text-wrapper_1 flex-row align-center justify-between">
 			  <text class="text_2">销售方式：</text>
-			  <view class="button_5" :class='{"button_3" : buy == 0}' @click="changeButton(0)">
+			  <view class="button_5" :class='{"button_3" : buy == "0"}' @click="changeButton('0')">
 			  	在线购买
 			  </view>
-			  <view class=" button_5" :class='{"button_3" : buy == 1}' @click="changeButton(1)">
+			  <view class=" button_5" :class='{"button_3" : buy == "1"}' @click="changeButton('1')">
 			  	在线询价
 			  </view>
 			  <text class="iconfont icon_1" @click="openHlep">&#xe8e9;</text>

@@ -11,7 +11,7 @@
 					<view class="text-wrapper_1 flex-col" @click="ToSearch">
 						<text class="text_2">搜索想要的空调产品</text>
 					</view>
-					<view class="image-wrapper_1 flex-col">
+					<view class="image-wrapper_1 flex-col" @click="toMy">
 						<text class="iconfont label_2">&#xe78b;</text>
 					</view>
 				</view>
@@ -233,6 +233,24 @@
 				this.localData = res
 				// console.log(res)
 			},
+			//右上角跳转
+			toMy() {
+				uni.getStorage({
+					key: 'userId',
+					success:(res) => {
+						// console.log(res)
+						uni.navigateTo({
+							url: '/pageA/pages/my/my?userid=' + res.data
+						})
+					},
+					fail:(res) => {
+						// console.log(res)
+						uni.navigateTo({
+							url: '/pageC/pages/login/login'
+						})
+					}
+				})
+			},
 			//获取个人信息判断是否为商家
 			//卖空调
 			async getMy1(e) {
@@ -324,21 +342,7 @@
 					})
 				} else if (e == 5) {
 					//跳转我的
-					uni.getStorage({
-						key: 'userId',
-						success:(res) => {
-							// console.log(res)
-							uni.navigateTo({
-								url: '/pageA/pages/my/my?userid=' + res.data
-							})
-						},
-						fail:(res) => {
-							// console.log(res)
-							uni.navigateTo({
-								url: '/pageC/pages/login/login'
-							})
-						}
-					})
+					this.toMy()
 				}
 			},
 			//跳转搜索
@@ -495,6 +499,9 @@
 			this.getCityLists()
 			// console.log(this.imgUrl)
 		},
+		onShow() {
+			this.selectTab = 1
+		}
 	};
 </script>
 <style>
@@ -1066,6 +1073,7 @@
 
 			.group_12 {
 				background-color: rgba(255, 255, 255, 1);
+				box-shadow: 0 -8rpx 4rpx #e6e6e6;
 				width: 750rpx;
 				height: 98rpx;
 				padding-bottom: 6rpx;
