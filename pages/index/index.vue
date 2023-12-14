@@ -106,7 +106,8 @@
 							</text>
 						</view>
 						<view class="text-wrapper_4 flex-row">
-							<text class="text_10">￥{{item.market_price}}</text>
+							<text class="text_10" v-if="item.is_xunjia != 1"><text>￥</text>{{item.shop_price}}</text>
+							<text class="text_10" v-else>询价</text>
 							<text class="text_11">{{item.region_id}}</text>
 						</view>
 					</view>
@@ -270,7 +271,7 @@
 				}
 			},
 			//买空调
-			async getMy2(e) {
+			/* async getMy2(e) {
 				let data = {
 					userid: e
 				}
@@ -278,24 +279,24 @@
 				// console.log(res)
 				if(res.shopStatus == 2) {
 					uni.navigateTo({
-						url: '/pageB/pages/my/releaseWantBuy'
+						url: '/pageB/'
 					})
 				}else {
 					uni.navigateTo({
 						url: '/pageA/pages/my/releaseWantBuy'
 					})
 				}
-			},
+			}, */
 			//买空调一键发布
 			buyKt() {
 				uni.getStorage({
 					key: 'userId',
 					success:(res) => {
 						// console.log(res)
-						this.getMy2(res.data)
-						// uni.navigateTo({
-						// 	url: '/pageA/pages/my/releaseWantBuy'
-						// })
+						// this.getMy2(res.data)
+						uni.navigateTo({
+							url: '/pageA/pages/my/releaseWantBuy'
+						})
 					},
 					fail:(res) => {
 						// console.log(res)
