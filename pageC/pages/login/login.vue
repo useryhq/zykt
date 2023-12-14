@@ -2,7 +2,7 @@
 	<!-- 登录 -->
 	<view class="page">
 		<view class="img-block">
-			<image class="img" src="../../static/bg/logo.png" mode=""></image>
+			<image class="img" src="../../../static/bg/logo.png" mode=""></image>
 		</view>
 		<button class="button color_1" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">
 			微信一键登录
