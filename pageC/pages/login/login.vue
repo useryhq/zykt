@@ -5,11 +5,14 @@
 			<image class="img" src="../../../static/bg/logo.png" mode=""></image>
 		</view>
 		<button class="button color_1" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">
-			微信一键登录
+			一键快捷登录
 		</button>
 		<view class="button color_2" @click="toTelLogin">
 			手机验证码登录
 		</view>
+		<!-- <uni-popup ref="popup" type="message">
+			<uni-popup-message type="success" message="成功消息" :duration="3000">{{prompt}}</uni-popup-message>
+		</uni-popup> -->
 	</view>
 </template>
 
@@ -22,7 +25,8 @@
 			return {
 				openId: '',
 				tel: '',
-				userId: ''
+				userId: '',
+				// prompt: ''
 			};
 		},
 		methods: {
@@ -44,6 +48,10 @@
 			async loginGetOpenID(data) {
 				let res = await getOpenID(data)
 				this.openId = res.openid
+				// if(this.openId) {
+				// 	this.prompt = this.openId
+				// 	this.$refs.popup.open('top')
+				// }
 				// console.log(res)
 			},
 			// 微信登录获取code
@@ -82,17 +90,25 @@
 				}
 				// console.log(data,'data')
 				let res = await getData(data)
-				// console.log(res)
-				this.tel = res.data.phoneNumber
-				this.wLogin(res.data.phoneNumber)
+				// console.log(res,"手机号解密")
+				// this.tel = res.data
+				let json = JSON.parse(res.data)
+				this.tel = json.phoneNumber
+				// this.prompt = this.tel
+				// this.$refs.popup.open('top')
+				// console.log(res.data,"手机号")
+				this.wLogin(json.phoneNumber)
 			},
 			//微信登录
 			async wLogin(e) {
 				let data = {
 					open_id: this.openId,
-					module: e
+					mobile: e
 				}
+				// console.log(data,"data")
 				let res =  await wechatLogin(data)
+				// this.prompt = res
+				// this.$refs.popup.open('top')
 				// console.log(res)
 				this.userId = res.user_id
 				uni.setStorage({

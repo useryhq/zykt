@@ -18,7 +18,12 @@
 			<view class="login-btn" @click="submit">
 				登录
 			</view>
-			<view class="registration-agreement">登录即视为同意<text class="text-color" @click="toWebview">《中央空调网用户注册协议》</text>
+			<view class="registration-agreement flex-row align-center"> 
+			<checkbox-group @change="checked">
+				<label>
+					<checkbox class="checked" value="check"/>
+				</label>
+			</checkbox-group> 我已阅读并同意同意<text class="text-color" @click="toWebview">《中央空调网用户注册协议》</text>
 			</view>
 		</view>
 		<uni-popup ref="popup" type="message">
@@ -42,7 +47,8 @@
 				reg: '',
 				time: '60',
 				flag: false,
-				test: false
+				test: false,
+				check: false
 			};
 		},
 		methods: {
@@ -87,12 +93,23 @@
 				}
 
 			},
+			// 选择同意隐私协议
+			checked(e) {
+				if(e.detail.value.length != 0) {
+					this.check = true
+				} else {
+					this.check = false
+				}	
+			},
 			async submit() {
 				if (!this.test) {
 					this.prompt = '请输入正确的电话号码'
 					this.$refs.popup.open('top')
 				} else if (!this.code) {
 					this.prompt = '请输入验证码'
+					this.$refs.popup.open('top')
+				} else if(!this.check) {
+					this.prompt = '请仔细阅读隐私协议并勾选同意框'
 					this.$refs.popup.open('top')
 				} else {
 					let data = {
@@ -193,7 +210,9 @@
 				margin-top: 30rpx;
 				font-size: 22rpx;
 				color: #999;
-
+				.checked {
+					 transform:scale(0.6);
+				}
 				.text-color {
 					color: #2391FB;
 				}

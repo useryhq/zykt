@@ -44,7 +44,7 @@
 			  	点击上传
 			  </view> -->
 					<view class="prompt_text">
-						最多上传1张图片，建议每张图片大小不超过500KB。
+						可以上传多张图片，缩略图消失后再次点击上传，建议每张图片大小不超过500KB。
 						图片尺寸比例为3：2，支持jpg,jpeg,gif,bmp格式。
 					</view>
 				</view>
@@ -366,7 +366,7 @@
 						// console.log("上传失败", res)
 					}
 				})
-				// console.log(this.name)
+				console.log(this.thumb)
 			},
 			//多文件删除图片
 			// delet(e) {
@@ -418,7 +418,7 @@
 			// 图文详情页返回的数据
 			backFunction(obj) {
 				this.backData = obj
-				// console.log(this.backData)
+				console.log(this.backData)
 			},
 			//提交数据
 			submit() {
@@ -468,7 +468,7 @@
 					this.pMReleaseComodity(data)
 					// console.log(data)
 				}
-				
+				console.log(this.thumb,this.backData.pics)
 			}
 		},
 		onShow() {

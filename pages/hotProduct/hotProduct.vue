@@ -68,7 +68,7 @@
 			<view v-if="add == 2" class="group_8 flex-row justify-between">
 				<view class="box_3 flex-col" v-for="(item,i) in ktlist" :key="i"
 					@click="toProductDetail(item.goods_id)">
-					<image class="kt_img" :src="item.thumb[0]"></image>
+					<image v-if="item.thumb[0]" class="kt_img" :src="item.thumb[0]"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
 							{{item.goods_name}}
@@ -89,7 +89,7 @@
 			<view v-if="add == 1" class="group_8 flex-row justify-between">
 				<view class="box_3 flex-col" v-for="(item,index) in ktlist" :key="index"
 					@click="toProductDetailH(item.goods_id)">
-					<image class="kt_img" :src="item.thumb[0]"></image>
+					<image v-if="item.thumb[0]" class="kt_img" :src="item.thumb[0]"></image>
 					<view class="text-wrapper_3 flex-row justify-between">
 						<text class="paragraph_2">
 							{{item.goods_name}}

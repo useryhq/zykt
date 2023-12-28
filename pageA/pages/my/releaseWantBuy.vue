@@ -21,9 +21,12 @@
 							<text class="text_6">采购数量：</text>
 							<input class="input_1" @blur="inNum" type="number" placeholder="请输入采购数量">
 						</view>
-						<uni-data-select class="text-group_1" :localdata="danweiData" :clear="false" @change="chooseDanwei"></uni-data-select>
-							<!-- <text class="text-group_1">台</text>
-							<text class="iconfont icon_2">&#xe686;</text> -->
+					</view>
+					<view class="block_2 flex-row justify-between align-center">
+						<view class="flex-row align-center">
+							<text class="text_6">单位：</text>
+						</view>
+						<uni-data-select class="text-group_1" :localdata="danweiData" :clear="false" @change="chooseDanwei" placeholder="选择单位"></uni-data-select>
 					</view>
 					<view class="block_2 flex-row justify-between align-center">
 						<view class="flex-row align-center">
@@ -278,7 +281,7 @@
 						}
 
 							.text-group_1 {
-								width: 120rpx;
+								width: 160rpx;
 								height: 70rpx;
 								overflow-wrap: break-word;
 								color: rgba(34, 34, 34, 1);

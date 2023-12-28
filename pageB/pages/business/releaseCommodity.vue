@@ -8,7 +8,7 @@
 		  <view class="group_2 flex-col">
 		    <view class="text-wrapper_1 flex-row align-center">
 		      <text class="text_2">商品标题：</text>
-		      <input class="text_3" @blur="inCname" placeholder="请输入您要求购的商品" />
+		      <input class="text_3" @blur="inCname" placeholder="请输入您要发布的商品" />
 		    </view>
 			<view class="text-wrapper_1 flex-row align-center justify-between">
 			  <text class="text_2">商品分类：</text>
@@ -60,7 +60,7 @@
 			  	点击上传
 			  </view> -->
 			  <view class="prompt_text">
-			  	最多上传1张图片，建议每张图片大小不超过500KB。
+			  	可以上传多张图片，缩略图消失后再次点击上传，建议每张图片大小不超过500KB。
 			  	图片尺寸比例为3：2，支持jpg,jpeg,gif,bmp格式。
 			  </view>
 			</view>

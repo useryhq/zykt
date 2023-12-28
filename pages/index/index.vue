@@ -99,7 +99,7 @@
 				<view v-if="add == 2" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,index) in ktlist1" :key="index"
 						@click="toProductDetail(item.goods_id)">
-						<image class="kt_img" :src="item.thumb"></image>
+						<image class="kt_img" :src="item.thumb[0]"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
 								{{item.goods_name}}
@@ -115,7 +115,7 @@
 				<view v-if="add == 1" class="group_8 flex-row justify-between">
 					<view class="box_3 flex-col" v-for="(item,i) in ktlist2" :key="i"
 						@click="toProductDetailH(item.id)">
-						<image class="kt_img" :src="item.thumb"></image>
+						<image class="kt_img" :src="item.thumb[0]"></image>
 						<view class="text-wrapper_3 flex-row justify-between">
 							<text class="paragraph_2">
 								{{item.goods_name}}
@@ -431,7 +431,7 @@
 									key:'longlat',
 									data: storageData,
 									success() {
-										console.log("123")
+										// console.log("123")
 									}
 								})
 							}
@@ -502,6 +502,7 @@
 		},
 		onShow() {
 			this.selectTab = 1
+			this.getGps()
 		}
 	};
 </script>

@@ -94,7 +94,7 @@
 				<text class="text-group_9">商品介绍</text>
 			</view>
 			<view class="img_list">
-				<view v-for="(item,index) in images" :key="index">
+				<view v-for="(item,index) in pics" :key="index">
 					<image v-if="item"  :src="item" ></image>
 				</view>
 			</view>
@@ -202,6 +202,7 @@
 				buyBlock2: false,
 				info: {},
 				images: [],
+				pics:[],
 				wordsWritten: [],
 				ktParameter: [{
 						text: '型号：120'
@@ -256,12 +257,24 @@
 				this.ktParameter = res.specInfo
 				this.wordsWritten = res.notesInfo
 				this.images = res.info.thumb
+				this.pics = res.info.pics
 				if(this.info.seller.logo.substring(0,6) == 'upload') {
 					this.imgUrl = this.$imgUrl.img_base_url
 				} else {
 					this.imgUrl = this.$upImgUrl.upImg_base_url
 				}
 				this.images.forEach((item,index,arr) => {
+					// console.log(item)
+					if(item.substring(0,6) == 'upload') {
+						arr[index] = 'https://img.zykt.com/' + item
+						// console.log(item)
+					} else {
+						arr[index] = 'https://qn.zykt.com/' + item
+					}
+					// this.images = arr
+					// this.images.push(item)
+				})
+				this.pics.forEach((item,index,arr) => {
 					// console.log(item)
 					if(item.substring(0,6) == 'upload') {
 						arr[index] = 'https://img.zykt.com/' + item
@@ -411,6 +424,19 @@
 		onLoad(option) {
 			this.id = option.id
 			this.getProductDetail(option.id)
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userid = res.data
+				},
+				fail() {
+					uni.navigateTo({
+						url: '/pageC/pages/login/login'
+					})
+				}
+			})
+		},
+		onShow() {
 			uni.getStorage({
 				key: 'userId',
 				success: (res) => {

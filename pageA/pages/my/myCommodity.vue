@@ -28,11 +28,11 @@
 		      </view>
 		  </view>
 		  <view v-if="nav == 1" class="block_3 flex-row align-center justify-around">
-			 <view class="button_text">
+			 <view class="button_text" @click="edit(items.status)">
 			 	<text class="iconfont icon">&#xe66e;</text>
 				<text class="text">编辑</text>
 			 </view>
-			 <view class="button_text" @click="down(items.goods_id)">
+			 <view v-if="items.status != 10" class="button_text" @click="down(items.goods_id)">
 			 	<text class="iconfont icon">&#xe739;</text>
 				<text class="text">下架</text>
 			 </view>		
@@ -95,6 +95,13 @@
 				}
 				this.pMyComodity(data)
 				this.nav = e
+			},
+			//编辑商品
+			edit(e) {
+				if(e == 10) {
+					this.prompt = '商品待审核，无法编辑'
+					this.$refs.popup.open('top')
+				}
 			},
 			//下架商品
 		    async down(id) {

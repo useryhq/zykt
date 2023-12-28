@@ -8,7 +8,7 @@
 					:circular="true">
 					<block v-for="(item,index) in images" :key="index">
 						<swiper-item>
-							<image mode="aspectFill" :src="item"></image>
+							<image v-if="item" mode="aspectFill" :src="item"></image>
 						</swiper-item>
 					</block>
 				</swiper>
@@ -70,7 +70,9 @@
 		</view>
 		<view class="img_block">
 			<view class="img_list">
-				<image v-for="(item,index) in images" :src="item" :key="index"></image>
+				<view v-for="(item,index) in pics">
+					<image v-if="item" :src="item" :key="index"></image>
+				</view>
 			</view>
 		</view>
 		<view class="words-written">
@@ -148,6 +150,7 @@
 				collect: 0,
 				shoppingCart: 0,
 				images: [],
+				pics:[],
 				ktParameter: [{
 						text: '型号：120'
 					},
@@ -199,6 +202,7 @@
 				this.info = res.info
 				this.wordsWritten = res.notesInfo
 				this.images = res.info.thumb
+				this.pics = res.info.pics
 				// console.log(this.images)
 				if(this.info.user.thumb.substring(0,6) == 'upload') {
 					this.imgUrl = this.$imgUrl.img_base_url
@@ -206,6 +210,17 @@
 					this.imgUrl = this.$upImgUrl.upImg_base_url
 				}
 				this.images.forEach((item,index,arr) => {
+					// console.log(item)
+					if(item.substring(0,6) == 'upload') {
+						arr[index] = 'https://img.zykt.com/' + item
+						// console.log(item)
+					} else {
+						arr[index] = 'https://qn.zykt.com/' + item
+					}
+					// this.images = arr
+					// this.images.push(item)
+				})
+				this.pics.forEach((item,index,arr) => {
 					// console.log(item)
 					if(item.substring(0,6) == 'upload') {
 						arr[index] = 'https://img.zykt.com/' + item
@@ -300,6 +315,19 @@
 				key: 'userId',
 				success: (res) => {
 					this.userid = res.data
+				}
+			})
+		},
+		onShow() {
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userid = res.data
+				},
+				fail() {
+					uni.navigateTo({
+						url: '/pageC/pages/login/login'
+					})
 				}
 			})
 		},
